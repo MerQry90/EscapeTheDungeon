@@ -59,6 +59,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 	}
+
 	/*
 	nextState controlla cos'è gameState: se un MainMenu, un MainGame o End, e in base allo stato in cui si trova
 	passa a quello successivo
