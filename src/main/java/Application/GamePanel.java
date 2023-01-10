@@ -1,5 +1,6 @@
 package Application;
 
+import Entities.Background;
 import GameStates.End;
 import GameStates.GameState;
 import GameStates.MainGame;
@@ -21,11 +22,17 @@ public class GamePanel extends JPanel implements ActionListener {
 	private final int FPS = 30;
 	private GameState gameState;
 	private Timer timer;
+	private Background background;
 
 	public GamePanel() {
 
 		//lo stato iniziale dell'applicazione è quello di menu principale
 		gameState = new MainMenu();
+
+		//impostazioni finestra
+		setPreferredSize(new Dimension(1088, 576));
+		setFocusable(true);
+		setDoubleBuffered(true);
 
 		//avvio del programma
 		timer = new Timer(Delay(), this);
@@ -58,6 +65,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
+		gameState.getBackground().paint(g);
 	}
 
 	/*

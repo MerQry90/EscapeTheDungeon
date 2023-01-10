@@ -1,5 +1,7 @@
 package GameStates;
 
+import java.awt.*;
+
 public class MainMenu extends GameState {
 	
 	public MainMenu() {
@@ -17,6 +19,5 @@ public class MainMenu extends GameState {
 	@Override
 	public void update() {
 		processInput();
-		//TODO paint the background
 	}
 }
