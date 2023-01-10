@@ -4,7 +4,7 @@ public class Tile {
 	int tileSize;
 
 	public Tile (){
-		setTileSize(64);
+		setTileSize(10);
 	}
 
 	public int getTileSize() {

@@ -1,12 +1,14 @@
 package GameStates;
 
+import Application.KeyHandler;
 import Entities.Background;
 import Entities.Tile;
 
 public abstract class GameState {
 
 	private boolean active;
-	private Background background = new Background();
+	protected Background background = new Background();
+	protected KeyHandler keyH = new KeyHandler();
 
 	public Background getBackground() {
 		return background;
@@ -22,15 +24,7 @@ public abstract class GameState {
 		active = false;
 	}
 
-	public void initialize() {
-
-	}
-
-	public void update() {
-
-	}
-
-	public void finish() {
-
-	}
+	public abstract void processInput();
+	
+	public abstract void update();
 }

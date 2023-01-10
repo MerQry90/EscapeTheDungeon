@@ -11,11 +11,11 @@ public class Background {
 	private ImageIcon background;
 
 	private Tile tile;
-
+	
 	public Background(){
 		tile = new Tile();
 	}
-
+	
 	/*
 	Image I/O recognises the contents of the file as a JPEG format image,
 	and decodes it into a BufferedImage which can be directly used by Java 2D.

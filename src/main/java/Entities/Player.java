@@ -1,4 +1,4 @@
 package Entities;
 
-public class Player extends GenericEntity{
+public class Player extends Entity {
 }
