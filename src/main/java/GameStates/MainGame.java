@@ -1,5 +1,6 @@
 package GameStates;
 
+import Application.KeyHandler;
 import Entities.EntityControl;
 
 public class MainGame extends GameState{
@@ -7,7 +8,8 @@ public class MainGame extends GameState{
 	// classe che serve come transito di comunicazione per il programma con le entità
 	EntityControl entityControl;
 	
-	public MainGame(){
+	public MainGame(KeyHandler keyH){
+		this.keyH = keyH;
 		setActive();
 		background.loadMainGameBackground();
 		entityControl = new EntityControl();

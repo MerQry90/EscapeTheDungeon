@@ -23,17 +23,22 @@ public class GamePanel extends JPanel implements ActionListener {
 	private GameState gameState;
 	private Timer timer;
 	private Background background;
+	private KeyHandler keyH;
 
 	public GamePanel() {
-
-		//lo stato iniziale dell'applicazione è quello di menu principale
-		gameState = new MainMenu();
-
+		
 		//impostazioni finestra
 		setPreferredSize(new Dimension(1088, 576));
 		setFocusable(true);
 		setDoubleBuffered(true);
 
+		//inizializzazione keyHandler
+		keyH = new KeyHandler();
+		addKeyListener(keyH);
+		
+		//lo stato iniziale dell'applicazione è quello di menu principale
+		nextState();
+		
 		//avvio del programma
 		timer = new Timer(Delay(), this);
 		timer.start();
@@ -74,13 +79,13 @@ public class GamePanel extends JPanel implements ActionListener {
 	 */
 	public void nextState(){
 		if (gameState instanceof MainMenu) {
-			gameState = new MainGame();
+			gameState = new MainGame(keyH);
 		}
 		else if (gameState instanceof MainGame) {
-			gameState = new End();
+			gameState = new End(keyH);
 		}
-		else if (gameState instanceof End) {
-			gameState = new MainMenu();
+		else if (gameState instanceof End || gameState == null) {
+			gameState = new MainMenu(keyH);
 		}
 	}
 }

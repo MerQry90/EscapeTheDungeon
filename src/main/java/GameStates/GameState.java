@@ -4,14 +4,12 @@ import Application.KeyHandler;
 import Entities.Background;
 import Entities.Tile;
 
-import java.awt.*;
-
 public abstract class GameState {
 
 	private boolean active;
 	protected Background background = new Background();
-	protected KeyHandler keyH = new KeyHandler();
-
+	protected KeyHandler keyH;
+	
 	public Background getBackground() {
 		return background;
 	}
