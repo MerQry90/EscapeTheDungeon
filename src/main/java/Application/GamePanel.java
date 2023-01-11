@@ -24,7 +24,6 @@ public class GamePanel extends JPanel implements ActionListener {
 	private Timer timer;
 	private Background background;
 	private KeyHandler keyH;
-
 	public GamePanel() {
 		
 		//impostazioni finestra

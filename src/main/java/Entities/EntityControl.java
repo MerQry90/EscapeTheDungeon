@@ -49,7 +49,8 @@ public class EntityControl {
 		}
 		return true;
 	}
-	
+
+	//movimenti giocatore
 	public void movePlayerUp(){
 		if(checkUpperBound(player)){
 			player.moveUp();
@@ -70,7 +71,9 @@ public class EntityControl {
 			player.moveRight();
 		}
 	}
-	
+
+
+
 	public void renderAllEntities(Graphics g){
 		player.paint(g);
 		//TODO altre entità

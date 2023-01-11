@@ -11,6 +11,8 @@ public class Zombie extends Entity{
 		setX(x);
 		setY(y);
 		setSpeed(speed);
+		setWidth(64);
+		setHeight(64);
 		setSprite("src/resources/sprites/png/zombie.png");
 	}
 
