@@ -9,13 +9,13 @@ public class MainGame extends GameState{
 	
 	public MainGame(){
 		setActive();
-		//TODO load main game background
+		background.loadMainGameBackground();
 		entityControl = new EntityControl();
 	}
 	
 	@Override
 	public void processInput() {
-	
+
 	}
 	
 	@Override
