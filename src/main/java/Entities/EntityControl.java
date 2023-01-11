@@ -139,8 +139,7 @@ public class EntityControl {
 	}
 
 	public void addArrow(boolean axis, boolean direction){
-		Arrow arrow = new Arrow(player.getX(), player.getY(), axis, direction);
-		arrowList.add(arrow);
+		arrowList.add(new Arrow(player.getX(), player.getY(), axis, direction));
 	}
 
 	public void updateArrows(){
@@ -197,6 +196,9 @@ public class EntityControl {
 
 	public void renderAllEntities(Graphics g){
 		player.paint(g);
+		for (Arrow arrow: arrowList){
+			arrow.paint(g);
+		}
 		for (Entity enemy: enemyList) {
 			if(enemy.checkIsAlive()) {
 				enemy.paint(g);
