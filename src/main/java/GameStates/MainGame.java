@@ -43,5 +43,6 @@ public class MainGame extends GameState{
 	@Override
 	public void update() {
 		processInput();
+		entityControl.moveEnemies();
 	}
 }

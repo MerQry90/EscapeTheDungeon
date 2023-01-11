@@ -11,6 +11,15 @@ public abstract class Entity {
 	private int width;
 	private int height;
 	private Image sprite;
+	private boolean isAlive = true;
+	
+	public void kill(){
+		isAlive = false;
+	}
+	
+	public boolean checkIsAlive() {
+		return isAlive;
+	}
 	
 	public int getX() {
 		return x;

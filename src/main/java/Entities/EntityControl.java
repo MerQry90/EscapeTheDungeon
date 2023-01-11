@@ -3,6 +3,7 @@ package Entities;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class EntityControl {
 	private Entity player;
@@ -23,6 +24,11 @@ public class EntityControl {
 		lowerBound = 64 * 7; //tmp
 		leftBound = 64 * 2; //tmp
 		rightBound = 64 * 15; //tmp
+		
+		//nemici dello scenario temporaneo------
+		enemyList.add(new Zombie(30, 30, 10));
+		enemyList.add(new Zombie(200, 30, 20));
+		//--------------------------------------
 	}
 	
 	public boolean checkUpperBound(Entity entity){
@@ -49,8 +55,7 @@ public class EntityControl {
 		}
 		return true;
 	}
-
-	//movimenti giocatore
+	
 	public void movePlayerUp(){
 		if(checkUpperBound(player)){
 			player.moveUp();
@@ -71,11 +76,75 @@ public class EntityControl {
 			player.moveRight();
 		}
 	}
-
-
-
+	
+	/*
+	actionByRate determina la probabilità dello zombie di muoversi
+	(potrebbe non servire più se il gioco gira decentemente a 30 fps)
+	*/
+	public boolean actionByRate(int possibleCases, int totalCases){
+		if(possibleCases > totalCases || possibleCases < 0){
+			return false;
+		}
+		Random random = new Random();
+		random.setSeed(System.currentTimeMillis());
+		int val = random.nextInt(totalCases);
+		if(val <= possibleCases) {
+			return true;
+		}
+		return false;
+	}
+	
+	public void moveEnemies(){
+		for (Entity enemy: enemyList) {
+			if(enemy.checkIsAlive()){
+				if(actionByRate(100, 100)){
+					int dx = player.getX() - enemy.getX();
+					int dy = player.getY() - enemy.getY();
+					int modX, modY;
+					
+					if(dx < 0){
+						modX = dx * (-1);
+					}
+					else{
+						modX = dx;
+					}
+					if(dy < 0){
+						modY = dy * (-1);
+					}
+					else{
+						modY = dy;
+					}
+					
+					//moves on the x axis
+					if(modX >= modY){
+						if(dx >= 0){
+							enemy.moveRight();
+						}
+						else {
+							enemy.moveLeft();
+						}
+					}
+					//moves on the y axis
+					else {
+						if(dy >= 0){
+							enemy.moveDown();
+						}
+						else {
+							enemy.moveUp();
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	public void renderAllEntities(Graphics g){
 		player.paint(g);
+		for (Entity enemy: enemyList) {
+			if(enemy.checkIsAlive()) {
+				enemy.paint(g);
+			}
+		}
 		//TODO altre entità
 	}
 }
