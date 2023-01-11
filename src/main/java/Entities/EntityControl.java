@@ -8,7 +8,7 @@ import java.util.Random;
 public class EntityControl {
 	private Entity player;
 	private List<Entity> enemyList;
-	private List<Entity> projectileList;
+	private List<Arrow> ArrowList;
 	
 	private int upperBound;
 	private int lowerBound;
@@ -18,7 +18,7 @@ public class EntityControl {
 	public EntityControl(){
 		player = new Player();
 		enemyList = new ArrayList<>();
-		projectileList = new ArrayList<>();
+		ArrowList = new ArrayList<>();
 		
 		upperBound = 64 * 2; //tmp
 		lowerBound = 64 * 7; //tmp
@@ -136,6 +136,31 @@ public class EntityControl {
 				}
 			}
 		}
+	}
+	
+	public void checkCollisions(){
+		//collisioni di frecce con i nemici
+		for(Entity enemy: enemyList){
+			if(enemy.checkIsAlive()){
+				for(Arrow arrow: ArrowList){
+					if((arrow.getX() >= enemy.getX()) && (arrow.getX() < (enemy.getX() + enemy.getWidth())) &&
+							((arrow.getY() >= enemy.getY()) && (arrow.getY() < enemy.getY() + enemy.getHeight()))) {
+						enemy.kill();
+						arrow.kill();
+					}
+				}
+				
+				//collisioni dei nemici con il player
+				if((player.getX() >= enemy.getX()) && (player.getX() < (enemy.getX() + enemy.getWidth())) &&
+						((player.getY() >= enemy.getY()) && (player.getY() < enemy.getY() + enemy.getHeight()))) {
+					player.kill();
+				}
+			}
+		}
+	}
+	
+	public boolean isGameOver(){
+		return !(player.checkIsAlive());
 	}
 	
 	public void renderAllEntities(Graphics g){
