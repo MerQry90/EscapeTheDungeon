@@ -15,11 +15,23 @@ public class MainGame extends GameState{
 	
 	@Override
 	public void processInput() {
-	
+		if(keyH.upPressed){
+			entityControl.movePlayerUp();
+			//System.out.println("Player su");
+		}
+		else if(keyH.downPressed){
+			entityControl.movePlayerDown();
+		}
+		else if(keyH.leftPressed){
+			entityControl.movePlayerLeft();
+		}
+		else if(keyH.rightPressed) {
+			entityControl.movePlayerRight();
+		}
 	}
 	
 	@Override
 	public void update() {
-	
+		processInput();
 	}
 }
