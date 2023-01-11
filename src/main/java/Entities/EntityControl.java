@@ -1,5 +1,6 @@
 package Entities;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,5 +69,10 @@ public class EntityControl {
 		if(checkRightBound(player)){
 			player.moveRight();
 		}
+	}
+	
+	public void renderAllEntities(Graphics g){
+		player.paint(g);
+		//TODO altre entità
 	}
 }

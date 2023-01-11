@@ -3,6 +3,8 @@ package GameStates;
 import Application.KeyHandler;
 import Entities.EntityControl;
 
+import java.awt.*;
+
 public class MainGame extends GameState{
 	
 	// classe che serve come transito di comunicazione per il programma con le entità
@@ -13,6 +15,12 @@ public class MainGame extends GameState{
 		setActive();
 		background.loadMainGameBackground();
 		entityControl = new EntityControl();
+	}
+	
+	@Override
+	public void render(Graphics g) {
+		super.render(g);
+		entityControl.renderAllEntities(g);
 	}
 	
 	@Override

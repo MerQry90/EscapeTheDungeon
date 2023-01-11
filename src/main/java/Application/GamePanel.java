@@ -70,7 +70,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		gameState.getBackground().paint(g);
+		gameState.render(g);
 	}
 
 	/*
