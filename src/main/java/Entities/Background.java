@@ -5,6 +5,10 @@ import java.awt.*;
 
 public class Background {
 
+	/*
+	width e height sono le misure del background e conseguentemente della finestra di gioco
+	(per ora sono impostate manualmente e moltiplicate per 64 perché basate sulla scala del vecchio progetto)
+	 */
 	private final int width = 17 * 64;
 	private final int height = 9 * 64;
 
@@ -15,6 +19,11 @@ public class Background {
 
 	private Tile tile;
 
+	/*
+	Le tre immagini di background sono pre-caricate all'inizio del programma nel costruttore,
+	in questo modo, quando lo stato cambia, basterà chiamare uno dei metodi sottostanti che non fa altro che cambiare
+	background e associare l'immagine corretta
+	 */
 	public Background(){
 		tile = new Tile();
 		MainMenuBackground = new ImageIcon("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
