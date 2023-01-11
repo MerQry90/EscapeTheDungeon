@@ -3,7 +3,6 @@ package Entities;
 public class Arrow extends Entity{
 
 	//la freccia deve essere visibile finché non collide con qualcosa
-	private boolean visible;
 	private final int arrowSpeed = 20;
 
 	/*
@@ -18,18 +17,9 @@ public class Arrow extends Entity{
 		this.axis = axis;
 		this.direction = direction;
 		setSpeed(arrowSpeed);
-		setVisible(true);
 		setSprite("src/resources/sprites/projectiles/arrow.png");
 		setWidth(32);
 		setHeight(32);
-	}
-
-	public boolean isVisible() {
-		return visible;
-	}
-
-	public void setVisible(boolean visible) {
-		this.visible = visible;
 	}
 
 	public boolean getAxis() {
@@ -38,5 +28,9 @@ public class Arrow extends Entity{
 
 	public boolean getDirection() {
 		return direction;
+	}
+
+	public int getArrowSpeed(){
+		return arrowSpeed;
 	}
 }

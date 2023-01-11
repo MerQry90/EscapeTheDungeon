@@ -8,8 +8,8 @@ import java.util.Random;
 public class EntityControl {
 	private Entity player;
 	private List<Entity> enemyList;
-	private List<Arrow> ArrowList;
-	
+	private List<Arrow> arrowList;
+
 	private int upperBound;
 	private int lowerBound;
 	private int leftBound;
@@ -18,7 +18,7 @@ public class EntityControl {
 	public EntityControl(){
 		player = new Player();
 		enemyList = new ArrayList<>();
-		ArrowList = new ArrayList<>();
+		arrowList = new ArrayList<>();
 		
 		upperBound = 64 * 2; //tmp
 		lowerBound = 64 * 7; //tmp
@@ -26,8 +26,8 @@ public class EntityControl {
 		rightBound = 64 * 15; //tmp
 		
 		//nemici dello scenario temporaneo------
-		enemyList.add(new Zombie(30, 30, 10));
-		enemyList.add(new Zombie(200, 30, 20));
+		enemyList.add(new Zombie(30, 30, 6));
+		enemyList.add(new Zombie(200, 30, 7));
 		//--------------------------------------
 	}
 	
@@ -137,19 +137,46 @@ public class EntityControl {
 			}
 		}
 	}
-	
+
+	public void updateArrows(){
+		for(int i = 0; i < arrowList.size(); i++){
+			if (arrowList.get(i).checkIsAlive()){
+				if(arrowList.get(i).getAxis() && arrowList.get(i).getDirection()){
+					//la freccia si muove a destra
+					arrowList.get(i).moveRight();
+				}
+				else if(arrowList.get(i).getAxis() && arrowList.get(i).getDirection() == false){
+					//la freccia si muove a sinistra
+					arrowList.get(i).moveLeft();
+				}
+				else if (arrowList.get(i).getAxis() == false && arrowList.get(i).getDirection()){
+					//la freccia si muove verso il basso
+					arrowList.get(i).moveDown();
+				}
+				else if (arrowList.get(i).getAxis() == false && arrowList.get(i).getDirection() == false){
+					//la freccia si muove verso l'alto
+					arrowList.get(i).moveUp();
+				}
+			}
+			else {
+				arrowList.remove(i);
+				i-= 1;
+			}
+		}
+	}
+
 	public void checkCollisions(){
 		//collisioni di frecce con i nemici
 		for(Entity enemy: enemyList){
 			if(enemy.checkIsAlive()){
-				for(Arrow arrow: ArrowList){
+				for(Arrow arrow: arrowList){
 					if((arrow.getX() >= enemy.getX()) && (arrow.getX() < (enemy.getX() + enemy.getWidth())) &&
 							((arrow.getY() >= enemy.getY()) && (arrow.getY() < enemy.getY() + enemy.getHeight()))) {
 						enemy.kill();
 						arrow.kill();
 					}
 				}
-				
+
 				//collisioni dei nemici con il player
 				if((player.getX() >= enemy.getX()) && (player.getX() < (enemy.getX() + enemy.getWidth())) &&
 						((player.getY() >= enemy.getY()) && (player.getY() < enemy.getY() + enemy.getHeight()))) {
@@ -158,11 +185,11 @@ public class EntityControl {
 			}
 		}
 	}
-	
+
 	public boolean isGameOver(){
 		return !(player.checkIsAlive());
 	}
-	
+
 	public void renderAllEntities(Graphics g){
 		player.paint(g);
 		for (Entity enemy: enemyList) {
