@@ -4,11 +4,20 @@ public class Arrow extends Entity{
 
 	//la freccia deve essere visibile finché non collide con qualcosa
 	private boolean visible;
+	private final int arrowSpeed = 20;
 
-	public Arrow(int x, int y, int speed) {
+	/*
+	axis = true: asse x
+	axis = false: asse y
+	 */
+	private boolean axis, direction;
+
+	public Arrow(int x, int y, boolean axis, boolean direction) {
 		setX(x);
 		setY(y);
-		setSpeed(speed);
+		this.axis = axis;
+		this.direction = direction;
+		setSpeed(arrowSpeed);
 		setVisible(true);
 		setSprite("src/resources/sprites/projectiles/arrow.png");
 		setWidth(32);
@@ -21,5 +30,13 @@ public class Arrow extends Entity{
 
 	public void setVisible(boolean visible) {
 		this.visible = visible;
+	}
+
+	public boolean getAxis() {
+		return axis;
+	}
+
+	public boolean getDirection() {
+		return direction;
 	}
 }
