@@ -138,6 +138,11 @@ public class EntityControl {
 		}
 	}
 
+	public void addArrow(boolean axis, boolean direction){
+		Arrow arrow = new Arrow(player.getX(), player.getY(), axis, direction);
+		arrowList.add(arrow);
+	}
+
 	public void updateArrows(){
 		for(int i = 0; i < arrowList.size(); i++){
 			if (arrowList.get(i).checkIsAlive()){

@@ -38,12 +38,26 @@ public class MainGame extends GameState{
 		else if(keyH.rightPressed) {
 			entityControl.movePlayerRight();
 		}
+
+		if(keyH.shootUp){
+			entityControl.addArrow(false, false);
+		}
+		else if(keyH.shootDown){
+			entityControl.addArrow(false, true);
+		}
+		else if(keyH.shootLeft){
+			entityControl.addArrow(true, false);
+		}
+		else if(keyH.shootRight){
+			entityControl.addArrow(true, true);
+		}
 	}
 	
 	@Override
 	public void update() {
 		processInput();
 		entityControl.moveEnemies();
+		entityControl.updateArrows();
 		entityControl.checkCollisions();
 		if(entityControl.isGameOver()){
 			setInactive();
