@@ -4,7 +4,7 @@ public class Player extends Entity {
 
 	private int shootCoolDown; //valore fisso che indica ogni quanti frame il giocatore può sparare una freccia
 	private int shootCoolDownValue; //valore che incrementa
-	private boolean hasShoot;
+	private boolean hasShot;
 
 	public Player() {
 		setX(512); //tmp
@@ -15,27 +15,27 @@ public class Player extends Entity {
 		setSprite("src/resources/sprites/png/player_front.png");
 		shootCoolDown = 15;
 		shootCoolDownValue = 0;
-		hasShoot = false;
+		hasShot = false;
 	}
 
 	public void coolDown(){
 		shootCoolDownValue += 1;
 	}
 
-	public boolean tryShoot() {
-		if (hasShoot) {
+	public boolean tryShot() {
+		if (hasShot) {
 			if (shootCoolDown - shootCoolDownValue > 0) {
 				//shootCoolDownValue += 1;
 			}
 			else {
-				hasShoot = false;
+				hasShot = false;
 				shootCoolDownValue = 0;
 			}
 			return false;
 		}
 		//hasShoot = false, quindi il player può sparare
 		else {
-			hasShoot = true;
+			hasShot = true;
 			shootCoolDownValue = 0;
 			return true;
 		}

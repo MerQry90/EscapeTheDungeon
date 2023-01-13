@@ -56,6 +56,7 @@ public class MainGame extends GameState{
 	@Override
 	public void update() {
 		processInput();
+		entityControl.updatePlayerCoolDown();
 		entityControl.moveEnemies();
 		entityControl.updateArrows();
 		entityControl.checkCollisionsAE();

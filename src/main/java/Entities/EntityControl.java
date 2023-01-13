@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Random;
 
 import static java.lang.Math.abs;
-import static java.lang.Math.sqrt;
 
 public class EntityControl {
 	private Player player;
@@ -29,8 +28,8 @@ public class EntityControl {
 		rightBound = 64 * 15; //tmp
 		
 		//nemici dello scenario temporaneo------
-		enemyList.add(new Zombie(30, 30, 10, 5, 60, 20));
-		enemyList.add(new Zombie(200, 30, 8, 10, 30, 10));
+		enemyList.add(new Zombie(30, 30, 6, 5, 60, 20));
+		enemyList.add(new Zombie(200, 30, 6, 10, 30, 10));
 		//--------------------------------------
 	}
 	
@@ -109,15 +108,18 @@ public class EntityControl {
 	}
 
 	public boolean checkPlayerShootCoolDown(){
-		return player.tryShoot();
+		return player.tryShot();
 	}
 
 	public void addArrow(boolean axis, boolean direction){
 		arrowList.add(new Arrow(player.getX(), player.getY(), axis, direction));
 	}
 
-	public void updateArrows(){
+	public void updatePlayerCoolDown(){
 		player.coolDown();
+	}
+
+	public void updateArrows(){
 		for(int i = 0; i < arrowList.size(); i++){
 			if (arrowList.get(i).checkIsAlive()){
 				if(arrowList.get(i).getAxis() && arrowList.get(i).getDirection()){
