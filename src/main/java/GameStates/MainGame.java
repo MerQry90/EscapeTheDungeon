@@ -39,16 +39,16 @@ public class MainGame extends GameState{
 			entityControl.movePlayerRight();
 		}
 
-		if(keyH.shootUp){
+		if (keyH.shootUp && entityControl.checkPlayerShootCoolDown()) {
 			entityControl.addArrow(false, false);
 		}
-		else if(keyH.shootDown){
+		else if (keyH.shootDown && entityControl.checkPlayerShootCoolDown()) {
 			entityControl.addArrow(false, true);
 		}
-		else if(keyH.shootLeft){
+		else if (keyH.shootLeft && entityControl.checkPlayerShootCoolDown()) {
 			entityControl.addArrow(true, false);
 		}
-		else if(keyH.shootRight){
+		else if (keyH.shootRight && entityControl.checkPlayerShootCoolDown()) {
 			entityControl.addArrow(true, true);
 		}
 	}
@@ -61,6 +61,10 @@ public class MainGame extends GameState{
 		entityControl.checkCollisionsAE();
 		entityControl.checkCollisionsPE();
 		if(entityControl.isGameOver()){
+			setInactive();
+		}
+		if(entityControl.checkStageCompletion()){
+			//TODO si aprono le porte e il giocatore può accedere all'area successiva
 			setInactive();
 		}
 	}

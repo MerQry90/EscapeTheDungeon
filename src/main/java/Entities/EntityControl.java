@@ -9,7 +9,7 @@ import static java.lang.Math.abs;
 import static java.lang.Math.sqrt;
 
 public class EntityControl {
-	private Entity player;
+	private Player player;
 	private List<Enemy> enemyList;
 	private List<Arrow> arrowList;
 
@@ -108,11 +108,16 @@ public class EntityControl {
 		}
 	}
 
+	public boolean checkPlayerShootCoolDown(){
+		return player.tryShoot();
+	}
+
 	public void addArrow(boolean axis, boolean direction){
 		arrowList.add(new Arrow(player.getX(), player.getY(), axis, direction));
 	}
 
 	public void updateArrows(){
+		player.coolDown();
 		for(int i = 0; i < arrowList.size(); i++){
 			if (arrowList.get(i).checkIsAlive()){
 				if(arrowList.get(i).getAxis() && arrowList.get(i).getDirection()){
@@ -182,6 +187,15 @@ public class EntityControl {
 
 	public boolean isGameOver(){
 		return !(player.checkIsAlive());
+	}
+
+	public boolean checkStageCompletion(){
+		for(Enemy enemy: enemyList){
+			if(enemy.checkIsAlive()){
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public void renderAllEntities(Graphics g){
