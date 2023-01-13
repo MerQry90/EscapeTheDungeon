@@ -29,8 +29,8 @@ public class EntityControl {
 		rightBound = 64 * 15; //tmp
 		
 		//nemici dello scenario temporaneo------
-		enemyList.add(new Zombie(30, 30, 6, 5, 60, 20));
-		enemyList.add(new Zombie(200, 30, 7, 10, 30, 10));
+		enemyList.add(new Zombie(30, 30, 10, 5, 60, 20));
+		enemyList.add(new Zombie(200, 30, 8, 10, 30, 10));
 		//--------------------------------------
 	}
 	
@@ -104,51 +104,7 @@ public class EntityControl {
 	
 	public void moveEnemies(){
 		for (Enemy enemy: enemyList) {
-			if(enemy.checkIsAlive() && enemy.tryMovement()){
-				int dx = player.getX() - enemy.getX();
-				int dy = player.getY() - enemy.getY();
-				int delta = abs(abs(dx) - abs(dy));
-				if(delta <= 80){
-					enemy.setSpeed(5);
-					if(dx > 0 && dy > 0){
-						enemy.moveRight();
-						enemy.moveDown();
-					}
-					else if (dx > 0 && dy < 0){
-						enemy.moveRight();
-						enemy.moveUp();
-					}
-					else if(dx < 0 && dy > 0){
-						enemy.moveLeft();
-						enemy.moveDown();
-					}
-					else {
-						enemy.moveLeft();
-						enemy.moveUp();
-					}
-				}
-				else{
-					enemy.setSpeed((int) (5 * sqrt(2)));
-					//moves on the x axis
-					if(abs(dx) > abs(dy)){
-						if(dx >= 0){
-							enemy.moveRight();
-						}
-						else {
-							enemy.moveLeft();
-						}
-					}
-					//moves on the y axis
-					else {
-						if(dy >= 0){
-							enemy.moveDown();
-						}
-						else {
-							enemy.moveUp();
-						}
-					}
-				}
-			}
+			enemy.moveTo(player.getX(), player.getY());
 		}
 	}
 

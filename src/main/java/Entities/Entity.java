@@ -3,6 +3,8 @@ package Entities;
 import javax.swing.*;
 import java.awt.*;
 
+import static java.lang.Math.sqrt;
+
 public abstract class Entity {
 
 	private int x;
@@ -59,10 +61,26 @@ public abstract class Entity {
 		setY(getY() + getSpeed());
 	}
 	public void moveLeft(){
-		setX(getX() - speed);
+		setX(getX() - getSpeed());
 	}
 	public void moveRight(){
-		setX(getX() + speed);
+		setX(getX() + getSpeed());
+	}
+	public void moveUpRight(){
+		setX((int) (getX() + getSpeed() / sqrt(2)));
+		setY((int) (getY() - getSpeed() / sqrt(2)));
+	}
+	public void moveUpLeft(){
+		setX((int) (getX() - getSpeed() / sqrt(2)));
+		setY((int) (getY() - getSpeed() / sqrt(2)));
+	}
+	public void moveDownRight(){
+		setX((int) (getX() + getSpeed() / sqrt(2)));
+		setY((int) (getY() + getSpeed() / sqrt(2)));
+	}
+	public void moveDownLeft(){
+		setX((int) (getX() - getSpeed() / sqrt(2)));
+		setY((int) (getY() + getSpeed() / sqrt(2)));
 	}
 	
 	public void setSprite(String path){

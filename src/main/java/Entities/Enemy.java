@@ -78,4 +78,5 @@ public abstract class Enemy extends Entity{
 	
 	//TODO fare la stessa cosa di movement per action
 	
+	public abstract void moveTo(int dstX, int dstY);
 }
