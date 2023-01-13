@@ -58,7 +58,8 @@ public class MainGame extends GameState{
 		processInput();
 		entityControl.moveEnemies();
 		entityControl.updateArrows();
-		entityControl.checkCollisions();
+		entityControl.checkCollisionsAE();
+		entityControl.checkCollisionsPE();
 		if(entityControl.isGameOver()){
 			setInactive();
 		}

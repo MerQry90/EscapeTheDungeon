@@ -20,9 +20,9 @@ public class EntityControl {
 		enemyList = new ArrayList<>();
 		arrowList = new ArrayList<>();
 		
-		upperBound = 64 * 2; //tmp
+		upperBound = 64; //tmp
 		lowerBound = 64 * 7; //tmp
-		leftBound = 64 * 2; //tmp
+		leftBound = 64; //tmp
 		rightBound = 64 * 15; //tmp
 		
 		//nemici dello scenario temporaneo------
@@ -169,23 +169,43 @@ public class EntityControl {
 		}
 	}
 
-	public void checkCollisions(){
-		//collisioni di frecce con i nemici
+	/*
+	* Controlla se si verificano collisioni tra le frecce e i nemici
+	*/
+	public void checkCollisionsAE(){
+		boolean xAlignment;
+		boolean yAlignment;
 		for(Entity enemy: enemyList){
-			if(enemy.checkIsAlive()){
-				for(Arrow arrow: arrowList){
-					if((arrow.getX() >= enemy.getX()) && (arrow.getX() < (enemy.getX() + enemy.getWidth())) &&
-							((arrow.getY() >= enemy.getY()) && (arrow.getY() < enemy.getY() + enemy.getHeight()))) {
-						enemy.kill();
-						arrow.kill();
-					}
+			for(Arrow arrow: arrowList){
+				//controllo allineamento della freccia con il nemico nell'asse delle x
+				xAlignment = (arrow.getX() < (enemy.getX() + enemy.getWidth()))
+							&& ((arrow.getX() + arrow.getWidth()) > enemy.getX());
+				//controllo allineamento della freccia con il nemico nell'asse delle y
+				yAlignment = (arrow.getY() < (enemy.getY() + enemy.getHeight()))
+							&& ((arrow.getY() + arrow.getHeight()) > enemy.getY());
+				if(enemy.checkIsAlive() && xAlignment && yAlignment) {
+					enemy.kill();
+					arrow.kill();
 				}
-
-				//collisioni dei nemici con il player
-				if((player.getX() >= enemy.getX()) && (player.getX() < (enemy.getX() + enemy.getWidth())) &&
-						((player.getY() >= enemy.getY()) && (player.getY() < enemy.getY() + enemy.getHeight()))) {
-					player.kill();
-				}
+			}
+		}
+	}
+	
+	/*
+	* Controlla se si verificano collisioni tra il giocatore e i nemici
+	*/
+	public void checkCollisionsPE(){
+		boolean xAlignment;
+		boolean yAlignment;
+		for(Entity enemy: enemyList){
+			//controllo allineamento del player con il nemico nell'asse delle x
+			xAlignment = (player.getX() < (enemy.getX() + enemy.getWidth()))
+					&& ((player.getX() + player.getWidth()) > enemy.getX());
+			//controllo allineamento del player con il nemico nell'asse delle y
+			yAlignment = (player.getY() < (enemy.getY() + enemy.getHeight()))
+					&& ((player.getY() + player.getHeight()) > enemy.getY());
+			if(enemy.checkIsAlive() && xAlignment && yAlignment) {
+				player.kill();
 			}
 		}
 	}
