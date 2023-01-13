@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import static java.lang.Math.abs;
+
 public class EntityControl {
 	private Entity player;
-	private List<Entity> enemyList;
+	private List<Enemy> enemyList;
 	private List<Arrow> arrowList;
 
 	private int upperBound;
@@ -81,42 +83,32 @@ public class EntityControl {
 	actionByRate determina la probabilità dello zombie di muoversi
 	(potrebbe non servire più se il gioco gira decentemente a 30 fps)
 	*/
-	public boolean actionByRate(int possibleCases, int totalCases){
-		if(possibleCases > totalCases || possibleCases < 0){
+	public boolean actionByRate(int actionPercentage){
+		if(actionPercentage >= 100){
+			return true;
+		}
+		if(actionPercentage <= 0){
 			return false;
 		}
 		Random random = new Random();
 		random.setSeed(System.currentTimeMillis());
-		int val = random.nextInt(totalCases);
-		if(val <= possibleCases) {
+		int val = random.nextInt(100);
+		if(val <= actionPercentage) {
 			return true;
 		}
-		return false;
+		else {
+			return false;
+		}
 	}
 	
 	public void moveEnemies(){
 		for (Entity enemy: enemyList) {
 			if(enemy.checkIsAlive()){
-				if(actionByRate(100, 100)){
+				if(actionByRate(50)){
 					int dx = player.getX() - enemy.getX();
 					int dy = player.getY() - enemy.getY();
-					int modX, modY;
-					
-					if(dx < 0){
-						modX = dx * (-1);
-					}
-					else{
-						modX = dx;
-					}
-					if(dy < 0){
-						modY = dy * (-1);
-					}
-					else{
-						modY = dy;
-					}
-					
 					//moves on the x axis
-					if(modX >= modY){
+					if(abs(dx) >= abs(dy)){
 						if(dx >= 0){
 							enemy.moveRight();
 						}
@@ -175,7 +167,7 @@ public class EntityControl {
 	public void checkCollisionsAE(){
 		boolean xAlignment;
 		boolean yAlignment;
-		for(Entity enemy: enemyList){
+		for(Enemy enemy: enemyList){
 			for(Arrow arrow: arrowList){
 				//controllo allineamento della freccia con il nemico nell'asse delle x
 				xAlignment = (arrow.getX() < (enemy.getX() + enemy.getWidth()))
@@ -197,7 +189,7 @@ public class EntityControl {
 	public void checkCollisionsPE(){
 		boolean xAlignment;
 		boolean yAlignment;
-		for(Entity enemy: enemyList){
+		for(Enemy enemy: enemyList){
 			//controllo allineamento del player con il nemico nell'asse delle x
 			xAlignment = (player.getX() < (enemy.getX() + enemy.getWidth()))
 					&& ((player.getX() + player.getWidth()) > enemy.getX());
@@ -219,11 +211,10 @@ public class EntityControl {
 		for (Arrow arrow: arrowList){
 			arrow.paint(g);
 		}
-		for (Entity enemy: enemyList) {
+		for (Enemy enemy: enemyList) {
 			if(enemy.checkIsAlive()) {
 				enemy.paint(g);
 			}
 		}
-		//TODO altre entità
 	}
 }

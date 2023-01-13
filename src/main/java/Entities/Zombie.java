@@ -2,12 +2,9 @@ package Entities;
 
 import java.util.Random;
 
-public class Zombie extends Entity{
-
-	private boolean isAlive;
-
+public class Zombie extends Enemy{
+	
 	public Zombie(int x, int y, int speed){
-		isAlive = true;
 		setX(x);
 		setY(y);
 		setSpeed(speed);
