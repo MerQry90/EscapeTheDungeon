@@ -5,10 +5,6 @@ public class Arrow extends GenericEntity {
 	//la freccia deve essere visibile finché non collide con qualcosa
 	private final int arrowSpeed = 20;
 
-	/*
-	axis = true: asse x
-	axis = false: asse y
-	 */
 	private boolean axis, direction;
 
 	public Arrow(int x, int y, boolean axis, boolean direction) {
@@ -23,11 +19,11 @@ public class Arrow extends GenericEntity {
 	}
 
 	public boolean getAxis() {
-		return axis;
+		return getAxis();
 	}
 
 	public boolean getDirection() {
-		return direction;
+		return getDirection();
 	}
 
 	public int getArrowSpeed(){
