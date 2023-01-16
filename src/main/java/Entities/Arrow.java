@@ -1,6 +1,6 @@
 package Entities;
 
-public class Arrow extends GenericEntity {
+public class Arrow extends Projectiles {
 
 	//la freccia deve essere visibile finché non collide con qualcosa
 	private final int arrowSpeed = 20;

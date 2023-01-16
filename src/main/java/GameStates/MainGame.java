@@ -162,6 +162,22 @@ public class MainGame extends GameState{
 			arrows.add(new Arrow(player.getX(), player.getY(), true, true));
 		}
 	}
+
+	public boolean isGameOver(){
+		if(!player.checkIsAlive()){
+			return true;
+		}
+		return false;
+	}
+
+	public boolean checkStageCompletion(){
+		for(Enemy enemy: enemies){
+			if(enemy.checkIsAlive()){
+				return false;
+			}
+		}
+		return true;
+	}
 	
 	@Override
 	public void update() {
@@ -171,6 +187,13 @@ public class MainGame extends GameState{
 		updateEnemies();
 		checkCollisionsPE();
 		checkCollisionsAE();
+		if(isGameOver()){
+			setInactive();
+		}
+		else if(checkStageCompletion()){
+			//TODO si aprono le porte e il giocatore può accedere all'area successiva
+			setInactive();
+		}
 		/*
 		entityControl.moveEnemies();
 		entityControl.updateArrows();
@@ -180,7 +203,6 @@ public class MainGame extends GameState{
 			setInactive();
 		}
 		if(entityControl.checkStageCompletion()){
-			//TODO si aprono le porte e il giocatore può accedere all'area successiva
 			setInactive();
 		}*/
 	}
