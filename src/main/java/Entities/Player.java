@@ -1,6 +1,10 @@
 package Entities;
 
-public class Player extends Entity {
+import Application.KeyHandler;
+
+import static java.lang.Math.sqrt;
+
+public class Player extends GenericEntity {
 
 	private int shootCoolDown; //valore fisso che indica ogni quanti frame il giocatore può sparare una freccia
 	private int shootCoolDownValue; //valore che incrementa
@@ -18,11 +22,11 @@ public class Player extends Entity {
 		hasShot = false;
 	}
 
-	public void coolDown(){
+	public void updateCoolDown(){
 		shootCoolDownValue += 1;
 	}
 
-	public boolean tryShot() {
+	public boolean canShoot() {
 		if (hasShot) {
 			if (shootCoolDown - shootCoolDownValue > 0) {
 				//shootCoolDownValue += 1;
@@ -40,6 +44,6 @@ public class Player extends Entity {
 			return true;
 		}
 	}
-
-
+	
+	
 }

@@ -1,4 +1,4 @@
-package Entities;
+/*package Entities;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -33,25 +33,25 @@ public class EntityControl {
 		//--------------------------------------
 	}
 	
-	public boolean checkUpperBound(Entity entity){
+	public boolean checkUpperBound(GenericEntity entity){
 		if(entity.getY() - entity.getSpeed() < upperBound){
 			return false;
 		}
 		return true;
 	}
-	public boolean checkLowerBound(Entity entity){
+	public boolean checkLowerBound(GenericEntity entity){
 		if(entity.getY() + entity.getSpeed() > lowerBound){
 			return false;
 		}
 		return true;
 	}
-	public boolean checkLeftBound(Entity entity){
+	public boolean checkLeftBound(GenericEntity entity){
 		if(entity.getX() - entity.getSpeed() < leftBound){
 			return false;
 		}
 		return true;
 	}
-	public boolean checkRightBound(Entity entity){
+	public boolean checkRightBound(GenericEntity entity){
 		if(entity.getX() + entity.getSpeed() > rightBound){
 			return false;
 		}
@@ -82,7 +82,7 @@ public class EntityControl {
 	/*
 	actionByRate determina la probabilità dello zombie di muoversi
 	(potrebbe non servire più se il gioco gira decentemente a 30 fps)
-	*/
+	
 	public boolean actionByRate(int actionPercentage){
 		if(actionPercentage >= 100){
 			return true;
@@ -148,7 +148,7 @@ public class EntityControl {
 
 	/*
 	* Controlla se si verificano collisioni tra le frecce e i nemici
-	*/
+	
 	public void checkCollisionsAE(){
 		boolean xAlignment;
 		boolean yAlignment;
@@ -170,7 +170,7 @@ public class EntityControl {
 	
 	/*
 	* Controlla se si verificano collisioni tra il giocatore e i nemici
-	*/
+	
 	public void checkCollisionsPE(){
 		boolean xAlignment;
 		boolean yAlignment;
@@ -212,3 +212,4 @@ public class EntityControl {
 		}
 	}
 }
+*/

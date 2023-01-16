@@ -1,6 +1,6 @@
 package Entities;
 
-public class Arrow extends Entity{
+public class Arrow extends GenericEntity {
 
 	//la freccia deve essere visibile finché non collide con qualcosa
 	private final int arrowSpeed = 20;
@@ -18,8 +18,8 @@ public class Arrow extends Entity{
 		this.direction = direction;
 		setSpeed(arrowSpeed);
 		setSprite("src/resources/sprites/projectiles/arrow.png");
-		setWidth(32);
-		setHeight(32);
+		setWidth(40);
+		setHeight(40);
 	}
 
 	public boolean getAxis() {

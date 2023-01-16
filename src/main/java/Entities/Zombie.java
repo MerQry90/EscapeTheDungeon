@@ -16,7 +16,7 @@ public class Zombie extends Enemy{
 		setSprite("src/resources/sprites/png/zombie.png");
 	}
 	
-	@Override
+	/*@Override
 	public void moveTo(int dstX, int dstY) {
 		if(checkIsAlive() && tryMovement()){
 			int dx = dstX - getX();
@@ -57,5 +57,10 @@ public class Zombie extends Enemy{
 				}
 			}
 		}
+	}*/
+	
+	@Override
+	public void updateBehaviour(int dstX, int dstY) {
+	
 	}
 }

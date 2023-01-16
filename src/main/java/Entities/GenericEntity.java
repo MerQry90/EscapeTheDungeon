@@ -1,0 +1,121 @@
+package Entities;
+
+import javax.swing.*;
+import java.awt.*;
+
+import static java.lang.Math.sqrt;
+
+public class GenericEntity {
+
+	private int x;
+	private int y;
+	private int speed;
+	private int width;
+	private int height;
+	private Image sprite;
+	private boolean isAlive = true;
+	
+	protected final int UPPER_BOUND = 64;
+	protected final int LOWER_BOUND = 64 * 7;
+	protected final int LEFT_BOUND = 64;
+	protected final int RIGHT_BOUND = 64 * 15;
+	
+	public void kill(){
+		isAlive = false;
+	}
+	
+	public boolean checkIsAlive() {
+		return isAlive;
+	}
+	
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	public int getSpeed() {
+		return speed;
+	}
+	public void setSpeed(int speed) {
+		this.speed = speed;
+	}
+	public int getWidth() {
+		return width;
+	}
+	public int getHeight() {
+		return height;
+	}
+	public void setWidth(int width) {
+		this.width = width;
+	}
+	public void setHeight(int height) {
+		this.height = height;
+	}
+	public void setSprite(String path){
+		ImageIcon icon = new ImageIcon(path);
+		sprite = icon.getImage();
+	}
+	public Image getSprite(){
+		return sprite;
+	}
+	
+	public int keepXBoundaries(int tmpX){
+		if(tmpX <= LEFT_BOUND){
+			return LEFT_BOUND + 1;
+		}
+		if(tmpX >= RIGHT_BOUND){
+			return RIGHT_BOUND - 1;
+		}
+		return tmpX;
+	}
+	public int keepYBoundaries(int tmpY){
+		if(tmpY <= UPPER_BOUND){
+			return UPPER_BOUND + 1;
+		}
+		if(tmpY >= LOWER_BOUND){
+			return LOWER_BOUND - 1;
+		}
+		return tmpY;
+	}
+	
+	public void moveUp(){
+		setY(keepYBoundaries(getY() - getSpeed()));
+	}
+	public void moveDown(){
+		setY(keepYBoundaries(getY() + getSpeed()));
+	}
+	public void moveLeft(){
+		setX(keepXBoundaries(getX() - getSpeed()));
+	}
+	public void moveRight(){
+		setX(keepXBoundaries(getX() + getSpeed()));
+	}
+	public void moveUpRight(){
+		setX(keepXBoundaries((int) (getX() + getSpeed() / sqrt(2))));
+		setY(keepYBoundaries((int) (getY() - getSpeed() / sqrt(2))));
+	}
+	public void moveUpLeft(){
+		setX(keepXBoundaries((int) (getX() - getSpeed() / sqrt(2))));
+		setY(keepYBoundaries((int) (getY() - getSpeed() / sqrt(2))));
+	}
+	public void moveDownRight(){
+		setX(keepXBoundaries((int) (getX() + getSpeed() / sqrt(2))));
+		setY(keepYBoundaries((int) (getY() + getSpeed() / sqrt(2))));
+	}
+	public void moveDownLeft(){
+		setX(keepXBoundaries((int) (getX() - getSpeed() / sqrt(2))));
+		setY(keepYBoundaries((int) (getY() + getSpeed() / sqrt(2))));
+	}
+	
+	public void paint(Graphics g){
+		g.drawImage(getSprite(), getX(), getY(), getWidth(), getHeight(), null);
+	}
+	
+}

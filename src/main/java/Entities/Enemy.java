@@ -1,6 +1,6 @@
 package Entities;
 
-public abstract class Enemy extends Entity{
+public abstract class Enemy extends GenericEntity {
 	
 	private int health;
 	
@@ -78,5 +78,5 @@ public abstract class Enemy extends Entity{
 	
 	//TODO fare la stessa cosa di movement per action
 	
-	public abstract void moveTo(int dstX, int dstY);
+	public abstract void updateBehaviour(int dstX, int dstY);
 }
