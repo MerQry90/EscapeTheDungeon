@@ -74,6 +74,7 @@ public class MainGame extends GameState{
 	
 	public void updateArrows(){
 		for(int i = 0; i < arrows.size(); i++){
+			arrows.get(i).checkBoundaries();
 			if (arrows.get(i).checkIsAlive()){
 				if(arrows.get(i).getAxis() && arrows.get(i).getDirection()){
 					//la freccia si muove a destra

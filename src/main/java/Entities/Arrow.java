@@ -19,14 +19,23 @@ public class Arrow extends GenericEntity {
 	}
 
 	public boolean getAxis() {
-		return getAxis();
+		return axis;
 	}
 
 	public boolean getDirection() {
-		return getDirection();
+		return direction;
 	}
 
 	public int getArrowSpeed(){
 		return arrowSpeed;
+	}
+
+	public void checkBoundaries(){
+		if(getX() <= LEFT_BOUND + 1|| getX() >= RIGHT_BOUND - 1){
+			kill();
+		}
+		else if(getY() <= UPPER_BOUND + 1 || getY() >= LOWER_BOUND - 1){
+			kill();
+		}
 	}
 }
