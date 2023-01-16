@@ -4,7 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Background {
-
+	
+	protected final static int UPPER_BOUND = 64;
+	protected final static int LOWER_BOUND = 64 * 8;
+	protected final static int LEFT_BOUND = 64;
+	protected final static int RIGHT_BOUND = 64 * 16;
+	
 	/*
 	width e height sono le misure del background e conseguentemente della finestra di gioco
 	(per ora sono impostate manualmente e moltiplicate per 64 perché basate sulla scala del vecchio progetto)

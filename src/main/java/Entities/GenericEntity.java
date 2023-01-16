@@ -15,11 +15,6 @@ public class GenericEntity {
 	private Image sprite;
 	private boolean isAlive = true;
 	
-	protected final int UPPER_BOUND = 64;
-	protected final int LOWER_BOUND = 64 * 7;
-	protected final int LEFT_BOUND = 64;
-	protected final int RIGHT_BOUND = 64 * 15;
-	
 	public void kill(){
 		isAlive = false;
 	}
@@ -67,20 +62,20 @@ public class GenericEntity {
 	}
 	
 	public int keepXBoundaries(int tmpX){
-		if(tmpX <= LEFT_BOUND){
-			return LEFT_BOUND + 1;
+		if(tmpX <= Background.LEFT_BOUND){
+			return Background.LEFT_BOUND;
 		}
-		if(tmpX >= RIGHT_BOUND){
-			return RIGHT_BOUND - 1;
+		if(tmpX >= Background.RIGHT_BOUND - getWidth()){
+			return Background.RIGHT_BOUND - getWidth();
 		}
 		return tmpX;
 	}
 	public int keepYBoundaries(int tmpY){
-		if(tmpY <= UPPER_BOUND){
-			return UPPER_BOUND + 1;
+		if(tmpY <= Background.UPPER_BOUND){
+			return Background.UPPER_BOUND;
 		}
-		if(tmpY >= LOWER_BOUND){
-			return LOWER_BOUND - 1;
+		if(tmpY >= Background.LOWER_BOUND - getHeight()){
+			return Background.LOWER_BOUND - getHeight();
 		}
 		return tmpY;
 	}

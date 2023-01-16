@@ -1,10 +1,14 @@
 package Entities;
 
-public class Arrow extends Projectiles {
+public class Arrow extends GenericEntity {
 
 	//la freccia deve essere visibile finché non collide con qualcosa
 	private final int arrowSpeed = 20;
-
+	
+	/*
+	axis = true: asse x
+	axis = false: asse y
+ 	*/
 	private boolean axis, direction;
 
 	public Arrow(int x, int y, boolean axis, boolean direction) {
@@ -31,10 +35,10 @@ public class Arrow extends Projectiles {
 	}
 
 	public void checkBoundaries(){
-		if(getX() <= LEFT_BOUND + 1|| getX() >= RIGHT_BOUND - 1){
-			kill();
-		}
-		else if(getY() <= UPPER_BOUND + 1 || getY() >= LOWER_BOUND - 1){
+		if((getX() <= Background.LEFT_BOUND && axis && !direction)
+				|| (getX() >= Background.RIGHT_BOUND - getWidth() && axis && direction)
+				|| (getY() <= Background.UPPER_BOUND && !axis && !direction)
+				|| (getY() >= Background.LOWER_BOUND - getHeight() && !axis && direction)){
 			kill();
 		}
 	}
