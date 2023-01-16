@@ -78,5 +78,5 @@ public abstract class Enemy extends GenericEntity {
 	
 	//TODO fare la stessa cosa di movement per action
 	
-	public abstract void updateBehaviour(int dstX, int dstY);
+	public abstract void updateBehaviour(int playerX, int playerY);
 }

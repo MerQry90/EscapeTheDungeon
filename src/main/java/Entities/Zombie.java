@@ -2,7 +2,7 @@ package Entities;
 
 import java.util.Random;
 
-import static java.lang.Math.abs;
+import static java.lang.Math.*;
 
 public class Zombie extends Enemy{
 	
@@ -60,7 +60,33 @@ public class Zombie extends Enemy{
 	}*/
 	
 	@Override
-	public void updateBehaviour(int dstX, int dstY) {
-	
+	public void updateBehaviour(int playerX, int playerY) {
+		/*
+		* angolo min = arctan(cateto min / cateto magg)
+		* */
+		int deltaX = playerX - getX();
+		int deltaY = playerY - getY();
+		
+		double angle;
+		int traslX, traslY;
+		
+		if(abs(deltaX) >= abs(deltaY)){
+			angle = Math.atan((double) abs(deltaY) / abs(deltaX));
+			traslX = (int) (getSpeed() * Math.cos(angle));
+			traslY = (int) (getSpeed() * Math.sin(angle));
+		}
+		else {
+			angle = Math.atan((double) abs(deltaX) / abs(deltaY));
+			traslX = (int) (getSpeed() * Math.sin(angle));
+			traslY = (int) (getSpeed() * Math.cos(angle));
+		}
+		if(deltaX < 0){
+			traslX = traslX * -1;
+		}
+		if(deltaY < 0){
+			traslY = traslY * -1;
+		}
+		setX(keepXBoundaries(getX() + traslX));
+		setY(keepYBoundaries(getY() + traslY));
 	}
 }

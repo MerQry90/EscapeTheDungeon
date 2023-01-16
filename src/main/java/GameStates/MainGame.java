@@ -99,6 +99,12 @@ public class MainGame extends GameState{
 		}
 	}
 	
+	public void updateEnemies(){
+		for(Enemy enemy: enemies){
+			enemy.updateBehaviour(player.getX(), player.getY());
+		}
+	}
+	
 	@Override
 	public void render(Graphics g) {
 		super.render(g);
@@ -161,6 +167,7 @@ public class MainGame extends GameState{
 		processInput();
 		player.updateCoolDown();
 		updateArrows();
+		updateEnemies();
 		checkCollisionsPE();
 		checkCollisionsAE();
 		/*
