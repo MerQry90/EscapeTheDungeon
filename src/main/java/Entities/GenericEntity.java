@@ -14,7 +14,7 @@ public abstract class GenericEntity {
 	private int height;
 	private Image sprite;
 	private CollisionBox cb;
-	private boolean isAlive = true;
+	private boolean isActive = true;
 	
 	public GenericEntity(int x, int y, int width, int height) {
 		this.x = x;
@@ -24,12 +24,13 @@ public abstract class GenericEntity {
 		cb = new CollisionBox(getX(), getY(), getWidth(), getHeight());
 	}
 	
-	public void kill(){
-		isAlive = false;
+	public void setInactive(){
+		isActive = false;
 	}
+	public void setActive(){ isActive = true; }
 	
-	public boolean checkIsAlive() {
-		return isAlive;
+	public boolean checkIfActive() {
+		return isActive;
 	}
 	
 	public void setX(int x) {

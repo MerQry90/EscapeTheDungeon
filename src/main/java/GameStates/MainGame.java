@@ -12,6 +12,7 @@ public class MainGame extends GameState{
 
 	private Stage stage;
 	private Player player;
+	private Door door;
 	private java.util.List<Enemy> enemies;
 	private java.util.List<Arrow> arrows;
 	
@@ -21,6 +22,7 @@ public class MainGame extends GameState{
 		background.loadMainGameBackground();
 		
 		player = new Player();
+		door = new Door(64 * 7, 32, 64 * 2, 64);
 		enemies = new ArrayList<>();
 		arrows = new ArrayList<>();
 		stage = new Stage();
@@ -37,13 +39,16 @@ public class MainGame extends GameState{
 	* Controlla se si verificano collisioni tra le frecce e i nemici
 	*/
 	public void checkCollisions(){
+		if(door.checkIfActive() && player.getCollisionBox().checkCollision(door.getCollisionBox())){
+			setInactive();
+		}
 		for(Enemy enemy: enemies){
-			if(enemy.checkIsAlive() && enemy.getCollisionBox().checkCollision(player.getCollisionBox())){
-				player.kill();
+			if(enemy.checkIfActive() && enemy.getCollisionBox().checkCollision(player.getCollisionBox())){
+				player.setInactive();
 			}
 			for(Arrow arrow: arrows){
-				if(enemy.checkIsAlive() && enemy.getCollisionBox().checkCollision(arrow.getCollisionBox())){
-					arrow.kill();
+				if(enemy.checkIfActive() && enemy.getCollisionBox().checkCollision(arrow.getCollisionBox())){
+					arrow.setInactive();
 					enemy.lowerHealth();
 				}
 			}
@@ -53,7 +58,7 @@ public class MainGame extends GameState{
 	public void updateArrows(){
 		for(int i = 0; i < arrows.size(); i++){
 			arrows.get(i).checkBoundaries();
-			if (arrows.get(i).checkIsAlive()){
+			if (arrows.get(i).checkIfActive()){
 				if(arrows.get(i).getAxis() && arrows.get(i).getDirection()){
 					//la freccia si muove a destra
 					arrows.get(i).moveRight();
@@ -87,12 +92,15 @@ public class MainGame extends GameState{
 	@Override
 	public void render(Graphics g) {
 		super.render(g);
+		if(door.checkIfActive()){
+			door.paint(g);
+		}
 		player.paint(g);
 		for (Arrow arrow: arrows){
 			arrow.paint(g);
 		}
 		for (Enemy enemy: enemies) {
-			if(enemy.checkIsAlive()) {
+			if(enemy.checkIfActive()) {
 				enemy.paint(g);
 			}
 		}
@@ -142,7 +150,7 @@ public class MainGame extends GameState{
 	}
 
 	public boolean isGameOver(){
-		if(!player.checkIsAlive()){
+		if(!player.checkIfActive()){
 			return true;
 		}
 		return false;
@@ -150,7 +158,7 @@ public class MainGame extends GameState{
 
 	public boolean checkStageCompletion(){
 		for(Enemy enemy: enemies){
-			if(enemy.checkIsAlive()){
+			if(enemy.checkIfActive()){
 				return false;
 			}
 		}
@@ -169,7 +177,7 @@ public class MainGame extends GameState{
 		}
 		else if(checkStageCompletion()){
 			//TODO si aprono le porte e il giocatore può accedere all'area successiva
-			setInactive();
+			door.setActive();
 		}
 	}
 }

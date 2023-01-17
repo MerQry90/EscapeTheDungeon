@@ -19,7 +19,7 @@ public abstract class Enemy extends GenericEntity {
 	public void lowerHealth(){
 		health -= 1;
 		if(health <= 0){
-			kill();
+			setInactive();
 		}
 	}
 

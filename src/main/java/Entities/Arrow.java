@@ -36,7 +36,7 @@ public class Arrow extends GenericEntity {
 				|| (getX() >= Background.RIGHT_BOUND - getWidth() && axis && direction)
 				|| (getY() <= Background.UPPER_BOUND && !axis && !direction)
 				|| (getY() >= Background.LOWER_BOUND - getHeight() && !axis && direction)){
-			kill();
+			setInactive();
 		}
 	}
 }
