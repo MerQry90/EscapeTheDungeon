@@ -1,6 +1,6 @@
 package Entities;
 
-public abstract class Projectiles extends GenericEntity {
+public abstract class Projectile extends GenericEntity {
 
 	/*
 	axis = true: asse x

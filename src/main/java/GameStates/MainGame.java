@@ -1,17 +1,16 @@
 package GameStates;
 
 import Application.KeyHandler;
-import Entities.Arrow;
-import Entities.Enemy;
-import Entities.Player;
-import Entities.Zombie;
+import Entities.*;
+import Stages.Stage;
 
 import java.util.ArrayList;
 import java.awt.*;
 
 
 public class MainGame extends GameState{
-	
+
+	private Stage stage;
 	private Player player;
 	private java.util.List<Enemy> enemies;
 	private java.util.List<Arrow> arrows;
@@ -24,10 +23,12 @@ public class MainGame extends GameState{
 		player = new Player();
 		enemies = new ArrayList<>();
 		arrows = new ArrayList<>();
-		
+		stage = new Stage(enemies);
+
+		//TODO chiamata al creatore di scenari
 		//nemici dello scenario temporaneo------
-		enemies.add(new Zombie(30, 30, 6, 5, 60, 20));
-		enemies.add(new Zombie(200, 30, 6, 10, 30, 10));
+		//enemies.add(new Zombie(30, 30, 6, 5, 60, 20));
+		//enemies.add(new Zombie(200, 30, 6, 10, 30, 10));
 		//--------------------------------------
 	}
 	
@@ -194,16 +195,5 @@ public class MainGame extends GameState{
 			//TODO si aprono le porte e il giocatore può accedere all'area successiva
 			setInactive();
 		}
-		/*
-		entityControl.moveEnemies();
-		entityControl.updateArrows();
-		entityControl.checkCollisionsAE();
-		entityControl.checkCollisionsPE();
-		if(entityControl.isGameOver()){
-			setInactive();
-		}
-		if(entityControl.checkStageCompletion()){
-			setInactive();
-		}*/
 	}
 }

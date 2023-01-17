@@ -1,16 +1,23 @@
 package Entities;
 
-import java.util.Random;
-
 import static java.lang.Math.*;
 
 public class Zombie extends Enemy{
-	
-	public Zombie(int x, int y, int speed, int health, int movementCoolDown, int standByMovementCoolDown){
-		super(health, movementCoolDown, standByMovementCoolDown);
+
+	public Zombie(int x, int y /*int movementCoolDown, int standByMovementCoolDown*/){
+
+		//super(movementCoolDown, standByMovementCoolDown);
 		setX(x);
 		setY(y);
-		setSpeed(speed);
+
+		setMinimumSpeed(5); //l'estremo è escluso, velocità a cui viene sommata maximumSpeed
+		setMaximumSpeed(4); //verrà sommato a minimumSpeed
+		setSpeed(initializeRandomSpeed());
+
+		setMinimumHealth(3);
+		setMaximumHealth(2);
+		setHealth();
+
 		setWidth(64); //tmp
 		setHeight(64); //tmp
 		setSprite("src/resources/sprites/png/zombie.png");
