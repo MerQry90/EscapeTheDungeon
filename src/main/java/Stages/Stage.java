@@ -1,7 +1,7 @@
 package Stages;
 
-import Entities.Enemy;
-import Entities.Zombie;
+import Entities.Enemies.Enemy;
+import Entities.Enemies.Zombie;
 
 import java.util.List;
 import java.util.Random;

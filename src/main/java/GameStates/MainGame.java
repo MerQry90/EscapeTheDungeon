@@ -2,6 +2,7 @@ package GameStates;
 
 import Application.KeyHandler;
 import Entities.*;
+import Entities.Enemies.Enemy;
 import Stages.Stage;
 
 import java.util.ArrayList;
@@ -179,6 +180,9 @@ public class MainGame extends GameState{
 	
 	@Override
 	public void update() {
+		if (clearedTotalStages >= 10){
+			setInactive();
+		}
 		processInput();
 		player.updateCoolDown();
 		updateArrows();
@@ -188,11 +192,7 @@ public class MainGame extends GameState{
 			setInactive();
 		}
 		else if(checkStageCompletion()){
-			//TODO si aprono le porte e il giocatore può accedere all'area successiva
 			door.setActive();
-		}
-		if (clearedTotalStages >= 10){
-			setInactive();
 		}
 	}
 }

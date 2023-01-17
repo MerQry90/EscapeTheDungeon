@@ -1,10 +1,10 @@
-package Entities;
+package Entities.Enemies;
 
 import static java.lang.Math.*;
 
 public class Zombie extends Enemy{
 
-	public Zombie(int x, int y /*int movementCoolDown, int standByMovementCoolDown*/){
+	public Zombie(int x, int y){
 
 		super(x, y, 64, 64, 0.7, 0.9);
 		

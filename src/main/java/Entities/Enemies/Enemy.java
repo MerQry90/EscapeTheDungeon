@@ -1,4 +1,6 @@
-package Entities;
+package Entities.Enemies;
+
+import Entities.GenericEntity;
 
 import java.util.Random;
 

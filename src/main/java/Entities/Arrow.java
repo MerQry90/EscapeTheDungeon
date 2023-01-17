@@ -27,9 +27,9 @@ public class Arrow extends GenericEntity {
 		return direction;
 	}
 
-	public int getArrowSpeed(){
+	/*public int getArrowSpeed(){
 		return arrowSpeed;
-	}
+	}*/
 
 	public void checkBoundaries(){
 		if((getX() <= Background.LEFT_BOUND && axis && !direction)
