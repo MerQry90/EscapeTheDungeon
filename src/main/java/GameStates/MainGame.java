@@ -37,11 +37,11 @@ public class MainGame extends GameState{
 	*/
 	public void checkCollisions(){
 		for(Enemy enemy: enemies){
-			if(enemy.checkIsAlive() && enemy.getHitBox().checkCollision(player.getHitBox())){
+			if(enemy.checkIsAlive() && enemy.getCollisionBox().checkCollision(player.getCollisionBox())){
 				player.kill();
 			}
 			for(Arrow arrow: arrows){
-				if(enemy.checkIsAlive() && enemy.getHitBox().checkCollision(arrow.getHitBox())){
+				if(enemy.checkIsAlive() && enemy.getCollisionBox().checkCollision(arrow.getCollisionBox())){
 					arrow.kill();
 					enemy.lowerHealth();
 				}

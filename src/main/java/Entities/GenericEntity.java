@@ -75,7 +75,7 @@ public abstract class GenericEntity {
 	public Image getSprite(){
 		return sprite;
 	}
-	public CollisionBox getHitBox(){
+	public CollisionBox getCollisionBox(){
 		return cb;
 	}
 	
