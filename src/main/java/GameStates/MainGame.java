@@ -15,6 +15,7 @@ public class MainGame extends GameState{
 	private Door door;
 	private java.util.List<Enemy> enemies;
 	private java.util.List<Arrow> arrows;
+	private int clearedTotalStages;
 	
 	public MainGame(KeyHandler keyH){
 		this.keyH = keyH;
@@ -27,12 +28,7 @@ public class MainGame extends GameState{
 		arrows = new ArrayList<>();
 		stage = new Stage();
 		stage.loadRandomStage(enemies);
-
-		//TODO chiamata al creatore di scenari
-		//nemici dello scenario temporaneo------
-		//enemies.add(new Zombie(30, 30, 6, 5, 60, 20));
-		//enemies.add(new Zombie(200, 30, 6, 10, 30, 10));
-		//--------------------------------------
+		clearedTotalStages = 0;
 	}
 	
 	/*
@@ -40,7 +36,8 @@ public class MainGame extends GameState{
 	*/
 	public void checkCollisions(){
 		if(door.checkIfActive() && player.getCollisionBox().checkCollision(door.getCollisionBox())){
-			setInactive();
+			clearedTotalStages++;
+			loadNextStage();
 		}
 		for(Enemy enemy: enemies){
 			if(enemy.checkIfActive() && enemy.getCollisionBox().checkCollision(player.getCollisionBox())){
@@ -108,6 +105,7 @@ public class MainGame extends GameState{
 	
 	@Override
 	public void processInput() {
+
 		//movimento
 		if(keyH.upPressed && keyH.rightPressed){
 			player.moveUpRight();
@@ -147,6 +145,13 @@ public class MainGame extends GameState{
 		else if (keyH.shootRight && player.canShoot()) {
 			arrows.add(new Arrow(player.getX(), player.getY(), true, true));
 		}
+
+		//DEBUG ONLY
+		if(keyH.killAll){
+			for(Enemy enemy: enemies){
+				enemy.setInactive();
+			}
+		}
 	}
 
 	public boolean isGameOver(){
@@ -164,6 +169,13 @@ public class MainGame extends GameState{
 		}
 		return true;
 	}
+
+	public void loadNextStage(){
+		player.setY(512 - 64);
+		player.setX(512);
+		stage.loadRandomStage(enemies);
+		door.setInactive();
+	}
 	
 	@Override
 	public void update() {
@@ -178,6 +190,9 @@ public class MainGame extends GameState{
 		else if(checkStageCompletion()){
 			//TODO si aprono le porte e il giocatore può accedere all'area successiva
 			door.setActive();
+		}
+		if (clearedTotalStages >= 10){
+			setInactive();
 		}
 	}
 }
