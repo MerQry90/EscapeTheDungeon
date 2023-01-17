@@ -12,7 +12,7 @@ public class Arrow extends GenericEntity {
 	private boolean axis, direction;
 
 	public Arrow(int x, int y, boolean axis, boolean direction) {
-		super(x, y, 40, 40);
+		super(x, y, 40, 40, 0.9, 0.5);
 		this.axis = axis;
 		this.direction = direction;
 		setSpeed(arrowSpeed);

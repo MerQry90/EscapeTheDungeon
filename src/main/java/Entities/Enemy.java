@@ -8,8 +8,8 @@ public abstract class Enemy extends GenericEntity {
 	Random random;
 	private int minimumSpeed, maximumSpeed, minimumHealth, maximumHealth;
 	
-	public Enemy(int x, int y, int w, int h){
-		super(x, y, w, h);
+	public Enemy(int x, int y, int w, int h, double CBsw, double CBsh){
+		super(x, y, w, h, CBsw, CBsh);
 	}
 
 	public void setHealth(){

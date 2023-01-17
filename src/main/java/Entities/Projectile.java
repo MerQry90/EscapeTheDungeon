@@ -8,8 +8,8 @@ public abstract class Projectile extends GenericEntity {
  	*/
 	private boolean axis, direction;
 	
-	public Projectile(int x, int y, int width, int height) {
-		super(x, y, width, height);
+	public Projectile(int x, int y, int width, int height, double CBsw, double CBsh) {
+		super(x, y, width, height, CBsw, CBsh);
 	}
 	
 	public void setAxis(boolean axis){

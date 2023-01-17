@@ -6,7 +6,7 @@ public class Zombie extends Enemy{
 
 	public Zombie(int x, int y /*int movementCoolDown, int standByMovementCoolDown*/){
 
-		super(x, y, 64, 64);
+		super(x, y, 64, 64, 0.7, 0.9);
 		
 		setMinimumSpeed(5); //l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		setMaximumSpeed(4); //verrà sommato a minimumSpeed

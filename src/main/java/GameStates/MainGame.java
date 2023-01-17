@@ -22,7 +22,7 @@ public class MainGame extends GameState{
 		background.loadMainGameBackground();
 		
 		player = new Player();
-		door = new Door(64 * 7, 32, 64 * 2, 64);
+		door = new Door(64 * 7, 0, 64 * 3, 64);
 		enemies = new ArrayList<>();
 		arrows = new ArrayList<>();
 		stage = new Stage();

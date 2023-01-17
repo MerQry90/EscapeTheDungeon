@@ -11,7 +11,7 @@ public class Player extends GenericEntity {
 	private boolean hasShot;
 
 	public Player() {
-		super(512, 256, 64, 64);
+		super(512, 256, 64, 64, 0.8, 0.8);
 		setX(512); //tmp
 		setY(256); //tmp
 		setHeight(64); //tmp

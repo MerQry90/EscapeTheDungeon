@@ -16,12 +16,12 @@ public abstract class GenericEntity {
 	private CollisionBox cb;
 	private boolean isActive = true;
 	
-	public GenericEntity(int x, int y, int width, int height) {
+	public GenericEntity(int x, int y, int width, int height, double CBwidthScalar, double CBheightScalar) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
-		cb = new CollisionBox(getX(), getY(), getWidth(), getHeight());
+		cb = new CollisionBox(getX(), getY(), getWidth(), getHeight(), CBwidthScalar, CBheightScalar);
 	}
 	
 	public void setInactive(){
@@ -35,19 +35,19 @@ public abstract class GenericEntity {
 	
 	public void setX(int x) {
 		this.x = x;
-		cb.setNewValues(getX(), getY(), getWidth(), getHeight());
+		cb.setCBx(x);
 	}
 	public void setY(int y) {
 		this.y = y;
-		cb.setNewValues(getX(), getY(), getWidth(), getHeight());
+		cb.setCBy(y);
 	}
 	public void setWidth(int width){
 		this.width = width;
-		cb.setNewValues(getX(), getY(), getWidth(), getHeight());
+		cb.setCBw(width);
 	}
 	public void setHeight(int height){
 		this.height = height;
-		cb.setNewValues(getX(), getY(), getWidth(), getHeight());
+		cb.setCBh(height);
 	}
 	
 	public int getX() {
