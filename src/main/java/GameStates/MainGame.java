@@ -23,7 +23,8 @@ public class MainGame extends GameState{
 		player = new Player();
 		enemies = new ArrayList<>();
 		arrows = new ArrayList<>();
-		stage = new Stage(enemies);
+		stage = new Stage();
+		stage.loadRandomStage(enemies);
 
 		//TODO chiamata al creatore di scenari
 		//nemici dello scenario temporaneo------
