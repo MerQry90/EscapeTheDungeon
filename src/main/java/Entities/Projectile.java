@@ -7,7 +7,11 @@ public abstract class Projectile extends GenericEntity {
 	axis = false: asse y
  	*/
 	private boolean axis, direction;
-
+	
+	public Projectile(int x, int y, int width, int height) {
+		super(x, y, width, height);
+	}
+	
 	public void setAxis(boolean axis){
 		this.axis = axis;
 	}

@@ -35,40 +35,16 @@ public class MainGame extends GameState{
 	/*
 	* Controlla se si verificano collisioni tra le frecce e i nemici
 	*/
-	public void checkCollisionsAE(){
-		boolean xAlignment;
-		boolean yAlignment;
+	public void checkCollisions(){
 		for(Enemy enemy: enemies){
-			for(Arrow arrow: arrows){
-				//controllo allineamento della freccia con il nemico nell'asse delle x
-				xAlignment = (arrow.getX() < (enemy.getX() + enemy.getWidth()))
-							&& ((arrow.getX() + arrow.getWidth()) > enemy.getX());
-				//controllo allineamento della freccia con il nemico nell'asse delle y
-				yAlignment = (arrow.getY() < (enemy.getY() + enemy.getHeight()))
-							&& ((arrow.getY() + arrow.getHeight()) > enemy.getY());
-				if(enemy.checkIsAlive() && xAlignment && yAlignment) {
-					enemy.lowerHealth();
-					arrow.kill();
-				}
-			}
-		}
-	}
-	
-	/*
-	* Controlla se si verificano collisioni tra il giocatore e i nemici
-	*/
-	public void checkCollisionsPE(){
-		boolean xAlignment;
-		boolean yAlignment;
-		for(Enemy enemy: enemies){
-			//controllo allineamento del player con il nemico nell'asse delle x
-			xAlignment = (player.getX() < (enemy.getX() + enemy.getWidth()))
-					&& ((player.getX() + player.getWidth()) > enemy.getX());
-			//controllo allineamento del player con il nemico nell'asse delle y
-			yAlignment = (player.getY() < (enemy.getY() + enemy.getHeight()))
-					&& ((player.getY() + player.getHeight()) > enemy.getY());
-			if(enemy.checkIsAlive() && xAlignment && yAlignment) {
+			if(enemy.checkIsAlive() && enemy.getHitBox().checkCollision(player.getHitBox())){
 				player.kill();
+			}
+			for(Arrow arrow: arrows){
+				if(enemy.checkIsAlive() && enemy.getHitBox().checkCollision(arrow.getHitBox())){
+					arrow.kill();
+					enemy.lowerHealth();
+				}
 			}
 		}
 	}
@@ -186,8 +162,7 @@ public class MainGame extends GameState{
 		player.updateCoolDown();
 		updateArrows();
 		updateEnemies();
-		checkCollisionsPE();
-		checkCollisionsAE();
+		checkCollisions();
 		if(isGameOver()){
 			setInactive();
 		}

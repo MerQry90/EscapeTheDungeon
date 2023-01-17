@@ -34,7 +34,7 @@ public class CollisionBox {
 		updateHitBox();
 	}
 	
-	public void updateHitBox(){
+	private void updateHitBox(){
 		hitBox = new Rectangle2D.Double(getCBx(), getCBy(), getCBw(), getCBh());
 	}
 	

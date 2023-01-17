@@ -6,65 +6,17 @@ public class Zombie extends Enemy{
 
 	public Zombie(int x, int y /*int movementCoolDown, int standByMovementCoolDown*/){
 
-		//super(movementCoolDown, standByMovementCoolDown);
-		setX(x);
-		setY(y);
-
+		super(x, y, 64, 64);
+		
 		setMinimumSpeed(5); //l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		setMaximumSpeed(4); //verrà sommato a minimumSpeed
 		setSpeed(initializeRandomSpeed());
-
 		setMinimumHealth(3);
 		setMaximumHealth(2);
+		
 		setHealth();
-
-		setWidth(64); //tmp
-		setHeight(64); //tmp
 		setSprite("src/resources/sprites/png/zombie.png");
 	}
-	
-	/*@Override
-	public void moveTo(int dstX, int dstY) {
-		if(checkIsAlive() && tryMovement()){
-			int dx = dstX - getX();
-			int dy = dstY - getY();
-			int delta = abs(abs(dx) - abs(dy));
-			if(delta <= 80){
-				if(dx > 0 && dy > 0){
-					moveDownRight();
-				}
-				else if (dx > 0 && dy < 0){
-					moveUpRight();
-				}
-				else if(dx < 0 && dy > 0){
-					moveDownLeft();
-				}
-				else {
-					moveUpLeft();
-				}
-			}
-			else{
-				//moves on the x axis
-				if(abs(dx) > abs(dy)){
-					if(dx >= 0){
-						moveRight();
-					}
-					else {
-						moveLeft();
-					}
-				}
-				//moves on the y axis
-				else {
-					if(dy >= 0){
-						moveDown();
-					}
-					else {
-						moveUp();
-					}
-				}
-			}
-		}
-	}*/
 	
 	@Override
 	public void updateBehaviour(int playerX, int playerY) {
