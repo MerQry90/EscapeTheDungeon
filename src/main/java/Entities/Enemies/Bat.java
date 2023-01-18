@@ -38,48 +38,53 @@ public class Bat extends Enemy{
 	@Override
 	public void updateBehaviour(int playerX, int playerY) {
 		countdown++;
-
-		if(countdown <= wait){
-
-			setSprite("src/resources/sprites/png/player_sample.png");
-			deltaX = playerX - getX();
-			deltaY = playerY - getY();
-			if(alternate){
-				moveUp();
-				alternate = false;
+		switch (getCurrentBehaviour()) {
+			case 0 -> {
+				setSprite("src/resources/sprites/png/player_sample.png");
+				deltaX = playerX - getX();
+				deltaY = playerY - getY();
+				if (alternate) {
+					moveUp();
+					alternate = false;
+				} else {
+					moveDown();
+					alternate = true;
+				}
+				if (countdown > wait) {
+					changeBehaviourTo(1);
+				}
 			}
-			else {
-				moveDown();
-				alternate = true;
+			case 1 -> {
+				double angle;
+				int traslX, traslY;
+				movingCountdown--;
+				setSprite("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
+				if (abs(deltaX) >= abs(deltaY)) {
+					angle = Math.atan((double) abs(deltaY) / abs(deltaX));
+					traslX = (int) (dashSpeed * Math.cos(angle));
+					traslY = (int) (dashSpeed * Math.sin(angle));
+				} else {
+					angle = Math.atan((double) abs(deltaX) / abs(deltaY));
+					traslX = (int) (dashSpeed * Math.sin(angle));
+					traslY = (int) (dashSpeed * Math.cos(angle));
+				}
+				if (deltaX < 0) {
+					traslX = traslX * -1;
+				}
+				if (deltaY < 0) {
+					traslY = traslY * -1;
+				}
+				setX(keepXBoundaries(getX() + traslX));
+				setY(keepYBoundaries(getY() + traslY));
+				if (movingCountdown <= 0) {
+					countdown = 0;
+					movingCountdown = 20;
+				}
+				if (countdown <= wait) {
+					changeBehaviourTo(0);
+				}
 			}
-		}
-
-		double angle;
-		int traslX, traslY;
-		if(countdown >= wait) {
-			movingCountdown--;
-			setSprite("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
-			if (abs(deltaX) >= abs(deltaY)) {
-				angle = Math.atan((double) abs(deltaY) / abs(deltaX));
-				traslX = (int) (dashSpeed * Math.cos(angle));
-				traslY = (int) (dashSpeed * Math.sin(angle));
-			} else {
-				angle = Math.atan((double) abs(deltaX) / abs(deltaY));
-				traslX = (int) (dashSpeed * Math.sin(angle));
-				traslY = (int) (dashSpeed * Math.cos(angle));
-			}
-			if (deltaX < 0) {
-				traslX = traslX * -1;
-			}
-			if (deltaY < 0) {
-				traslY = traslY * -1;
-			}
-			setX(keepXBoundaries(getX() + traslX));
-			setY(keepYBoundaries(getY() + traslY));
-			if(movingCountdown <= 0){
-				countdown = 0;
-				movingCountdown = 20;
-			}
+			default -> changeBehaviourTo(0);
 		}
 	}
 }

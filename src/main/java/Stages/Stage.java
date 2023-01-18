@@ -22,9 +22,10 @@ public class Stage {
 		switch(stageNumber){
 			case 0:
 				/*
-				per testing inserire come parametro in random.nextInt(1) in modo da fare uscire solo la prima stanza e inserire appunto i nemici da testare qui
+				per testing inserire come parametro in random.nextInt(1) in modo da fare
+				uscire solo la prima stanza e inserire appunto i nemici da testare qui
 				 */
-				enemies.add(new CosoCheSpara(256, 256));
+				enemies.add(new Bat(256, 256));
 
 				break;
 			case 1:

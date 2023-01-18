@@ -7,6 +7,8 @@ import java.util.Random;
 public abstract class Enemy extends GenericEntity {
 	
 	private int health;
+	private int currentBehaviour;
+	
 	Random random;
 	
 	public Enemy(int x, int y){
@@ -29,6 +31,13 @@ public abstract class Enemy extends GenericEntity {
 		random = new Random();
 		int speed = random.nextInt(minimumSpeed) + maximumSpeed;
 		setSpeed(speed);
+	}
+	
+	public int getCurrentBehaviour(){
+		return currentBehaviour;
+	}
+	public void changeBehaviourTo(int newBehaviour){
+		this.currentBehaviour = newBehaviour;
 	}
 	
 	public abstract void updateBehaviour(int playerX, int playerY);

@@ -20,6 +20,7 @@ public class Zombie extends Enemy{
 		
 		setRandomHealth(3, 2);
 		setSprite("src/resources/sprites/png/zombie.png");
+		changeBehaviourTo(0);
 	}
 	
 	@Override
@@ -33,23 +34,29 @@ public class Zombie extends Enemy{
 		double angle;
 		int traslX, traslY;
 		
-		if(abs(deltaX) >= abs(deltaY)){
-			angle = Math.atan((double) abs(deltaY) / abs(deltaX));
-			traslX = (int) (getSpeed() * Math.cos(angle));
-			traslY = (int) (getSpeed() * Math.sin(angle));
+		switch (getCurrentBehaviour()){
+			case 0:
+				if(abs(deltaX) >= abs(deltaY)){
+					angle = Math.atan((double) abs(deltaY) / abs(deltaX));
+					traslX = (int) (getSpeed() * Math.cos(angle));
+					traslY = (int) (getSpeed() * Math.sin(angle));
+				}
+				else {
+					angle = Math.atan((double) abs(deltaX) / abs(deltaY));
+					traslX = (int) (getSpeed() * Math.sin(angle));
+					traslY = (int) (getSpeed() * Math.cos(angle));
+				}
+				if(deltaX < 0){
+					traslX = traslX * -1;
+				}
+				if(deltaY < 0){
+					traslY = traslY * -1;
+				}
+				setX(keepXBoundaries(getX() + traslX));
+				setY(keepYBoundaries(getY() + traslY));
+				break;
+			default:
+				changeBehaviourTo(0);
 		}
-		else {
-			angle = Math.atan((double) abs(deltaX) / abs(deltaY));
-			traslX = (int) (getSpeed() * Math.sin(angle));
-			traslY = (int) (getSpeed() * Math.cos(angle));
-		}
-		if(deltaX < 0){
-			traslX = traslX * -1;
-		}
-		if(deltaY < 0){
-			traslY = traslY * -1;
-		}
-		setX(keepXBoundaries(getX() + traslX));
-		setY(keepYBoundaries(getY() + traslY));
 	}
 }
