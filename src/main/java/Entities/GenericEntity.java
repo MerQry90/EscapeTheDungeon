@@ -155,6 +155,8 @@ public abstract class GenericEntity {
 	
 	public void paint(Graphics g){
 		g.drawImage(getSprite(), getX(), getY(), getWidth(), getHeight(), null);
+		g.setColor(Color.GREEN);
+		g.drawRect(cb.getCBx(), cb.getCBy(), cb.getCBw(), cb.getCBh());
 	}
 	
 }

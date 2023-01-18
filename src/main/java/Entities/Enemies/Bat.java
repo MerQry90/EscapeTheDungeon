@@ -23,12 +23,12 @@ public class Bat extends Enemy{
 		setSpeed(initializeRandomSpeed());
 		setMinimumHealth(2);
 		setMaximumHealth(1);
-		wait = 40;
 		setWidth(64);
 		setHeight(64);
 		setCBwidthScalar(0.7);
 		setCBheightScalar(0.9);
-		wait = 30;
+		
+		wait = 40;
 		countdown = 0;
 		movingCountdown = 20;
 		deltaX = 0;

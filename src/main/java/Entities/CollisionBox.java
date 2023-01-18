@@ -12,10 +12,10 @@ public class CollisionBox {
 		this.wScalar = wScalar;
 		this.hScalar = hScalar;
 		
+		this.CBx = (int) (Ex + ((double)(Ew) * (1.0 - wScalar)));
+		this.CBy = (int) (Ey + ((double)(Eh) * (1.0 - hScalar)));
 		this.CBw = (int) (Ew * wScalar);
 		this.CBh = (int) (Eh * hScalar);
-		this.CBx = (int) (Ex + ((1.0 - wScalar) / 2.0));
-		this.CBy = (int) (Ey + ((1.0 - hScalar) / 2.0));
 		
 		updateHitBox();
 	}
@@ -37,11 +37,11 @@ public class CollisionBox {
 	}
 	
 	public void setCBx(int Ex) {
-		this.CBx = (int) (Ex + ((1.0 - wScalar) / 2.0));
+		this.CBx = (int) (Ex + ((double)(CBw) * (1.0 - wScalar) / 2.0));
 		updateHitBox();
 	}
 	public void setCBy(int Ey) {
-		this.CBy = (int) (Ey + ((1.0 - hScalar) / 2.0));
+		this.CBy = (int) (Ey + ((double)(CBh) * (1.0 - hScalar) / 2.0));
 		updateHitBox();
 	}
 	public void setCBw(int Ew) {
