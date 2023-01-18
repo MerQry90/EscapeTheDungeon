@@ -13,6 +13,6 @@ public class Door extends GenericEntity{
 		setWidth(64 * 3);
 		setHeight(64);
 		setCBwidthScalar(1.0);
-		setCBheightScalar(1.1);
+		setCBheightScalar(1.3);
 	}
 }

@@ -39,13 +39,13 @@ public abstract class GenericEntity {
 	public void setX(int x) {
 		this.x = x;
 		if(cb != null) {
-			cb.setCBx(x);
+			cb.setCBx(x, getWidth());
 		}
 	}
 	public void setY(int y) {
 		this.y = y;
 		if(cb != null) {
-			cb.setCBy(y);
+			cb.setCBy(y, getHeight());
 		}
 	}
 	public void setWidth(int width){

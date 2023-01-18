@@ -38,14 +38,14 @@ public class CollisionBox {
 		return hitBox;
 	}
 	
-	public void setCBx(int Ex) {
-		this.CBx = (int) (Ex + ((double)(CBw) * (1.0 - wScalar) / 2.0));
+	public void setCBx(int Ex, int Ew) {
+		this.CBx = (int) (Ex + ((double)(Ew - this.CBw) / 2.0));
 		if(hitBox != null){
 			updateHitBox();
 		}
 	}
-	public void setCBy(int Ey) {
-		this.CBy = (int) (Ey + ((double)(CBh) * (1.0 - hScalar) / 2.0));
+	public void setCBy(int Ey, int Eh) {
+		this.CBy = (int) (Ey + ((double)(Eh - this.CBh) / 2.0));
 		if(hitBox != null){
 			updateHitBox();
 		}
