@@ -20,8 +20,13 @@ public class Stage {
 		stageNumber = random.nextInt(1);
 		switch(stageNumber){
 			case 0:
+				/*
+				per testing inserire come parametro in random.nextInt(1) in modo da fare uscire solo la prima stanza e inserire appunto i nemici da testare qui
+				 */
 				enemies.add(new Bat(64, 64));
-				//enemies.add(new Bat(800, 64));
+				enemies.add(new Bat(800, 64));
+				enemies.add(new Zombie(30, 400));
+				enemies.add(new Zombie(800, 400));
 
 				break;
 			case 1:

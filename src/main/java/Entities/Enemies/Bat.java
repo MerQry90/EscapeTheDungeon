@@ -8,18 +8,22 @@ public class Bat extends Enemy{
 
 	private int wait, countdown, movingCountdown;
 	int deltaX, deltaY;
-	
+	private boolean alternate;
+	private int dashSpeed = 30;
+
+
 	public Bat(int x, int y){
 		super(x, y);
 	}
-	
+
 	@Override
 	public void init() {
 		setMinimumSpeed(1); //l'estremo è escluso, velocità a cui viene sommata maximumSpeed
-		setMaximumSpeed(40); //verrà sommato a minimumSpeed
+		setMaximumSpeed(5); //verrà sommato a minimumSpeed
 		setSpeed(initializeRandomSpeed());
 		setMinimumHealth(2);
 		setMaximumHealth(1);
+		wait = 40;
 		setWidth(64);
 		setHeight(64);
 		setCBwidthScalar(0.7);
@@ -29,7 +33,8 @@ public class Bat extends Enemy{
 		movingCountdown = 20;
 		deltaX = 0;
 		deltaY = 0;
-		
+		alternate = true;
+
 		setHealth();
 		setSprite("src/resources/sprites/png/player_sample.png");
 	}
@@ -39,22 +44,32 @@ public class Bat extends Enemy{
 		countdown++;
 
 		if(countdown <= wait){
+			setSprite("src/resources/sprites/png/player_sample.png");
 			deltaX = playerX - getX();
 			deltaY = playerY - getY();
+			if(alternate){
+				moveUp();
+				alternate = false;
+			}
+			else {
+				moveDown();
+				alternate = true;
+			}
 		}
 
 		double angle;
 		int traslX, traslY;
 		if(countdown >= wait) {
 			movingCountdown--;
+			setSprite("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
 			if (abs(deltaX) >= abs(deltaY)) {
 				angle = Math.atan((double) abs(deltaY) / abs(deltaX));
-				traslX = (int) (getSpeed() * Math.cos(angle));
-				traslY = (int) (getSpeed() * Math.sin(angle));
+				traslX = (int) (dashSpeed * Math.cos(angle));
+				traslY = (int) (dashSpeed * Math.sin(angle));
 			} else {
 				angle = Math.atan((double) abs(deltaX) / abs(deltaY));
-				traslX = (int) (getSpeed() * Math.sin(angle));
-				traslY = (int) (getSpeed() * Math.cos(angle));
+				traslX = (int) (dashSpeed * Math.sin(angle));
+				traslY = (int) (dashSpeed * Math.cos(angle));
 			}
 			if (deltaX < 0) {
 				traslX = traslX * -1;
