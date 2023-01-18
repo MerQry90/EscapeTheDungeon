@@ -12,12 +12,14 @@ public class CollisionBox {
 		this.wScalar = wScalar;
 		this.hScalar = hScalar;
 		
-		this.CBx = (int) (Ex + ((double)(Ew) * (1.0 - wScalar)));
-		this.CBy = (int) (Ey + ((double)(Eh) * (1.0 - hScalar)));
-		this.CBw = (int) (Ew * wScalar);
-		this.CBh = (int) (Eh * hScalar);
+		this.CBw = (int) ((double)(Ew) * wScalar);
+		this.CBh = (int) ((double)(Eh) * hScalar);
+		
+		this.CBx = (int) (Ex + ((double)(Ew - this.CBw) / 2.0));
+		this.CBy = (int) (Ey + ((double)(Eh - this.CBh) / 2.0));
 		
 		updateHitBox();
+		
 	}
 	
 	public int getCBx() {
@@ -38,19 +40,27 @@ public class CollisionBox {
 	
 	public void setCBx(int Ex) {
 		this.CBx = (int) (Ex + ((double)(CBw) * (1.0 - wScalar) / 2.0));
-		updateHitBox();
+		if(hitBox != null){
+			updateHitBox();
+		}
 	}
 	public void setCBy(int Ey) {
 		this.CBy = (int) (Ey + ((double)(CBh) * (1.0 - hScalar) / 2.0));
-		updateHitBox();
+		if(hitBox != null){
+			updateHitBox();
+		}
 	}
 	public void setCBw(int Ew) {
 		this.CBw = (int) (Ew * wScalar);
-		updateHitBox();
+		if(hitBox != null){
+			updateHitBox();
+		}
 	}
 	public void setCBh(int Eh) {
 		this.CBh = (int) (Eh * hScalar);
-		updateHitBox();
+		if(hitBox != null){
+			updateHitBox();
+		}
 	}
 	
 	private void updateHitBox(){
