@@ -12,7 +12,7 @@ public class CosoCheSpara extends Enemy{
 	public void init() {
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		//verrà sommato a minimumSpeed
-		setRandomSpeed(1, 8);
+		setRandomSpeed(1, 9);
 		setWidth(64);
 		setHeight(64);
 		setCBwidthScalar(0.7);
@@ -43,9 +43,13 @@ public class CosoCheSpara extends Enemy{
 			traslY = (int) (getSpeed() * Math.cos(angle));
 		}
 
-		if(traslX < 1 || traslY < 1) {
+		if(traslX < 2 || traslY < 2) {
 			traslX = traslX * -1;
 			traslY = traslY * -1;
+			
+			int tmp = traslX;
+			traslX = traslY;
+			traslY = tmp;
 		}
 		if(deltaX < 0){
 			traslX = traslX * -1;
