@@ -3,16 +3,22 @@ package Entities.Enemies;
 import static java.lang.Math.*;
 
 public class Zombie extends Enemy{
-
-	public Zombie(int x, int y){
-
-		super(x, y, 64, 64, 0.7, 0.9);
-		
+	
+	public Zombie(int x, int y) {
+		super(x, y);
+	}
+	
+	@Override
+	public void init(){
 		setMinimumSpeed(5); //l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		setMaximumSpeed(4); //verrà sommato a minimumSpeed
 		setSpeed(initializeRandomSpeed());
 		setMinimumHealth(3);
 		setMaximumHealth(2);
+		setWidth(64);
+		setHeight(64);
+		setCBwidthScalar(0.7);
+		setCBheightScalar(0.9);
 		
 		setHealth();
 		setSprite("src/resources/sprites/png/zombie.png");

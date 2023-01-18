@@ -12,9 +12,17 @@ public class Arrow extends GenericEntity {
 	private boolean axis, direction;
 
 	public Arrow(int x, int y, boolean axis, boolean direction) {
-		super(x, y, 40, 40, 0.9, 0.5);
+		super(x, y);
 		this.axis = axis;
 		this.direction = direction;
+	}
+	
+	@Override
+	public void init() {
+		setWidth(40);
+		setHeight(40);
+		setCBwidthScalar(0.9);
+		setCBheightScalar(0.5);
 		setSpeed(arrowSpeed);
 		setSprite("src/resources/sprites/projectiles/arrow.png");
 	}

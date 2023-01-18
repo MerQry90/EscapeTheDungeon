@@ -12,17 +12,20 @@ public abstract class GenericEntity {
 	private int speed;
 	private int width;
 	private int height;
+	private double CBwidthScalar;
+	private double CBheightScalar;
 	private Image sprite;
 	private CollisionBox cb;
 	private boolean isActive = true;
 	
-	public GenericEntity(int x, int y, int width, int height, double CBwidthScalar, double CBheightScalar) {
+	public GenericEntity(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.width = width;
-		this.height = height;
-		cb = new CollisionBox(getX(), getY(), getWidth(), getHeight(), CBwidthScalar, CBheightScalar);
+		init();
+		cb = new CollisionBox(getX(), getY(), getWidth(), getHeight(), getCBwidthScalar(), getCBheightScalar());
 	}
+	
+	public abstract void init();
 	
 	public void setInactive(){
 		isActive = false;
@@ -35,19 +38,28 @@ public abstract class GenericEntity {
 	
 	public void setX(int x) {
 		this.x = x;
-		cb.setCBx(x);
+		if(cb != null) {
+			cb.setCBx(x);
+		}
 	}
 	public void setY(int y) {
 		this.y = y;
-		cb.setCBy(y);
+		if(cb != null) {
+			cb.setCBy(y);
+		}
 	}
 	public void setWidth(int width){
 		this.width = width;
-		cb.setCBw(width);
+		if(cb != null){
+			cb.setCBw(width);
+			
+		}
 	}
 	public void setHeight(int height){
 		this.height = height;
-		cb.setCBh(height);
+		if(cb != null){
+			cb.setCBh(height);
+		}
 	}
 	
 	public int getX() {
@@ -67,6 +79,19 @@ public abstract class GenericEntity {
 	}
 	public void setSpeed(int speed) {
 		this.speed = speed;
+	}
+	
+	public double getCBwidthScalar() {
+		return CBwidthScalar;
+	}
+	public void setCBwidthScalar(double CBwidthScalar) {
+		this.CBwidthScalar = CBwidthScalar;
+	}
+	public double getCBheightScalar() {
+		return CBheightScalar;
+	}
+	public void setCBheightScalar(double CBheightScalar) {
+		this.CBheightScalar = CBheightScalar;
 	}
 	
 	public void setSprite(String path){
