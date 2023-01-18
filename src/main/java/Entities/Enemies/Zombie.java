@@ -10,17 +10,15 @@ public class Zombie extends Enemy{
 	
 	@Override
 	public void init(){
-		setMinimumSpeed(5); //l'estremo è escluso, velocità a cui viene sommata maximumSpeed
-		setMaximumSpeed(4); //verrà sommato a minimumSpeed
-		setSpeed(initializeRandomSpeed());
-		setMinimumHealth(3);
-		setMaximumHealth(2);
+		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
+		//verrà sommato a minimumSpeed
+		setRandomSpeed(5, 4);
 		setWidth(64);
 		setHeight(64);
 		setCBwidthScalar(0.7);
 		setCBheightScalar(0.9);
 		
-		setHealth();
+		setRandomHealth(3, 2);
 		setSprite("src/resources/sprites/png/zombie.png");
 	}
 	
