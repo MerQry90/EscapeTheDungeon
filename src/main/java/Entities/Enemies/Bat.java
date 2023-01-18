@@ -1,7 +1,5 @@
 package Entities.Enemies;
 
-import Entities.GenericEntity;
-
 import static java.lang.Math.abs;
 
 public class Bat extends Enemy{
@@ -18,25 +16,23 @@ public class Bat extends Enemy{
 
 	@Override
 	public void init() {
-		setMinimumSpeed(1); //l'estremo è escluso, velocità a cui viene sommata maximumSpeed
-		setMaximumSpeed(5); //verrà sommato a minimumSpeed
-		setSpeed(initializeRandomSpeed());
-		setMinimumHealth(2);
-		setMaximumHealth(1);
-		wait = 40;
+		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
+		//verrà sommato a minimumSpeed
+		setRandomSpeed(1, 5);
 		setWidth(64);
 		setHeight(64);
 		setCBwidthScalar(0.7);
 		setCBheightScalar(0.9);
-		wait = 30;
+		setRandomHealth(2, 1);
+		setSprite("src/resources/sprites/png/player_sample.png");
+
+		wait = 40;
 		countdown = 0;
 		movingCountdown = 20;
-		deltaX = 0;
-		deltaY = 0;
 		alternate = true;
 
-		setHealth();
-		setSprite("src/resources/sprites/png/player_sample.png");
+		deltaX = 0;
+		deltaY = 0;
 	}
 
 	@Override
@@ -44,6 +40,7 @@ public class Bat extends Enemy{
 		countdown++;
 
 		if(countdown <= wait){
+
 			setSprite("src/resources/sprites/png/player_sample.png");
 			deltaX = playerX - getX();
 			deltaY = playerY - getY();
