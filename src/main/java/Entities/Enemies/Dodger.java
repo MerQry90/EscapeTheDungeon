@@ -1,44 +1,40 @@
 package Entities.Enemies;
 
-import static java.lang.Math.*;
+import static java.lang.Math.abs;
 
-public class Zombie extends Enemy{
-	
-	public Zombie(int x, int y) {
+public class Dodger extends Enemy{
+	int traslX = 0;
+	int traslY = 0;
+
+
+	public Dodger(int x, int y){
 		super(x, y);
 	}
-	
+
 	@Override
-	public void init(){
+	public void init() {
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		//verrà sommato a minimumSpeed
-		setRandomSpeed(5, 4);
+		setRandomSpeed(1, 9);
 		setWidth(64);
 		setHeight(64);
 		setCBwidthScalar(0.7);
 		setCBheightScalar(0.9);
-		
-		setRandomHealth(3, 2);
-		setSprite("src/resources/sprites/png/zombie.png");
-		changeBehaviourTo(0);
+		setRandomHealth(2, 1);
+		setSprite("src/resources/sprites/png/player_sample.png");
 	}
-	
+
 	@Override
 	public void updateBehaviour(int playerX, int playerY) {
 		/*
-		* angolo min = arctan(cateto min / cateto magg)
-		* */
-		/*int deltaX = playerX - getX();
-		int deltaY = playerY - getY();
-
-		double angle;
-		int traslX, traslY;*/
-
+		 * angolo min = arctan(cateto min / cateto magg)
+		 * */
 		initializeDeltas(playerX, playerY);
 
-		switch (getCurrentBehaviour()){
-			case 0:
-				/*if(abs(deltaX) >= abs(deltaY)){
+		double angle;
+		switch(getCurrentBehaviour()) {
+			case 0 -> {
+				if(abs(deltaX) >= abs(deltaY)){
 					angle = Math.atan((double) abs(deltaY) / abs(deltaX));
 					traslX = (int) (getSpeed() * Math.cos(angle));
 					traslY = (int) (getSpeed() * Math.sin(angle));
@@ -54,12 +50,24 @@ public class Zombie extends Enemy{
 				if(deltaY < 0){
 					traslY = traslY * -1;
 				}
-				setX(keepXBoundaries(getX() + traslX));
-				setY(keepYBoundaries(getY() + traslY));*/
-				followPlayer();
-				break;
-			default:
-				changeBehaviourTo(0);
+				if(traslX <= 2 || traslY <= 2){
+					changeBehaviourTo(1);
+				}
+			}
+			case 1 -> {
+				traslX *= -1;
+				traslY *= -1;
+
+				int tmp = traslX;
+				traslX = traslY;
+				traslY = tmp;
+				if(traslX > 2 || traslY > 2){
+					changeBehaviourTo(0);
+				}
+			}
+			default -> changeBehaviourTo(0);
 		}
+		setX(keepXBoundaries(getX() + traslX));
+		setY(keepYBoundaries(getY() + traslY));
 	}
 }

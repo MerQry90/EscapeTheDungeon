@@ -18,7 +18,7 @@ public class Bat extends Enemy{
 	public void init() {
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		//verrà sommato a minimumSpeed
-		setRandomSpeed(1, 5);
+		setRandomSpeed(1, 30);
 		setWidth(64);
 		setHeight(64);
 		setCBwidthScalar(0.7);
@@ -41,8 +41,9 @@ public class Bat extends Enemy{
 		switch (getCurrentBehaviour()) {
 			case 0 -> {
 				setSprite("src/resources/sprites/png/player_sample.png");
-				deltaX = playerX - getX();
-				deltaY = playerY - getY();
+				//deltaX = playerX - getX();
+				//deltaY = playerY - getY();
+				initializeDeltas(playerX,playerY);
 				if (alternate) {
 					moveUp();
 					alternate = false;
@@ -55,11 +56,11 @@ public class Bat extends Enemy{
 				}
 			}
 			case 1 -> {
-				double angle;
-				int traslX, traslY;
+				//double angle;
+				//int traslX, traslY;
 				movingCountdown--;
 				setSprite("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
-				if (abs(deltaX) >= abs(deltaY)) {
+				/*if (abs(deltaX) >= abs(deltaY)) {
 					angle = Math.atan((double) abs(deltaY) / abs(deltaX));
 					traslX = (int) (dashSpeed * Math.cos(angle));
 					traslY = (int) (dashSpeed * Math.sin(angle));
@@ -75,7 +76,8 @@ public class Bat extends Enemy{
 					traslY = traslY * -1;
 				}
 				setX(keepXBoundaries(getX() + traslX));
-				setY(keepYBoundaries(getY() + traslY));
+				setY(keepYBoundaries(getY() + traslY));*/
+				followPlayer();
 				if (movingCountdown <= 0) {
 					countdown = 0;
 					movingCountdown = 20;

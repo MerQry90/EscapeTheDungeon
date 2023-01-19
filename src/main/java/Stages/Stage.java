@@ -1,7 +1,7 @@
 package Stages;
 
 import Entities.Enemies.Bat;
-import Entities.Enemies.CosoCheSpara;
+import Entities.Enemies.Dodger;
 import Entities.Enemies.Enemy;
 import Entities.Enemies.Zombie;
 
@@ -25,7 +25,7 @@ public class Stage {
 				per testing inserire come parametro in random.nextInt(1) in modo da fare
 				uscire solo la prima stanza e inserire appunto i nemici da testare qui
 				 */
-				enemies.add(new Bat(256, 256));
+				enemies.add(new Dodger(256, 256));
 
 				break;
 			case 1:

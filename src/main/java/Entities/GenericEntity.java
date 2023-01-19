@@ -26,7 +26,8 @@ public abstract class GenericEntity {
 	}
 	
 	public abstract void init();
-	
+
+	//Attivazione e disattivazione dell'entità--------------------------------------------------------------------------
 	public void setInactive(){
 		isActive = false;
 	}
@@ -35,7 +36,9 @@ public abstract class GenericEntity {
 	public boolean checkIfActive() {
 		return isActive;
 	}
-	
+	//------------------------------------------------------------------------------------------------------------------
+
+	//Getter e setter dei parametri dell'entità-------------------------------------------------------------------------
 	public void setX(int x) {
 		this.x = x;
 		if(cb != null) {
@@ -80,7 +83,16 @@ public abstract class GenericEntity {
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
-	
+	public void setSprite(String path){
+		ImageIcon icon = new ImageIcon(path);
+		sprite = icon.getImage();
+	}
+	public Image getSprite(){
+		return sprite;
+	}
+	//------------------------------------------------------------------------------------------------------------------
+
+	//Getter e setter per parametri della collision box-----------------------------------------------------------------
 	public double getCBwidthScalar() {
 		return CBwidthScalar;
 	}
@@ -93,18 +105,12 @@ public abstract class GenericEntity {
 	public void setCBheightScalar(double CBheightScalar) {
 		this.CBheightScalar = CBheightScalar;
 	}
-	
-	public void setSprite(String path){
-		ImageIcon icon = new ImageIcon(path);
-		sprite = icon.getImage();
-	}
-	public Image getSprite(){
-		return sprite;
-	}
 	public CollisionBox getCollisionBox(){
 		return cb;
 	}
-	
+	//------------------------------------------------------------------------------------------------------------------
+
+	//Controllo per non fuoriuscire dalla schermata---------------------------------------------------------------------
 	public int keepXBoundaries(int tmpX){
 		if(tmpX <= Background.LEFT_BOUND){
 			return Background.LEFT_BOUND;
@@ -123,7 +129,9 @@ public abstract class GenericEntity {
 		}
 		return tmpY;
 	}
-	
+	//------------------------------------------------------------------------------------------------------------------
+
+	//Metodi per il movimento delle entità------------------------------------------------------------------------------
 	public void moveUp(){
 		setY(keepYBoundaries(getY() - getSpeed()));
 	}
@@ -152,7 +160,8 @@ public abstract class GenericEntity {
 		setX(keepXBoundaries((int) (getX() - getSpeed() / sqrt(2))));
 		setY(keepYBoundaries((int) (getY() + getSpeed() / sqrt(2))));
 	}
-	
+	//------------------------------------------------------------------------------------------------------------------
+
 	public void paint(Graphics g){
 		g.drawImage(getSprite(), getX(), getY(), getWidth(), getHeight(), null);
 		g.setColor(Color.CYAN);
