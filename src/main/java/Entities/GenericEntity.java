@@ -14,7 +14,7 @@ public abstract class GenericEntity {
 	private int height;
 	private double CBwidthScalar;
 	private double CBheightScalar;
-	private Image sprite;
+	private Image activeSprite;
 	private CollisionBox cb;
 	private boolean isActive = true;
 	
@@ -83,12 +83,15 @@ public abstract class GenericEntity {
 	public void setSpeed(int speed) {
 		this.speed = speed;
 	}
-	public void setSprite(String path){
+	public Image setSpriteFromPath(String path){
 		ImageIcon icon = new ImageIcon(path);
-		sprite = icon.getImage();
+		return icon.getImage();
 	}
-	public Image getSprite(){
-		return sprite;
+	public void setActiveSprite(Image newSprite){
+		this.activeSprite = newSprite;
+	}
+	public Image getActiveSprite(){
+		return activeSprite;
 	}
 	//------------------------------------------------------------------------------------------------------------------
 
@@ -163,7 +166,7 @@ public abstract class GenericEntity {
 	//------------------------------------------------------------------------------------------------------------------
 
 	public void paint(Graphics g){
-		g.drawImage(getSprite(), getX(), getY(), getWidth(), getHeight(), null);
+		g.drawImage(getActiveSprite(), getX(), getY(), getWidth(), getHeight(), null);
 		g.setColor(Color.CYAN);
 		g.drawRect(getX(), getY(), getWidth(), getHeight());
 		g.setColor(Color.GREEN);

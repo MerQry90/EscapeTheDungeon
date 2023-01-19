@@ -26,6 +26,8 @@ public class Stage {
 				uscire solo la prima stanza e inserire appunto i nemici da testare qui
 				 */
 				enemies.add(new Dodger(256, 256));
+				enemies.add(new Bat(256, 256));
+				//enemies.add(new Bat(700, 256));
 
 				break;
 			case 1:

@@ -1,9 +1,14 @@
 package Entities.Enemies;
 
+import java.awt.*;
+
 import static java.lang.Math.abs;
 
 public class Bat extends Enemy{
 
+	private Image LIVING_BAT_OFF;
+	private Image LIVING_BAT_ON;
+	
 	private int wait, countdown, movingCountdown;
 	int deltaX, deltaY;
 	private boolean alternate;
@@ -16,6 +21,11 @@ public class Bat extends Enemy{
 
 	@Override
 	public void init() {
+		//CARICAMENTO SPRITE
+		LIVING_BAT_OFF = setSpriteFromPath("src/resources/sprites/png/player_sample.png");
+		LIVING_BAT_ON = setSpriteFromPath("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
+		setActiveSprite(LIVING_BAT_OFF);
+		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		//verrà sommato a minimumSpeed
 		setRandomSpeed(1, 30);
@@ -24,7 +34,6 @@ public class Bat extends Enemy{
 		setCBwidthScalar(0.7);
 		setCBheightScalar(0.9);
 		setRandomHealth(2, 1);
-		setSprite("src/resources/sprites/png/player_sample.png");
 
 		wait = 40;
 		countdown = 0;
@@ -40,15 +49,14 @@ public class Bat extends Enemy{
 		countdown++;
 		switch (getCurrentBehaviour()) {
 			case 0 -> {
-				setSprite("src/resources/sprites/png/player_sample.png");
 				//deltaX = playerX - getX();
 				//deltaY = playerY - getY();
 				initializeDeltas(playerX,playerY);
 				if (alternate) {
-					moveUp();
+					setActiveSprite(LIVING_BAT_ON);
 					alternate = false;
 				} else {
-					moveDown();
+					setActiveSprite(LIVING_BAT_OFF);
 					alternate = true;
 				}
 				if (countdown > wait) {
@@ -59,7 +67,7 @@ public class Bat extends Enemy{
 				//double angle;
 				//int traslX, traslY;
 				movingCountdown--;
-				setSprite("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
+				setActiveSprite(LIVING_BAT_OFF);
 				/*if (abs(deltaX) >= abs(deltaY)) {
 					angle = Math.atan((double) abs(deltaY) / abs(deltaX));
 					traslX = (int) (dashSpeed * Math.cos(angle));

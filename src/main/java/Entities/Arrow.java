@@ -1,7 +1,11 @@
 package Entities;
 
+import java.awt.*;
+
 public class Arrow extends GenericEntity {
 
+	private Image RIGHT_ARROW;
+	
 	//la freccia deve essere visibile finché non collide con qualcosa
 	private final int arrowSpeed = 20;
 	
@@ -19,12 +23,15 @@ public class Arrow extends GenericEntity {
 	
 	@Override
 	public void init() {
+		//CARICAMENTO SPRITE
+		RIGHT_ARROW = setSpriteFromPath("src/resources/sprites/projectiles/arrow.png");
+		setActiveSprite(RIGHT_ARROW);
+		
 		setWidth(40);
 		setHeight(40);
 		setCBwidthScalar(0.9);
 		setCBheightScalar(0.5);
 		setSpeed(arrowSpeed);
-		setSprite("src/resources/sprites/projectiles/arrow.png");
 	}
 
 	public boolean getAxis() {

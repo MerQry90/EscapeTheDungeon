@@ -1,8 +1,13 @@
 package Entities.Enemies;
 
+import java.awt.*;
+
 import static java.lang.Math.*;
 
 public class Zombie extends Enemy{
+	
+	private Image LIVING_ZOMBIE_LEFT;
+	//TODO altri sprite
 	
 	public Zombie(int x, int y) {
 		super(x, y);
@@ -10,16 +15,18 @@ public class Zombie extends Enemy{
 	
 	@Override
 	public void init(){
+		//CARICAMENTO SPRITE
+		LIVING_ZOMBIE_LEFT = setSpriteFromPath("src/resources/sprites/png/zombie.png");
+		setActiveSprite(LIVING_ZOMBIE_LEFT);
+		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		//verrà sommato a minimumSpeed
 		setRandomSpeed(5, 4);
+		setRandomHealth(3, 2);
 		setWidth(64);
 		setHeight(64);
 		setCBwidthScalar(0.7);
 		setCBheightScalar(0.9);
-		
-		setRandomHealth(3, 2);
-		setSprite("src/resources/sprites/png/zombie.png");
 		changeBehaviourTo(0);
 	}
 	
