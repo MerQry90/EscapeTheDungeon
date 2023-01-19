@@ -1,8 +1,13 @@
 package Entities.Enemies;
 
+import java.awt.*;
+
 import static java.lang.Math.abs;
 
 public class Dodger extends Enemy{
+	
+	private Image ALIVE_DODGER;
+	
 	int traslX = 0;
 	int traslY = 0;
 
@@ -13,6 +18,10 @@ public class Dodger extends Enemy{
 
 	@Override
 	public void init() {
+		//CARICAMENTO SPRITE
+		ALIVE_DODGER = setSpriteFromPath("src/resources/sprites/png/player_sample.png");
+		setActiveSprite(ALIVE_DODGER);
+		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		//verrà sommato a minimumSpeed
 		setRandomSpeed(1, 9);
@@ -21,7 +30,6 @@ public class Dodger extends Enemy{
 		setCBwidthScalar(0.7);
 		setCBheightScalar(0.9);
 		setRandomHealth(2, 1);
-		setSprite("src/resources/sprites/png/player_sample.png");
 	}
 
 	@Override
