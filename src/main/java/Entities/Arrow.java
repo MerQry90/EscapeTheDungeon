@@ -15,8 +15,9 @@ public class Arrow extends GenericEntity {
  	*/
 	private boolean axis, direction;
 
-	public Arrow(int x, int y, boolean axis, boolean direction) {
-		super(x, y);
+	//TODO rimuovere asse e direzione dai proiettili
+	public Arrow(int x, int y, boolean axis, boolean direction, EntityManager entityManager) {
+		super(x, y, entityManager);
 		this.axis = axis;
 		this.direction = direction;
 	}
@@ -45,13 +46,4 @@ public class Arrow extends GenericEntity {
 	/*public int getArrowSpeed(){
 		return arrowSpeed;
 	}*/
-
-	public void checkBoundaries(){
-		if((getX() <= Background.LEFT_BOUND && axis && !direction)
-				|| (getX() >= Background.RIGHT_BOUND - getWidth() && axis && direction)
-				|| (getY() <= Background.UPPER_BOUND && !axis && !direction)
-				|| (getY() >= Background.LOWER_BOUND - getHeight() && !axis && direction)){
-			setInactive();
-		}
-	}
 }

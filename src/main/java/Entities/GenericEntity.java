@@ -3,10 +3,13 @@ package Entities;
 import javax.swing.*;
 import java.awt.*;
 
+import static java.lang.Math.abs;
 import static java.lang.Math.sqrt;
 
 public abstract class GenericEntity {
 
+	protected EntityManager entityManager;
+	
 	private int x;
 	private int y;
 	private int speed;
@@ -18,9 +21,11 @@ public abstract class GenericEntity {
 	private CollisionBox cb;
 	private boolean isActive = true;
 	
-	public GenericEntity(int x, int y) {
+	public GenericEntity(int x, int y, EntityManager entityManager) {
 		this.x = x;
 		this.y = y;
+		this.entityManager = entityManager;
+		
 		init();
 		cb = new CollisionBox(getX(), getY(), getWidth(), getHeight(), getCBwidthScalar(), getCBheightScalar());
 	}
@@ -112,56 +117,62 @@ public abstract class GenericEntity {
 		return cb;
 	}
 	//------------------------------------------------------------------------------------------------------------------
-
-	//Controllo per non fuoriuscire dalla schermata---------------------------------------------------------------------
-	public int keepXBoundaries(int tmpX){
-		if(tmpX <= Background.LEFT_BOUND){
-			return Background.LEFT_BOUND;
-		}
-		if(tmpX >= Background.RIGHT_BOUND - getWidth()){
-			return Background.RIGHT_BOUND - getWidth();
-		}
-		return tmpX;
-	}
-	public int keepYBoundaries(int tmpY){
-		if(tmpY <= Background.UPPER_BOUND){
-			return Background.UPPER_BOUND;
-		}
-		if(tmpY >= Background.LOWER_BOUND - getHeight()){
-			return Background.LOWER_BOUND - getHeight();
-		}
-		return tmpY;
-	}
-	//------------------------------------------------------------------------------------------------------------------
-
+	
 	//Metodi per il movimento delle entità------------------------------------------------------------------------------
-	public void moveUp(){
-		setY(keepYBoundaries(getY() - getSpeed()));
-	}
-	public void moveDown(){
-		setY(keepYBoundaries(getY() + getSpeed()));
-	}
-	public void moveLeft(){
-		setX(keepXBoundaries(getX() - getSpeed()));
-	}
-	public void moveRight(){
-		setX(keepXBoundaries(getX() + getSpeed()));
-	}
-	public void moveUpRight(){
-		setX(keepXBoundaries((int) (getX() + getSpeed() / sqrt(2))));
-		setY(keepYBoundaries((int) (getY() - getSpeed() / sqrt(2))));
-	}
-	public void moveUpLeft(){
-		setX(keepXBoundaries((int) (getX() - getSpeed() / sqrt(2))));
-		setY(keepYBoundaries((int) (getY() - getSpeed() / sqrt(2))));
-	}
-	public void moveDownRight(){
-		setX(keepXBoundaries((int) (getX() + getSpeed() / sqrt(2))));
-		setY(keepYBoundaries((int) (getY() + getSpeed() / sqrt(2))));
-	}
-	public void moveDownLeft(){
-		setX(keepXBoundaries((int) (getX() - getSpeed() / sqrt(2))));
-		setY(keepYBoundaries((int) (getY() + getSpeed() / sqrt(2))));
+	public void calculateTranslations(int deltaX, int deltaY){
+		double angle;
+		int translationX, translationY;
+		int currentX, currentY;
+		if(abs(deltaX) >= abs(deltaY)){
+			angle = Math.atan((double) abs(deltaY) / abs(deltaX));
+			translationX = (int) (getSpeed() * Math.cos(angle));
+			translationY = (int) (getSpeed() * Math.sin(angle));
+		}
+		else {
+			angle = Math.atan((double) abs(deltaX) / abs(deltaY));
+			translationX = (int) (getSpeed() * Math.sin(angle));
+			translationY = (int) (getSpeed() * Math.cos(angle));
+		}
+		
+		currentX = getX();
+		currentY = getY();
+		
+		if(deltaX < 0){
+			translationX = translationX * -1;
+			for(int i = 0; i < abs(translationX); i++){
+				setX(currentX + (translationX + i));
+				if(!entityManager.checkObstaclesCollisions(this)){
+					break;
+				}
+			}
+		}
+		else {
+			for(int i = 0; i < translationX; i++){
+				setX(currentX + (translationX - i));
+				if(!entityManager.checkObstaclesCollisions(this)){
+					break;
+				}
+			}
+		}
+		
+		if(deltaY < 0){
+			translationY = translationY * -1;
+			for(int i = 0; i < abs(translationY); i++){
+				setX(currentY + (translationY + i));
+				if(!entityManager.checkObstaclesCollisions(this)){
+					break;
+				}
+			}
+		}
+		else {
+			for(int i = 0; i < translationY; i++){
+				setX(currentY + (translationY - i));
+				if(!entityManager.checkObstaclesCollisions(this)){
+					break;
+				}
+			}
+		}
+		
 	}
 	//------------------------------------------------------------------------------------------------------------------
 

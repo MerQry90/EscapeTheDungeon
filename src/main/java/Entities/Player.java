@@ -14,8 +14,8 @@ public class Player extends GenericEntity {
 	private int shootCoolDownValue; //valore che incrementa
 	private boolean hasShot;
 
-	public Player() {
-		super(512, 256);//tmp
+	public Player(EntityManager entityManager) {
+		super(512, 256, entityManager);//tmp
 	}
 	
 	@Override

@@ -8,8 +8,8 @@ public abstract class Projectile extends GenericEntity {
  	*/
 	private boolean axis, direction;
 	
-	public Projectile(int x, int y) {
-		super(x, y);
+	public Projectile(int x, int y, EntityManager entityManager) {
+		super(x, y, entityManager);
 	}
 	
 	public void setAxis(boolean axis){
@@ -26,5 +26,14 @@ public abstract class Projectile extends GenericEntity {
 
 	public boolean getDirection(){
 		return direction;
+	}
+	
+	public void checkBoundaries(){
+		if((getX() <= Background.LEFT_BOUND && axis && !direction)
+				|| (getX() >= Background.RIGHT_BOUND - getWidth() && axis && direction)
+				|| (getY() <= Background.UPPER_BOUND && !axis && !direction)
+				|| (getY() >= Background.LOWER_BOUND - getHeight() && !axis && direction)){
+			setInactive();
+		}
 	}
 }

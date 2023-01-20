@@ -7,8 +7,8 @@ public class Door extends GenericEntity{
 	private Image OPEN_DOOR;
 	//private Image CLOSED_DOOR;
 	
-	public Door(int x, int y) {
-		super(x, y);
+	public Door(int x, int y, EntityManager entityManager) {
+		super(x, y, entityManager);
 		setInactive();
 	}
 	

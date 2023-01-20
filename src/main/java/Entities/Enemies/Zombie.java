@@ -1,5 +1,7 @@
 package Entities.Enemies;
 
+import Entities.EntityManager;
+
 import java.awt.*;
 
 import static java.lang.Math.*;
@@ -9,8 +11,8 @@ public class Zombie extends Enemy{
 	private Image LIVING_ZOMBIE_LEFT;
 	//TODO altri sprite
 	
-	public Zombie(int x, int y) {
-		super(x, y);
+	public Zombie(int x, int y, EntityManager entityManager) {
+		super(x, y, entityManager);
 	}
 	
 	@Override
@@ -31,39 +33,11 @@ public class Zombie extends Enemy{
 	}
 	
 	@Override
-	public void updateBehaviour(int playerX, int playerY) {
-		/*
-		* angolo min = arctan(cateto min / cateto magg)
-		* */
-		/*int deltaX = playerX - getX();
-		int deltaY = playerY - getY();
-
-		double angle;
-		int traslX, traslY;*/
-
-		initializeDeltas(playerX, playerY);
-
+	public void updateBehaviour() {
 		switch (getCurrentBehaviour()){
 			case 0:
-				/*if(abs(deltaX) >= abs(deltaY)){
-					angle = Math.atan((double) abs(deltaY) / abs(deltaX));
-					traslX = (int) (getSpeed() * Math.cos(angle));
-					traslY = (int) (getSpeed() * Math.sin(angle));
-				}
-				else {
-					angle = Math.atan((double) abs(deltaX) / abs(deltaY));
-					traslX = (int) (getSpeed() * Math.sin(angle));
-					traslY = (int) (getSpeed() * Math.cos(angle));
-				}
-				if(deltaX < 0){
-					traslX = traslX * -1;
-				}
-				if(deltaY < 0){
-					traslY = traslY * -1;
-				}
-				setX(keepXBoundaries(getX() + traslX));
-				setY(keepYBoundaries(getY() + traslY));*/
-				followPlayer();
+				calculateTranslations(entityManager.getPlayerX() - getX(),
+						entityManager.getPlayerY() - getY());
 				break;
 			default:
 				changeBehaviourTo(0);

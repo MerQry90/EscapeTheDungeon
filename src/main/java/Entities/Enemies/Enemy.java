@@ -1,5 +1,6 @@
 package Entities.Enemies;
 
+import Entities.EntityManager;
 import Entities.GenericEntity;
 
 import java.util.Random;
@@ -10,19 +11,20 @@ public abstract class Enemy extends GenericEntity {
 	
 	private int health;
 	private int currentBehaviour;
-	int deltaX = 0;
-	int deltaY = 0;
 	
-	Random random;
-	
-	public Enemy(int x, int y){
-		super(x, y);
+	public Enemy(int x, int y, EntityManager entityManager){
+		super(x, y, entityManager);
 	}
 
 	public void setRandomHealth(int minimumHealth, int maximumHealth){
-		random = new Random();
+		Random random = new Random();
 		int health = random.nextInt(minimumHealth) + maximumHealth;
 		this.health = health;
+	}
+	public void setRandomSpeed(int minimumSpeed, int maximumSpeed){
+		Random random = new Random();
+		int speed = random.nextInt(minimumSpeed) + maximumSpeed;
+		setSpeed(speed);
 	}
 	
 	public void lowerHealth(){
@@ -31,45 +33,6 @@ public abstract class Enemy extends GenericEntity {
 			setInactive();
 		}
 	}
-	public void setRandomSpeed(int minimumSpeed, int maximumSpeed){
-		random = new Random();
-		int speed = random.nextInt(minimumSpeed) + maximumSpeed;
-		setSpeed(speed);
-	}
-
-	public void initializeDeltas(int playerX, int playerY){
-		deltaX = playerX - getX();
-		deltaY = playerY - getY();
-	}
-
-	public void followPlayer(){
-		/*
-		 * angolo min = arctan(cateto min / cateto magg)
-		 * */
-
-		double angle;
-		int traslX, traslY;
-		if(abs(deltaX) >= abs(deltaY)){
-			angle = Math.atan((double) abs(deltaY) / abs(deltaX));
-			traslX = (int) (getSpeed() * Math.cos(angle));
-			traslY = (int) (getSpeed() * Math.sin(angle));
-		}
-		else {
-			angle = Math.atan((double) abs(deltaX) / abs(deltaY));
-			traslX = (int) (getSpeed() * Math.sin(angle));
-			traslY = (int) (getSpeed() * Math.cos(angle));
-		}
-		if(deltaX < 0){
-			traslX = traslX * -1;
-		}
-		if(deltaY < 0){
-			traslY = traslY * -1;
-		}
-		setX(keepXBoundaries(getX() + traslX));
-		setY(keepYBoundaries(getY() + traslY));
-	}
-
-
 
 	//metodi riguardanti lo stato del nemico----------------------------------------------------------------------------
 	public int getCurrentBehaviour(){
@@ -80,6 +43,6 @@ public abstract class Enemy extends GenericEntity {
 		this.currentBehaviour = newBehaviour;
 	}
 	
-	public abstract void updateBehaviour(int playerX, int playerY);
+	public abstract void updateBehaviour();
 	//------------------------------------------------------------------------------------------------------------------
 }

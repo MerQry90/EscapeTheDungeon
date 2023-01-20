@@ -1,5 +1,7 @@
 package Entities.Enemies;
 
+import Entities.EntityManager;
+
 import java.awt.*;
 
 import static java.lang.Math.abs;
@@ -15,8 +17,8 @@ public class Bat extends Enemy{
 	private int dashSpeed = 30;
 
 
-	public Bat(int x, int y){
-		super(x, y);
+	public Bat(int x, int y, EntityManager entityManager){
+		super(x, y, entityManager);
 	}
 
 	@Override
@@ -44,14 +46,12 @@ public class Bat extends Enemy{
 		deltaY = 0;
 	}
 
+	//TODO creare metodo di countdown
 	@Override
-	public void updateBehaviour(int playerX, int playerY) {
+	public void updateBehaviour() {
 		countdown++;
 		switch (getCurrentBehaviour()) {
 			case 0 -> {
-				//deltaX = playerX - getX();
-				//deltaY = playerY - getY();
-				initializeDeltas(playerX,playerY);
 				if (alternate) {
 					setActiveSprite(LIVING_BAT_ON);
 					alternate = false;
@@ -64,28 +64,11 @@ public class Bat extends Enemy{
 				}
 			}
 			case 1 -> {
-				//double angle;
-				//int traslX, traslY;
+				//TODO bat op
 				movingCountdown--;
 				setActiveSprite(LIVING_BAT_OFF);
-				/*if (abs(deltaX) >= abs(deltaY)) {
-					angle = Math.atan((double) abs(deltaY) / abs(deltaX));
-					traslX = (int) (dashSpeed * Math.cos(angle));
-					traslY = (int) (dashSpeed * Math.sin(angle));
-				} else {
-					angle = Math.atan((double) abs(deltaX) / abs(deltaY));
-					traslX = (int) (dashSpeed * Math.sin(angle));
-					traslY = (int) (dashSpeed * Math.cos(angle));
-				}
-				if (deltaX < 0) {
-					traslX = traslX * -1;
-				}
-				if (deltaY < 0) {
-					traslY = traslY * -1;
-				}
-				setX(keepXBoundaries(getX() + traslX));
-				setY(keepYBoundaries(getY() + traslY));*/
-				followPlayer();
+				calculateTranslations(entityManager.getPlayerX() - getX(),
+						entityManager.getPlayerY() - getY());
 				if (movingCountdown <= 0) {
 					countdown = 0;
 					movingCountdown = 20;
