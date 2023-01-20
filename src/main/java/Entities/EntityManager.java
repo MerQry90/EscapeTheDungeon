@@ -1,5 +1,7 @@
 package Entities;
 
+import Entities.Boundaries.HorizontalWall;
+import Entities.Boundaries.VerticalWall;
 import Entities.Enemies.Enemy;
 
 import java.awt.*;
@@ -8,23 +10,29 @@ import java.util.List;
 
 public class EntityManager {
 
-	private CollisionBox boundaries;
+	//private CollisionBox boundaries;
 	
 	private Player player;
 	private Door door;
 	private List<Enemy> enemies;
 	private List<Projectile> friendlyProjectiles;
 	private List<Projectile> hostileProjectiles;
+	private HorizontalWall upperWall, lowerWall;
+	private VerticalWall leftWall, rightWall;
 	//TODO lista di ostacoli
 	
 	public EntityManager(){
-		boundaries = new CollisionBox(64, 32, 1088 - 128, 576 + 32, 1.0, 1.0);
+		//boundaries = new CollisionBox(64, 32, 1088 - 128, 576 + 32, 1.0, 1.0);
 		
 		player = new Player(this);
 		door = new Door(64 * 7, 0, this);
 		enemies = new ArrayList<>();
 		friendlyProjectiles = new ArrayList<>();
 		hostileProjectiles = new ArrayList<>();
+		upperWall = new HorizontalWall(0, 0, this);
+		lowerWall = new HorizontalWall(0, -512, this);
+		leftWall = new VerticalWall(0, 0, this);
+		rightWall = new VerticalWall(1024, 0, this);
 	}
 	
 	public Player getPlayer() {
@@ -38,7 +46,14 @@ public class EntityManager {
 	}
 	
 	public boolean checkObstaclesCollisions(GenericEntity entity){
-		return entity.getCollisionBox().checkCollision(boundaries);
+		if(entity.getCollisionBox().checkCollision(upperWall.getCollisionBox())
+				&& entity.getCollisionBox().checkCollision(lowerWall.getCollisionBox())
+				&& entity.getCollisionBox().checkCollision(leftWall.getCollisionBox())
+				&& entity.getCollisionBox().checkCollision(rightWall.getCollisionBox())){
+			System.out.println("STAI COLLIDENDO CON UN OGGETTO, FERMATI PER FAVORFE CHE NON FUNZIONANO I MURI");
+			return true;
+		}
+		return false;
 	}
 	
 	public void checkDynamicCollisions(){

@@ -13,7 +13,7 @@ public class MainGame extends GameState{
 
 	private Stage stage;
 	
-	private CollisionBox boundaries;
+	//private CollisionBox boundaries;
 	
 	private int clearedTotalStages;
 	
@@ -43,32 +43,33 @@ public class MainGame extends GameState{
 
 		//movimento
 		/*if(keyH.upPressed && keyH.rightPressed){
-			player.moveUpRight();
+
 		}
 		else if(keyH.upPressed && keyH.leftPressed){
-			player.moveUpLeft();
+
 		}
 		else if(keyH.downPressed && keyH.rightPressed){
-			player.moveDownRight();
+
 		}
 		else if(keyH.downPressed && keyH.leftPressed) {
-			player.moveDownLeft();
+
 		}
-		else if(keyH.upPressed){
-			player.moveUp();
+		else*/
+		if(keyH.upPressed){
+			entityManager.getPlayer().calculateTranslations(0, entityManager.getPlayer().getSpeed() * -1);
 		}
 		else if(keyH.downPressed){
-			player.moveDown();
+			entityManager.getPlayer().calculateTranslations(0, entityManager.getPlayer().getSpeed());
 		}
 		else if(keyH.leftPressed){
-			player.moveLeft();
+			entityManager.getPlayer().calculateTranslations(entityManager.getPlayer().getSpeed() * -1, 0);
 		}
 		else if(keyH.rightPressed) {
-			player.moveRight();
+			entityManager.getPlayer().calculateTranslations(entityManager.getPlayer().getSpeed(), 0);
 		}
 		
 		//shooting
-		if (keyH.shootUp && player.canShoot()) {
+		/*if (keyH.shootUp && player.canShoot()) {
 			arrows.add(new Arrow(player.getX(), player.getY(), false, false));
 		}
 		else if (keyH.shootDown && player.canShoot()) {
@@ -86,8 +87,7 @@ public class MainGame extends GameState{
 			for(Enemy enemy: enemies){
 				enemy.setInactive();
 			}
-		}
-		*/
+		}*/
 		
 	}
 	

@@ -144,6 +144,7 @@ public abstract class GenericEntity {
 				if(!entityManager.checkObstaclesCollisions(this)){
 					break;
 				}
+				setX(currentX);
 			}
 		}
 		else {
@@ -152,24 +153,27 @@ public abstract class GenericEntity {
 				if(!entityManager.checkObstaclesCollisions(this)){
 					break;
 				}
+				setX(currentX);
 			}
 		}
 		
 		if(deltaY < 0){
 			translationY = translationY * -1;
 			for(int i = 0; i < abs(translationY); i++){
-				setX(currentY + (translationY + i));
+				setY(currentY + (translationY + i));
 				if(!entityManager.checkObstaclesCollisions(this)){
 					break;
 				}
+				setY(currentY);
 			}
 		}
 		else {
 			for(int i = 0; i < translationY; i++){
-				setX(currentY + (translationY - i));
+				setY(currentY + (translationY - i));
 				if(!entityManager.checkObstaclesCollisions(this)){
 					break;
 				}
+				setY(currentY);
 			}
 		}
 		
