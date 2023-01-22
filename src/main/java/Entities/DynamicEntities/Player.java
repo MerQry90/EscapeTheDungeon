@@ -1,12 +1,11 @@
-package Entities;
+package Entities.DynamicEntities;
 
-import Application.KeyHandler;
+import Components.EntityManager;
+import Entities.GenericEntity;
 
 import java.awt.*;
 
-import static java.lang.Math.sqrt;
-
-public class Player extends GenericEntity {
+public class Player extends DynamicEntity {
 
 	private Image LEFT_PLAYER;
 	

@@ -1,10 +1,7 @@
-package Stages;
+package Components;
 
-import Entities.Enemies.Bat;
-import Entities.Enemies.Dodger;
-import Entities.Enemies.Enemy;
-import Entities.Enemies.Zombie;
-import Entities.EntityManager;
+import Entities.DynamicEntities.Bat;
+import Entities.DynamicEntities.Enemy;
 
 import java.util.List;
 import java.util.Random;

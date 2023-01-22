@@ -1,4 +1,4 @@
-package Entities;
+package Components;
 
 import javax.swing.*;
 import java.awt.*;

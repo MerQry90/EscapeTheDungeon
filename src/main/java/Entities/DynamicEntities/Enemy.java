@@ -1,13 +1,13 @@
-package Entities.Enemies;
+package Entities.DynamicEntities;
 
-import Entities.EntityManager;
+import Components.EntityManager;
 import Entities.GenericEntity;
 
 import java.util.Random;
 
 import static java.lang.Math.abs;
 
-public abstract class Enemy extends GenericEntity {
+public abstract class Enemy extends DynamicEntity{
 	
 	private int health;
 	private int currentBehaviour;
@@ -15,6 +15,8 @@ public abstract class Enemy extends GenericEntity {
 	public Enemy(int x, int y, EntityManager entityManager){
 		super(x, y, entityManager);
 	}
+	
+	public abstract void move();
 
 	public void setRandomHealth(int minimumHealth, int maximumHealth){
 		Random random = new Random();

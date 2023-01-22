@@ -1,8 +1,11 @@
-package Entities;
+package Entities.StaticEntities;
+
+import Components.EntityManager;
+import Entities.GenericEntity;
 
 import java.awt.*;
 
-public class Door extends GenericEntity{
+public class Door extends StaticEntity {
 	
 	private Image OPEN_DOOR;
 	//private Image CLOSED_DOOR;

@@ -1,8 +1,12 @@
-package Entities;
+package Components;
 
-import Entities.Boundaries.HorizontalWall;
-import Entities.Boundaries.VerticalWall;
-import Entities.Enemies.Enemy;
+import Entities.StaticEntities.Door;
+import Entities.GenericEntity;
+import Entities.DynamicEntities.Player;
+import Entities.DynamicEntities.Projectile;
+import Entities.StaticEntities.HorizontalWall;
+import Entities.StaticEntities.VerticalWall;
+import Entities.DynamicEntities.Enemy;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -14,11 +18,10 @@ public class EntityManager {
 	
 	private Player player;
 	private Door door;
+	private List<GenericEntity> boundaries;
 	private List<Enemy> enemies;
 	private List<Projectile> friendlyProjectiles;
 	private List<Projectile> hostileProjectiles;
-	private HorizontalWall upperWall, lowerWall;
-	private VerticalWall leftWall, rightWall;
 	//TODO lista di ostacoli
 	
 	public EntityManager(){
@@ -29,10 +32,13 @@ public class EntityManager {
 		enemies = new ArrayList<>();
 		friendlyProjectiles = new ArrayList<>();
 		hostileProjectiles = new ArrayList<>();
-		upperWall = new HorizontalWall(0, 0, this);
-		lowerWall = new HorizontalWall(0, -512, this);
-		leftWall = new VerticalWall(0, 0, this);
-		rightWall = new VerticalWall(1024, 0, this);
+		boundaries = new ArrayList<>();
+		
+		//SETTAGGIO MURI
+		boundaries.add(new HorizontalWall(64, 0, this));
+		boundaries.add(new HorizontalWall(64, 64 * 8, this));
+		boundaries.add(new VerticalWall(0, 64, this));
+		boundaries.add(new VerticalWall(64 * 16, 64, this));
 	}
 	
 	public Player getPlayer() {
@@ -46,12 +52,10 @@ public class EntityManager {
 	}
 	
 	public boolean checkObstaclesCollisions(GenericEntity entity){
-		if(entity.getCollisionBox().checkCollision(upperWall.getCollisionBox())
-				&& entity.getCollisionBox().checkCollision(lowerWall.getCollisionBox())
-				&& entity.getCollisionBox().checkCollision(leftWall.getCollisionBox())
-				&& entity.getCollisionBox().checkCollision(rightWall.getCollisionBox())){
-			System.out.println("STAI COLLIDENDO CON UN OGGETTO, FERMATI PER FAVORFE CHE NON FUNZIONANO I MURI");
-			return true;
+		for (GenericEntity obstacle: boundaries) {
+			if(obstacle.checkCollision(entity)){
+				return true;
+			}
 		}
 		return false;
 	}

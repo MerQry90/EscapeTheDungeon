@@ -1,11 +1,9 @@
 package GameStates;
 
 import Application.KeyHandler;
-import Entities.*;
-import Entities.Enemies.Enemy;
-import Stages.Stage;
+import Components.EntityManager;
+import Components.Stage;
 
-import java.util.ArrayList;
 import java.awt.*;
 
 
@@ -42,30 +40,29 @@ public class MainGame extends GameState{
 	public void processInput() {
 
 		//movimento
-		/*if(keyH.upPressed && keyH.rightPressed){
-
+		if(keyH.upPressed && keyH.rightPressed){
+			entityManager.getPlayer().calculateTranslations(1, -1);
 		}
 		else if(keyH.upPressed && keyH.leftPressed){
-
+			entityManager.getPlayer().calculateTranslations(-1, -1);
 		}
 		else if(keyH.downPressed && keyH.rightPressed){
-
+			entityManager.getPlayer().calculateTranslations(1, 1);
 		}
 		else if(keyH.downPressed && keyH.leftPressed) {
-
+			entityManager.getPlayer().calculateTranslations(-1, 1);
 		}
-		else*/
-		if(keyH.upPressed){
-			entityManager.getPlayer().calculateTranslations(0, entityManager.getPlayer().getSpeed() * -1);
+		else if(keyH.upPressed){
+			entityManager.getPlayer().calculateTranslations(0, -1);
 		}
 		else if(keyH.downPressed){
-			entityManager.getPlayer().calculateTranslations(0, entityManager.getPlayer().getSpeed());
+			entityManager.getPlayer().calculateTranslations(0, 1);
 		}
 		else if(keyH.leftPressed){
-			entityManager.getPlayer().calculateTranslations(entityManager.getPlayer().getSpeed() * -1, 0);
+			entityManager.getPlayer().calculateTranslations(-1, 0);
 		}
 		else if(keyH.rightPressed) {
-			entityManager.getPlayer().calculateTranslations(entityManager.getPlayer().getSpeed(), 0);
+			entityManager.getPlayer().calculateTranslations(1, 0);
 		}
 		
 		//shooting

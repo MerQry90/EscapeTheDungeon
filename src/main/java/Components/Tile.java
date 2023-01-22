@@ -1,4 +1,4 @@
-package Entities;
+package Components;
 
 public class Tile {
 	int tileSize;

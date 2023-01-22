@@ -1,6 +1,6 @@
 package Application;
 
-import Entities.Background;
+import Components.Background;
 import GameStates.End;
 import GameStates.GameState;
 import GameStates.MainGame;
@@ -26,7 +26,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	private KeyHandler keyH;
 	public GamePanel() {
 		
-		//impostazioni finestra
+		//impostazioni finestra 17x9
 		setPreferredSize(new Dimension(1088, 576));
 		setFocusable(true);
 		setDoubleBuffered(true);

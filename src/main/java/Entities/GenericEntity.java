@@ -1,10 +1,12 @@
 package Entities;
 
+import Components.CollisionBox;
+import Components.EntityManager;
+
 import javax.swing.*;
 import java.awt.*;
 
 import static java.lang.Math.abs;
-import static java.lang.Math.sqrt;
 
 public abstract class GenericEntity {
 
@@ -116,67 +118,83 @@ public abstract class GenericEntity {
 	public CollisionBox getCollisionBox(){
 		return cb;
 	}
+	public boolean checkCollision(GenericEntity other){
+		return this.getCollisionBox().getHitBox().intersects(other.getCollisionBox().getHitBox());
+	}
 	//------------------------------------------------------------------------------------------------------------------
 	
 	//Metodi per il movimento delle entità------------------------------------------------------------------------------
-	public void calculateTranslations(int deltaX, int deltaY){
+	
+	public int getTranslationX(int deltaX, int deltaY){
 		double angle;
-		int translationX, translationY;
-		int currentX, currentY;
+		int translationX;
 		if(abs(deltaX) >= abs(deltaY)){
 			angle = Math.atan((double) abs(deltaY) / abs(deltaX));
 			translationX = (int) (getSpeed() * Math.cos(angle));
-			translationY = (int) (getSpeed() * Math.sin(angle));
 		}
 		else {
 			angle = Math.atan((double) abs(deltaX) / abs(deltaY));
 			translationX = (int) (getSpeed() * Math.sin(angle));
+		}
+		if(deltaX < 0){
+			return translationX * -1;
+		}
+		return translationX;
+	}
+	public int getTranslationY(int deltaX, int deltaY){
+		double angle;
+		int translationY;
+		if(abs(deltaX) >= abs(deltaY)){
+			angle = Math.atan((double) abs(deltaY) / abs(deltaX));
+			translationY = (int) (getSpeed() * Math.sin(angle));
+		}
+		else {
+			angle = Math.atan((double) abs(deltaX) / abs(deltaY));
 			translationY = (int) (getSpeed() * Math.cos(angle));
 		}
-		
-		currentX = getX();
-		currentY = getY();
-		
-		if(deltaX < 0){
-			translationX = translationX * -1;
-			for(int i = 0; i < abs(translationX); i++){
-				setX(currentX + (translationX + i));
-				if(!entityManager.checkObstaclesCollisions(this)){
-					break;
-				}
-				setX(currentX);
-			}
-		}
-		else {
-			for(int i = 0; i < translationX; i++){
-				setX(currentX + (translationX - i));
-				if(!entityManager.checkObstaclesCollisions(this)){
-					break;
-				}
-				setX(currentX);
-			}
-		}
-		
 		if(deltaY < 0){
-			translationY = translationY * -1;
-			for(int i = 0; i < abs(translationY); i++){
-				setY(currentY + (translationY + i));
-				if(!entityManager.checkObstaclesCollisions(this)){
+			return translationY * -1;
+		}
+		return translationY;
+	}
+	
+	public void moveEntity(int tX, int tY){
+		if(tX < 0){
+			for(int i = 0; i > tX; i--){
+				if(entityManager.checkObstaclesCollisions(this)) {
+					setX(getX() + 1);
 					break;
 				}
-				setY(currentY);
+				setX(getX() - 1);
 			}
 		}
 		else {
-			for(int i = 0; i < translationY; i++){
-				setY(currentY + (translationY - i));
-				if(!entityManager.checkObstaclesCollisions(this)){
+			for(int i = 0; i < tX; i++){
+				if(entityManager.checkObstaclesCollisions(this)){
+					setX(getX() - 1);
 					break;
 				}
-				setY(currentY);
+				setX(getX() + 1);
 			}
 		}
-		
+		if(tY < 0){
+			for(int i = 0; i > tY; i--){
+				if(entityManager.checkObstaclesCollisions(this)) {
+					setY(getY() + 1);
+					break;
+				}
+				setY(getY() - 1);
+			}
+		}
+		else {
+			for(int i = 0; i < tY; i++){
+				if(entityManager.checkObstaclesCollisions(this)){
+					setY(getY() - 1);
+					break;
+				}
+				setY(getY() + 1);
+			}
+		}
 	}
 	//------------------------------------------------------------------------------------------------------------------
 

@@ -1,4 +1,4 @@
-package Entities;
+package Components;
 
 import java.awt.geom.Rectangle2D;
 
@@ -65,10 +65,6 @@ public class CollisionBox {
 	
 	private void updateHitBox(){
 		hitBox = new Rectangle2D.Double(getCBx(), getCBy(), getCBw(), getCBh());
-	}
-	
-	public boolean checkCollision(CollisionBox otherCB){
-		return this.getHitBox().intersects(otherCB.getHitBox());
 	}
 	
 }

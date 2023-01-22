@@ -1,8 +1,11 @@
-package Entities;
+package Entities.DynamicEntities;
+
+import Components.EntityManager;
+import Entities.GenericEntity;
 
 import java.awt.*;
 
-public class Arrow extends GenericEntity {
+public class Arrow extends Projectile {
 
 	private Image RIGHT_ARROW;
 	

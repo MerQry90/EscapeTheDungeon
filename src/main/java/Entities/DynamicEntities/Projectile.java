@@ -1,6 +1,10 @@
-package Entities;
+package Entities.DynamicEntities;
 
-public abstract class Projectile extends GenericEntity {
+import Components.Background;
+import Components.EntityManager;
+import Entities.GenericEntity;
+
+public abstract class Projectile extends DynamicEntity {
 
 	/*
 	axis = true: asse x

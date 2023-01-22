@@ -1,8 +1,7 @@
 package GameStates;
 
 import Application.KeyHandler;
-import Entities.Background;
-import Entities.Tile;
+import Components.Background;
 
 import java.awt.*;
 

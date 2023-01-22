@@ -1,10 +1,8 @@
-package Entities.Enemies;
+package Entities.DynamicEntities;
 
-import Entities.EntityManager;
+import Components.EntityManager;
 
 import java.awt.*;
-
-import static java.lang.Math.*;
 
 public class Zombie extends Enemy{
 	

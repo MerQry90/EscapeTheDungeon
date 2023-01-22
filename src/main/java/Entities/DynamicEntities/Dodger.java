@@ -1,6 +1,6 @@
-package Entities.Enemies;
+package Entities.DynamicEntities;
 
-import Entities.EntityManager;
+import Components.EntityManager;
 
 import java.awt.*;
 
