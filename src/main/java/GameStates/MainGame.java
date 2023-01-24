@@ -41,28 +41,31 @@ public class MainGame extends GameState{
 
 		//movimento
 		if(keyH.upPressed && keyH.rightPressed){
-			entityManager.getPlayer().calculateTranslations(1, -1);
+			entityManager.setNextPlayerInstruction("up-right");
 		}
 		else if(keyH.upPressed && keyH.leftPressed){
-			entityManager.getPlayer().calculateTranslations(-1, -1);
+			entityManager.setNextPlayerInstruction("up-left");
 		}
 		else if(keyH.downPressed && keyH.rightPressed){
-			entityManager.getPlayer().calculateTranslations(1, 1);
+			entityManager.setNextPlayerInstruction("down-right");
 		}
 		else if(keyH.downPressed && keyH.leftPressed) {
-			entityManager.getPlayer().calculateTranslations(-1, 1);
+			entityManager.setNextPlayerInstruction("down-left");
 		}
 		else if(keyH.upPressed){
-			entityManager.getPlayer().calculateTranslations(0, -1);
+			entityManager.setNextPlayerInstruction("up");
 		}
 		else if(keyH.downPressed){
-			entityManager.getPlayer().calculateTranslations(0, 1);
+			entityManager.setNextPlayerInstruction("down");
 		}
 		else if(keyH.leftPressed){
-			entityManager.getPlayer().calculateTranslations(-1, 0);
+			entityManager.setNextPlayerInstruction("left");
 		}
 		else if(keyH.rightPressed) {
-			entityManager.getPlayer().calculateTranslations(1, 0);
+			entityManager.setNextPlayerInstruction("right");
+		}
+		else {
+			entityManager.setNextPlayerInstruction("stop");
 		}
 		
 		//shooting

@@ -11,8 +11,6 @@ public abstract class Enemy extends DynamicEntity{
 	
 	private int health;
 	private int currentBehaviour;
-	
-	public abstract void move();
 
 	public void setRandomHealth(int minimumHealth, int maximumHealth){
 		Random random = new Random();

@@ -1,6 +1,7 @@
 package Entities.DynamicEntities;
 
 import Components.EntityManager;
+import Components.Vector2D;
 import Entities.GenericEntity;
 
 import java.awt.*;
@@ -14,6 +15,7 @@ public class Player extends DynamicEntity {
 	private boolean hasShot;
 
 	public Player(EntityManager entityManager) {
+		init();
 		super(512, 256, entityManager);//tmp
 	}
 	
@@ -31,6 +33,8 @@ public class Player extends DynamicEntity {
 		shootCoolDown = 15;
 		shootCoolDownValue = 0;
 		hasShot = false;
+		
+		translation = new Vector2D(getSpeed());
 	}
 
 	public void updateCoolDown(){
@@ -53,6 +57,45 @@ public class Player extends DynamicEntity {
 			hasShot = true;
 			shootCoolDownValue = 0;
 			return true;
+		}
+	}
+	
+	@Override
+	public void move() {
+		boolean canMove = true;
+		switch (entityManager.getNextPlayerInstruction()){
+			case "up" -> {
+				translation.setAngulationToObjective(0, -1);
+			}
+			case "down" -> {
+				translation.setAngulationToObjective(0, 1);
+			}
+			case "right" -> {
+				translation.setAngulationToObjective(1, 0);
+			}
+			case "left" -> {
+				translation.setAngulationToObjective(-1, 0);
+			}
+			case "up-right" -> {
+				translation.setAngulationToObjective(1, -1);
+			}
+			case "up-left" -> {
+				translation.setAngulationToObjective(-1, -1);
+			}
+			case "down-right" -> {
+				translation.setAngulationToObjective(1, 1);
+			}
+			case "down-left" -> {
+				translation.setAngulationToObjective(-1, 1);
+			}
+			case "stop" -> {
+				translation.setAngulationToObjective(0, 0);
+				canMove = false;
+			}
+		}
+		if(canMove) {
+			setX(getX() + translation.getXTranslation());
+			setY(getY() + translation.getYTranslation());
 		}
 	}
 }

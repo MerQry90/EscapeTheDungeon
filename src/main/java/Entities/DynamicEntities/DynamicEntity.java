@@ -1,44 +1,33 @@
 package Entities.DynamicEntities;
 
+import Components.Vector2D;
 import Entities.GenericEntity;
 
-import static java.lang.Math.abs;
+import static java.lang.Math.*;
 
 public abstract class DynamicEntity extends GenericEntity {
 	
-	//Metodi per il movimento delle entità------------------------------------------------------------------------------
+	protected Vector2D translation;
+	//private boolean canFly;
+	//private boolean canPassThroughWalls;
 	
-	public int getTranslationX(int deltaX, int deltaY){
-		double angle;
-		int translationX;
-		if(abs(deltaX) >= abs(deltaY)){
-			angle = Math.atan((double) abs(deltaY) / abs(deltaX));
-			translationX = (int) (getSpeed() * Math.cos(angle));
-		}
-		else {
-			angle = Math.atan((double) abs(deltaX) / abs(deltaY));
-			translationX = (int) (getSpeed() * Math.sin(angle));
-		}
-		if(deltaX < 0){
-			return translationX * -1;
-		}
-		return translationX;
+	public int getDeltaXToObjective(int oX){
+		return oX - this.getX();
 	}
-	public int getTranslationY(int deltaX, int deltaY){
-		double angle;
-		int translationY;
-		if(abs(deltaX) >= abs(deltaY)){
-			angle = Math.atan((double) abs(deltaY) / abs(deltaX));
-			translationY = (int) (getSpeed() * Math.sin(angle));
-		}
-		else {
-			angle = Math.atan((double) abs(deltaX) / abs(deltaY));
-			translationY = (int) (getSpeed() * Math.cos(angle));
-		}
-		if(deltaY < 0){
-			return translationY * -1;
-		}
-		return translationY;
+	public int getDeltaYToObjective(int oY){
+		return oY - this.getY();
+	}
+	public int getDistanceToObjective(int oX, int oY){
+		return round((float) (sqrt(pow(oX - this.getX(), 2) + pow(oY - this.getY(), 2))));
+	}
+	
+	public abstract void move();
+	
+	/*public void setCanFly(boolean flag){
+		canFly = flag;
+	}
+	public void setCanPassThroughWalls(boolean flag){
+		canPassThroughWalls = flag;
 	}
 	
 	public void moveEntity(int tX, int tY){
@@ -78,5 +67,5 @@ public abstract class DynamicEntity extends GenericEntity {
 				setY(getY() + 1);
 			}
 		}
-	}
+	}*/
 }

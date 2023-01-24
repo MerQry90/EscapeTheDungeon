@@ -16,6 +16,8 @@ public class EntityManager {
 
 	//private CollisionBox boundaries;
 	
+	private String nextPlayerInstruction = "stop";
+	
 	private Player player;
 	private Door door;
 	private List<GenericEntity> boundaries;
@@ -41,6 +43,13 @@ public class EntityManager {
 		boundaries.add(new VerticalWall(64 * 16, 64, this));
 	}
 	
+	public void setNextPlayerInstruction(String instruction){
+		nextPlayerInstruction = instruction;
+	}
+	public String getNextPlayerInstruction(){
+		return nextPlayerInstruction;
+	}
+	
 	public Player getPlayer() {
 		return player;
 	}
@@ -51,7 +60,7 @@ public class EntityManager {
 		return player.getY();
 	}
 	
-	public boolean checkObstaclesCollisions(GenericEntity entity){
+	public boolean checkWallsCollisions(GenericEntity entity){
 		for (GenericEntity obstacle: boundaries) {
 			if(obstacle.checkCollision(entity)){
 				return true;
