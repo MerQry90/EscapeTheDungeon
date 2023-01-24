@@ -12,10 +12,6 @@ public abstract class Projectile extends DynamicEntity {
  	*/
 	private boolean axis, direction;
 	
-	public Projectile(int x, int y, EntityManager entityManager) {
-		super(x, y, entityManager);
-	}
-	
 	public void setAxis(boolean axis){
 		this.axis = axis;
 	}
