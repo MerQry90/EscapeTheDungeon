@@ -33,6 +33,7 @@ public class Player extends DynamicEntity {
 		shootCoolDown = 15;
 		shootCoolDownValue = 0;
 		hasShot = false;
+		setCanPassThroughWalls(false);
 		
 		translation = new Vector2D(getSpeed());
 	}
