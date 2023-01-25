@@ -1,5 +1,6 @@
 package Components;
 
+import Entities.DynamicEntities.Arrow;
 import Entities.StaticEntities.Door;
 import Entities.GenericEntity;
 import Entities.DynamicEntities.Player;
@@ -20,7 +21,7 @@ public class EntityManager {
 	private Door door;
 	private List<GenericEntity> boundaries;
 	private List<Enemy> enemies;
-	private List<Projectile> friendlyProjectiles;
+	private List<Arrow> friendlyArrows;
 	private List<Projectile> hostileProjectiles;
 	//TODO lista di ostacoli
 	
@@ -30,7 +31,7 @@ public class EntityManager {
 		player = new Player(this);
 		door = new Door(64 * 7, 0, this);
 		enemies = new ArrayList<>();
-		friendlyProjectiles = new ArrayList<>();
+		friendlyArrows = new ArrayList<>();
 		hostileProjectiles = new ArrayList<>();
 		boundaries = new ArrayList<>();
 		
@@ -73,7 +74,7 @@ public class EntityManager {
 			if(enemy.checkIfActive() && enemy.checkCollision(player)){
 				player.setInactive();
 			}
-			for(Projectile arrow: friendlyProjectiles){
+			for(Projectile arrow: friendlyArrows){
 				if(enemy.checkIfActive() && enemy.checkCollision(arrow)){
 					arrow.setInactive();
 					enemy.lowerHealth();
@@ -81,9 +82,23 @@ public class EntityManager {
 			}
 		}
 	}
-	
+
+	public void newArrow(String orientation){
+		friendlyArrows.add(new Arrow(getPlayerX(), getPlayerY(), orientation, this));
+	}
+
 	public void updateArrows(){
-		for(int i = 0; i < friendlyProjectiles.size(); i++){
+		for (int i = 0; i < friendlyArrows.size(); i++){
+			if(friendlyArrows.get(i).checkIfActive()){
+				friendlyArrows.get(i).move();
+			}
+			else {
+				friendlyArrows.remove(i);
+				i -= 1;
+			}
+		}
+
+		/*for(int i = 0; i < friendlyProjectiles.size(); i++){
 			friendlyProjectiles.get(i).checkBoundaries();
 			if (friendlyProjectiles.get(i).checkIfActive()){
 				if(friendlyProjectiles.get(i).getAxis() && friendlyProjectiles.get(i).getDirection()){
@@ -107,7 +122,7 @@ public class EntityManager {
 				friendlyProjectiles.remove(i);
 				i-= 1;
 			}
-		}
+		}*/
 	}
 	
 	public void updateEnemies(){
@@ -145,7 +160,7 @@ public class EntityManager {
 			door.paint(g);
 		}
 		player.paint(g);
-		for (Projectile arrow: friendlyProjectiles){
+		for (Projectile arrow: friendlyArrows){
 			arrow.paint(g);
 		}
 		for (Enemy enemy: enemies) {

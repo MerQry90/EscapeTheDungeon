@@ -27,7 +27,9 @@ public class Player extends DynamicEntity {
 		//CARICAMENTO SPRITE
 		LEFT_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_front.png");
 		setActiveSprite(LEFT_PLAYER);
-		
+
+		setX(512);
+		setY(256);
 		setHeight(64); //tmp
 		setWidth(64); //tmp
 		setCBwidthScalar(0.8);

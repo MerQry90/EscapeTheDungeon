@@ -1,6 +1,7 @@
 package Entities.DynamicEntities;
 
 import Components.EntityManager;
+import Components.Vector2D;
 import Entities.GenericEntity;
 
 import java.awt.*;
@@ -11,18 +12,15 @@ public class Arrow extends Projectile {
 	
 	//la freccia deve essere visibile finché non collide con qualcosa
 	private final int arrowSpeed = 20;
-	
-	/*
-	axis = true: asse x
-	axis = false: asse y
- 	*/
-	private boolean axis, direction;
+	private String arrowOrientation;
 
 	//TODO rimuovere asse e direzione dai proiettili
-	public Arrow(int x, int y, boolean axis, boolean direction, EntityManager entityManager) {
-		super(x, y, entityManager);
-		this.axis = axis;
-		this.direction = direction;
+	public Arrow(int x, int y, String arrowOrientation, EntityManager entityManager) {
+		this.entityManager = entityManager;
+		this.arrowOrientation = arrowOrientation;
+		setX(x);
+		setY(y);
+		init();
 	}
 	
 	@Override
@@ -35,18 +33,25 @@ public class Arrow extends Projectile {
 		setHeight(40);
 		setCBwidthScalar(0.9);
 		setCBheightScalar(0.5);
+		initCollisionBox();
 		setSpeed(arrowSpeed);
+		translation = new Vector2D(getSpeed());
 	}
 
-	public boolean getAxis() {
-		return axis;
+	public void move() {
+		switch (arrowOrientation){
+			case "up" ->{
+				translation.setAngulationToObjective(0, -1);
+			}
+			case "down" ->{
+				translation.setAngulationToObjective(0, 1);
+			}
+			case "right" ->{
+				translation.setAngulationToObjective(1, 0);
+			}
+			case "left" ->{
+				translation.setAngulationToObjective(-1, 0);
+			}
+		}
 	}
-
-	public boolean getDirection() {
-		return direction;
-	}
-
-	/*public int getArrowSpeed(){
-		return arrowSpeed;
-	}*/
 }

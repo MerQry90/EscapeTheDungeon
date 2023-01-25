@@ -69,21 +69,21 @@ public class MainGame extends GameState{
 		}
 		
 		//shooting
-		/*if (keyH.shootUp && player.canShoot()) {
-			arrows.add(new Arrow(player.getX(), player.getY(), false, false));
+		if (keyH.shootUp && entityManager.getPlayer().canShoot()) {
+			entityManager.newArrow("up");
 		}
-		else if (keyH.shootDown && player.canShoot()) {
-			arrows.add(new Arrow(player.getX(), player.getY(), false, true));
+		else if (keyH.shootDown && entityManager.getPlayer().canShoot()) {
+			entityManager.newArrow("down");
 		}
-		else if (keyH.shootLeft && player.canShoot()) {
-			arrows.add(new Arrow(player.getX(), player.getY(), true, false));
+		else if (keyH.shootLeft && entityManager.getPlayer().canShoot()) {
+			entityManager.newArrow("right");
 		}
-		else if (keyH.shootRight && player.canShoot()) {
-			arrows.add(new Arrow(player.getX(), player.getY(), true, true));
+		else if (keyH.shootRight && entityManager.getPlayer().canShoot()) {
+			entityManager.newArrow("left");
 		}
 
 		//DEBUG ONLY
-		if(keyH.killAll){
+		/*if(keyH.killAll){
 			for(Enemy enemy: enemies){
 				enemy.setInactive();
 			}
