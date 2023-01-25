@@ -19,23 +19,27 @@ public class Vector2D {
 		return module;
 	}
 	
-	public void setAngulationToObjective(int oX, int oY){
+	public void setAngulationToObjective(int oX, int oY){ //-1, 0
 		if(oX == 0 && oY == 0){
 			angulation = 0;
 		}
 		else {
-			double theta = atan((double) (oX)/(double) (oY));
+			double theta = atan((double) (oY)/(double) (oX));
 			if(oX >= 0 && oY >= 0){
 				angulation = theta;
+				System.out.println(toDegrees(angulation));
 			}
-			else if(oX >= 0){
+			else if(oY >= 0 && oX < 0){
 				angulation = toRadians(180) - theta;
+				System.out.println(toDegrees(angulation));
 			}
-			else if(oY >= 0){
+			else if(oY < 0 && oX >= 0){
 				angulation = toRadians(180) + theta;
+				System.out.println(toDegrees(angulation));
 			}
 			else {
 				angulation = toRadians(360) - theta;
+				System.out.println(toDegrees(angulation));
 			}
 		}
 	}

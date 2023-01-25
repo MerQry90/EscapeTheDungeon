@@ -32,7 +32,7 @@ public class Zombie extends Enemy{
 		setCBheightScalar(0.9);
 		initCollisionBox();
 		
-		translation = new Vector2D(getSpeed());
+		translation = new Vector2D(0);
 		setRandomSpeed(5, 4);
 		setRandomHealth(3, 2);
 		setCanPassThroughWalls(false);

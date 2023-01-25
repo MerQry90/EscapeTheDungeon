@@ -34,7 +34,7 @@ public class Bat extends Enemy{
 		setCBheightScalar(0.9);
 		initCollisionBox();
 		
-		translation = new Vector2D(getSpeed());
+		translation = new Vector2D(0);
 		setRandomSpeed(1, 30);
 		setRandomHealth(2, 1);
 		setCanPassThroughWalls(false);
@@ -43,7 +43,6 @@ public class Bat extends Enemy{
 		movingCountdown = 20;
 	}
 
-	//TODO creare metodo di countdown
 	@Override
 	public void updateBehaviour() {
 		switch (getCurrentBehaviour()) {
@@ -51,7 +50,7 @@ public class Bat extends Enemy{
 				countdown++;
 				setActiveSprite(LIVING_BAT_ON);
 				if (countdown > wait) {
-					changeBehaviourTo("dashing");
+					changeBehaviourTo("aiming");
 				}
 				else {
 					changeBehaviourTo("stop-2");

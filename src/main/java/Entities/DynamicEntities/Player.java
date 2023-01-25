@@ -36,8 +36,7 @@ public class Player extends DynamicEntity {
 		setCBheightScalar(0.8);
 		initCollisionBox();
 		
-		translation = new Vector2D(getSpeed());
-		setSpeed(10); //tmp
+		translation = new Vector2D(10);
 		shootCoolDown = 15;
 		shootCoolDownValue = 0;
 		hasShot = false;
@@ -85,6 +84,7 @@ public class Player extends DynamicEntity {
 			}
 			case "left" -> {
 				translation.setAngulationToObjective(-1, 0);
+				System.out.println("sinistra");
 			}
 			case "up-right" -> {
 				translation.setAngulationToObjective(1, -1);

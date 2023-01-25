@@ -34,8 +34,9 @@ public class Arrow extends Projectile {
 		setCBwidthScalar(0.9);
 		setCBheightScalar(0.5);
 		initCollisionBox();
-		setSpeed(arrowSpeed);
+
 		translation = new Vector2D(getSpeed());
+		setSpeed(arrowSpeed);
 	}
 
 	public void move() {

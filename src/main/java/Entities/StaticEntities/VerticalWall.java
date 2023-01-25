@@ -5,7 +5,10 @@ import Entities.GenericEntity;
 
 public class VerticalWall extends StaticEntity {
 	public VerticalWall(int x, int y, EntityManager entityManager) {
-		super(x, y, entityManager);
+		setX(x);
+		setY(y);
+		this.entityManager = entityManager;
+		init();
 	}
 
 	@Override
@@ -14,5 +17,6 @@ public class VerticalWall extends StaticEntity {
 		setHeight(64 * 7);
 		setCBwidthScalar(1.0);
 		setCBheightScalar(1.0);
+		initCollisionBox();
 	}
 }

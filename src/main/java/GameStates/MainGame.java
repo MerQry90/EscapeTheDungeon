@@ -97,6 +97,7 @@ public class MainGame extends GameState{
 			setInactive();
 		}
 		processInput();
+		entityManager.getPlayer().move();
 		entityManager.getPlayer().updateCoolDown();
 		entityManager.updateArrows();
 		entityManager.updateEnemies();

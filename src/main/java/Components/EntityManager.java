@@ -97,32 +97,6 @@ public class EntityManager {
 				i -= 1;
 			}
 		}
-
-		/*for(int i = 0; i < friendlyProjectiles.size(); i++){
-			friendlyProjectiles.get(i).checkBoundaries();
-			if (friendlyProjectiles.get(i).checkIfActive()){
-				if(friendlyProjectiles.get(i).getAxis() && friendlyProjectiles.get(i).getDirection()){
-					//la freccia si muove a destra
-					friendlyProjectiles.get(i).calculateTranslations(friendlyProjectiles.get(i).getSpeed(), 0);
-				}
-				else if(friendlyProjectiles.get(i).getAxis() && friendlyProjectiles.get(i).getDirection() == false){
-					//la freccia si muove a sinistra
-					friendlyProjectiles.get(i).calculateTranslations(friendlyProjectiles.get(i).getSpeed() * -1, 0);
-				}
-				else if (friendlyProjectiles.get(i).getAxis() == false && friendlyProjectiles.get(i).getDirection()){
-					//la freccia si muove verso il basso
-					friendlyProjectiles.get(i).calculateTranslations(0, friendlyProjectiles.get(i).getSpeed());
-				}
-				else if (friendlyProjectiles.get(i).getAxis() == false && friendlyProjectiles.get(i).getDirection() == false){
-					//la freccia si muove verso l'alto
-					friendlyProjectiles.get(i).calculateTranslations(0, friendlyProjectiles.get(i).getSpeed() * -1);
-				}
-			}
-			else {
-				friendlyProjectiles.remove(i);
-				i-= 1;
-			}
-		}*/
 	}
 	
 	public void updateEnemies(){

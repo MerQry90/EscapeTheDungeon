@@ -11,8 +11,11 @@ public class Door extends StaticEntity {
 	//private Image CLOSED_DOOR;
 	
 	public Door(int x, int y, EntityManager entityManager) {
-		super(x, y, entityManager);
+		setX(x);
+		setY(y);
+		this.entityManager = entityManager;
 		setInactive();
+		init();
 	}
 	
 	@Override

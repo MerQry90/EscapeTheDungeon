@@ -5,7 +5,10 @@ import Entities.GenericEntity;
 
 public class HorizontalWall extends StaticEntity {
 	public HorizontalWall(int x, int y, EntityManager entityManager) {
-		super(x, y, entityManager);
+		setX(x);
+		setY(y);
+		this.entityManager = entityManager;
+		init();
 	}
 
 	@Override
@@ -14,5 +17,6 @@ public class HorizontalWall extends StaticEntity {
 		setHeight(32);
 		setCBwidthScalar(1.0);
 		setCBheightScalar(1.0);
+		initCollisionBox();
 	}
 }
