@@ -1,13 +1,10 @@
 package Components;
 
-import Entities.DynamicEntities.Arrow;
+import Entities.DynamicEntities.*;
 import Entities.StaticEntities.Door;
 import Entities.GenericEntity;
-import Entities.DynamicEntities.Player;
-import Entities.DynamicEntities.Projectile;
 import Entities.StaticEntities.HorizontalWall;
 import Entities.StaticEntities.VerticalWall;
-import Entities.DynamicEntities.Enemy;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -40,6 +37,9 @@ public class EntityManager {
 		boundaries.add(new HorizontalWall(64, 64 * 8, this));
 		boundaries.add(new VerticalWall(0, 64, this)); //////
 		boundaries.add(new VerticalWall(64 * 16, 64, this));
+		
+		//TMP
+		enemies.add(new Zombie(100, 100, this));
 	}
 	
 	public void setNextPlayerInstruction(String instruction){
