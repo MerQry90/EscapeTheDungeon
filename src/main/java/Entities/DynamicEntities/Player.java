@@ -10,13 +10,14 @@ public class Player extends DynamicEntity {
 
 	private Image LEFT_PLAYER;
 	
+	private String nextPlayerInstruction = "stop";
 	private int shootCoolDown; //valore fisso che indica ogni quanti frame il giocatore può sparare una freccia
 	private int shootCoolDownValue; //valore che incrementa
 	private boolean hasShot;
 
 	public Player(EntityManager entityManager) {
+		this.entityManager = entityManager;
 		init();
-		super(512, 256, entityManager);//tmp
 	}
 	
 	@Override
@@ -25,11 +26,14 @@ public class Player extends DynamicEntity {
 		LEFT_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_front.png");
 		setActiveSprite(LEFT_PLAYER);
 		
+		setX(512);
+		setY(256);
 		setHeight(64); //tmp
 		setWidth(64); //tmp
 		setSpeed(10); //tmp
 		setCBwidthScalar(0.8);
 		setCBheightScalar(0.8);
+		
 		shootCoolDown = 15;
 		shootCoolDownValue = 0;
 		hasShot = false;
@@ -41,7 +45,11 @@ public class Player extends DynamicEntity {
 	public void updateCoolDown(){
 		shootCoolDownValue += 1;
 	}
-
+	
+	public void setNextPlayerInstruction(String nextPlayerInstruction) {
+		this.nextPlayerInstruction = nextPlayerInstruction;
+	}
+	
 	public boolean canShoot() {
 		if (hasShot) {
 			if (shootCoolDown - shootCoolDownValue > 0) {
@@ -64,7 +72,7 @@ public class Player extends DynamicEntity {
 	@Override
 	public void move() {
 		boolean canMove = true;
-		switch (entityManager.getNextPlayerInstruction()){
+		switch (nextPlayerInstruction){
 			case "up" -> {
 				translation.setAngulationToObjective(0, -1);
 			}
@@ -95,8 +103,7 @@ public class Player extends DynamicEntity {
 			}
 		}
 		if(canMove) {
-			setX(getX() + translation.getXTranslation());
-			setY(getY() + translation.getYTranslation());
+			moveEntity(translation.getXTranslation(), translation.getYTranslation());
 		}
 	}
 }

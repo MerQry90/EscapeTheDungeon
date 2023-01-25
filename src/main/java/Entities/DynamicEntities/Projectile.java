@@ -9,7 +9,7 @@ public abstract class Projectile extends DynamicEntity {
 	/*
 	axis = true: asse x
 	axis = false: asse y
- 	*/
+ 
 	private boolean axis, direction;
 	
 	public void setAxis(boolean axis){
@@ -35,5 +35,5 @@ public abstract class Projectile extends DynamicEntity {
 				|| (getY() >= Background.LOWER_BOUND - getHeight() && !axis && direction)){
 			setInactive();
 		}
-	}
+	}*/
 }

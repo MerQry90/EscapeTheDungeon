@@ -34,6 +34,10 @@ public abstract class GenericEntity {
 	
 	public abstract void init();
 
+	public void initCollisionBox(){
+		cb = new CollisionBox(getX(), getY(), getWidth(), getHeight(), getCBwidthScalar(), getCBheightScalar());
+	}
+	
 	//Attivazione e disattivazione dell'entità--------------------------------------------------------------------------
 	public void setInactive(){
 		isActive = false;

@@ -16,8 +16,6 @@ public class EntityManager {
 
 	//private CollisionBox boundaries;
 	
-	private String nextPlayerInstruction = "stop";
-	
 	private Player player;
 	private Door door;
 	private List<GenericEntity> boundaries;
@@ -44,10 +42,7 @@ public class EntityManager {
 	}
 	
 	public void setNextPlayerInstruction(String instruction){
-		nextPlayerInstruction = instruction;
-	}
-	public String getNextPlayerInstruction(){
-		return nextPlayerInstruction;
+		player.setNextPlayerInstruction(instruction);
 	}
 	
 	public Player getPlayer() {
@@ -70,16 +65,16 @@ public class EntityManager {
 	}
 	
 	public void checkDynamicCollisions(){
-		if(door.checkIfActive() && player.getCollisionBox().checkCollision(door.getCollisionBox())){
+		if(door.checkIfActive() && player.checkCollision(door)){
 			//clearedTotalStages++;
 			//loadNextStage();
 		}
 		for(Enemy enemy: enemies){
-			if(enemy.checkIfActive() && enemy.getCollisionBox().checkCollision(player.getCollisionBox())){
+			if(enemy.checkIfActive() && enemy.checkCollision(player)){
 				player.setInactive();
 			}
 			for(Projectile arrow: friendlyProjectiles){
-				if(enemy.checkIfActive() && enemy.getCollisionBox().checkCollision(arrow.getCollisionBox())){
+				if(enemy.checkIfActive() && enemy.checkCollision(arrow)){
 					arrow.setInactive();
 					enemy.lowerHealth();
 				}

@@ -21,24 +21,30 @@ public class Zombie extends Enemy{
 		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		//verrà sommato a minimumSpeed
-		setRandomSpeed(5, 4);
-		setRandomHealth(3, 2);
+		
 		setWidth(64);
 		setHeight(64);
 		setCBwidthScalar(0.7);
 		setCBheightScalar(0.9);
-		changeBehaviourTo(0);
+		
+		setRandomSpeed(5, 4);
+		setRandomHealth(3, 2);
+		changeBehaviourTo("follow-player");
 	}
 	
 	@Override
 	public void updateBehaviour() {
 		switch (getCurrentBehaviour()){
-			case 0:
-				calculateTranslations(entityManager.getPlayerX() - getX(),
-						entityManager.getPlayerY() - getY());
-				break;
+			case "follow-player" -> {
+				this.moveEntity();
+			}
 			default:
-				changeBehaviourTo(0);
+				changeBehaviourTo("follow-player");
 		}
+	}
+	
+	@Override
+	public void move() {
+	
 	}
 }

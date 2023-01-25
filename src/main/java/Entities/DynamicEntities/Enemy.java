@@ -10,7 +10,7 @@ import static java.lang.Math.abs;
 public abstract class Enemy extends DynamicEntity{
 	
 	private int health;
-	private int currentBehaviour;
+	private String currentBehaviour;
 
 	public void setRandomHealth(int minimumHealth, int maximumHealth){
 		Random random = new Random();
@@ -31,11 +31,11 @@ public abstract class Enemy extends DynamicEntity{
 	}
 
 	//metodi riguardanti lo stato del nemico----------------------------------------------------------------------------
-	public int getCurrentBehaviour(){
+	public String getCurrentBehaviour(){
 		return currentBehaviour;
 	}
 
-	public void changeBehaviourTo(int newBehaviour){
+	public void changeBehaviourTo(String newBehaviour){
 		this.currentBehaviour = newBehaviour;
 	}
 	
