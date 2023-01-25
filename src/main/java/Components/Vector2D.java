@@ -15,6 +15,9 @@ public class Vector2D {
 	public void setModule(int speed){
 		module = speed;
 	}
+	public double getModule() {
+		return module;
+	}
 	
 	public void setAngulationToObjective(int oX, int oY){
 		if(oX == 0 && oY == 0){

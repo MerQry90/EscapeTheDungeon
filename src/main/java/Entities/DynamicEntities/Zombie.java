@@ -1,6 +1,7 @@
 package Entities.DynamicEntities;
 
 import Components.EntityManager;
+import Components.Vector2D;
 
 import java.awt.*;
 
@@ -10,7 +11,10 @@ public class Zombie extends Enemy{
 	//TODO altri sprite
 	
 	public Zombie(int x, int y, EntityManager entityManager) {
-		super(x, y, entityManager);
+		this.entityManager = entityManager;
+		setX(x);
+		setY(y);
+		init();
 	}
 	
 	@Override
@@ -26,9 +30,12 @@ public class Zombie extends Enemy{
 		setHeight(64);
 		setCBwidthScalar(0.7);
 		setCBheightScalar(0.9);
+		initCollisionBox();
 		
+		translation = new Vector2D(getSpeed());
 		setRandomSpeed(5, 4);
 		setRandomHealth(3, 2);
+		setCanPassThroughWalls(false);
 		changeBehaviourTo("follow-player");
 	}
 	
@@ -36,15 +43,15 @@ public class Zombie extends Enemy{
 	public void updateBehaviour() {
 		switch (getCurrentBehaviour()){
 			case "follow-player" -> {
-				this.moveEntity();
+				int dX = getDeltaXToObjective(entityManager.getPlayerX());
+				int dY = getDeltaYToObjective(entityManager.getPlayerY());
+				translation.setAngulationToObjective(dX, dY);
+				setX(translation.getXTranslation() + getX());
+				setY(translation.getYTranslation() + getY());
 			}
-			default:
+			default -> {
 				changeBehaviourTo("follow-player");
+			}
 		}
-	}
-	
-	@Override
-	public void move() {
-	
 	}
 }

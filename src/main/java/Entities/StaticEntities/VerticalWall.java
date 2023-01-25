@@ -10,7 +10,6 @@ public class VerticalWall extends StaticEntity {
 
 	@Override
 	public void init() {
-		setSpeed(0);
 		setWidth(64);
 		setHeight(64 * 7);
 		setCBwidthScalar(1.0);

@@ -14,7 +14,6 @@ public abstract class GenericEntity {
 	
 	private int x;
 	private int y;
-	private int speed;
 	private int width;
 	private int height;
 	private double CBwidthScalar;
@@ -22,15 +21,6 @@ public abstract class GenericEntity {
 	private Image activeSprite;
 	private CollisionBox cb;
 	private boolean isActive = true;
-	
-	/*public GenericEntity(int x, int y, EntityManager entityManager) {
-		this.x = x;
-		this.y = y;
-		this.entityManager = entityManager;
-		
-		init();
-		cb = new CollisionBox(getX(), getY(), getWidth(), getHeight(), getCBwidthScalar(), getCBheightScalar());
-	}*/
 	
 	public abstract void init();
 
@@ -87,12 +77,6 @@ public abstract class GenericEntity {
 	}
 	public int getHeight() {
 		return height;
-	}
-	public int getSpeed() {
-		return speed;
-	}
-	public void setSpeed(int speed) {
-		this.speed = speed;
 	}
 	public Image setSpriteFromPath(String path){
 		ImageIcon icon = new ImageIcon(path);

@@ -10,7 +10,6 @@ public class HorizontalWall extends StaticEntity {
 
 	@Override
 	public void init() {
-		setSpeed(0);
 		setWidth(64 * 15);
 		setHeight(32);
 		setCBwidthScalar(1.0);

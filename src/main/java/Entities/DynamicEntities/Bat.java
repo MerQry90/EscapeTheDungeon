@@ -1,6 +1,7 @@
 package Entities.DynamicEntities;
 
 import Components.EntityManager;
+import Components.Vector2D;
 
 import java.awt.*;
 
@@ -12,13 +13,12 @@ public class Bat extends Enemy{
 	private Image LIVING_BAT_ON;
 	
 	private int wait, countdown, movingCountdown;
-	int deltaX, deltaY;
-	private boolean alternate;
-	private int dashSpeed = 30;
-
-
+	
 	public Bat(int x, int y, EntityManager entityManager){
-		super(x, y, entityManager);
+		this.entityManager = entityManager;
+		setX(x);
+		setY(y);
+		init();
 	}
 
 	@Override
@@ -28,56 +28,65 @@ public class Bat extends Enemy{
 		LIVING_BAT_ON = setSpriteFromPath("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
 		setActiveSprite(LIVING_BAT_OFF);
 		
-		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
-		//verrà sommato a minimumSpeed
-		setRandomSpeed(1, 30);
 		setWidth(64);
 		setHeight(64);
 		setCBwidthScalar(0.7);
 		setCBheightScalar(0.9);
+		initCollisionBox();
+		
+		translation = new Vector2D(getSpeed());
+		setRandomSpeed(1, 30);
 		setRandomHealth(2, 1);
-
+		setCanPassThroughWalls(false);
 		wait = 40;
 		countdown = 0;
 		movingCountdown = 20;
-		alternate = true;
-
-		deltaX = 0;
-		deltaY = 0;
 	}
 
 	//TODO creare metodo di countdown
 	@Override
 	public void updateBehaviour() {
-		countdown++;
 		switch (getCurrentBehaviour()) {
-			case 0 -> {
-				if (alternate) {
-					setActiveSprite(LIVING_BAT_ON);
-					alternate = false;
-				} else {
-					setActiveSprite(LIVING_BAT_OFF);
-					alternate = true;
-				}
+			case "stop-1" -> {
+				countdown++;
+				setActiveSprite(LIVING_BAT_ON);
 				if (countdown > wait) {
-					changeBehaviourTo(1);
+					changeBehaviourTo("dashing");
+				}
+				else {
+					changeBehaviourTo("stop-2");
 				}
 			}
-			case 1 -> {
-				//TODO bat op
+			case "stop-2" -> {
+				countdown++;
+				setActiveSprite(LIVING_BAT_OFF);
+				if (countdown > wait) {
+					changeBehaviourTo("aiming");
+				}
+				else {
+					changeBehaviourTo("stop-1");
+				}
+			}
+			case "aiming" ->{
+				int dX = getDeltaXToObjective(entityManager.getPlayerX());
+				int dY = getDeltaYToObjective(entityManager.getPlayerY());
+				translation.setAngulationToObjective(dX, dY);
+				changeBehaviourTo("dashing");
+			}
+			case "dashing" -> {
 				movingCountdown--;
 				setActiveSprite(LIVING_BAT_OFF);
-				calculateTranslations(entityManager.getPlayerX() - getX(),
-						entityManager.getPlayerY() - getY());
+				setX(translation.getXTranslation() + getX());
+				setY(translation.getYTranslation() + getY());
 				if (movingCountdown <= 0) {
 					countdown = 0;
 					movingCountdown = 20;
 				}
 				if (countdown <= wait) {
-					changeBehaviourTo(0);
+					changeBehaviourTo("stop-1");
 				}
 			}
-			default -> changeBehaviourTo(0);
+			default -> changeBehaviourTo("stop-1");
 		}
 	}
 }

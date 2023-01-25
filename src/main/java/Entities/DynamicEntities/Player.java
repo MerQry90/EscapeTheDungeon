@@ -17,6 +17,8 @@ public class Player extends DynamicEntity {
 
 	public Player(EntityManager entityManager) {
 		this.entityManager = entityManager;
+		setX(512);
+		setY(256);
 		init();
 	}
 	
@@ -26,20 +28,18 @@ public class Player extends DynamicEntity {
 		LEFT_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_front.png");
 		setActiveSprite(LEFT_PLAYER);
 		
-		setX(512);
-		setY(256);
 		setHeight(64); //tmp
 		setWidth(64); //tmp
-		setSpeed(10); //tmp
 		setCBwidthScalar(0.8);
 		setCBheightScalar(0.8);
+		initCollisionBox();
 		
+		translation = new Vector2D(getSpeed());
+		setSpeed(10); //tmp
 		shootCoolDown = 15;
 		shootCoolDownValue = 0;
 		hasShot = false;
 		setCanPassThroughWalls(false);
-		
-		translation = new Vector2D(getSpeed());
 	}
 
 	public void updateCoolDown(){
@@ -69,7 +69,6 @@ public class Player extends DynamicEntity {
 		}
 	}
 	
-	@Override
 	public void move() {
 		boolean canMove = true;
 		switch (nextPlayerInstruction){

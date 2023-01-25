@@ -11,6 +11,13 @@ public abstract class DynamicEntity extends GenericEntity {
 	private boolean canFly;
 	private boolean canPassThroughWalls;
 	
+	public int getSpeed() {
+		return round((float) (translation.getModule()));
+	}
+	public void setSpeed(int speed) {
+		translation.setModule(speed);
+	}
+	
 	public int getDeltaXToObjective(int oX){
 		return oX - this.getX();
 	}
@@ -20,8 +27,6 @@ public abstract class DynamicEntity extends GenericEntity {
 	public int getDistanceToObjective(int oX, int oY){
 		return round((float) (sqrt(pow(oX - this.getX(), 2) + pow(oY - this.getY(), 2))));
 	}
-	
-	public abstract void move();
 	
 	public void setCanFly(boolean flag){
 		canFly = flag;
