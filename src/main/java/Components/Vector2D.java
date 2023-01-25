@@ -24,32 +24,36 @@ public class Vector2D {
 			angulation = 0;
 		}
 		else {
-			double theta = atan((double) (oX)/(double) (oY));
-			if(oX >= 0 && oY >= 0){
-				angulation = theta;
-				System.out.println(toDegrees(angulation));
-			}
-			else if(oY >= 0){
-				angulation = toRadians(180) - theta;
-				System.out.println(toDegrees(angulation));
-			}
-			else if(oX >= 0){
+			double theta = atan((double) (oY)/(double) (oX));
+			// 3o quad
+			if(oX < 0 && oY < 0){
 				angulation = toRadians(180) + theta;
 				System.out.println(toDegrees(angulation));
 			}
+			// 4o quad
+			else if(oY < 0){
+				angulation = toRadians(360) + theta;
+				System.out.println(toDegrees(angulation));
+			}
+			// 2o quad
+			else if(oX < 0){
+				angulation = toRadians(180) - theta;
+				System.out.println(toDegrees(angulation));
+			}
+			// 1o quad
 			else {
-				angulation = toRadians(360) - theta;
+				angulation = theta;
 				System.out.println(toDegrees(angulation));
 			}
 		}
 	}
 	//0 gradi è verso il basso, quindi sin e cos sono invertiti
 	public int getXTranslation(){
-		double tX = module * sin(angulation);
+		double tX = module * cos(angulation);
 		return round((float) (tX));
 	}
 	public int getYTranslation(){
-		double tY = module * cos(angulation);
+		double tY = module * sin(angulation);
 		return round((float) (tY));
 	}
 }
