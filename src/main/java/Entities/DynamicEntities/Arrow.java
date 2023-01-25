@@ -35,8 +35,7 @@ public class Arrow extends Projectile {
 		setCBheightScalar(0.5);
 		initCollisionBox();
 
-		translation = new Vector2D(getSpeed());
-		setSpeed(arrowSpeed);
+		translation = new Vector2D(arrowSpeed);
 	}
 
 	public void move() {
@@ -54,5 +53,6 @@ public class Arrow extends Projectile {
 				translation.setAngulationToObjective(-1, 0);
 			}
 		}
+		moveEntity(translation.getXTranslation(), translation.getYTranslation());
 	}
 }

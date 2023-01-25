@@ -38,7 +38,7 @@ public class EntityManager {
 		//SETTAGGIO MURI
 		boundaries.add(new HorizontalWall(64, 0, this));
 		boundaries.add(new HorizontalWall(64, 64 * 8, this));
-		boundaries.add(new VerticalWall(0, 64, this));
+		boundaries.add(new VerticalWall(0, 64, this)); //////
 		boundaries.add(new VerticalWall(64 * 16, 64, this));
 	}
 	
@@ -89,6 +89,8 @@ public class EntityManager {
 
 	public void updateArrows(){
 		for (int i = 0; i < friendlyArrows.size(); i++){
+			System.out.println(checkWallsCollisions(friendlyArrows.get(i)));
+			System.out.println(friendlyArrows.get(i).getX());
 			if(friendlyArrows.get(i).checkIfActive()){
 				friendlyArrows.get(i).move();
 			}

@@ -26,18 +26,13 @@ public class Vector2D {
 		else {
 			double theta = atan((double) (oY)/(double) (oX));
 			// 3o quad
-			if(oX < 0 && oY < 0){
+			if(oX < 0){
 				angulation = toRadians(180) + theta;
 				System.out.println(toDegrees(angulation));
 			}
 			// 4o quad
 			else if(oY < 0){
 				angulation = toRadians(360) + theta;
-				System.out.println(toDegrees(angulation));
-			}
-			// 2o quad
-			else if(oX < 0){
-				angulation = toRadians(180) - theta;
 				System.out.println(toDegrees(angulation));
 			}
 			// 1o quad

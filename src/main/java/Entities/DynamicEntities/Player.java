@@ -73,19 +73,6 @@ public class Player extends DynamicEntity {
 	public void move() {
 		boolean canMove = true;
 		switch (nextPlayerInstruction){
-			case "up" -> {
-				translation.setAngulationToObjective(0, -1);
-			}
-			case "down" -> {
-				translation.setAngulationToObjective(0, 1);
-			}
-			case "right" -> {
-				translation.setAngulationToObjective(1, 0);
-			}
-			case "left" -> {
-				translation.setAngulationToObjective(-1, 0);
-				System.out.println("sinistra");
-			}
 			case "up-right" -> {
 				translation.setAngulationToObjective(1, -1);
 			}
@@ -97,6 +84,18 @@ public class Player extends DynamicEntity {
 			}
 			case "down-left" -> {
 				translation.setAngulationToObjective(-1, 1);
+			}
+			case "up" -> {
+				translation.setAngulationToObjective(0, -1);
+			}
+			case "down" -> {
+				translation.setAngulationToObjective(0, 1);
+			}
+			case "right" -> {
+				translation.setAngulationToObjective(1, 0);
+			}
+			case "left" -> {
+				translation.setAngulationToObjective(-1, 0);
 			}
 			case "stop" -> {
 				translation.setAngulationToObjective(0, 0);

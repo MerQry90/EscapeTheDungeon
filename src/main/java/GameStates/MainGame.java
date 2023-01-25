@@ -76,10 +76,10 @@ public class MainGame extends GameState{
 			entityManager.newArrow("down");
 		}
 		else if (keyH.shootLeft && entityManager.getPlayer().canShoot()) {
-			entityManager.newArrow("right");
+			entityManager.newArrow("left");
 		}
 		else if (keyH.shootRight && entityManager.getPlayer().canShoot()) {
-			entityManager.newArrow("left");
+			entityManager.newArrow("right");
 		}
 
 		//DEBUG ONLY
