@@ -9,12 +9,15 @@ public class Room {
 	private Wall NorthernLeftWall;
 	private Wall NorthernCenterWall;
 	private Wall NorthernRightWall;
+
 	private Wall EasternUpperWall;
 	private Wall EasternCenterWall;
 	private Wall EasternLowerWall;
+
 	private Wall SouthernRightWall;
 	private Wall SouthernCenterWall;
 	private Wall SouthernLeftWall;
+
 	private Wall WesternLowerWall;
 	private Wall WesternCenterWall;
 	private Wall WesternUpperWall;

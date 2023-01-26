@@ -35,12 +35,13 @@ public abstract class DynamicEntity extends GenericEntity {
 		canPassThroughWalls = flag;
 	}
 	
-	public void moveEntity(int tX, int tY){
-		if(tX < 0){
-			for(int i = 0; i > tX; i--){
+	public boolean moveEntity(int translationX, int translationY){
+		if(translationX < 0){
+			for(int i = 0; i > translationX; i--){
 				if(entityManager.checkWallsCollisions(this) && !canPassThroughWalls) {
 					setX(getX() + 1);
-					break;
+					return true;
+					//break;
 				}
 				/*if(entityManager.checkObstaclesCollisions(this) && !canFly) {
 					setX(getX() + 1);
@@ -50,31 +51,35 @@ public abstract class DynamicEntity extends GenericEntity {
 			}
 		}
 		else {
-			for(int i = 0; i < tX; i++){
+			for(int i = 0; i < translationX; i++){
 				if(entityManager.checkWallsCollisions(this) && !canPassThroughWalls){
 					setX(getX() - 1);
-					break;
+					return true;
+					//break;
 				}
 				setX(getX() + 1);
 			}
 		}
-		if(tY < 0){
-			for(int i = 0; i > tY; i--){
+		if(translationY < 0){
+			for(int i = 0; i > translationY; i--){
 				if(entityManager.checkWallsCollisions(this) && !canPassThroughWalls) {
 					setY(getY() + 1);
-					break;
+					return true;
+					//break;
 				}
 				setY(getY() - 1);
 			}
 		}
 		else {
-			for(int i = 0; i < tY; i++){
+			for(int i = 0; i < translationY; i++){
 				if(entityManager.checkWallsCollisions(this) && !canPassThroughWalls){
 					setY(getY() - 1);
-					break;
+					return true;
+					//break;
 				}
 				setY(getY() + 1);
 			}
 		}
+		return false;
 	}
 }

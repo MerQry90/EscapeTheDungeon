@@ -89,11 +89,7 @@ public class EntityManager {
 
 	public void updateArrows(){
 		for (int i = 0; i < friendlyArrows.size(); i++){
-			System.out.println(checkWallsCollisions(friendlyArrows.get(i)));
-			System.out.println(friendlyArrows.get(i).getX());
-			if(friendlyArrows.get(i).checkIfActive()){
-				friendlyArrows.get(i).move();
-			}
+			if(friendlyArrows.get(i).checkIfActive() && !friendlyArrows.get(i).move()){}
 			else {
 				friendlyArrows.remove(i);
 				i -= 1;
