@@ -5,7 +5,7 @@ import Entities.GenericEntity;
 
 import java.awt.*;
 
-public class Door extends StaticEntity {
+public class Door extends GenericEntity {
 	
 	private Image OPEN_DOOR;
 	//private Image CLOSED_DOOR;

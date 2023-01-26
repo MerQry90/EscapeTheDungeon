@@ -3,8 +3,6 @@ package Components;
 import Entities.DynamicEntities.*;
 import Entities.StaticEntities.Door;
 import Entities.GenericEntity;
-import Entities.StaticEntities.HorizontalWall;
-import Entities.StaticEntities.VerticalWall;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -12,31 +10,23 @@ import java.util.List;
 
 public class EntityManager {
 
-	//private CollisionBox boundaries;
 	
 	private Player player;
 	private Door door;
-	private List<GenericEntity> boundaries;
 	private List<Enemy> enemies;
 	private List<Arrow> friendlyArrows;
 	private List<Projectile> hostileProjectiles;
-	//TODO lista di ostacoli
+	
+	private Room room;
 	
 	public EntityManager(){
-		//boundaries = new CollisionBox(64, 32, 1088 - 128, 576 + 32, 1.0, 1.0);
-		
 		player = new Player(this);
 		door = new Door(64 * 7, 0, this);
 		enemies = new ArrayList<>();
 		friendlyArrows = new ArrayList<>();
 		hostileProjectiles = new ArrayList<>();
-		boundaries = new ArrayList<>();
 		
-		//SETTAGGIO MURI
-		boundaries.add(new HorizontalWall(64, 0, this));
-		boundaries.add(new HorizontalWall(64, 64 * 8, this));
-		boundaries.add(new VerticalWall(0, 64, this)); //////
-		boundaries.add(new VerticalWall(64 * 16, 64, this));
+		room = new Room(false, false, false, false);
 		
 		//TMP
 		enemies.add(new Zombie(100, 100, this));
@@ -57,12 +47,7 @@ public class EntityManager {
 	}
 	
 	public boolean checkWallsCollisions(GenericEntity entity){
-		for (GenericEntity obstacle: boundaries) {
-			if(obstacle.checkCollision(entity)){
-				return true;
-			}
-		}
-		return false;
+		return room.checkCollisions(entity);
 	}
 	
 	public void checkDynamicCollisions(){
