@@ -26,7 +26,6 @@ public abstract class GenericEntity {
 
 	public void initCollisionBox(){
 		cb = new CollisionBox(getX(), getY(), getWidth(), getHeight(), getCBwidthScalar(), getCBheightScalar());
-		//System.out.println("hitbox creata");
 	}
 	
 	//Attivazione e disattivazione dell'entità--------------------------------------------------------------------------

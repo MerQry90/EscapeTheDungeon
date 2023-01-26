@@ -38,7 +38,7 @@ public class Arrow extends Projectile {
 		translation = new Vector2D(arrowSpeed);
 	}
 
-	public boolean move() {
+	public void move() {
 		switch (arrowOrientation){
 			case "up" ->{
 				translation.setAngulationToObjective(0, -1);
@@ -53,6 +53,8 @@ public class Arrow extends Projectile {
 				translation.setAngulationToObjective(-1, 0);
 			}
 		}
-		return moveEntity(translation.getXTranslation(), translation.getYTranslation());
+		if(moveEntity(translation.getXTranslation(), translation.getYTranslation())) {
+			setInactive();
+		}
 	}
 }

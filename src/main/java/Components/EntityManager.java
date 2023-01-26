@@ -69,13 +69,15 @@ public class EntityManager {
 	}
 
 	public void newArrow(String orientation){
-		friendlyArrows.add(new Arrow(getPlayerX(), getPlayerY(), orientation, this));
+		friendlyArrows.add(new Arrow(getPlayerX() + 11, getPlayerY() + 11, orientation, this));
 	}
 
 	public void updateArrows(){
 		for (int i = 0; i < friendlyArrows.size(); i++){
-			if(friendlyArrows.get(i).checkIfActive() && !friendlyArrows.get(i).move()){}
-			else {
+			if(friendlyArrows.get(i).checkIfActive()){
+				friendlyArrows.get(i).move();
+			}
+			if(!friendlyArrows.get(i).checkIfActive()){
 				friendlyArrows.remove(i);
 				i -= 1;
 			}
