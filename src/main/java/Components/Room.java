@@ -57,16 +57,16 @@ public class Room {
 	
 	public boolean checkCollisions(GenericEntity entity){
 		return entity.checkCollision(northernLeftWall) ||
-				entity.checkCollision(northernCenterWall) ||
+				(entity.checkCollision(northernCenterWall) && !hasNorthernDoor)||
 				entity.checkCollision(northernRightWall) ||
 				entity.checkCollision(easternUpperWall) ||
-				entity.checkCollision(easternCenterWall) ||
+				(entity.checkCollision(easternCenterWall) && !hasEasternDoor)||
 				entity.checkCollision(easternLowerWall) ||
 				entity.checkCollision(southernRightWall) ||
-				entity.checkCollision(southernCenterWall) ||
+				(entity.checkCollision(southernCenterWall) && !hasSouthernDoor)||
 				entity.checkCollision(southernLeftWall) ||
 				entity.checkCollision(westernLowerWall) ||
-				entity.checkCollision(westernCenterWall) ||
+				(entity.checkCollision(westernCenterWall) && !hasWesternDoor) ||
 				entity.checkCollision(westernUpperWall);
 	}
 }

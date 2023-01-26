@@ -21,12 +21,11 @@ public class EntityManager {
 	
 	public EntityManager(){
 		player = new Player(this);
-		door = new Door(64 * 7, 0, this);
 		enemies = new ArrayList<>();
 		friendlyArrows = new ArrayList<>();
 		hostileProjectiles = new ArrayList<>();
 		
-		room = new Room(false, false, false, false);
+		room = new Room(true, true, true, true);
 		
 		//TMP
 		enemies.add(new Zombie(100, 100, this));
@@ -51,10 +50,10 @@ public class EntityManager {
 	}
 	
 	public void checkDynamicCollisions(){
-		if(door.checkIfActive() && player.checkCollision(door)){
-			//clearedTotalStages++;
-			//loadNextStage();
-		}
+		/*if(door.checkIfActive() && player.checkCollision(door)){
+			clearedTotalStages++;
+			loadNextStage();
+		}*/
 		for(Enemy enemy: enemies){
 			if(enemy.checkIfActive() && enemy.checkCollision(player)){
 				player.setInactive();
@@ -115,9 +114,9 @@ public class EntityManager {
 	 */
 	
 	public void renderEntities(Graphics g){
-		if(door.checkIfActive()){
+		/*if(door.checkIfActive()){
 			door.paint(g);
-		}
+		}*/
 		player.paint(g);
 		for (Projectile arrow: friendlyArrows){
 			arrow.paint(g);
