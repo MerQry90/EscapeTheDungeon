@@ -10,6 +10,8 @@ import java.awt.*;
 public class MainGame extends GameState{
 
 	private Stage stage;
+	private boolean pause;
+	private int pauseCountdown;
 	
 	//private CollisionBox boundaries;
 	
@@ -28,6 +30,7 @@ public class MainGame extends GameState{
 		//stage.loadRandomStage(enemies);
 		
 		clearedTotalStages = 0;
+		pause = false;
 	}
 	
 	@Override
@@ -38,7 +41,15 @@ public class MainGame extends GameState{
 	
 	@Override
 	public void processInput() {
-
+		if(keyH.escapePressed && pauseCountdown <= 0){
+			pauseCountdown = 10;
+			if(!pause){
+				pause = true;
+			}
+			else if(pause){
+				pause = false;
+			}
+		}
 		//movimento
 		if(keyH.upPressed && keyH.rightPressed){
 			entityManager.setNextPlayerInstruction("up-right");
@@ -83,25 +94,26 @@ public class MainGame extends GameState{
 		}
 
 		//DEBUG ONLY
-		/*if(keyH.killAll){
-			for(Enemy enemy: enemies){
-				enemy.setInactive();
-			}
-		}*/
+		if(keyH.killAll){
+			entityManager.killAll();
+		}
 		
 	}
 	
 	@Override
 	public void update() {
-		if (clearedTotalStages >= 10){
-			setInactive();
-		}
+		pauseCountdown--;
 		processInput();
-		entityManager.getPlayer().move();
-		entityManager.getPlayer().updateCoolDown();
-		entityManager.updateArrows();
-		entityManager.updateEnemies();
-		entityManager.checkDynamicCollisions();
-		entityManager.checkStageCompletion();
+		if(!pause) {
+			if (clearedTotalStages >= 10) {
+				setInactive();
+			}
+			entityManager.getPlayer().move();
+			entityManager.getPlayer().updateCoolDown();
+			entityManager.updateArrows();
+			entityManager.updateEnemies();
+			entityManager.checkDynamicCollisions();
+			entityManager.checkStageCompletion();
+		}
 	}
 }
