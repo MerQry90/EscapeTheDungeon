@@ -54,8 +54,9 @@ public class EntityManager {
 			loadNextStage();
 		}*/
 		for(Enemy enemy: enemies){
-			if(enemy.checkIfActive() && enemy.checkCollision(player)){
-				player.setInactive();
+			if(enemy.checkIfActive() && enemy.checkCollision(player) && player.isVulnerable()){
+				player.lowerHealth();
+				player.setInvulnerable();
 			}
 			for(Projectile arrow: friendlyArrows){
 				if(enemy.checkIfActive() && enemy.checkCollision(arrow)){

@@ -13,8 +13,6 @@ public class MainGame extends GameState{
 	private boolean pause;
 	private int pauseCountdown;
 	
-	//private CollisionBox boundaries;
-	
 	private int clearedTotalStages;
 	
 	private EntityManager entityManager;
@@ -27,7 +25,6 @@ public class MainGame extends GameState{
 		entityManager = new EntityManager();
 		
 		stage = new Stage(entityManager);
-		//stage.loadRandomStage(enemies);
 		
 		clearedTotalStages = 0;
 		pause = false;
@@ -106,6 +103,9 @@ public class MainGame extends GameState{
 		processInput();
 		if(!pause) {
 			if (clearedTotalStages >= 10) {
+				setInactive();
+			}
+			if(entityManager.isGameOver()){
 				setInactive();
 			}
 			entityManager.getPlayer().move();

@@ -9,11 +9,14 @@ import java.awt.*;
 public class Player extends DynamicEntity {
 
 	private Image LEFT_PLAYER;
+	private Image INVULNERABLE_PLAYER;
 	
 	private String nextPlayerInstruction = "stop";
 	private int shootCoolDown; //valore fisso che indica ogni quanti frame il giocatore può sparare una freccia
 	private int shootCoolDownValue; //valore che incrementa
 	private boolean hasShot;
+	private boolean vulnerability;
+	private int invulnerabilityCountdown;
 
 	public Player(EntityManager entityManager) {
 		this.entityManager = entityManager;
@@ -21,12 +24,13 @@ public class Player extends DynamicEntity {
 		setY(256);
 		init();
 		setHealth(3);
+		vulnerability = true;
 	}
-	
 	@Override
 	public void init() {
 		//CARICAMENTO SPRITE
 		LEFT_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_front.png");
+		INVULNERABLE_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_invulnerable.png");
 		setActiveSprite(LEFT_PLAYER);
 
 		setX(512);
@@ -36,7 +40,7 @@ public class Player extends DynamicEntity {
 		setCBwidthScalar(0.8);
 		setCBheightScalar(0.8);
 		initCollisionBox();
-		
+
 		translation = new Vector2D(10);
 		shootCoolDown = 15;
 		shootCoolDownValue = 0;
@@ -44,8 +48,22 @@ public class Player extends DynamicEntity {
 		setCanPassThroughWalls(false);
 	}
 
+	public void setInvulnerable(){
+		vulnerability = false;
+		setActiveSprite(INVULNERABLE_PLAYER);
+		invulnerabilityCountdown = 25;
+	}
+	public boolean isVulnerable(){
+		return vulnerability;
+	}
+
 	public void updateCoolDown(){
 		shootCoolDownValue += 1;
+		invulnerabilityCountdown --;
+		if(invulnerabilityCountdown <= 0){
+			setActiveSprite(LEFT_PLAYER);
+			vulnerability = true;
+		}
 	}
 	
 	public void setNextPlayerInstruction(String nextPlayerInstruction) {
