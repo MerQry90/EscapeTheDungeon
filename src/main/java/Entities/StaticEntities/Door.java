@@ -15,8 +15,6 @@ public class Door extends GenericEntity {
 		setY(y);
 		setCBwidthScalar(CBwidthScalar);
 		setCBheightScalar(CBheightScalar);
-		
-		setInactive();
 		init();
 	}
 	
@@ -28,5 +26,7 @@ public class Door extends GenericEntity {
 		
 		setWidth(64);
 		setHeight(64);
+		
+		initCollisionBox();
 	}
 }

@@ -12,7 +12,6 @@ public class EntityManager {
 
 	
 	private Player player;
-	private Door door;
 	private List<Enemy> enemies;
 	private List<Arrow> friendlyArrows;
 	private List<Projectile> hostileProjectiles;
@@ -102,6 +101,7 @@ public class EntityManager {
 				return false;
 			}
 		}
+		room.openDoors();
 		return true;
 	}
 	
@@ -114,9 +114,7 @@ public class EntityManager {
 	 */
 	
 	public void renderEntities(Graphics g){
-		/*if(door.checkIfActive()){
-			door.paint(g);
-		}*/
+		room.paintDoors(g);
 		player.paint(g);
 		for (Projectile arrow: friendlyArrows){
 			arrow.paint(g);

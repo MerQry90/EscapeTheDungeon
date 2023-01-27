@@ -102,11 +102,6 @@ public class MainGame extends GameState{
 		entityManager.updateArrows();
 		entityManager.updateEnemies();
 		entityManager.checkDynamicCollisions();
-		/*if(isGameOver()){
-			setInactive();
-		}
-		else if(checkStageCompletion()){
-			door.setActive();
-		}*/
+		entityManager.checkStageCompletion();
 	}
 }
