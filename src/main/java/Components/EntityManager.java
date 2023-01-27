@@ -88,6 +88,12 @@ public class EntityManager {
 			enemy.updateBehaviour();
 		}
 	}
+
+	public void killAll(){
+		for (Enemy enemy: enemies){
+			enemy.setInactive();
+		}
+	}
 	
 	public boolean isGameOver(){
 		if(!player.checkIfActive()){
