@@ -20,6 +20,7 @@ public class Player extends DynamicEntity {
 		setX(512);
 		setY(256);
 		init();
+		setHealth(3);
 	}
 	
 	@Override

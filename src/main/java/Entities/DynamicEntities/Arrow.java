@@ -9,6 +9,7 @@ import java.awt.*;
 public class Arrow extends Projectile {
 
 	private Image RIGHT_ARROW;
+	private int arrowCountdown;
 	
 	//la freccia deve essere visibile finché non collide con qualcosa
 	private final int arrowSpeed = 20;
@@ -34,11 +35,13 @@ public class Arrow extends Projectile {
 		setCBwidthScalar(0.9);
 		setCBheightScalar(0.5);
 		initCollisionBox();
+		arrowCountdown = 70;
 
 		translation = new Vector2D(arrowSpeed);
 	}
 
 	public void move() {
+		arrowCountdown--;
 		switch (arrowOrientation){
 			case "up" ->{
 				translation.setAngulationToObjective(0, -1);
@@ -53,7 +56,7 @@ public class Arrow extends Projectile {
 				translation.setAngulationToObjective(-1, 0);
 			}
 		}
-		if(moveEntity(translation.getXTranslation(), translation.getYTranslation())) {
+		if(moveEntity(translation.getXTranslation(), translation.getYTranslation()) || arrowCountdown <= 0) {
 			setInactive();
 		}
 	}

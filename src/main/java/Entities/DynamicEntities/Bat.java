@@ -41,6 +41,7 @@ public class Bat extends Enemy{
 		wait = 40;
 		countdown = 0;
 		movingCountdown = 20;
+		changeBehaviourTo("stop-1");
 	}
 
 	@Override

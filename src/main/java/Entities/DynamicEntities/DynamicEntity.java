@@ -6,7 +6,8 @@ import Entities.GenericEntity;
 import static java.lang.Math.*;
 
 public abstract class DynamicEntity extends GenericEntity {
-	
+
+	private int health;
 	protected Vector2D translation;
 	private boolean canFly;
 	private boolean canPassThroughWalls;
@@ -16,6 +17,18 @@ public abstract class DynamicEntity extends GenericEntity {
 	}
 	public void setSpeed(int speed) {
 		translation.setModule(speed);
+	}
+	public int getHealth(){
+		return health;
+	}
+	public void setHealth(int health){
+		this.health = health;
+	}
+	public void lowerHealth(){
+		health -= 1;
+		if(health <= 0){
+			setInactive();
+		}
 	}
 	
 	public int getDeltaXToObjective(int oX){

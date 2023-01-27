@@ -27,7 +27,7 @@ public class EntityManager {
 		room = new Room(true, true, true, true);
 		
 		//TMP
-		enemies.add(new Zombie(100, 100, this));
+		enemies.add(new Bat(100, 100, this));
 	}
 	
 	public void setNextPlayerInstruction(String instruction){
