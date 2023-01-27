@@ -107,4 +107,17 @@ public class Room {
 			westernDoor.paint(g);
 		}
 	}
+	
+	public boolean hasNorthernDoor() {
+		return hasNorthernDoor;
+	}
+	public boolean hasEasternDoor() {
+		return hasEasternDoor;
+	}
+	public boolean hasSouthernDoor() {
+		return hasSouthernDoor;
+	}
+	public boolean hasWesternDoor() {
+		return hasWesternDoor;
+	}
 }

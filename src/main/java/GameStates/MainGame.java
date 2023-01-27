@@ -2,6 +2,7 @@ package GameStates;
 
 import Application.KeyHandler;
 import Components.EntityManager;
+import Components.RoomManager;
 import Components.Stage;
 
 import java.awt.*;
@@ -28,6 +29,8 @@ public class MainGame extends GameState{
 		
 		clearedTotalStages = 0;
 		pause = false;
+		
+		RoomManager rm = new RoomManager();
 	}
 	
 	@Override
