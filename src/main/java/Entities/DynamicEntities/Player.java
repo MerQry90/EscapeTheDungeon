@@ -54,6 +54,7 @@ public class Player extends DynamicEntity {
 		setCanPassThroughWalls(false);
 	}
 
+	//Getter e setter metodi specifici del giocatore--------------------------------------------------------------------
 	public int getMaxHealth(){
 		return maxHealth;
 	}
@@ -70,7 +71,9 @@ public class Player extends DynamicEntity {
 	public boolean isVulnerable(){
 		return vulnerability;
 	}
+	//------------------------------------------------------------------------------------------------------------------
 
+	//Metodi per la gestione del cool down per sparare------------------------------------------------------------------
 	public void updateCoolDown(){
 		shootCoolDownValue += 1;
 		invulnerabilityCountdown --;
@@ -78,10 +81,6 @@ public class Player extends DynamicEntity {
 			setActiveSprite(LEFT_PLAYER);
 			vulnerability = true;
 		}
-	}
-	
-	public void setNextPlayerInstruction(String nextPlayerInstruction) {
-		this.nextPlayerInstruction = nextPlayerInstruction;
 	}
 	
 	public boolean canShoot() {
@@ -102,13 +101,13 @@ public class Player extends DynamicEntity {
 			return true;
 		}
 	}
+	//------------------------------------------------------------------------------------------------------------------
 
-	public void drawHeart(Graphics g){
-		for(int i = 0; i < this.getHealth(); i += 64){
-			g.drawImage(HEART_FULL, 0 + i, 0, null);
-		}
+	//Movimento del giocatore-------------------------------------------------------------------------------------------
+	public void setNextPlayerInstruction(String nextPlayerInstruction) {
+		this.nextPlayerInstruction = nextPlayerInstruction;
 	}
-	
+
 	public void move() {
 		boolean canMove = true;
 		switch (nextPlayerInstruction){

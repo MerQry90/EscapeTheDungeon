@@ -9,7 +9,6 @@ import static java.lang.Math.abs;
 
 public abstract class Enemy extends DynamicEntity{
 
-
 	private String currentBehaviour;
 
 	public void setRandomHealth(int minimumHealth, int maximumHealth){

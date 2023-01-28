@@ -18,6 +18,7 @@ public abstract class DynamicEntity extends GenericEntity {
 	public void setSpeed(int speed) {
 		translation.setModule(speed);
 	}
+
 	public int getHealth(){
 		return health;
 	}

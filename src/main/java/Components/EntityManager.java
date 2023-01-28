@@ -29,11 +29,8 @@ public class EntityManager {
 		//TMP
 		enemies.add(new Bat(100, 100, this));
 	}
-	
-	public void setNextPlayerInstruction(String instruction){
-		player.setNextPlayerInstruction(instruction);
-	}
-	
+
+	//metodi riguardanti il giocatore-----------------------------------------------------------------------------------
 	public Player getPlayer() {
 		return player;
 	}
@@ -43,7 +40,12 @@ public class EntityManager {
 	public int getPlayerY(){
 		return player.getY();
 	}
-	
+	public void setNextPlayerInstruction(String instruction){
+		player.setNextPlayerInstruction(instruction);
+	}
+	//------------------------------------------------------------------------------------------------------------------
+
+	//collisioni--------------------------------------------------------------------------------------------------------
 	public boolean checkWallsCollisions(GenericEntity entity){
 		return room.checkCollisions(entity);
 	}
@@ -66,7 +68,9 @@ public class EntityManager {
 			}
 		}
 	}
+	//------------------------------------------------------------------------------------------------------------------
 
+	//gestione frecce---------------------------------------------------------------------------------------------------
 	public void newArrow(String orientation){
 		friendlyArrows.add(new Arrow(getPlayerX() + 11, getPlayerY() + 11, orientation, this));
 	}
@@ -82,26 +86,31 @@ public class EntityManager {
 			}
 		}
 	}
-	
+	//------------------------------------------------------------------------------------------------------------------
+
+	//gestione nemici---------------------------------------------------------------------------------------------------
 	public void updateEnemies(){
 		for(Enemy enemy: enemies){
 			enemy.updateBehaviour();
 		}
 	}
 
+	//DEBUG ONLY
 	public void killAll(){
 		for (Enemy enemy: enemies){
 			enemy.setInactive();
 		}
 	}
-	
+	//------------------------------------------------------------------------------------------------------------------
+
+	//gestione stato----------------------------------------------------------------------------------------------------
 	public boolean isGameOver(){
 		if(!player.checkIfActive()){
 			return true;
 		}
 		return false;
 	}
-	
+
 	public boolean checkStageCompletion(){
 		for(Enemy enemy: enemies){
 			if(enemy.checkIfActive()){
@@ -111,14 +120,7 @@ public class EntityManager {
 		room.openDoors();
 		return true;
 	}
-	
-	/*public void loadNextStage(){
-		player.setY(512 - 64);
-		player.setX(512);
-		stage.loadRandomStage(enemies);
-		door.setInactive();
-	}/
-	 */
+	//------------------------------------------------------------------------------------------------------------------
 	
 	public void renderEntities(Graphics g){
 		room.paintDoors(g);
