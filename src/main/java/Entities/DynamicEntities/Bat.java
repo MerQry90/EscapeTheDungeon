@@ -37,7 +37,7 @@ public class Bat extends Enemy{
 		translation = new Vector2D(0);
 		setRandomSpeed(1, 30);
 		setRandomHealth(2, 1);
-		setCanPassThroughWalls(false);
+		//setCanPassThroughWalls(false);
 		wait = 40;
 		countdown = 0;
 		movingCountdown = 20;
@@ -76,8 +76,7 @@ public class Bat extends Enemy{
 			case "dashing" -> {
 				movingCountdown--;
 				setActiveSprite(LIVING_BAT_OFF);
-				setX(translation.getXTranslation() + getX());
-				setY(translation.getYTranslation() + getY());
+				moveEntity(translation.getXTranslation(), translation.getYTranslation());
 				if (movingCountdown <= 0) {
 					countdown = 0;
 					movingCountdown = 20;

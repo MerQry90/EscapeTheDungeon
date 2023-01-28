@@ -46,8 +46,7 @@ public class Zombie extends Enemy{
 				int dX = getDeltaXToObjective(entityManager.getPlayerX());
 				int dY = getDeltaYToObjective(entityManager.getPlayerY());
 				translation.setAngulationToObjective(dX, dY);
-				setX(translation.getXTranslation() + getX());
-				setY(translation.getYTranslation() + getY());
+				moveEntity(translation.getXTranslation(), translation.getYTranslation());
 			}
 			default -> {
 				changeBehaviourTo("follow-player");

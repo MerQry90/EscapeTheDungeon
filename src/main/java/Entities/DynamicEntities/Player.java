@@ -2,7 +2,6 @@ package Entities.DynamicEntities;
 
 import Components.EntityManager;
 import Components.Vector2D;
-import Entities.GenericEntity;
 
 import java.awt.*;
 
@@ -10,28 +9,35 @@ public class Player extends DynamicEntity {
 
 	private Image LEFT_PLAYER;
 	private Image INVULNERABLE_PLAYER;
-	
+	public Image HEART_FULL;
+	public Image HEART_EMPTY;
+
 	private String nextPlayerInstruction = "stop";
 	private int shootCoolDown; //valore fisso che indica ogni quanti frame il giocatore può sparare una freccia
 	private int shootCoolDownValue; //valore che incrementa
 	private boolean hasShot;
 	private boolean vulnerability;
 	private int invulnerabilityCountdown;
+	private int maxHealth;
 
 	public Player(EntityManager entityManager) {
 		this.entityManager = entityManager;
 		setX(512);
 		setY(256);
 		init();
-		setHealth(3);
-		vulnerability = true;
 	}
 	@Override
 	public void init() {
 		//CARICAMENTO SPRITE
+		HEART_FULL = setSpriteFromPath("src/resources/sprites/png/full_heart.png");
+		HEART_EMPTY = setSpriteFromPath("src/resources/sprites/png/empty_heart.png");
 		LEFT_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_front.png");
 		INVULNERABLE_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_invulnerable.png");
 		setActiveSprite(LEFT_PLAYER);
+
+		maxHealth = 3;
+		setHealth(maxHealth);
+		vulnerability = true;
 
 		setX(512);
 		setY(256);
@@ -46,6 +52,14 @@ public class Player extends DynamicEntity {
 		shootCoolDownValue = 0;
 		hasShot = false;
 		setCanPassThroughWalls(false);
+	}
+
+	public int getMaxHealth(){
+		return maxHealth;
+	}
+
+	public void setMaxHealth(int maxHealth) {
+		this.maxHealth = maxHealth;
 	}
 
 	public void setInvulnerable(){
@@ -86,6 +100,12 @@ public class Player extends DynamicEntity {
 			hasShot = true;
 			shootCoolDownValue = 0;
 			return true;
+		}
+	}
+
+	public void drawHeart(Graphics g){
+		for(int i = 0; i < this.getHealth(); i += 64){
+			g.drawImage(HEART_FULL, 0 + i, 0, null);
 		}
 	}
 	

@@ -4,6 +4,7 @@ import Application.KeyHandler;
 import Components.EntityManager;
 import Components.RoomManager;
 import Components.Stage;
+import Components.UI;
 
 import java.awt.*;
 
@@ -13,6 +14,7 @@ public class MainGame extends GameState{
 	private Stage stage;
 	private boolean pause;
 	private int pauseCountdown;
+	private UI ui;
 	
 	private int clearedTotalStages;
 	
@@ -31,12 +33,7 @@ public class MainGame extends GameState{
 		pause = false;
 		
 		RoomManager rm = new RoomManager();
-	}
-	
-	@Override
-	public void render(Graphics g) {
-		super.render(g);
-		entityManager.renderEntities(g);
+		ui = new UI();
 	}
 	
 	@Override
@@ -98,6 +95,13 @@ public class MainGame extends GameState{
 			entityManager.killAll();
 		}
 		
+	}
+
+	@Override
+	public void render(Graphics g) {
+		super.render(g);
+		entityManager.renderEntities(g);
+		ui.drawUI(g, entityManager.getPlayer());
 	}
 	
 	@Override
