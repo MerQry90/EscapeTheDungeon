@@ -10,6 +10,12 @@ import java.util.List;
 
 public class EntityManager {
 
+	/*TODO
+	   fare Door e Room in entity manager,
+	   così che RoomManager sia solo una struttura di dati
+	   e anche per rendere più semplice l'incorporazione di
+	   classi che indicano il numero di nemici e ostacoli(forse)
+	*/
 	
 	private Player player;
 	private List<Enemy> enemies;
