@@ -37,7 +37,8 @@ public class Bat extends Enemy{
 		translation = new Vector2D(0);
 		setRandomSpeed(1, 30);
 		setRandomHealth(2, 1);
-		//setCanPassThroughWalls(false);
+		setCanPassThroughWalls(false);
+		setCanFly(true);
 		wait = 40;
 		countdown = 0;
 		movingCountdown = 20;

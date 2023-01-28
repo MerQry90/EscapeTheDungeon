@@ -36,6 +36,7 @@ public class Zombie extends Enemy{
 		setRandomSpeed(5, 4);
 		setRandomHealth(3, 2);
 		setCanPassThroughWalls(false);
+		setCanFly(false);
 		changeBehaviourTo("follow-player");
 	}
 	

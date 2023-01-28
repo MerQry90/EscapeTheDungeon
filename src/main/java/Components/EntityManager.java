@@ -3,6 +3,7 @@ package Components;
 import Entities.DynamicEntities.*;
 import Entities.StaticEntities.Door;
 import Entities.GenericEntity;
+import Entities.StaticEntities.Obstacle;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -16,12 +17,13 @@ public class EntityManager {
 	   e anche per rendere più semplice l'incorporazione di
 	   classi che indicano il numero di nemici e ostacoli(forse)
 	*/
-	
+
 	private Player player;
 	private List<Enemy> enemies;
 	private List<Arrow> friendlyArrows;
 	private List<Projectile> hostileProjectiles;
-	
+	private List<Obstacle> obstacles;
+
 	private Room room;
 	
 	public EntityManager(){
@@ -29,11 +31,16 @@ public class EntityManager {
 		enemies = new ArrayList<>();
 		friendlyArrows = new ArrayList<>();
 		hostileProjectiles = new ArrayList<>();
-		
+		obstacles = new ArrayList<>();
+
 		room = new Room(true, true, true, true);
 		
 		//TMP
 		enemies.add(new Bat(100, 100, this));
+		obstacles.add(new Obstacle(64 * 4, 64 *6, 64, 64));
+		for (Obstacle obstacle: obstacles){
+			obstacle.setActiveSprite(obstacle.rock);
+		}
 	}
 
 	//metodi riguardanti il giocatore-----------------------------------------------------------------------------------
@@ -55,7 +62,16 @@ public class EntityManager {
 	public boolean checkWallsCollisions(GenericEntity entity){
 		return room.checkCollisions(entity);
 	}
-	
+
+	public boolean checkObstaclesCollisions(DynamicEntity entity){
+		for(Obstacle obstacle: obstacles){
+			if(entity.checkIfActive() && !entity.getCanFly()){
+				return obstacle.checkCollision(entity);
+			}
+		}
+		return false;
+	}
+
 	public void checkDynamicCollisions(){
 		/*if(door.checkIfActive() && player.checkCollision(door)){
 			clearedTotalStages++;
@@ -133,6 +149,9 @@ public class EntityManager {
 		player.paint(g);
 		for (Projectile arrow: friendlyArrows){
 			arrow.paint(g);
+		}
+		for (Obstacle obstacle: obstacles){
+			obstacle.paint(g);
 		}
 		for (Enemy enemy: enemies) {
 			if(enemy.checkIfActive()) {
