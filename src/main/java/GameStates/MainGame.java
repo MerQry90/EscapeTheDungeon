@@ -2,7 +2,7 @@ package GameStates;
 
 import Application.KeyHandler;
 import Components.EntityManager;
-import Components.RoomManager;
+import Components.CellManager;
 import Components.Stage;
 import Components.UI;
 
@@ -32,7 +32,7 @@ public class MainGame extends GameState{
 		clearedTotalStages = 0;
 		pause = false;
 		
-		RoomManager rm = new RoomManager();
+		CellManager rm = new CellManager();
 		ui = new UI();
 	}
 	
@@ -40,12 +40,7 @@ public class MainGame extends GameState{
 	public void processInput() {
 		if(keyH.escapePressed && pauseCountdown <= 0){
 			pauseCountdown = 10;
-			if(!pause){
-				pause = true;
-			}
-			else if(pause){
-				pause = false;
-			}
+			pause = !pause;
 		}
 		//movimento
 		if(keyH.upPressed && keyH.rightPressed){

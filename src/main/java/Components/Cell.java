@@ -2,32 +2,61 @@ package Components;
 
 public class Cell {
 	
-	private int position;
-	private Room currentRoom;
+	private int ID;
+	private int northDoorID, eastDoorID, southDoorID, westDoorID;
+	private boolean deadEnd;
 	
-	public Cell(int position){
-		this.position = position;
-	}
-	
-	public int getPosition() {
-		return position;
-	}
-	
-	public void setCurrentRoom(boolean hasNorthernDoor, boolean hasEasternDoor,
-							   boolean hasSouthernDoor, boolean hasWesternDoor) {
-		this.currentRoom = new Room(hasNorthernDoor, hasEasternDoor, hasSouthernDoor, hasWesternDoor);
+	public Cell(int ID){
+		this.ID = ID;
+		northDoorID = -1;
+		eastDoorID = -1;
+		southDoorID = -1;
+		westDoorID = -1;
+		deadEnd = false;
 	}
 	
-	public boolean hasNorthernDoor() {
-		return currentRoom.hasNorthernDoor();
+	public int getID() {
+		return ID;
 	}
-	public boolean hasEasternDoor() {
-		return currentRoom.hasEasternDoor();
+	public void setID(int ID) {
+		this.ID = ID;
 	}
-	public boolean hasSouthernDoor() {
-		return currentRoom.hasSouthernDoor();
+	public int getNorthDoorID() {
+		return northDoorID;
 	}
-	public boolean hasWesternDoor() {
-		return currentRoom.hasWesternDoor();
+	public void setNorthDoorID(int northDoorID) {
+		this.northDoorID = northDoorID;
 	}
+	public int getEastDoorID() {
+		return eastDoorID;
+	}
+	public void setEastDoorID(int eastDoorID) {
+		this.eastDoorID = eastDoorID;
+	}
+	public int getSouthDoorID() {
+		return southDoorID;
+	}
+	public void setSouthDoorID(int southDoorID) {
+		this.southDoorID = southDoorID;
+	}
+	public int getWestDoorID() {
+		return westDoorID;
+	}
+	public void setWestDoorID(int westDoorID) {
+		this.westDoorID = westDoorID;
+	}
+	public boolean isDeadEnd() {
+		return deadEnd;
+	}
+	public void setAsDeadEnd() {
+		this.deadEnd = true;
+	}
+	
+	@Override
+	public String toString(){
+		return "#"+getID()+" N:"+getNorthDoorID()+
+				" E:"+getEastDoorID()+" S:"+getSouthDoorID()+
+				" W:"+getWestDoorID()+" deadEnd: "+isDeadEnd();
+	}
+	
 }
