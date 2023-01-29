@@ -36,15 +36,20 @@ public class Room {
 	
 	private boolean isCleared;
 	
-	public Room(boolean hasNorthernDoor, boolean hasEasternDoor, boolean hasSouthernDoor, boolean hasWesternDoor) {
-		this.hasNorthernDoor = hasNorthernDoor;
-		this.hasEasternDoor = hasEasternDoor;
-		this.hasSouthernDoor = hasSouthernDoor;
-		this.hasWesternDoor = hasWesternDoor;
-		init();
-	}
-	
-	public void init(){
+	public Room(int northLeadsTo, int eastLeadsTo, int southLeadsTo, int westLeadsTo) {
+		if(northLeadsTo > 0){
+			this.hasNorthernDoor = true;
+		}
+		if(eastLeadsTo > 0){
+			this.hasEasternDoor = true;
+		}
+		if(southLeadsTo > 0){
+			this.hasSouthernDoor = true;
+		}
+		if(westLeadsTo > 0){
+			this.hasWesternDoor = true;
+		}
+
 		northernLeftWall = new Obstacle(64, 0, 64 * 7, 64);
 		northernCenterWall = new Obstacle(64 * 8, 0, 64, 64);
 		northernRightWall = new Obstacle(64 * 9, 0, 64 * 7, 64);
@@ -59,22 +64,26 @@ public class Room {
 		westernUpperWall = new Obstacle(0, 64, 64, 64 * 3);
 		
 		if(hasNorthernDoor){
-			northernDoor = new Door(northernCenterWall.getX(), northernCenterWall.getY(), 1.0, 0.1);
+			northernDoor = new Door(northernCenterWall.getX(), northernCenterWall.getY(),
+					1.0, 0.1, northLeadsTo);
 		}
 		if(hasEasternDoor){
-			easternDoor = new Door(easternCenterWall.getX(), easternCenterWall.getY(), 0.1, 1.0);
+			easternDoor = new Door(easternCenterWall.getX(), easternCenterWall.getY(),
+					0.1, 1.0, eastLeadsTo);
 		}
 		if(hasSouthernDoor){
-			southernDoor = new Door(southernCenterWall.getX(), southernCenterWall.getY(), 1.0, 0.1);
+			southernDoor = new Door(southernCenterWall.getX(), southernCenterWall.getY(),
+					1.0, 0.1, southLeadsTo);
 		}
 		if(hasWesternDoor){
-			westernDoor = new Door(westernCenterWall.getX(), westernCenterWall.getY(), 0.1, 1.0);
+			westernDoor = new Door(westernCenterWall.getX(), westernCenterWall.getY(),
+					0.1, 1.0, westLeadsTo);
 		}
 		
 		isCleared = false;
 	}
 	
-	public boolean checkCollisions(GenericEntity entity){
+	public boolean checkWallsCollisions(GenericEntity entity){
 		return entity.checkCollision(northernLeftWall) ||
 				(entity.checkCollision(northernCenterWall) && !(hasNorthernDoor && isCleared)) ||
 				entity.checkCollision(northernRightWall) ||
@@ -119,5 +128,18 @@ public class Room {
 	}
 	public boolean hasWesternDoor() {
 		return hasWesternDoor;
+	}
+	
+	public Door getNorthernDoor() {
+		return northernDoor;
+	}
+	public Door getEasternDoor() {
+		return easternDoor;
+	}
+	public Door getSouthernDoor() {
+		return southernDoor;
+	}
+	public Door getWesternDoor() {
+		return westernDoor;
 	}
 }

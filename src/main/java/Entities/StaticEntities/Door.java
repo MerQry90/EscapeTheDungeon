@@ -9,12 +9,14 @@ public class Door extends GenericEntity {
 	
 	private Image OPEN_DOOR;
 	//private Image CLOSED_DOOR;
+	private int leadsTo;
 	
-	public Door(int x, int y, double CBwidthScalar, double CBheightScalar) {
+	public Door(int x, int y, double CBwidthScalar, double CBheightScalar, int leadsTo) {
 		setX(x);
 		setY(y);
 		setCBwidthScalar(CBwidthScalar);
 		setCBheightScalar(CBheightScalar);
+		this.leadsTo = leadsTo;
 		init();
 	}
 	
@@ -28,5 +30,9 @@ public class Door extends GenericEntity {
 		setHeight(64);
 		
 		initCollisionBox();
+	}
+	
+	public int leadsTo(){
+		return leadsTo;
 	}
 }

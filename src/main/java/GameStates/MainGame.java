@@ -14,11 +14,13 @@ public class MainGame extends GameState{
 	private Stage stage;
 	private boolean pause;
 	private int pauseCountdown;
-	private UI ui;
+	private int oldRoomID;
 	
 	private int clearedTotalStages;
 	
 	private EntityManager entityManager;
+	private CellManager cellManager;
+	private UI ui;
 	
 	public MainGame(KeyHandler keyH){
 		this.keyH = keyH;
@@ -32,8 +34,35 @@ public class MainGame extends GameState{
 		clearedTotalStages = 0;
 		pause = false;
 		
-		CellManager rm = new CellManager();
+		cellManager = new CellManager();
+		oldRoomID = -1;
+		translateCellToNewRoom(cellManager.STARTING_CELL);
+		
 		ui = new UI();
+	}
+	
+	public void translateCellToNewRoom(int newID){
+		System.out.println("room #"+newID);
+		if(oldRoomID == newID + 10){
+			entityManager.setDefaultPlayerPositionDown();
+		}
+		else if(oldRoomID == newID - 1){
+			entityManager.setDefaultPlayerPositionLeft();
+		}
+		else if(oldRoomID == newID - 10){
+			entityManager.setDefaultPlayerPositionUp();
+		}
+		else if(oldRoomID == newID + 1){
+			entityManager.setDefaultPlayerPositionRight();
+		}
+		else {
+			entityManager.setDefaultPlayerPositionCenter();
+		}
+		oldRoomID = newID;
+		entityManager.setNewRoom(cellManager.getCellByID(newID).getNorthDoorID(),
+				cellManager.getCellByID(newID).getEastDoorID(),
+				cellManager.getCellByID(newID).getSouthDoorID(),
+				cellManager.getCellByID(newID).getWestDoorID());
 	}
 	
 	@Override
@@ -115,7 +144,11 @@ public class MainGame extends GameState{
 			entityManager.updateArrows();
 			entityManager.updateEnemies();
 			entityManager.checkDynamicCollisions();
-			entityManager.checkStageCompletion();
+			entityManager.checkRoomCompletion();
+			int collisionID = entityManager.checkPlayerAndDoorsCollisions();
+			if(collisionID > 0){
+				translateCellToNewRoom(collisionID);
+			}
 		}
 	}
 }

@@ -9,22 +9,22 @@ import java.util.Random;
 
 public class CellManager {
 	
+	public final int STARTING_CELL = 35;
 	private int placeableRooms;
 	private List<Cell> cells;
 	
 	public CellManager(){
 		//init stanza iniziale così da poter cominciare a reiterare
 		cells = new ArrayList<>();
-		int startingCell = 35;
 		do{
 			cells.clear();
 			placeableRooms = 20;
-			cells.add(new Cell(startingCell));
-			makeMap(getCellByID(startingCell));
+			cells.add(new Cell(STARTING_CELL));
+			makeMap(getCellByID(STARTING_CELL));
 			makeDoors();
 		}
 		while(getNumberOfDeadEnds() < 4 || placeableRooms > 1);
-		printCells();
+		//printCells();
 	}
 	
 	public Cell getCellByID(int ID){

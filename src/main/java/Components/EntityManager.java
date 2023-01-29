@@ -1,7 +1,6 @@
 package Components;
 
 import Entities.DynamicEntities.*;
-import Entities.StaticEntities.Door;
 import Entities.GenericEntity;
 import Entities.StaticEntities.Obstacle;
 
@@ -32,9 +31,6 @@ public class EntityManager {
 		friendlyArrows = new ArrayList<>();
 		hostileProjectiles = new ArrayList<>();
 		obstacles = new ArrayList<>();
-
-		room = new Room(true, true, true, true);
-		
 		//TMP
 		enemies.add(new Bat(100, 100, this));
 		obstacles.add(new Obstacle(64 * 4, 64 *6, 64, 64));
@@ -56,11 +52,31 @@ public class EntityManager {
 	public void setNextPlayerInstruction(String instruction){
 		player.setNextPlayerInstruction(instruction);
 	}
+	public void setDefaultPlayerPositionUp(){
+		player.setX(64 * 8);
+		player.setY(64);
+	}
+	public void setDefaultPlayerPositionRight(){
+		player.setX(64 * 15);
+		player.setY(64 * 4);
+	}
+	public void setDefaultPlayerPositionDown(){
+		player.setX(64 * 8);
+		player.setY(64 * 7);
+	}
+	public void setDefaultPlayerPositionLeft(){
+		player.setX(64);
+		player.setY(64 * 4);
+	}
+	public void setDefaultPlayerPositionCenter(){
+		player.setX(64 * 8);
+		player.setY(64 * 4);
+	}
 	//------------------------------------------------------------------------------------------------------------------
 
 	//collisioni--------------------------------------------------------------------------------------------------------
 	public boolean checkWallsCollisions(GenericEntity entity){
-		return room.checkCollisions(entity);
+		return room.checkWallsCollisions(entity);
 	}
 
 	public boolean checkObstaclesCollisions(DynamicEntity entity){
@@ -70,6 +86,23 @@ public class EntityManager {
 			}
 		}
 		return false;
+	}
+	
+	public int checkPlayerAndDoorsCollisions(){
+		int collisionID = -1;
+		if(room.hasNorthernDoor() && room.getNorthernDoor().checkCollision(player)){
+			collisionID = room.getNorthernDoor().leadsTo();
+		}
+		else if(room.hasEasternDoor() && room.getEasternDoor().checkCollision(player)){
+			collisionID = room.getEasternDoor().leadsTo();
+		}
+		else if(room.hasSouthernDoor() && room.getSouthernDoor().checkCollision(player)){
+			collisionID = room.getSouthernDoor().leadsTo();
+		}
+		else if(room.hasWesternDoor() && room.getWesternDoor().checkCollision(player)){
+			collisionID = room.getWesternDoor().leadsTo();
+		}
+		return collisionID;
 	}
 
 	public void checkDynamicCollisions(){
@@ -132,15 +165,21 @@ public class EntityManager {
 		}
 		return false;
 	}
-
-	public boolean checkStageCompletion(){
+	
+	public void setNewRoom(int nID, int eID, int sID, int wID){
+		room = new Room(nID, eID, sID, wID);
+	}
+	
+	public void checkRoomCompletion(){
+		boolean completed = true;
 		for(Enemy enemy: enemies){
 			if(enemy.checkIfActive()){
-				return false;
+				completed = false;
 			}
 		}
-		room.openDoors();
-		return true;
+		if(completed){
+			room.openDoors();
+		}
 	}
 	//------------------------------------------------------------------------------------------------------------------
 	
