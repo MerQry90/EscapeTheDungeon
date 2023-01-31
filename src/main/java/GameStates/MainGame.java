@@ -14,7 +14,7 @@ public class MainGame extends GameState{
 	private Stage stage;
 	private boolean pause;
 	private int pauseCountdown;
-	private int oldRoomID;
+	//private int oldRoomID;
 	
 	private int clearedTotalStages;
 	
@@ -35,31 +35,38 @@ public class MainGame extends GameState{
 		pause = false;
 		
 		cellManager = new CellManager();
-		oldRoomID = -1;
-		translateCellToNewRoom(cellManager.STARTING_CELL);
-		
+		initStartingRoom();
 		ui = new UI();
+	}
+	
+	public void initStartingRoom(){
+		entityManager.setNewRoom(cellManager.STARTING_CELL,
+				cellManager.getCellByID(cellManager.STARTING_CELL).getNorthDoorID(),
+				cellManager.getCellByID(cellManager.STARTING_CELL).getEastDoorID(),
+				cellManager.getCellByID(cellManager.STARTING_CELL).getSouthDoorID(),
+				cellManager.getCellByID(cellManager.STARTING_CELL).getWestDoorID());
+		entityManager.setDefaultPlayerPositionCenter();
 	}
 	
 	public void translateCellToNewRoom(int newID){
 		System.out.println("room #"+newID);
-		if(oldRoomID == newID + 10){
+		if(entityManager.getRoomID() == newID + 10){
 			entityManager.setDefaultPlayerPositionDown();
 		}
-		else if(oldRoomID == newID - 1){
+		else if(entityManager.getRoomID() == newID - 1){
 			entityManager.setDefaultPlayerPositionLeft();
 		}
-		else if(oldRoomID == newID - 10){
+		else if(entityManager.getRoomID() == newID - 10){
 			entityManager.setDefaultPlayerPositionUp();
 		}
-		else if(oldRoomID == newID + 1){
+		else if(entityManager.getRoomID() == newID + 1){
 			entityManager.setDefaultPlayerPositionRight();
 		}
 		else {
 			entityManager.setDefaultPlayerPositionCenter();
 		}
-		oldRoomID = newID;
-		entityManager.setNewRoom(cellManager.getCellByID(newID).getNorthDoorID(),
+		entityManager.setNewRoom(newID,
+				cellManager.getCellByID(newID).getNorthDoorID(),
 				cellManager.getCellByID(newID).getEastDoorID(),
 				cellManager.getCellByID(newID).getSouthDoorID(),
 				cellManager.getCellByID(newID).getWestDoorID());

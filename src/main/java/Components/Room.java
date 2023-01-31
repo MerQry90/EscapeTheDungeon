@@ -36,7 +36,10 @@ public class Room {
 	
 	private boolean isCleared;
 	
-	public Room(int northLeadsTo, int eastLeadsTo, int southLeadsTo, int westLeadsTo) {
+	public int roomID;
+	
+	public Room(int roomID, int northLeadsTo, int eastLeadsTo, int southLeadsTo, int westLeadsTo) {
+		this.roomID = roomID;
 		if(northLeadsTo > 0){
 			this.hasNorthernDoor = true;
 		}

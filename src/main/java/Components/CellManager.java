@@ -12,10 +12,12 @@ public class CellManager {
 	public final int STARTING_CELL = 35;
 	private int placeableRooms;
 	private List<Cell> cells;
+	private List<Cell> deadEnds;
 	
 	public CellManager(){
 		//init stanza iniziale così da poter cominciare a reiterare
 		cells = new ArrayList<>();
+		deadEnds = new ArrayList<>();
 		do{
 			cells.clear();
 			placeableRooms = 20;
@@ -24,7 +26,7 @@ public class CellManager {
 			makeDoors();
 		}
 		while(getNumberOfDeadEnds() < 4 || placeableRooms > 1);
-		//printCells();
+		printCells();
 	}
 	
 	public Cell getCellByID(int ID){
@@ -158,6 +160,7 @@ public class CellManager {
 			}
 			if(nOfDoors <= 1){
 				cell.setAsDeadEnd();
+				deadEnds.add(cell);
 			}
 		}
 	}
