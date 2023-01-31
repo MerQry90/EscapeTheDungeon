@@ -1,10 +1,7 @@
 package GameStates;
 
 import Application.KeyHandler;
-import Components.EntityManager;
-import Components.CellManager;
-import Components.Stage;
-import Components.UI;
+import Components.*;
 
 import java.awt.*;
 
@@ -14,7 +11,6 @@ public class MainGame extends GameState{
 	private Stage stage;
 	private boolean pause;
 	private int pauseCountdown;
-	//private int oldRoomID;
 	
 	private int clearedTotalStages;
 	
@@ -35,6 +31,7 @@ public class MainGame extends GameState{
 		pause = false;
 		
 		cellManager = new CellManager();
+		setEntityGroups();
 		initStartingRoom();
 		ui = new UI();
 	}
@@ -46,6 +43,13 @@ public class MainGame extends GameState{
 				cellManager.getCellByID(cellManager.STARTING_CELL).getSouthDoorID(),
 				cellManager.getCellByID(cellManager.STARTING_CELL).getWestDoorID());
 		entityManager.setDefaultPlayerPositionCenter();
+	}
+
+	public void setEntityGroups(){
+		for(Cell cell: cellManager.getCells()){
+			entityManager.entityGenerator.addGroup(cell.getID());
+		}
+		entityManager.entityGenerator.generateEntities();
 	}
 	
 	public void translateCellToNewRoom(int newID){

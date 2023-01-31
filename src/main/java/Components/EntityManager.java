@@ -15,6 +15,7 @@ public class EntityManager {
 	private List<Arrow> friendlyArrows;
 	private List<Projectile> hostileProjectiles;
 	private List<Obstacle> obstacles;
+	public EntityGenerator entityGenerator;
 
 	private Room room;
 	
@@ -24,12 +25,14 @@ public class EntityManager {
 		friendlyArrows = new ArrayList<>();
 		hostileProjectiles = new ArrayList<>();
 		obstacles = new ArrayList<>();
+		entityGenerator = new EntityGenerator(this);
+
 		//TMP
-		enemies.add(new Bat(100, 100, this));
+		/*enemies.add(new Zombie(100, 100, this));
 		obstacles.add(new Obstacle(64 * 4, 64 *6, 64, 64));
 		for (Obstacle obstacle: obstacles){
 			obstacle.setActiveSprite(obstacle.rock);
-		}
+		}*/
 	}
 
 	//metodi riguardanti il giocatore-----------------------------------------------------------------------------------
@@ -73,12 +76,13 @@ public class EntityManager {
 	}
 
 	public boolean checkObstaclesCollisions(DynamicEntity entity){
+		boolean hasCollided = false;
 		for(Obstacle obstacle: obstacles){
 			if(entity.checkIfActive() && !entity.getCanFly()){
-				return obstacle.checkCollision(entity);
+				hasCollided = obstacle.checkCollision(entity);
 			}
 		}
-		return false;
+		return hasCollided;
 	}
 	
 	public int checkPlayerAndDoorsCollisions(){
@@ -161,6 +165,10 @@ public class EntityManager {
 	
 	public void setNewRoom(int ID, int nID, int eID, int sID, int wID){
 		room = new Room(ID, nID, eID, sID, wID);
+		if (!entityGenerator.getGroupByID(getRoomID()).isDefeated()){
+			enemies = entityGenerator.getGroupByID(getRoomID()).getEnemies();
+		}
+		obstacles = entityGenerator.getGroupByID(getRoomID()).getObstacles();
 	}
 	
 	public int getRoomID(){
@@ -175,6 +183,7 @@ public class EntityManager {
 			}
 		}
 		if(completed){
+			entityGenerator.getGroupByID(getRoomID()).setAsDefeated();
 			room.openDoors();
 		}
 	}

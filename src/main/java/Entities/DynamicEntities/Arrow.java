@@ -15,7 +15,6 @@ public class Arrow extends Projectile {
 	private final int arrowSpeed = 20;
 	private String arrowOrientation;
 
-	//TODO rimuovere asse e direzione dai proiettili
 	public Arrow(int x, int y, String arrowOrientation, EntityManager entityManager) {
 		this.entityManager = entityManager;
 		this.arrowOrientation = arrowOrientation;

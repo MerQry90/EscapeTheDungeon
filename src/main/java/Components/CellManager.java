@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-//Griglia delle stanze è 8 col x 8 rig
+//Griglia delle stanze è 8 col x 8 righe
 // 1a cifra la colonna, 2a cifra la riga
 
 public class CellManager {
@@ -28,7 +28,11 @@ public class CellManager {
 		while(getNumberOfDeadEnds() < 4 || placeableRooms > 1);
 		printCells();
 	}
-	
+
+	public List<Cell> getCells() {
+		return cells;
+	}
+
 	public Cell getCellByID(int ID){
 		for(Cell cell: cells){
 			if(cell.getID() == ID){
@@ -75,6 +79,7 @@ public class CellManager {
 	}
 	
 	public int checkNumberOfNeighbours(int ID){
+		//permette di creare un piano composto da più "corridoi", evitando di creare un unico blocco di stanze
 		int northID = ID - 10;
 		int southID = ID + 10;
 		int eastID = ID + 1;
