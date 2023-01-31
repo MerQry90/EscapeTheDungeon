@@ -78,8 +78,8 @@ public class EntityManager {
 	public boolean checkObstaclesCollisions(DynamicEntity entity){
 		boolean hasCollided = false;
 		for(Obstacle obstacle: obstacles){
-			if(entity.checkIfActive() && !entity.getCanFly()){
-				hasCollided = obstacle.checkCollision(entity);
+			if(entity.checkIfActive() && !entity.getCanFly() && obstacle.checkCollision(entity)){
+				hasCollided = true;
 			}
 		}
 		return hasCollided;
