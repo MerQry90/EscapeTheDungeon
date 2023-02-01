@@ -26,7 +26,7 @@ public class CellManager {
 			makeDoors();
 		}
 		while(getNumberOfDeadEnds() < 4 || placeableRooms > 1);
-		printCells();
+		//printCells();
 	}
 
 	public List<Cell> getCells() {

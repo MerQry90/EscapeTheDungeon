@@ -36,10 +36,12 @@ public class Room {
 	
 	private boolean isCleared;
 	
+	private boolean deadEnd;
 	public int roomID;
 	
 	public Room(int roomID, int northLeadsTo, int eastLeadsTo, int southLeadsTo, int westLeadsTo) {
 		this.roomID = roomID;
+		deadEnd = false;
 		if(northLeadsTo > 0){
 			this.hasNorthernDoor = true;
 		}
@@ -103,6 +105,13 @@ public class Room {
 	
 	public void openDoors(){
 		isCleared = true;
+	}
+	
+	public void setAsDeadEnd(){
+		this.deadEnd = true;
+	}
+	public boolean isDeadEnd() {
+		return deadEnd;
 	}
 	
 	public void paintDoors(Graphics g){

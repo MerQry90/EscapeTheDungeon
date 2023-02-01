@@ -47,7 +47,7 @@ public class MainGame extends GameState{
 
 	public void setEntityGroups(){
 		for(Cell cell: cellManager.getCells()){
-			entityManager.entityGenerator.addGroup(cell.getID());
+			entityManager.entityGenerator.addGroup(cell.getID(), cell.isDeadEnd());
 		}
 		entityManager.entityGenerator.generateEntities();
 	}
@@ -74,6 +74,10 @@ public class MainGame extends GameState{
 				cellManager.getCellByID(newID).getEastDoorID(),
 				cellManager.getCellByID(newID).getSouthDoorID(),
 				cellManager.getCellByID(newID).getWestDoorID());
+		if(cellManager.getCellByID(newID).isDeadEnd()){
+			entityManager.setRoomAsDeadEnd();
+			System.out.println("DEADEND FOUND");
+		}
 	}
 	
 	@Override

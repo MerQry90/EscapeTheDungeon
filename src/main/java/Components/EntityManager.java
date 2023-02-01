@@ -175,6 +175,12 @@ public class EntityManager {
 	public int getRoomID(){
 		return room.roomID;
 	}
+	public void setRoomAsDeadEnd(){
+		room.setAsDeadEnd();
+	}
+	public boolean isRoomDeadEnd() {
+		return room.isDeadEnd();
+	}
 	
 	public void checkRoomCompletion(){
 		boolean completed = true;
