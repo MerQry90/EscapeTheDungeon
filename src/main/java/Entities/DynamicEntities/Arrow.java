@@ -31,8 +31,14 @@ public class Arrow extends Projectile {
 		
 		setWidth(40);
 		setHeight(40);
-		setCBwidthScalar(0.9);
-		setCBheightScalar(0.5);
+		if(arrowOrientation.compareTo("right") == 0 || arrowOrientation.compareTo("left") == 0) {
+			setCBwidthScalar(0.9);
+			setCBheightScalar(0.5);
+		}
+		if(arrowOrientation.compareTo("up") == 0 || arrowOrientation.compareTo("down") == 0) {
+			setCBwidthScalar(0.5);
+			setCBheightScalar(0.9);
+		}
 		initCollisionBox();
 		arrowCountdown = 35;
 		setCanFly(true);

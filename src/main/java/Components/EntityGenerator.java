@@ -3,7 +3,6 @@ package Components;
 import Entities.DynamicEntities.Bat;
 import Entities.DynamicEntities.Enemy;
 import Entities.DynamicEntities.Zombie;
-import Entities.StaticEntities.Obstacle;
 import Entities.StaticEntities.Rock;
 
 import java.util.ArrayList;

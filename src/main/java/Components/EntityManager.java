@@ -2,11 +2,13 @@ package Components;
 
 import Entities.DynamicEntities.*;
 import Entities.GenericEntity;
+import Entities.StaticEntities.Item;
 import Entities.StaticEntities.Obstacle;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class EntityManager {
 
@@ -15,6 +17,8 @@ public class EntityManager {
 	private List<Arrow> friendlyArrows;
 	private List<Projectile> hostileProjectiles;
 	private List<Obstacle> obstacles;
+	private Item heart;
+
 	public EntityGenerator entityGenerator;
 
 	private Room room;
@@ -26,6 +30,7 @@ public class EntityManager {
 		hostileProjectiles = new ArrayList<>();
 		obstacles = new ArrayList<>();
 		entityGenerator = new EntityGenerator(this);
+		heart = null;
 	}
 
 	//metodi riguardanti il giocatore-----------------------------------------------------------------------------------
@@ -143,6 +148,13 @@ public class EntityManager {
 		}
 	}
 	//------------------------------------------------------------------------------------------------------------------
+
+	public void dropItems(){
+		Random random = new Random();
+		if(random.nextBoolean()){
+
+		}
+	}
 
 	//gestione stato----------------------------------------------------------------------------------------------------
 	public boolean isGameOver(){
