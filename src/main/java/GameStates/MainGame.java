@@ -32,51 +32,55 @@ public class MainGame extends GameState{
 		
 		cellManager = new CellManager();
 		setEntityGroups();
-		initStartingRoom();
+		translateCellToNewRoom(-1);
 		ui = new UI();
-	}
-	
-	public void initStartingRoom(){
-		entityManager.setNewRoom(cellManager.STARTING_CELL,
-				cellManager.getCellByID(cellManager.STARTING_CELL).getNorthDoorID(),
-				cellManager.getCellByID(cellManager.STARTING_CELL).getEastDoorID(),
-				cellManager.getCellByID(cellManager.STARTING_CELL).getSouthDoorID(),
-				cellManager.getCellByID(cellManager.STARTING_CELL).getWestDoorID());
-		entityManager.setDefaultPlayerPositionCenter();
 	}
 
 	public void setEntityGroups(){
-		for(Cell cell: cellManager.getCells()){
+		for(Cell cell: cellManager.getCellsList()){
 			entityManager.entityGenerator.addGroup(cell.getID(), cell.isDeadEnd());
 		}
 		entityManager.entityGenerator.generateEntities();
 	}
 	
 	public void translateCellToNewRoom(int newID){
-		System.out.println("room #"+newID);
-		if(entityManager.getRoomID() == newID + 10){
-			entityManager.setDefaultPlayerPositionDown();
-		}
-		else if(entityManager.getRoomID() == newID - 1){
-			entityManager.setDefaultPlayerPositionLeft();
-		}
-		else if(entityManager.getRoomID() == newID - 10){
-			entityManager.setDefaultPlayerPositionUp();
-		}
-		else if(entityManager.getRoomID() == newID + 1){
-			entityManager.setDefaultPlayerPositionRight();
+		
+		if(entityManager.getRoom() == null){
+			entityManager.setNewRoom(cellManager.STARTING_CELL,
+					cellManager.getCellByID(cellManager.STARTING_CELL).getNorthDoorID(),
+					cellManager.getCellByID(cellManager.STARTING_CELL).getEastDoorID(),
+					cellManager.getCellByID(cellManager.STARTING_CELL).getSouthDoorID(),
+					cellManager.getCellByID(cellManager.STARTING_CELL).getWestDoorID());
+			entityManager.setDefaultPlayerPositionCenter();
+			entityManager.setRoomAsDeadEnd();
+			newID = cellManager.STARTING_CELL;
+			entityManager.setBossRoomID(cellManager.getBossRoomID());
 		}
 		else {
-			entityManager.setDefaultPlayerPositionCenter();
+			System.out.println("room #" + newID);
+			if (entityManager.getRoomID() == newID + 10) {
+				entityManager.setDefaultPlayerPositionDown();
+			} else if (entityManager.getRoomID() == newID - 1) {
+				entityManager.setDefaultPlayerPositionLeft();
+			} else if (entityManager.getRoomID() == newID - 10) {
+				entityManager.setDefaultPlayerPositionUp();
+			} else if (entityManager.getRoomID() == newID + 1) {
+				entityManager.setDefaultPlayerPositionRight();
+			}
+			entityManager.setNewRoom(newID,
+					cellManager.getCellByID(newID).getNorthDoorID(),
+					cellManager.getCellByID(newID).getEastDoorID(),
+					cellManager.getCellByID(newID).getSouthDoorID(),
+					cellManager.getCellByID(newID).getWestDoorID());
 		}
-		entityManager.setNewRoom(newID,
-				cellManager.getCellByID(newID).getNorthDoorID(),
-				cellManager.getCellByID(newID).getEastDoorID(),
-				cellManager.getCellByID(newID).getSouthDoorID(),
-				cellManager.getCellByID(newID).getWestDoorID());
 		if(cellManager.getCellByID(newID).isDeadEnd()){
 			entityManager.setRoomAsDeadEnd();
-			System.out.println("DEADEND FOUND");
+			if(cellManager.getBossRoomID() == newID){
+				System.out.println("BOSSROOM FOUND");
+			}
+			else {
+				System.out.println("DEADEND FOUND");
+			}
 		}
 	}
 	

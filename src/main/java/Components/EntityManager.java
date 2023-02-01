@@ -171,7 +171,9 @@ public class EntityManager {
 		}
 		obstacles = entityGenerator.getGroupByID(getRoomID()).getObstacles();
 	}
-	
+	public Room getRoom(){
+		return room;
+	}
 	public int getRoomID(){
 		return room.roomID;
 	}
@@ -180,6 +182,9 @@ public class EntityManager {
 	}
 	public boolean isRoomDeadEnd() {
 		return room.isDeadEnd();
+	}
+	public void setBossRoomID(int ID){
+		entityGenerator.setBossRoomID(ID);
 	}
 	
 	public void checkRoomCompletion(){

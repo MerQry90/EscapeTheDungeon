@@ -14,6 +14,7 @@ public class EntityGenerator {
 	private String difficulty;
 	private List<Group> groups;
 	private EntityManager entityManager;
+	private int bossRoomID;
 
 	public EntityGenerator(EntityManager entityManager) {
 		this.groups = new ArrayList<>();
@@ -33,14 +34,22 @@ public class EntityGenerator {
 		}
 		return null;
 	}
+	
+	public void setBossRoomID(int ID){
+		bossRoomID = ID;
+	}
 
 	public void generateEntities(){
 		Random random = new Random();
 		for(Group group: groups) {
-			if(group.isRoomADeadEnd()){
-			
+			if(group.isRoomADeadEnd() && bossRoomID == group.getID()){
+				//STANZA DEL BOSS
+			}
+			else if(group.isRoomADeadEnd() && !(bossRoomID == group.getID())){
+				//NORMALE VICOLO
 			}
 			else {
+				//STANZA COMUNE CON I NEMICI
 				switch (difficulty) {
 					case "easy" -> {
 						switch (random.nextInt(3)) {
