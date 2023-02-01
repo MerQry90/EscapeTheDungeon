@@ -68,6 +68,7 @@ public abstract class DynamicEntity extends GenericEntity {
 				}
 				if(entityManager.checkObstaclesCollisions(this) && !canFly) {
 					setX(getX() + 1);
+					hasCollided = true;
 					break;
 				}
 				setX(getX() - 1);
@@ -82,6 +83,7 @@ public abstract class DynamicEntity extends GenericEntity {
 				}
 				if(entityManager.checkObstaclesCollisions(this) && !canFly) {
 					setX(getX() - 1);
+					hasCollided = true;
 					break;
 				}
 				setX(getX() + 1);
@@ -96,6 +98,7 @@ public abstract class DynamicEntity extends GenericEntity {
 				}
 				if(entityManager.checkObstaclesCollisions(this) && !canFly) {
 					setY(getY() + 1);
+					hasCollided = true;
 					break;
 				}
 				setY(getY() - 1);
@@ -110,6 +113,7 @@ public abstract class DynamicEntity extends GenericEntity {
 				}
 				if(entityManager.checkObstaclesCollisions(this) && !canFly) {
 					setY(getY() - 1);
+					hasCollided = true;
 					break;
 				}
 				setY(getY() + 1);

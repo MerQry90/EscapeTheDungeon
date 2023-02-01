@@ -34,7 +34,8 @@ public class Arrow extends Projectile {
 		setCBwidthScalar(0.9);
 		setCBheightScalar(0.5);
 		initCollisionBox();
-		arrowCountdown = 70;
+		arrowCountdown = 35;
+		setCanFly(true);
 
 		translation = new Vector2D(arrowSpeed);
 	}

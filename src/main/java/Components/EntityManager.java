@@ -26,13 +26,6 @@ public class EntityManager {
 		hostileProjectiles = new ArrayList<>();
 		obstacles = new ArrayList<>();
 		entityGenerator = new EntityGenerator(this);
-
-		//TMP
-		/*enemies.add(new Zombie(100, 100, this));
-		obstacles.add(new Obstacle(64 * 4, 64 *6, 64, 64));
-		for (Obstacle obstacle: obstacles){
-			obstacle.setActiveSprite(obstacle.rock);
-		}*/
 	}
 
 	//metodi riguardanti il giocatore-----------------------------------------------------------------------------------
@@ -103,10 +96,6 @@ public class EntityManager {
 	}
 
 	public void checkDynamicCollisions(){
-		/*if(door.checkIfActive() && player.checkCollision(door)){
-			clearedTotalStages++;
-			loadNextStage();
-		}*/
 		for(Enemy enemy: enemies){
 			if(enemy.checkIfActive() && enemy.checkCollision(player) && player.isVulnerable()){
 				player.lowerHealth();
@@ -191,12 +180,12 @@ public class EntityManager {
 	
 	public void renderEntities(Graphics g){
 		room.paintDoors(g);
+		for (Obstacle obstacle: obstacles){
+			obstacle.paint(g);
+		}
 		player.paint(g);
 		for (Projectile arrow: friendlyArrows){
 			arrow.paint(g);
-		}
-		for (Obstacle obstacle: obstacles){
-			obstacle.paint(g);
 		}
 		for (Enemy enemy: enemies) {
 			if(enemy.checkIfActive()) {

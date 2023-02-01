@@ -4,6 +4,7 @@ import Entities.DynamicEntities.Bat;
 import Entities.DynamicEntities.Enemy;
 import Entities.DynamicEntities.Zombie;
 import Entities.StaticEntities.Obstacle;
+import Entities.StaticEntities.Rock;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,27 +44,26 @@ public class EntityGenerator {
 						case 0 -> {
 							group.getEnemies().add(new Zombie(64, 64, entityManager));
 							group.getEnemies().add(new Zombie(64 * 15, 64, entityManager));
-							group.getObstacles().add(new Obstacle(64 * 7, 64 * 4, 64, 64));
-							group.getObstacles().add(new Obstacle(64 * 8, 64 * 5, 64, 64));
-							group.getObstacles().add(new Obstacle(64 * 10, 64 * 5, 64, 64));
-							group.getObstacles().add(new Obstacle(64 * 11, 64 * 4, 64, 64));
+							group.getObstacles().add(new Rock(64 * 7, 64 * 4));
+							group.getObstacles().add(new Rock(64 * 8, 64 * 5));
+							group.getObstacles().add(new Rock(64 * 10, 64 * 5));
+							group.getObstacles().add(new Rock(64 * 11, 64 * 4));
 						}
 						case 1 -> {
 							group.getEnemies().add(new Bat(64, 64, entityManager));
 							group.getEnemies().add(new Bat(64 * 15, 64, entityManager));
-							group.getObstacles().add(new Obstacle(64 * 7, 64 * 4, 64, 64));
-							group.getObstacles().add(new Obstacle(64 * 8, 64 * 5, 64, 64));
-							group.getObstacles().add(new Obstacle(64 * 10, 64 * 5, 64, 64));
-							group.getObstacles().add(new Obstacle(64 * 11, 64 * 4, 64, 64));
+							group.getObstacles().add(new Rock(64 * 7, 64 * 4));
+							group.getObstacles().add(new Rock(64 * 8, 64 * 5));
+							group.getObstacles().add(new Rock(64 * 10, 64 * 5));
+							group.getObstacles().add(new Rock(64 * 11, 64 * 4));
 						}
 						case 2 -> {
 							group.getEnemies().add(new Zombie(64, 64, entityManager));
 							group.getEnemies().add(new Bat(64 * 15, 64, entityManager));
-							group.getObstacles().add(new Obstacle(64 * 7, 64 * 4, 64, 64));
-							group.getObstacles().add(new Obstacle(64 * 8, 64 * 5, 64, 64));
-							group.getObstacles().add(new Obstacle(64 * 10, 64 * 5, 64, 64));
-							group.getObstacles().add(new Obstacle(64 * 11, 64 * 4, 64, 64));
-
+							group.getObstacles().add(new Rock(64 * 7, 64 * 4));
+							group.getObstacles().add(new Rock(64 * 8, 64 * 5));
+							group.getObstacles().add(new Rock(64 * 10, 64 * 5));
+							group.getObstacles().add(new Rock(64 * 11, 64 * 4));
 						}
 					}
 				}
