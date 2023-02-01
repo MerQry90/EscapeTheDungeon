@@ -20,6 +20,7 @@ public class CellManager {
 		deadEnds = new ArrayList<>();
 		do{
 			cells.clear();
+			deadEnds.clear();
 			placeableRooms = 20;
 			cells.add(new Cell(STARTING_CELL));
 			makeMap(getCellByID(STARTING_CELL));
