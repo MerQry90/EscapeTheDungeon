@@ -12,11 +12,12 @@ public class CellManager {
 	public final int STARTING_CELL = 35;
 	private int placeableRooms;
 	private List<Cell> cells;
-	private int bossRoomID;
+	private List<Cell> deadEnds;
 	
 	public CellManager(){
 		//init stanza iniziale così da poter cominciare a reiterare
 		cells = new ArrayList<>();
+		deadEnds = new ArrayList<>();
 		do{
 			cells.clear();
 			placeableRooms = 20;
@@ -28,6 +29,9 @@ public class CellManager {
 		//printCells();
 	}
 
+	public List<Cell> getDeadEndsList(){
+		return deadEnds;
+	}
 	public List<Cell> getCellsList() {
 		return cells;
 	}
@@ -41,10 +45,6 @@ public class CellManager {
 		return null;
 	}
 	
-	public int getBossRoomID(){
-		return bossRoomID;
-	}
-
 	public int getNumberOfDeadEnds(){
 		int nOfDeadEnds = 0;
 		for(Cell cell: cells){
@@ -168,7 +168,7 @@ public class CellManager {
 			}
 			if(nOfDoors <= 1){
 				cell.setAsDeadEnd();
-				bossRoomID = cell.getID();
+				deadEnds.add(cell);
 			}
 		}
 	}

@@ -15,15 +15,17 @@ public class EntityGenerator {
 	private List<Group> groups;
 	private EntityManager entityManager;
 	private int bossRoomID;
+	private int[] specialRoomsIDS;
 
 	public EntityGenerator(EntityManager entityManager) {
 		this.groups = new ArrayList<>();
 		difficulty = "easy";
 		this.entityManager = entityManager;
+		specialRoomsIDS = new int[3];
 	}
 
-	public void addGroup(int ID, boolean roomIsDeadEnd){
-		groups.add(new Group(ID, roomIsDeadEnd));
+	public void addGroup(int ID){
+		groups.add(new Group(ID));
 	}
 
 	public Group getGroupByID(int ID){
@@ -35,18 +37,32 @@ public class EntityGenerator {
 		return null;
 	}
 	
-	public void setBossRoomID(int ID){
-		bossRoomID = ID;
+	public void setSpecialRoomsIDS(int r1, int r2, int r3, int br){
+		specialRoomsIDS[0] = r1;
+		specialRoomsIDS[1] = r2;
+		specialRoomsIDS[2] = r3;
+		bossRoomID = br;
+	}
+	public boolean checkIfSpecial(int ID){
+		for(int id: specialRoomsIDS){
+			if(id == ID){
+				return true;
+			}
+		}
+		return false;
+	}
+	public boolean checkIfBossRoom(int ID){
+		return ID == bossRoomID;
 	}
 
 	public void generateEntities(){
 		Random random = new Random();
 		for(Group group: groups) {
-			if(group.isRoomADeadEnd() && bossRoomID == group.getID()){
+			if(bossRoomID == group.getID()){
 				//STANZA DEL BOSS
 			}
-			else if(group.isRoomADeadEnd() && !(bossRoomID == group.getID())){
-				//NORMALE VICOLO CIECO
+			else if(checkIfSpecial(group.getID())){
+				//STANZA SPECIALE
 			}
 			else {
 				//STANZA COMUNE CON I NEMICI

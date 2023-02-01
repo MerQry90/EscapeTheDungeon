@@ -38,13 +38,17 @@ public class MainGame extends GameState{
 
 	public void setEntityGroups(){
 		for(Cell cell: cellManager.getCellsList()){
-			entityManager.entityGenerator.addGroup(cell.getID(), cell.isDeadEnd());
+			entityManager.entityGenerator.addGroup(cell.getID());
 		}
+		int r1 = cellManager.getDeadEndsList().get(0).getID();
+		int r2 = cellManager.getDeadEndsList().get(cellManager.getDeadEndsList().size() - 3).getID();
+		int r3 = cellManager.getDeadEndsList().get(cellManager.getDeadEndsList().size() - 2).getID();
+		int br = cellManager.getDeadEndsList().get(cellManager.getDeadEndsList().size() - 1).getID();
+		entityManager.entityGenerator.setSpecialRoomsIDS(r1, r2, r3, br);
 		entityManager.entityGenerator.generateEntities();
 	}
 	
 	public void translateCellToNewRoom(int newID){
-		
 		if(entityManager.getRoom() == null){
 			entityManager.setNewRoom(cellManager.STARTING_CELL,
 					cellManager.getCellByID(cellManager.STARTING_CELL).getNorthDoorID(),
@@ -54,7 +58,6 @@ public class MainGame extends GameState{
 			entityManager.setDefaultPlayerPositionCenter();
 			entityManager.setRoomAsDeadEnd();
 			newID = cellManager.STARTING_CELL;
-			entityManager.setBossRoomID(cellManager.getBossRoomID());
 		}
 		else {
 			System.out.println("room #" + newID);
@@ -73,14 +76,11 @@ public class MainGame extends GameState{
 					cellManager.getCellByID(newID).getSouthDoorID(),
 					cellManager.getCellByID(newID).getWestDoorID());
 		}
-		if(cellManager.getCellByID(newID).isDeadEnd()){
-			entityManager.setRoomAsDeadEnd();
-			if(cellManager.getBossRoomID() == newID){
-				System.out.println("BOSSROOM FOUND");
-			}
-			else {
-				System.out.println("DEADEND FOUND");
-			}
+		if(entityManager.entityGenerator.checkIfSpecial(newID)){
+			System.out.println("SPECIAL ROOM");
+		}
+		else if(entityManager.entityGenerator.checkIfBossRoom(newID)){
+			System.out.println("BOSS ROOM");
 		}
 	}
 	

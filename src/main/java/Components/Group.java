@@ -11,21 +11,19 @@ import java.util.List;
 public class Group {
 	private int ID;
 	private boolean defeated;
-	private boolean roomIsDeadEnd;
 	private boolean itemsDropped;
 
 	private List<Enemy> enemies;
 	private List<Obstacle> obstacles;
 	private List<Item> items;
 
-	public Group(int ID, boolean roomIsDeadEnd){
+	public Group(int ID){
 		enemies = new ArrayList<>();
 		obstacles = new ArrayList<>();
 		items = new ArrayList<>();
 		this.ID = ID;
 		defeated = false;
 		itemsDropped = false;
-		this.roomIsDeadEnd = roomIsDeadEnd;
 	}
 
 	public boolean isItemsDropped() {
@@ -55,9 +53,5 @@ public class Group {
 	}
 	public int getID() {
 		return ID;
-	}
-
-	public boolean isRoomADeadEnd() {
-		return roomIsDeadEnd;
 	}
 }

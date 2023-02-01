@@ -192,9 +192,6 @@ public class EntityManager {
 	public boolean isRoomDeadEnd() {
 		return room.isDeadEnd();
 	}
-	public void setBossRoomID(int ID){
-		entityGenerator.setBossRoomID(ID);
-	}
 	
 	public void checkRoomCompletion(){
 		boolean completed = true;
