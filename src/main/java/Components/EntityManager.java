@@ -17,7 +17,7 @@ public class EntityManager {
 	private List<Arrow> friendlyArrows;
 	private List<Projectile> hostileProjectiles;
 	private List<Obstacle> obstacles;
-	private Item heart;
+	private List<Item> items;
 
 	public EntityGenerator entityGenerator;
 
@@ -30,7 +30,6 @@ public class EntityManager {
 		hostileProjectiles = new ArrayList<>();
 		obstacles = new ArrayList<>();
 		entityGenerator = new EntityGenerator(this);
-		heart = null;
 	}
 
 	//metodi riguardanti il giocatore-----------------------------------------------------------------------------------
@@ -114,6 +113,15 @@ public class EntityManager {
 			}
 		}
 	}
+
+	public void checkItemsCollisions(){
+		for(Item item: items) {
+			if (item.checkIfActive() && item.checkCollision(player) && player.getHealth() < player.getMaxHealth()) {
+				player.setHealth(player.getHealth() + 1);
+				item.setInactive();
+			}
+		}
+	}
 	//------------------------------------------------------------------------------------------------------------------
 
 	//gestione frecce---------------------------------------------------------------------------------------------------
@@ -151,8 +159,8 @@ public class EntityManager {
 
 	public void dropItems(){
 		Random random = new Random();
-		if(random.nextBoolean()){
-
+		if(random.nextInt(4) == 0){
+			items.add(new Item(512, 256));
 		}
 	}
 
@@ -170,6 +178,7 @@ public class EntityManager {
 			enemies = entityGenerator.getGroupByID(getRoomID()).getEnemies();
 		}
 		obstacles = entityGenerator.getGroupByID(getRoomID()).getObstacles();
+		items = entityGenerator.getGroupByID(getRoomID()).getItems();
 	}
 	public Room getRoom(){
 		return room;
@@ -197,11 +206,20 @@ public class EntityManager {
 		if(completed){
 			entityGenerator.getGroupByID(getRoomID()).setAsDefeated();
 			room.openDoors();
+			if(!entityGenerator.getGroupByID(getRoomID()).isItemsDropped()){
+				dropItems();
+				entityGenerator.getGroupByID(getRoomID()).setItemsDropped();
+			}
 		}
 	}
 	//------------------------------------------------------------------------------------------------------------------
 	
 	public void renderEntities(Graphics g){
+		for(Item item: items){
+			if(item.checkIfActive()){
+				item.paint(g);
+			}
+		}
 		room.paintDoors(g);
 		for (Obstacle obstacle: obstacles){
 			obstacle.paint(g);

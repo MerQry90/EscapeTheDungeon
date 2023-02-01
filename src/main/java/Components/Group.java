@@ -1,25 +1,39 @@
 package Components;
 
 import Entities.DynamicEntities.Enemy;
+import Entities.StaticEntities.Item;
 import Entities.StaticEntities.Obstacle;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Group {
 	private int ID;
 	private boolean defeated;
 	private boolean roomIsDeadEnd;
+	private boolean itemsDropped;
 
 	private List<Enemy> enemies;
 	private List<Obstacle> obstacles;
+	private List<Item> items;
 
 	public Group(int ID, boolean roomIsDeadEnd){
 		enemies = new ArrayList<>();
 		obstacles = new ArrayList<>();
+		items = new ArrayList<>();
 		this.ID = ID;
 		defeated = false;
+		itemsDropped = false;
 		this.roomIsDeadEnd = roomIsDeadEnd;
+	}
+
+	public boolean isItemsDropped() {
+		return itemsDropped;
+	}
+
+	public void setItemsDropped() {
+		this.itemsDropped = true;
 	}
 
 	public List<Enemy> getEnemies() {
@@ -28,6 +42,11 @@ public class Group {
 	public List<Obstacle> getObstacles() {
 		return obstacles;
 	}
+
+	public List<Item> getItems() {
+		return items;
+	}
+
 	public boolean isDefeated() {
 		return defeated;
 	}
@@ -37,7 +56,7 @@ public class Group {
 	public int getID() {
 		return ID;
 	}
-	
+
 	public boolean isRoomADeadEnd() {
 		return roomIsDeadEnd;
 	}

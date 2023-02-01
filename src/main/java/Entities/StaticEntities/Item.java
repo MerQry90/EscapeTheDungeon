@@ -14,7 +14,7 @@ public class Item extends GenericEntity {
 		setWidth(32);
 		setHeight(32);
 		init();
-		setInactive();
+		setActive();
 	}
 
 	@Override

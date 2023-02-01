@@ -46,7 +46,7 @@ public class EntityGenerator {
 				//STANZA DEL BOSS
 			}
 			else if(group.isRoomADeadEnd() && !(bossRoomID == group.getID())){
-				//NORMALE VICOLO
+				//NORMALE VICOLO CIECO
 			}
 			else {
 				//STANZA COMUNE CON I NEMICI
