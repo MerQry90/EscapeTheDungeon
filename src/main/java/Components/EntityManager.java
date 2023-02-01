@@ -67,7 +67,7 @@ public class EntityManager {
 	public boolean checkWallsCollisions(GenericEntity entity){
 		return room.checkWallsCollisions(entity);
 	}
-
+	
 	public boolean checkObstaclesCollisions(DynamicEntity entity){
 		boolean hasCollided = false;
 		for(Obstacle obstacle: obstacles){

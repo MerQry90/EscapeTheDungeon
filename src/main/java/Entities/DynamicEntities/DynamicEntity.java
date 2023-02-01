@@ -57,68 +57,22 @@ public abstract class DynamicEntity extends GenericEntity {
 		return canPassThroughWalls;
 	}
 
-	public boolean moveEntity(int translationX, int translationY){
-		boolean hasCollided = false;
-		if(translationX < 0){
-			for(int i = 0; i > translationX; i--){
-				if(entityManager.checkWallsCollisions(this) && !canPassThroughWalls) {
-					setX(getX() + 1);
-					hasCollided = true;
-					break;
-				}
-				if(entityManager.checkObstaclesCollisions(this) && !canFly) {
-					setX(getX() + 1);
-					hasCollided = true;
-					break;
-				}
-				setX(getX() - 1);
+	public void moveEntity(int translationX, int translationY){
+		if(translationX != 0) {
+			int signX = translationX / abs(translationX);
+			setX(getX() + translationX);
+			while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
+					(entityManager.checkObstaclesCollisions(this) && !canFly)) {
+				setX(getX() - signX);
 			}
 		}
-		else {
-			for(int i = 0; i < translationX; i++){
-				if(entityManager.checkWallsCollisions(this) && !canPassThroughWalls){
-					setX(getX() - 1);
-					hasCollided = true;
-					break;
-				}
-				if(entityManager.checkObstaclesCollisions(this) && !canFly) {
-					setX(getX() - 1);
-					hasCollided = true;
-					break;
-				}
-				setX(getX() + 1);
+		if(translationY != 0) {
+			int signY = translationY / abs(translationY);
+			setY(getY() + translationY);
+			while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
+					(entityManager.checkObstaclesCollisions(this) && !canFly)) {
+				setY(getY() - signY);
 			}
 		}
-		if(translationY < 0){
-			for(int i = 0; i > translationY; i--){
-				if(entityManager.checkWallsCollisions(this) && !canPassThroughWalls) {
-					setY(getY() + 1);
-					hasCollided = true;
-					break;
-				}
-				if(entityManager.checkObstaclesCollisions(this) && !canFly) {
-					setY(getY() + 1);
-					hasCollided = true;
-					break;
-				}
-				setY(getY() - 1);
-			}
-		}
-		else {
-			for(int i = 0; i < translationY; i++){
-				if(entityManager.checkWallsCollisions(this) && !canPassThroughWalls){
-					setY(getY() - 1);
-					hasCollided = true;
-					break;
-				}
-				if(entityManager.checkObstaclesCollisions(this) && !canFly) {
-					setY(getY() - 1);
-					hasCollided = true;
-					break;
-				}
-				setY(getY() + 1);
-			}
-		}
-		return hasCollided;
 	}
 }
