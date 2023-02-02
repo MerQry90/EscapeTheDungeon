@@ -36,6 +36,16 @@ public class CellManager {
 	public List<Cell> getCellsList() {
 		return cells;
 	}
+	public int getBossRoomID(){
+		return deadEnds.get(deadEnds.size() - 1).getID();
+	}
+	public int[] getSpecialRoomsIDs(){
+		int[] specialRooms = new int[3];
+		specialRooms[0] = deadEnds.get(0).getID();
+		specialRooms[1] = deadEnds.get(deadEnds.size() - 3).getID();
+		specialRooms[2] = deadEnds.get(deadEnds.size() - 2).getID();
+		return specialRooms;
+	}
 
 	public Cell getCellByID(int ID){
 		for(Cell cell: cells){

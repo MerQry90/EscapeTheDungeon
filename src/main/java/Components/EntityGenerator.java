@@ -1,7 +1,6 @@
 package Components;
 
 import Entities.DynamicEntities.Bat;
-import Entities.DynamicEntities.Enemy;
 import Entities.DynamicEntities.Zombie;
 import Entities.StaticEntities.Rock;
 
@@ -37,19 +36,19 @@ public class EntityGenerator {
 		return null;
 	}
 	
-	public void setSpecialRoomsIDS(int r1, int r2, int r3, int br){
-		specialRoomsIDS[0] = r1;
-		specialRoomsIDS[1] = r2;
-		specialRoomsIDS[2] = r3;
-		bossRoomID = br;
+	public void setSpecialRoomsIDS(int[] specialRoomsIDS){
+		this.specialRoomsIDS = specialRoomsIDS;
 	}
-	public boolean checkIfSpecial(int ID){
+	public boolean checkIfSpecialRoom(int ID){
 		for(int id: specialRoomsIDS){
 			if(id == ID){
 				return true;
 			}
 		}
 		return false;
+	}
+	public void setBossRoomID(int bossRoomID){
+		this.bossRoomID = bossRoomID;
 	}
 	public boolean checkIfBossRoom(int ID){
 		return ID == bossRoomID;
@@ -61,7 +60,7 @@ public class EntityGenerator {
 			if(bossRoomID == group.getID()){
 				//STANZA DEL BOSS
 			}
-			else if(checkIfSpecial(group.getID())){
+			else if(checkIfSpecialRoom(group.getID())){
 				//STANZA SPECIALE
 			}
 			else {

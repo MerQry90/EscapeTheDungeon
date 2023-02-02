@@ -14,6 +14,9 @@ public class UI {
 	private Image HEART_FULL;
 	private Image HEART_EMPTY;
 	private float opacity = 0.4f;
+	
+	private int[] specialRoomsIDS;
+	private int bossRoomID;
 
 	public UI(){
 		NORMAL_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/NormalRoom.png");
@@ -63,5 +66,24 @@ public class UI {
 				g.drawImage(BOSS_ROOM, mapCellX + 16, mapCellY + 16, 32, 32, null);
 			}
 		}
+	}
+	
+	//METODI PER IL RICONOSCIMENTO DELLE CELLE
+	public void setSpecialRoomsIDS(int[] specialRoomsIDS){
+		this.specialRoomsIDS = specialRoomsIDS;
+	}
+	public boolean checkIfSpecialRoom(int ID){
+		for(int id: specialRoomsIDS){
+			if(id == ID){
+				return true;
+			}
+		}
+		return false;
+	}
+	public void setBossRoomID(int bossRoomID){
+		this.bossRoomID = bossRoomID;
+	}
+	public boolean checkIfBossRoom(int ID){
+		return ID == bossRoomID;
 	}
 }
