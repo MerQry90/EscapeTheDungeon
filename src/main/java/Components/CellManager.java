@@ -66,7 +66,7 @@ public class CellManager {
 	}
 	
 	public boolean checkIfWithinBounds(int ID){
-		if(ID < 11 || ID > 99){
+		if(ID < 11 || ID > 99 || ID % 10 == 0){
 			//OOB
 			return false;
 		}
