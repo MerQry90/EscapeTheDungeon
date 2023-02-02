@@ -5,7 +5,6 @@ public class Cell {
 	private int ID;
 	private int northDoorID, eastDoorID, southDoorID, westDoorID;
 	private boolean deadEnd;
-	private boolean hasBeenFound;
 	
 	public Cell(int ID){
 		this.ID = ID;
@@ -14,7 +13,6 @@ public class Cell {
 		southDoorID = -1;
 		westDoorID = -1;
 		deadEnd = false;
-		hasBeenFound = false;
 	}
 	
 	public int getID() {

@@ -41,10 +41,12 @@ public class CellManager {
 		}
 		return foundRooms;
 	}
-	public List<Integer> getAlmostFoundRooms(){
+	public List<Integer> getAlmostFoundRooms() {
 		List<Integer> almostFoundRooms = new ArrayList<>();
-		for(Cell cell: foundCells){
-			almostFoundRooms.add(cell.getID());
+		if (!almostFoundRooms.isEmpty()) {
+			for (Cell cell : almostFoundCells) {
+				almostFoundRooms.add(cell.getID());
+			}
 		}
 		return almostFoundRooms;
 	}
@@ -55,21 +57,23 @@ public class CellManager {
 		boolean addSD = true;
 		boolean addWD = true;
 		boolean deleteFromAFC = false;
-		for(Cell cell: almostFoundCells){
-			if(cell.getID() == ID){
-				deleteFromAFC = true;
-			}
-			if(getCellByID(ID).getNorthDoorID() == cell.getID()){
-				addND = false;
-			}
-			if(getCellByID(ID).getEastDoorID() == cell.getID()){
-				addED = false;
-			}
-			if(getCellByID(ID).getSouthDoorID() == cell.getID()){
-				addSD = false;
-			}
-			if(getCellByID(ID).getWestDoorID() == cell.getID()){
-				addWD = false;
+		if(!almostFoundCells.isEmpty()) {
+			for (Cell cell : almostFoundCells) {
+				if (cell.getID() == ID) {
+					deleteFromAFC = true;
+				}
+				if (getCellByID(ID).getNorthDoorID() == cell.getID()) {
+					addND = false;
+				}
+				if (getCellByID(ID).getEastDoorID() == cell.getID()) {
+					addED = false;
+				}
+				if (getCellByID(ID).getSouthDoorID() == cell.getID()) {
+					addSD = false;
+				}
+				if (getCellByID(ID).getWestDoorID() == cell.getID()) {
+					addWD = false;
+				}
 			}
 		}
 		if(deleteFromAFC){

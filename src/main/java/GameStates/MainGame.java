@@ -78,6 +78,7 @@ public class MainGame extends GameState{
 					cellManager.getCellByID(newID).getSouthDoorID(),
 					cellManager.getCellByID(newID).getWestDoorID());
 		}
+		cellManager.addNewFoundRoom(newID);
 		//STAMPA DELLE STANZE PER DEBUGGING
 		if(entityManager.entityGenerator.checkIfSpecialRoom(newID)){
 			System.out.println("room #" + newID + " SPECIAL ROOM");
@@ -93,6 +94,13 @@ public class MainGame extends GameState{
 	@Override
 	public void processInput() {
 		//vari
+		if(keyH.mapPressed){
+			ui.enableMap();
+		}
+		else{
+			ui.disableMap();
+		}
+
 		if(keyH.escapePressed && pauseCountdown <= 0){
 			pauseCountdown = 10;
 			pause = !pause;
@@ -152,9 +160,7 @@ public class MainGame extends GameState{
 		super.render(g);
 		entityManager.renderEntities(g);
 		ui.drawUI(g, entityManager.getPlayer());
-		if(keyH.mapPressed){
-			ui.drawMap(cellManager.getCellsList(), entityManager.getRoomID(), g);
-		}
+		ui.renderMap(cellManager.getFoundRooms(), cellManager.getAlmostFoundRooms(), entityManager.getRoomID(), g);
 	}
 	
 	@Override
