@@ -86,6 +86,7 @@ public class MainGame extends GameState{
 	
 	@Override
 	public void processInput() {
+		//vari
 		if(keyH.escapePressed && pauseCountdown <= 0){
 			pauseCountdown = 10;
 			pause = !pause;
@@ -145,6 +146,9 @@ public class MainGame extends GameState{
 		super.render(g);
 		entityManager.renderEntities(g);
 		ui.drawUI(g, entityManager.getPlayer());
+		if(keyH.mapPressed){
+			ui.drawMap(cellManager.getCellsList(), entityManager.getRoomID(), g);
+		}
 	}
 	
 	@Override
