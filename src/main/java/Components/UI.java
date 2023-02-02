@@ -11,10 +11,10 @@ public class UI {
 	private Image NORMAL_ROOM;
 	private Image SPECIAL_ROOM;
 	private Image BOSS_ROOM;
+	private Image DARK_SCREEN;
 	private Image HEART_FULL;
 	private Image HEART_EMPTY;
-	private float opacity = 0.4f;
-	
+
 	private int[] specialRoomsIDS;
 	private int bossRoomID;
 
@@ -22,6 +22,7 @@ public class UI {
 		NORMAL_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/NormalRoom.png");
 		SPECIAL_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/SpecialRoom.png");
 		BOSS_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/BossRoom.png");
+		DARK_SCREEN = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/DarkScreen.png");
 		HEART_FULL = GenericEntity.setSpriteFromPath("src/resources/sprites/png/full_heart.png");
 		HEART_EMPTY = GenericEntity.setSpriteFromPath("src/resources/sprites/png/empty_heart.png");
 	}
@@ -47,6 +48,7 @@ public class UI {
 		int IDX, IDY;
 		int mapCellX, mapCellY;
 		//scorro tutte le celle
+		g.drawImage(DARK_SCREEN, 0, 0, 17 * 64, 9 * 64, null);
 		for(Cell cell: cells){
 			//segno l'ID della cella corrente
 			currentCellID = cell.getID();
@@ -59,15 +61,22 @@ public class UI {
 			mapCellX = (IDX + 4) * 64; //aggiungo 4 per far venire la mappa centrata
 			mapCellY = (IDY / 10) * 64 - 64; //divido per 10 per ottenere la coordinata
 
-			//todo aggiungere switch per riconoscere i vari tipi di stanza e farle di colori diversi
-			g.drawImage(NORMAL_ROOM, mapCellX, mapCellY, 64, 64, null);
+			if(checkIfSpecialRoom(cell.getID())){
+				g.drawImage(SPECIAL_ROOM, mapCellX, mapCellY, 64, 64, null);
+			}
+			else if(checkIfBossRoom(cell.getID())){
+				g.drawImage(BOSS_ROOM, mapCellX, mapCellY, 64, 64, null);
+			}
+			else {
+				g.drawImage(NORMAL_ROOM, mapCellX, mapCellY, 64, 64, null);
+			}
 			if(cell.getID() == playerCellID){
 				//dipingo il quadrato rosso dove c'è il player
 				g.drawImage(BOSS_ROOM, mapCellX + 16, mapCellY + 16, 32, 32, null);
 			}
 		}
 	}
-	
+
 	//METODI PER IL RICONOSCIMENTO DELLE CELLE
 	public void setSpecialRoomsIDS(int[] specialRoomsIDS){
 		this.specialRoomsIDS = specialRoomsIDS;
