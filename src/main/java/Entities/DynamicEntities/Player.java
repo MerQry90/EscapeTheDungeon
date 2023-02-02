@@ -9,8 +9,7 @@ public class Player extends DynamicEntity {
 
 	private Image LEFT_PLAYER;
 	private Image INVULNERABLE_PLAYER;
-	public Image HEART_FULL;
-	public Image HEART_EMPTY;
+
 
 	private String nextPlayerInstruction = "stop";
 	private int shootCoolDown; //valore fisso che indica ogni quanti frame il giocatore può sparare una freccia
@@ -29,8 +28,6 @@ public class Player extends DynamicEntity {
 	@Override
 	public void init() {
 		//CARICAMENTO SPRITE
-		HEART_FULL = setSpriteFromPath("src/resources/sprites/png/full_heart.png");
-		HEART_EMPTY = setSpriteFromPath("src/resources/sprites/png/empty_heart.png");
 		LEFT_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_front.png");
 		INVULNERABLE_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_invulnerable.png");
 		setActiveSprite(LEFT_PLAYER);

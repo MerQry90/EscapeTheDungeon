@@ -78,7 +78,7 @@ public abstract class GenericEntity {
 	public int getHeight() {
 		return height;
 	}
-	public Image setSpriteFromPath(String path){
+	public static Image setSpriteFromPath(String path){
 		ImageIcon icon = new ImageIcon(path);
 		return icon.getImage();
 	}
