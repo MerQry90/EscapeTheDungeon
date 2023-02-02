@@ -82,7 +82,7 @@ public class UI {
 					g.drawImage(BOSS_ROOM, mapCellX + 16, mapCellY + 16, 32, 32, null);
 				}
 			}
-			/*for(Integer ID: almostFoundRooms){
+			for(Integer ID: almostFoundRooms){
 				IDX = ID % 10;
 				IDY = ID - IDX;
 
@@ -91,7 +91,7 @@ public class UI {
 				mapCellY = (IDY / 10) * 64 - 64; //divido per 10 per ottenere la coordinata
 
 				g.drawImage(NORMAL_ROOM, mapCellX, mapCellY, 64, 64, null);
-			}*/
+			}
 		}
 	}
 

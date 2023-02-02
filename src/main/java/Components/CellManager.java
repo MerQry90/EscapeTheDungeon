@@ -43,7 +43,7 @@ public class CellManager {
 	}
 	public List<Integer> getAlmostFoundRooms() {
 		List<Integer> almostFoundRooms = new ArrayList<>();
-		if (!almostFoundRooms.isEmpty()) {
+		if (!almostFoundCells.isEmpty()) {
 			for (Cell cell : almostFoundCells) {
 				almostFoundRooms.add(cell.getID());
 			}
