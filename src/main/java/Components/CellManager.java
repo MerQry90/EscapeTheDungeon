@@ -13,6 +13,8 @@ public class CellManager {
 	private int placeableRooms;
 	private List<Cell> cells;
 	private List<Cell> deadEnds;
+	private List<Cell> foundCells;
+	private List<Cell> almostFoundCells;
 	
 	public CellManager(){
 		//init stanza iniziale così da poter cominciare a reiterare
@@ -28,8 +30,65 @@ public class CellManager {
 		}
 		while(getNumberOfDeadEnds() < 4 || placeableRooms > 1 || getCellByID(STARTING_CELL).isDeadEnd());
 		//printCells();
+		foundCells = new ArrayList<>();
+		almostFoundCells = new ArrayList<>();
 	}
-
+	
+	public List<Integer> getFoundRooms(){
+		List<Integer> foundRooms = new ArrayList<>();
+		for(Cell cell: foundCells){
+			foundRooms.add(cell.getID());
+		}
+		return foundRooms;
+	}
+	public List<Integer> getAlmostFoundRooms(){
+		List<Integer> almostFoundRooms = new ArrayList<>();
+		for(Cell cell: foundCells){
+			almostFoundRooms.add(cell.getID());
+		}
+		return almostFoundRooms;
+	}
+	public void addNewFoundRoom(int ID){
+		foundCells.add(getCellByID(ID));
+		boolean addND = true;
+		boolean addED = true;
+		boolean addSD = true;
+		boolean addWD = true;
+		boolean deleteFromAFC = false;
+		for(Cell cell: almostFoundCells){
+			if(cell.getID() == ID){
+				deleteFromAFC = true;
+			}
+			if(getCellByID(ID).getNorthDoorID() == cell.getID()){
+				addND = false;
+			}
+			if(getCellByID(ID).getEastDoorID() == cell.getID()){
+				addED = false;
+			}
+			if(getCellByID(ID).getSouthDoorID() == cell.getID()){
+				addSD = false;
+			}
+			if(getCellByID(ID).getWestDoorID() == cell.getID()){
+				addWD = false;
+			}
+		}
+		if(deleteFromAFC){
+			almostFoundCells.remove(getCellByID(ID));
+		}
+		if(addND && getCellByID(ID).getNorthDoorID() != -1){
+			almostFoundCells.add(getCellByID(getCellByID(ID).getNorthDoorID()));
+		}
+		if(addED && getCellByID(ID).getEastDoorID() != -1){
+			almostFoundCells.add(getCellByID(getCellByID(ID).getEastDoorID()));
+		}
+		if(addSD && getCellByID(ID).getSouthDoorID() != -1){
+			almostFoundCells.add(getCellByID(getCellByID(ID).getSouthDoorID()));
+		}
+		if(addWD && getCellByID(ID).getWestDoorID() != -1){
+			almostFoundCells.add(getCellByID(getCellByID(ID).getNorthDoorID()));
+		}
+	}
+	
 	public List<Cell> getDeadEndsList(){
 		return deadEnds;
 	}

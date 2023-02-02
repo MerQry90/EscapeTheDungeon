@@ -63,7 +63,6 @@ public class MainGame extends GameState{
 			newID = cellManager.STARTING_CELL;
 		}
 		else {
-			System.out.println("room #" + newID);
 			if (entityManager.getRoomID() == newID + 10) {
 				entityManager.setDefaultPlayerPositionDown();
 			} else if (entityManager.getRoomID() == newID - 1) {
@@ -79,11 +78,15 @@ public class MainGame extends GameState{
 					cellManager.getCellByID(newID).getSouthDoorID(),
 					cellManager.getCellByID(newID).getWestDoorID());
 		}
+		//STAMPA DELLE STANZE PER DEBUGGING
 		if(entityManager.entityGenerator.checkIfSpecialRoom(newID)){
-			System.out.println("SPECIAL ROOM");
+			System.out.println("room #" + newID + " SPECIAL ROOM");
 		}
 		else if(entityManager.entityGenerator.checkIfBossRoom(newID)){
-			System.out.println("BOSS ROOM");
+			System.out.println("room #" + newID + " BOSS ROOM");
+		}
+		else {
+			System.out.println("room #" + newID);
 		}
 	}
 	
