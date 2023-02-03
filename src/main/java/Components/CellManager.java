@@ -51,7 +51,16 @@ public class CellManager {
 		return almostFoundRooms;
 	}
 	public void addNewFoundRoom(int ID){
-		foundCells.add(getCellByID(ID));
+		boolean isDuplicate = false;
+		for(Cell cell: foundCells){
+			if(cell.getID() == getCellByID(ID).getID()){
+				isDuplicate = true;
+				break;
+			}
+		}
+		if(!isDuplicate) {
+			foundCells.add(getCellByID(ID));
+		}
 		boolean addND = true;
 		boolean addED = true;
 		boolean addSD = true;
@@ -60,7 +69,8 @@ public class CellManager {
 		if(!almostFoundCells.isEmpty()) {
 			for (Cell cell : almostFoundCells) {
 				if (cell.getID() == ID) {
-					deleteFromAFC = true;
+						deleteFromAFC = true;
+
 				}
 				if (getCellByID(ID).getNorthDoorID() == cell.getID()) {
 					addND = false;
@@ -89,7 +99,7 @@ public class CellManager {
 			almostFoundCells.add(getCellByID(getCellByID(ID).getSouthDoorID()));
 		}
 		if(addWD && getCellByID(ID).getWestDoorID() != -1){
-			almostFoundCells.add(getCellByID(getCellByID(ID).getNorthDoorID()));
+			almostFoundCells.add(getCellByID(getCellByID(ID).getWestDoorID()));
 		}
 	}
 	

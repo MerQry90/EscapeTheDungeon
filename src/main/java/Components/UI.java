@@ -10,7 +10,10 @@ public class UI {
 	private Image NORMAL_ROOM;
 	private Image SPECIAL_ROOM;
 	private Image BOSS_ROOM;
+	private Image DARK_ROOM;
+
 	private Image DARK_SCREEN;
+
 	private Image HEART_FULL;
 	private Image HEART_EMPTY;
 
@@ -23,7 +26,10 @@ public class UI {
 		NORMAL_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/NormalRoom.png");
 		SPECIAL_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/SpecialRoom.png");
 		BOSS_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/BossRoom.png");
+		DARK_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/DarkRoom.png");
+
 		DARK_SCREEN = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/DarkScreen.png");
+
 		HEART_FULL = GenericEntity.setSpriteFromPath("src/resources/sprites/png/full_heart.png");
 		HEART_EMPTY = GenericEntity.setSpriteFromPath("src/resources/sprites/png/empty_heart.png");
 		mapEnabled = false;
@@ -53,6 +59,10 @@ public class UI {
 		mapEnabled = false;
 	}
 
+	public void updateMap(){
+		//salvare tutti i valori che servono a renderMap
+	}
+
 	public void renderMap(List<Integer> foundRooms, List<Integer> almostFoundRooms, int playerCellID, Graphics g){
 		if(mapEnabled){
 			int IDX, IDY;
@@ -63,6 +73,8 @@ public class UI {
 				//ricavo la X e la Y della cella(per fare i calcoli sulle coordinate in cui devono essere dipinte)
 				IDX = ID % 10;
 				IDY = ID - IDX;
+
+				System.out.println(ID);
 
 				//calcolo le coordinate
 				mapCellX = (IDX + 4) * 64; //aggiungo 4 per far venire la mappa centrata

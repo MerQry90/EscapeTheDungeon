@@ -165,6 +165,7 @@ public class MainGame extends GameState{
 	
 	@Override
 	public void update() {
+		//todo aggiungere metodo updateMap per evitare che la mappa venga renderizzata 30 al secondo
 		pauseCountdown--;
 		processInput();
 		if(!pause) {
