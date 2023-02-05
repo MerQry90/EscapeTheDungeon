@@ -80,7 +80,7 @@ public class MainGame extends GameState{
 		}
 		cellManager.addNewFoundRoom(newID);
 		//STAMPA DELLE STANZE PER DEBUGGING
-		if(entityManager.entityGenerator.checkIfSpecialRoom(newID)){
+		/*if(entityManager.entityGenerator.checkIfSpecialRoom(newID)){
 			System.out.println("room #" + newID + " SPECIAL ROOM");
 		}
 		else if(entityManager.entityGenerator.checkIfBossRoom(newID)){
@@ -88,7 +88,7 @@ public class MainGame extends GameState{
 		}
 		else {
 			System.out.println("room #" + newID);
-		}
+		}*/
 	}
 	
 	@Override

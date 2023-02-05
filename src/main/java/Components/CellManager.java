@@ -1,8 +1,6 @@
 package Components;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 //Griglia delle stanze è 8 col x 8 righe
 // 1a cifra la colonna, 2a cifra la riga
@@ -15,6 +13,7 @@ public class CellManager {
 	private List<Cell> deadEnds;
 	private List<Cell> foundCells;
 	private List<Cell> almostFoundCells;
+	private Map<Integer, Boolean> knownIDsAndFound;
 	
 	public CellManager(){
 		//init stanza iniziale così da poter cominciare a reiterare
@@ -30,66 +29,52 @@ public class CellManager {
 		}
 		while(getNumberOfDeadEnds() < 4 || placeableRooms > 1 || getCellByID(STARTING_CELL).isDeadEnd());
 		//printCells();
+		
 		foundCells = new ArrayList<>();
 		almostFoundCells = new ArrayList<>();
+		
+		knownIDsAndFound = new HashMap<>();
 	}
 	
 	public List<Integer> getFoundRooms(){
 		List<Integer> foundRooms = new ArrayList<>();
-		for(Cell cell: foundCells){
-			foundRooms.add(cell.getID());
+		if(!knownIDsAndFound.isEmpty()) {
+			for (int id : knownIDsAndFound.keySet()) {
+				if (knownIDsAndFound.get(id)) {
+					foundRooms.add(id);
+				}
+			}
 		}
 		return foundRooms;
 	}
 	public List<Integer> getAlmostFoundRooms() {
 		List<Integer> almostFoundRooms = new ArrayList<>();
-		if (!almostFoundCells.isEmpty()) {
-			for (Cell cell : almostFoundCells) {
-				almostFoundRooms.add(cell.getID());
+		if(!knownIDsAndFound.isEmpty()) {
+			for (int id : knownIDsAndFound.keySet()) {
+				if (!knownIDsAndFound.get(id)) {
+					almostFoundRooms.add(id);
+				}
 			}
 		}
 		return almostFoundRooms;
 	}
 	public void addNewFoundRoom(int ID){
-		foundCells.add(getCellByID(ID));
-		boolean addND = true;
-		boolean addED = true;
-		boolean addSD = true;
-		boolean addWD = true;
-		boolean deleteFromAFC = false;
-		if(!almostFoundCells.isEmpty()) {
-			for (Cell cell : almostFoundCells) {
-				if (cell.getID() == ID) {
-					deleteFromAFC = true;
-				}
-				if (getCellByID(ID).getNorthDoorID() == cell.getID()) {
-					addND = false;
-				}
-				if (getCellByID(ID).getEastDoorID() == cell.getID()) {
-					addED = false;
-				}
-				if (getCellByID(ID).getSouthDoorID() == cell.getID()) {
-					addSD = false;
-				}
-				if (getCellByID(ID).getWestDoorID() == cell.getID()) {
-					addWD = false;
-				}
-			}
+		knownIDsAndFound.putIfAbsent(ID, true);
+		if(!knownIDsAndFound.get(ID)){
+			knownIDsAndFound.replace(ID, true);
 		}
-		if(deleteFromAFC){
-			almostFoundCells.remove(getCellByID(ID));
+		int tmpID;
+		if((tmpID = getCellByID(ID).getNorthDoorID()) != -1){
+			knownIDsAndFound.putIfAbsent(tmpID, false);
 		}
-		if(addND && getCellByID(ID).getNorthDoorID() != -1){
-			almostFoundCells.add(getCellByID(getCellByID(ID).getNorthDoorID()));
+		if((tmpID = getCellByID(ID).getEastDoorID()) != -1){
+			knownIDsAndFound.putIfAbsent(tmpID, false);
 		}
-		if(addED && getCellByID(ID).getEastDoorID() != -1){
-			almostFoundCells.add(getCellByID(getCellByID(ID).getEastDoorID()));
+		if((tmpID = getCellByID(ID).getSouthDoorID()) != -1){
+			knownIDsAndFound.putIfAbsent(tmpID, false);
 		}
-		if(addSD && getCellByID(ID).getSouthDoorID() != -1){
-			almostFoundCells.add(getCellByID(getCellByID(ID).getSouthDoorID()));
-		}
-		if(addWD && getCellByID(ID).getWestDoorID() != -1){
-			almostFoundCells.add(getCellByID(getCellByID(ID).getNorthDoorID()));
+		if((tmpID = getCellByID(ID).getWestDoorID()) != -1){
+			knownIDsAndFound.putIfAbsent(tmpID, false);
 		}
 	}
 	

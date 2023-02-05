@@ -4,7 +4,9 @@ import Entities.DynamicEntities.Player;
 import Entities.GenericEntity;
 
 import java.awt.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UI {
 	private Image NORMAL_ROOM;
