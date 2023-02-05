@@ -14,13 +14,12 @@ public class EntityGenerator {
 	private List<Group> groups;
 	private EntityManager entityManager;
 	private int bossRoomID;
-	private int[] specialRoomsIDS;
+	private List<Integer> specialRoomsIDS;
 
 	public EntityGenerator(EntityManager entityManager) {
 		this.groups = new ArrayList<>();
 		difficulty = "easy";
 		this.entityManager = entityManager;
-		specialRoomsIDS = new int[3];
 	}
 
 	public void addGroup(int ID){
@@ -36,7 +35,7 @@ public class EntityGenerator {
 		return null;
 	}
 	
-	public void setSpecialRoomsIDS(int[] specialRoomsIDS){
+	public void setSpecialRoomsIDS(List<Integer> specialRoomsIDS){
 		this.specialRoomsIDS = specialRoomsIDS;
 	}
 	public boolean checkIfSpecialRoom(int ID){

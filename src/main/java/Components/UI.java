@@ -21,7 +21,7 @@ public class UI {
 
 	private boolean mapEnabled;
 
-	private int[] specialRoomsIDS;
+	private List<Integer> specialRoomsIDS;
 	private int bossRoomID;
 
 	public UI(){
@@ -104,13 +104,13 @@ public class UI {
 				mapCellX = (IDX + 4) * 64; //aggiungo 4 per far venire la mappa centrata
 				mapCellY = (IDY / 10) * 64 - 64; //divido per 10 per ottenere la coordinata
 
-				g.drawImage(NORMAL_ROOM, mapCellX, mapCellY, 64, 64, null);
+				g.drawImage(DARK_ROOM, mapCellX, mapCellY, 64, 64, null);
 			}
 		}
 	}
 
 	//METODI PER IL RICONOSCIMENTO DELLE CELLE
-	public void setSpecialRoomsIDS(int[] specialRoomsIDS){
+	public void setSpecialRoomsIDS(List<Integer> specialRoomsIDS){
 		this.specialRoomsIDS = specialRoomsIDS;
 	}
 	public boolean checkIfSpecialRoom(int ID){

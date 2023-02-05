@@ -11,8 +11,6 @@ public class CellManager {
 	private int placeableRooms;
 	private List<Cell> cells;
 	private List<Cell> deadEnds;
-	private List<Cell> foundCells;
-	private List<Cell> almostFoundCells;
 	private Map<Integer, Boolean> knownIDsAndFound;
 	
 	public CellManager(){
@@ -29,10 +27,6 @@ public class CellManager {
 		}
 		while(getNumberOfDeadEnds() < 4 || placeableRooms > 1 || getCellByID(STARTING_CELL).isDeadEnd());
 		//printCells();
-		
-		foundCells = new ArrayList<>();
-		almostFoundCells = new ArrayList<>();
-		
 		knownIDsAndFound = new HashMap<>();
 	}
 	
@@ -87,11 +81,11 @@ public class CellManager {
 	public int getBossRoomID(){
 		return deadEnds.get(deadEnds.size() - 1).getID();
 	}
-	public int[] getSpecialRoomsIDs(){
-		int[] specialRooms = new int[3];
-		specialRooms[0] = deadEnds.get(0).getID();
-		specialRooms[1] = deadEnds.get(deadEnds.size() - 3).getID();
-		specialRooms[2] = deadEnds.get(deadEnds.size() - 2).getID();
+	public List<Integer> getSpecialRoomsIDs(){
+		List<Integer> specialRooms = new ArrayList<>();
+		specialRooms.add(deadEnds.get(0).getID());
+		specialRooms.add(deadEnds.get(deadEnds.size() - 3).getID());
+		specialRooms.add(deadEnds.get(deadEnds.size() - 2).getID());
 		return specialRooms;
 	}
 
