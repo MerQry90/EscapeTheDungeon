@@ -10,7 +10,9 @@ public class MainGame extends GameState{
 
 	private Stage stage;
 	private boolean pause;
+	private boolean toggleMap;
 	private int pauseCountdown;
+	private int mapCountdown;
 	
 	private int clearedTotalStages;
 	
@@ -29,6 +31,7 @@ public class MainGame extends GameState{
 		
 		clearedTotalStages = 0;
 		pause = false;
+		toggleMap = false;
 		
 		cellManager = new CellManager();
 		setEntityGroups();
@@ -84,13 +87,15 @@ public class MainGame extends GameState{
 	@Override
 	public void processInput() {
 		//vari
-		if(keyH.mapPressed){
-			ui.enableMap();
+		if(keyH.mPressed && mapCountdown <= 0){
+			mapCountdown = 10;
+			System.out.println(mapCountdown);
+			toggleMap = !toggleMap;
+			if(toggleMap){
+				ui.enableMap();
+			}
+			else ui.disableMap();
 		}
-		else{
-			ui.disableMap();
-		}
-
 		if(keyH.escapePressed && pauseCountdown <= 0){
 			pauseCountdown = 10;
 			pause = !pause;
@@ -149,8 +154,7 @@ public class MainGame extends GameState{
 	public void render(Graphics g) {
 		super.render(g);
 		entityManager.renderEntities(g);
-		ui.drawUI(g, entityManager.getPlayer());
-		ui.renderMap(cellManager.getFoundRooms(), cellManager.getAlmostFoundRooms(), entityManager.getRoomID(), g);
+		ui.drawUI(g, entityManager.getPlayer(), cellManager.getFoundRooms(), cellManager.getAlmostFoundRooms(), entityManager.getRoomID());
 		//TEST DI DISEGNO DEL FONT
 		g.setFont(new Font("Verdana", Font.BOLD, 80));
 		g.drawString("Test", 64*10, 64*7);
@@ -158,8 +162,8 @@ public class MainGame extends GameState{
 	
 	@Override
 	public void update() {
-		//todo aggiungere metodo updateMap per evitare che la mappa venga renderizzata 30 al secondo
 		pauseCountdown--;
+		mapCountdown--;
 		processInput();
 		if(!pause) {
 			if (clearedTotalStages >= 10) {

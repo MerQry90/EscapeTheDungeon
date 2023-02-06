@@ -20,6 +20,7 @@ public class UI {
 	private Image HEART_EMPTY;
 
 	private boolean mapEnabled;
+	private static int mapRoomDimension = 24;
 
 	private List<Integer> specialRoomsIDS;
 	private int bossRoomID;
@@ -37,8 +38,9 @@ public class UI {
 		mapEnabled = false;
 	}
 
-	public void drawUI(Graphics g, Player player){
+	public void drawUI(Graphics g, Player player, List<Integer> foundRooms, List<Integer> almostFoundRooms, int playerCellID){
 		drawPlayerHeart(g, player);
+		renderMap(foundRooms, almostFoundRooms, playerCellID, g);
 		//chiamare qui tutti i metodi della UI
 	}
 
@@ -61,48 +63,46 @@ public class UI {
 		mapEnabled = false;
 	}
 
-	public void updateMap(){
-		//salvare tutti i valori che servono a renderMap
-	}
-
-	public void renderMap(List<Integer> foundRooms, List<Integer> almostFoundRooms, int playerCellID, Graphics g){
+	private void renderMap(List<Integer> foundRooms, List<Integer> almostFoundRooms, int playerCellID, Graphics g){
 		if(mapEnabled){
 			int IDX, IDY;
 			int mapCellX, mapCellY;
+			double xOffset, yOffset;
+			xOffset = 12.75 * 64;
+			yOffset = 0;
 			//scorro tutte le celle
-			g.drawImage(DARK_SCREEN, 0, 0, 17 * 64, 9 * 64, null);
+			g.drawImage(DARK_SCREEN, (int)xOffset + 24, (int)yOffset + 24, 9 * 24, 9 * 24, null);
 			for(Integer ID: foundRooms){
 				//ricavo la X e la Y della cella(per fare i calcoli sulle coordinate in cui devono essere dipinte)
 				IDX = ID % 10;
-				IDY = ID - IDX;
-				
-				//calcolo le coordinate
-				mapCellX = (IDX + 4) * 64; //aggiungo 4 per far venire la mappa centrata
-				mapCellY = (IDY / 10) * 64 - 64; //divido per 10 per ottenere la coordinata
+				IDY = (ID - IDX) / 10;
+
+				mapCellX = (int)xOffset + (IDX * mapRoomDimension);
+				mapCellY = (int)yOffset + (IDY * mapRoomDimension);
 
 				if(checkIfSpecialRoom(ID)){
-					g.drawImage(SPECIAL_ROOM, mapCellX, mapCellY, 64, 64, null);
+					g.drawImage(SPECIAL_ROOM, mapCellX, mapCellY, mapRoomDimension, mapRoomDimension, null);
 				}
 				else if(checkIfBossRoom(ID)){
-					g.drawImage(BOSS_ROOM, mapCellX, mapCellY, 64, 64, null);
+					g.drawImage(BOSS_ROOM, mapCellX, mapCellY, mapRoomDimension, mapRoomDimension, null);
 				}
 				else {
-					g.drawImage(NORMAL_ROOM, mapCellX, mapCellY, 64, 64, null);
+					g.drawImage(NORMAL_ROOM, mapCellX, mapCellY, mapRoomDimension, mapRoomDimension, null);
 				}
 				if(ID == playerCellID){
 					//dipingo il quadrato rosso dove c'è il player
-					g.drawImage(BOSS_ROOM, mapCellX + 16, mapCellY + 16, 32, 32, null);
+					g.drawImage(BOSS_ROOM, mapCellX + 8, mapCellY + 8, 8, 8, null);
 				}
 			}
 			for(Integer ID: almostFoundRooms){
 				IDX = ID % 10;
-				IDY = ID - IDX;
+				IDY = (ID - IDX) / 10;
 
-				//calcolo le coordinate
-				mapCellX = (IDX + 4) * 64; //aggiungo 4 per far venire la mappa centrata
-				mapCellY = (IDY / 10) * 64 - 64; //divido per 10 per ottenere la coordinata
 
-				g.drawImage(DARK_ROOM, mapCellX, mapCellY, 64, 64, null);
+				mapCellX = (int)xOffset + (IDX * mapRoomDimension);
+				mapCellY = (int)yOffset + (IDY * mapRoomDimension);
+
+				g.drawImage(DARK_ROOM, mapCellX, mapCellY, mapRoomDimension, mapRoomDimension, null);
 			}
 		}
 	}
