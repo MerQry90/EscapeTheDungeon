@@ -79,16 +79,6 @@ public class MainGame extends GameState{
 					cellManager.getCellByID(newID).getWestDoorID());
 		}
 		cellManager.addNewFoundRoom(newID);
-		//STAMPA DELLE STANZE PER DEBUGGING
-		/*if(entityManager.entityGenerator.checkIfSpecialRoom(newID)){
-			System.out.println("room #" + newID + " SPECIAL ROOM");
-		}
-		else if(entityManager.entityGenerator.checkIfBossRoom(newID)){
-			System.out.println("room #" + newID + " BOSS ROOM");
-		}
-		else {
-			System.out.println("room #" + newID);
-		}*/
 	}
 	
 	@Override

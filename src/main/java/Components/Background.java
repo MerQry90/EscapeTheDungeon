@@ -32,7 +32,7 @@ public class Background {
 	public Background(){
 		tile = new Tile();
 		MainMenuBackground = new ImageIcon("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
-		MainGameBackground = new ImageIcon("src/resources/sprites/backgrounds/background_sample.png");
+		MainGameBackground = new ImageIcon("src/resources/sprites/backgrounds/backgroundNew_placeholder.png");
 		EndBackground = new ImageIcon("src/resources/sprites/backgrounds/gameOver_placeHolder.png");
 	}
 

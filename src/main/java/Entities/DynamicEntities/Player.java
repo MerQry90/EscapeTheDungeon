@@ -40,8 +40,8 @@ public class Player extends DynamicEntity {
 		setY(256);
 		setHeight(64); //tmp
 		setWidth(64); //tmp
-		setCBwidthScalar(0.8);
-		setCBheightScalar(0.8);
+		setCBwidthScalar(0.7);
+		setCBheightScalar(0.7);
 		initCollisionBox();
 
 		translation = new Vector2D(10);

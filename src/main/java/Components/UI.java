@@ -75,9 +75,7 @@ public class UI {
 				//ricavo la X e la Y della cella(per fare i calcoli sulle coordinate in cui devono essere dipinte)
 				IDX = ID % 10;
 				IDY = ID - IDX;
-
-				System.out.println(ID);
-
+				
 				//calcolo le coordinate
 				mapCellX = (IDX + 4) * 64; //aggiungo 4 per far venire la mappa centrata
 				mapCellY = (IDY / 10) * 64 - 64; //divido per 10 per ottenere la coordinata
