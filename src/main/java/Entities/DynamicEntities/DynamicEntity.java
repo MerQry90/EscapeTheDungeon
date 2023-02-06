@@ -6,7 +6,7 @@ import Entities.GenericEntity;
 import static java.lang.Math.*;
 
 public abstract class DynamicEntity extends GenericEntity {
-
+	
 	private int health;
 	protected Vector2D translation;
 	private boolean canFly;

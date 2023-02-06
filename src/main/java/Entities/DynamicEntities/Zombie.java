@@ -42,15 +42,17 @@ public class Zombie extends Enemy{
 	
 	@Override
 	public void updateBehaviour() {
-		switch (getCurrentBehaviour()){
-			case "follow-player" -> {
-				int dX = getDeltaXToObjective(entityManager.getPlayerX());
-				int dY = getDeltaYToObjective(entityManager.getPlayerY());
-				translation.setAngulationToObjective(dX, dY);
-				moveEntity(translation.getXTranslation(), translation.getYTranslation());
-			}
-			default -> {
-				changeBehaviourTo("follow-player");
+		if(checkActivation()) {
+			switch (getCurrentBehaviour()) {
+				case "follow-player" -> {
+					int dX = getDeltaXToObjective(entityManager.getPlayerX());
+					int dY = getDeltaYToObjective(entityManager.getPlayerY());
+					translation.setAngulationToObjective(dX, dY);
+					moveEntity(translation.getXTranslation(), translation.getYTranslation());
+				}
+				default -> {
+					changeBehaviourTo("follow-player");
+				}
 			}
 		}
 	}

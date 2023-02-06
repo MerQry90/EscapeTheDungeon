@@ -63,7 +63,7 @@ public class Player extends DynamicEntity {
 	public void setInvulnerable(){
 		vulnerability = false;
 		setActiveSprite(INVULNERABLE_PLAYER);
-		invulnerabilityCountdown = 25;
+		invulnerabilityCountdown = 40;
 	}
 	public boolean isVulnerable(){
 		return vulnerability;

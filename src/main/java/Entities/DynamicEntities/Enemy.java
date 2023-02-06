@@ -9,7 +9,18 @@ import static java.lang.Math.abs;
 
 public abstract class Enemy extends DynamicEntity{
 
+	protected int activationWaiting = 20;
 	private String currentBehaviour;
+	
+	public boolean checkActivation(){
+		if(activationWaiting > 0){
+			activationWaiting -= 1;
+		}
+		else {
+			return true;
+		}
+		return false;
+	}
 
 	public void setRandomHealth(int minimumHealth, int maximumHealth){
 		Random random = new Random();

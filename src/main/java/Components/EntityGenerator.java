@@ -62,34 +62,52 @@ public class EntityGenerator {
 			else if(checkIfSpecialRoom(group.getID())){
 				//STANZA SPECIALE
 			}
-			else {
+			else if(group.getID() != 35){
 				//STANZA COMUNE CON I NEMICI
 				switch (difficulty) {
 					case "easy" -> {
 						switch (random.nextInt(3)) {
 							case 0 -> {
-								group.getEnemies().add(new Zombie(64, 64, entityManager));
-								group.getEnemies().add(new Zombie(64 * 15, 64, entityManager));
-								group.getObstacles().add(new Rock(64 * 7, 64 * 4));
-								group.getObstacles().add(new Rock(64 * 8, 64 * 5));
-								group.getObstacles().add(new Rock(64 * 10, 64 * 5));
-								group.getObstacles().add(new Rock(64 * 11, 64 * 4));
+								group.getEnemies().add(new Zombie(Tile.getTile(7), Tile.getTile(2), entityManager));
+								group.getEnemies().add(new Zombie(Tile.getTile(7), Tile.getTile(6), entityManager));
+								group.getEnemies().add(new Zombie(Tile.getTile(9), Tile.getTile(2), entityManager));
+								group.getEnemies().add(new Zombie(Tile.getTile(9), Tile.getTile(6), entityManager));
+								
+								//group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(3)));
+								group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(4)));
+								//group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(5)));
+								//group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(3)));
+								group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(4)));
+								//group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(5)));
 							}
 							case 1 -> {
-								group.getEnemies().add(new Bat(64, 64, entityManager));
-								group.getEnemies().add(new Bat(64 * 15, 64, entityManager));
-								group.getObstacles().add(new Rock(64 * 7, 64 * 4));
-								group.getObstacles().add(new Rock(64 * 8, 64 * 5));
-								group.getObstacles().add(new Rock(64 * 10, 64 * 5));
-								group.getObstacles().add(new Rock(64 * 11, 64 * 4));
+								group.getEnemies().add(new Bat(Tile.getTile(1),Tile.getTile(1), entityManager));
+								group.getEnemies().add(new Bat(Tile.getTile(15),Tile.getTile(7), entityManager));
+								
+								group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(6)));
+								group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(5)));
+								group.getObstacles().add(new Rock(Tile.getTile(4), Tile.getTile(4)));
+								group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(3)));
+								
+								group.getObstacles().add(new Rock(Tile.getTile(14), Tile.getTile(2)));
+								group.getObstacles().add(new Rock(Tile.getTile(13), Tile.getTile(3)));
+								group.getObstacles().add(new Rock(Tile.getTile(12), Tile.getTile(4)));
+								group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(5)));
+						
 							}
 							case 2 -> {
-								group.getEnemies().add(new Zombie(64, 64, entityManager));
-								group.getEnemies().add(new Bat(64 * 15, 64, entityManager));
-								group.getObstacles().add(new Rock(64 * 7, 64 * 4));
-								group.getObstacles().add(new Rock(64 * 8, 64 * 5));
-								group.getObstacles().add(new Rock(64 * 10, 64 * 5));
-								group.getObstacles().add(new Rock(64 * 11, 64 * 4));
+								group.getEnemies().add(new Zombie(Tile.getTile(5), Tile.getTile(2), entityManager));
+								group.getEnemies().add(new Zombie(Tile.getTile(5), Tile.getTile(6), entityManager));
+								group.getEnemies().add(new Bat(Tile.getTile(12),Tile.getTile(4), entityManager));
+								
+								group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(4)));
+								group.getObstacles().add(new Rock(Tile.getTile(4), Tile.getTile(4)));
+								group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(4)));
+								group.getObstacles().add(new Rock(Tile.getTile(6), Tile.getTile(4)));
+								
+								group.getObstacles().add(new Rock(Tile.getTile(10), Tile.getTile(3)));
+								group.getObstacles().add(new Rock(Tile.getTile(10), Tile.getTile(4)));
+								group.getObstacles().add(new Rock(Tile.getTile(10), Tile.getTile(5)));
 							}
 						}
 					}

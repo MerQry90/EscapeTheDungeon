@@ -151,6 +151,9 @@ public class MainGame extends GameState{
 		entityManager.renderEntities(g);
 		ui.drawUI(g, entityManager.getPlayer());
 		ui.renderMap(cellManager.getFoundRooms(), cellManager.getAlmostFoundRooms(), entityManager.getRoomID(), g);
+		//TEST DI DISEGNO DEL FONT
+		g.setFont(new Font("Verdana", Font.BOLD, 80));
+		g.drawString("Test", 64*10, 64*7);
 	}
 	
 	@Override

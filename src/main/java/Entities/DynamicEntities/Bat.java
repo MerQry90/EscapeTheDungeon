@@ -47,46 +47,46 @@ public class Bat extends Enemy{
 
 	@Override
 	public void updateBehaviour() {
-		switch (getCurrentBehaviour()) {
-			case "stop-1" -> {
-				countdown++;
-				setActiveSprite(LIVING_BAT_ON);
-				if (countdown > wait) {
-					changeBehaviourTo("aiming");
+		if(checkActivation()) {
+			switch (getCurrentBehaviour()) {
+				case "stop-1" -> {
+					countdown++;
+					setActiveSprite(LIVING_BAT_ON);
+					if (countdown > wait) {
+						changeBehaviourTo("aiming");
+					} else {
+						changeBehaviourTo("stop-2");
+					}
 				}
-				else {
-					changeBehaviourTo("stop-2");
+				case "stop-2" -> {
+					countdown++;
+					setActiveSprite(LIVING_BAT_OFF);
+					if (countdown > wait) {
+						changeBehaviourTo("aiming");
+					} else {
+						changeBehaviourTo("stop-1");
+					}
 				}
+				case "aiming" -> {
+					int dX = getDeltaXToObjective(entityManager.getPlayerX());
+					int dY = getDeltaYToObjective(entityManager.getPlayerY());
+					translation.setAngulationToObjective(dX, dY);
+					changeBehaviourTo("dashing");
+				}
+				case "dashing" -> {
+					movingCountdown--;
+					setActiveSprite(LIVING_BAT_OFF);
+					moveEntity(translation.getXTranslation(), translation.getYTranslation());
+					if (movingCountdown <= 0) {
+						countdown = 0;
+						movingCountdown = 20;
+					}
+					if (countdown <= wait) {
+						changeBehaviourTo("stop-1");
+					}
+				}
+				default -> changeBehaviourTo("stop-1");
 			}
-			case "stop-2" -> {
-				countdown++;
-				setActiveSprite(LIVING_BAT_OFF);
-				if (countdown > wait) {
-					changeBehaviourTo("aiming");
-				}
-				else {
-					changeBehaviourTo("stop-1");
-				}
-			}
-			case "aiming" ->{
-				int dX = getDeltaXToObjective(entityManager.getPlayerX());
-				int dY = getDeltaYToObjective(entityManager.getPlayerY());
-				translation.setAngulationToObjective(dX, dY);
-				changeBehaviourTo("dashing");
-			}
-			case "dashing" -> {
-				movingCountdown--;
-				setActiveSprite(LIVING_BAT_OFF);
-				moveEntity(translation.getXTranslation(), translation.getYTranslation());
-				if (movingCountdown <= 0) {
-					countdown = 0;
-					movingCountdown = 20;
-				}
-				if (countdown <= wait) {
-					changeBehaviourTo("stop-1");
-				}
-			}
-			default -> changeBehaviourTo("stop-1");
 		}
 	}
 }
