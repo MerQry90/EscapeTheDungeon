@@ -2,6 +2,8 @@ package Components;
 
 import Entities.DynamicEntities.Bat;
 import Entities.DynamicEntities.Zombie;
+import Entities.StaticEntities.PowerUps.LifeUp;
+import Entities.StaticEntities.PowerUps.MultipleShot;
 import Entities.StaticEntities.Rock;
 
 import java.util.ArrayList;
@@ -61,6 +63,8 @@ public class EntityGenerator {
 			}
 			else if(checkIfSpecialRoom(group.getID())){
 				//STANZA SPECIALE
+				group.getPowerUpList().add(new LifeUp());
+				group.getPowerUpList().add(new MultipleShot());
 			}
 			else if(group.getID() != 35){
 				//STANZA COMUNE CON I NEMICI

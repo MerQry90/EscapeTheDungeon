@@ -6,7 +6,6 @@ import java.awt.*;
 
 public class Item extends GenericEntity {
 	private Image HEART;
-	private String item;
 
 	public Item(int x, int y){
 		setX(x);
@@ -21,7 +20,6 @@ public class Item extends GenericEntity {
 	public void init() {
 		HEART = setSpriteFromPath("src/resources/sprites/png/full_heart.png");
 		setActiveSprite(HEART);
-		//KEY = setSpriteFromPath()
 		setCBwidthScalar(1);
 		setCBheightScalar(1);
 		initCollisionBox();

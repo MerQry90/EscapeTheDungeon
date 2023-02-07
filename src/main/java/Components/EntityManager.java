@@ -4,6 +4,7 @@ import Entities.DynamicEntities.*;
 import Entities.GenericEntity;
 import Entities.StaticEntities.Item;
 import Entities.StaticEntities.Obstacle;
+import Entities.StaticEntities.PowerUps.PowerUp;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class EntityManager {
 	private List<Projectile> hostileProjectiles;
 	private List<Obstacle> obstacles;
 	private List<Item> items;
+	private List<PowerUp> powerUpList;
 
 	public EntityGenerator entityGenerator;
 
@@ -25,10 +27,13 @@ public class EntityManager {
 	
 	public EntityManager(){
 		player = new Player(this);
+
 		enemies = new ArrayList<>();
 		friendlyArrows = new ArrayList<>();
 		hostileProjectiles = new ArrayList<>();
 		obstacles = new ArrayList<>();
+		powerUpList = new ArrayList<>();
+
 		entityGenerator = new EntityGenerator(this);
 	}
 
@@ -122,11 +127,30 @@ public class EntityManager {
 			}
 		}
 	}
+
+	public void checkPowerUpCollision(){
+		for(PowerUp powerUp: powerUpList){
+			if(powerUp.checkIfActive() && powerUp.checkCollision(player)){
+				powerUp.activate(player);
+				powerUp.setInactive();
+			}
+		}
+	}
 	//------------------------------------------------------------------------------------------------------------------
 
 	//gestione frecce---------------------------------------------------------------------------------------------------
 	public void newArrow(String orientation){
 		friendlyArrows.add(new Arrow(getPlayerX() + 11, getPlayerY() + 11, orientation, this));
+		if (player.getMultipleShot()){
+			if(orientation.compareTo("right") == 0 || orientation.compareTo("left") == 0) {
+				friendlyArrows.add(new Arrow(getPlayerX() + 11, getPlayerY() + 11 - 64, orientation, this));
+				friendlyArrows.add(new Arrow(getPlayerX() + 11, getPlayerY() + 11 + 64, orientation, this));
+			}
+			else{
+				friendlyArrows.add(new Arrow(getPlayerX() + 11 - 64, getPlayerY() + 11, orientation, this));
+				friendlyArrows.add(new Arrow(getPlayerX() + 11 + 64, getPlayerY() + 11, orientation, this));
+			}
+		}
 	}
 
 	public void updateArrows(){
@@ -179,6 +203,7 @@ public class EntityManager {
 		}
 		obstacles = entityGenerator.getGroupByID(getRoomID()).getObstacles();
 		items = entityGenerator.getGroupByID(getRoomID()).getItems();
+		powerUpList = entityGenerator.getGroupByID(getRoomID()).getPowerUpList();
 	}
 	public Room getRoom(){
 		return room;
@@ -215,6 +240,11 @@ public class EntityManager {
 		for(Item item: items){
 			if(item.checkIfActive()){
 				item.paint(g);
+			}
+		}
+		for(PowerUp powerUp: powerUpList){
+			if(powerUp.checkIfActive()){
+				powerUp.paint(g);
 			}
 		}
 		room.paintDoors(g);

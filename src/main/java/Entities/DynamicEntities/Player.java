@@ -10,6 +10,7 @@ public class Player extends DynamicEntity {
 	private Image LEFT_PLAYER;
 	private Image INVULNERABLE_PLAYER;
 
+	private boolean multipleShot;
 
 	private String nextPlayerInstruction = "stop";
 	private int shootCoolDown; //valore fisso che indica ogni quanti frame il giocatore può sparare una freccia
@@ -49,6 +50,8 @@ public class Player extends DynamicEntity {
 		shootCoolDownValue = 0;
 		hasShot = false;
 		setCanPassThroughWalls(false);
+
+		multipleShot = false;
 	}
 
 	//Getter e setter metodi specifici del giocatore--------------------------------------------------------------------
@@ -67,6 +70,12 @@ public class Player extends DynamicEntity {
 	}
 	public boolean isVulnerable(){
 		return vulnerability;
+	}
+	public void activateMultipleShot(){
+		multipleShot = true;
+	}
+	public boolean getMultipleShot(){
+		return multipleShot;
 	}
 	//------------------------------------------------------------------------------------------------------------------
 
