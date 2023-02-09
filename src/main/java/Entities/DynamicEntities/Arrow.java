@@ -2,9 +2,10 @@ package Entities.DynamicEntities;
 
 import Components.EntityManager;
 import Components.Vector2D;
-import Entities.GenericEntity;
 
 import java.awt.*;
+
+import static java.lang.Math.abs;
 
 public class Arrow extends Projectile {
 
@@ -43,7 +44,7 @@ public class Arrow extends Projectile {
 		arrowCountdown = 35;
 		setCanFly(true);
 
-		translation = new Vector2D(arrowSpeed);
+		translationVector2D = new Vector2D(arrowSpeed);
 	}
 
 	public void move() {
@@ -52,21 +53,43 @@ public class Arrow extends Projectile {
 		int oldY = this.getY();
 		switch (arrowOrientation){
 			case "up" ->{
-				translation.setAngulationToObjective(0, -1);
+				translationVector2D.setAngulationFromCoordinates(0, -1);
 			}
 			case "down" ->{
-				translation.setAngulationToObjective(0, 1);
+				translationVector2D.setAngulationFromCoordinates(0, 1);
 			}
 			case "right" ->{
-				translation.setAngulationToObjective(1, 0);
+				translationVector2D.setAngulationFromCoordinates(1, 0);
 			}
 			case "left" ->{
-				translation.setAngulationToObjective(-1, 0);
+				translationVector2D.setAngulationFromCoordinates(-1, 0);
 			}
 		}
-		moveEntity(translation.getXTranslation(), translation.getYTranslation());
+		moveEntity();
 		if(arrowCountdown <= 0){
 			setInactive();
+		}
+	}
+	
+	@Override
+	public void moveEntity() {
+		int translationOnX = translationVector2D.getTranslationOnX();
+		int translationOnY = translationVector2D.getTranslationOnY();
+		if(translationOnX != 0) {
+			int signX = translationOnX / abs(translationOnX);
+			setX(getX() + translationOnX);
+			while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
+					(entityManager.checkObstaclesCollisions(this) && !canFly)) {
+				setX(getX() - signX);
+			}
+		}
+		if(translationOnY != 0) {
+			int signY = translationOnY / abs(translationOnY);
+			setY(getY() + translationOnY);
+			while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
+					(entityManager.checkObstaclesCollisions(this) && !canFly)) {
+				setY(getY() - signY);
+			}
 		}
 	}
 }

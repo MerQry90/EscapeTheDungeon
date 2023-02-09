@@ -87,7 +87,7 @@ public class EntityManager {
 		return hasCollided;
 	}
 	
-	public int checkPlayerAndDoorsCollisions(){
+	public int checkPlayerToDoorsCollisions(){
 		int collisionID = -1;
 		if(room.hasNorthernDoor() && room.getNorthernDoor().checkCollision(player)){
 			collisionID = room.getNorthernDoor().leadsTo();
@@ -104,7 +104,7 @@ public class EntityManager {
 		return collisionID;
 	}
 
-	public void checkDynamicCollisions(){
+	public void checkEntityToEntityCollisions(){
 		for(Enemy enemy: enemies){
 			if(enemy.checkIfActive() && enemy.checkCollision(player) && player.isVulnerable()){
 				player.lowerHealth();

@@ -9,7 +9,7 @@ public class Vector2D {
 	
 	public Vector2D(int speed){
 		setModule(speed);
-		setAngulationToObjective(0, 0);
+		setAngulationFromCoordinates(0, 0);
 	}
 	
 	public void setModule(int speed){
@@ -18,8 +18,13 @@ public class Vector2D {
 	public double getModule() {
 		return module;
 	}
-	
-	public void setAngulationToObjective(int oX, int oY){ //-1, 0
+	public void setAngulation(double angulation){
+		this.angulation = angulation;
+	}
+	public double getAngulation() {
+		return angulation;
+	}
+	public void setAngulationFromCoordinates(int oX, int oY){ //-1, 0
 		if(oX == 0 && oY == 0){
 			angulation = 0;
 		}
@@ -39,12 +44,12 @@ public class Vector2D {
 			}
 		}
 	}
-	//0 gradi è verso il basso, quindi sin e cos sono invertiti
-	public int getXTranslation(){
+// 0 gradi a dx e poi in senso orario
+	public int getTranslationOnX(){
 		double tX = module * cos(angulation);
 		return round((float) (tX));
 	}
-	public int getYTranslation(){
+	public int getTranslationOnY(){
 		double tY = module * sin(angulation);
 		return round((float) (tY));
 	}

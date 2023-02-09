@@ -172,15 +172,15 @@ public class MainGame extends GameState{
 			if(entityManager.isGameOver()){
 				setInactive();
 			}
-			entityManager.getPlayer().move();
+			entityManager.getPlayer().translateInputToMovement();
 			entityManager.getPlayer().updateCoolDown();
 			entityManager.updateArrows();
 			entityManager.updateEnemies();
-			entityManager.checkDynamicCollisions();
+			entityManager.checkEntityToEntityCollisions();
 			entityManager.checkItemsCollisions();
 			entityManager.checkPowerUpCollision();
 			entityManager.checkRoomCompletion();
-			int collisionID = entityManager.checkPlayerAndDoorsCollisions();
+			int collisionID = entityManager.checkPlayerToDoorsCollisions();
 			if(collisionID > 0){
 				translateCellToNewRoom(collisionID);
 			}

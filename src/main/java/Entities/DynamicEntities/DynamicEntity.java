@@ -8,15 +8,15 @@ import static java.lang.Math.*;
 public abstract class DynamicEntity extends GenericEntity {
 	
 	private int health;
-	protected Vector2D translation;
-	private boolean canFly;
-	private boolean canPassThroughWalls;
+	protected Vector2D translationVector2D;
+	protected boolean canFly;
+	protected boolean canPassThroughWalls;
 	
 	public int getSpeed() {
-		return round((float) (translation.getModule()));
+		return round((float) (translationVector2D.getModule()));
 	}
 	public void setSpeed(int speed) {
-		translation.setModule(speed);
+		translationVector2D.setModule(speed);
 	}
 
 	public int getHealth(){
@@ -57,22 +57,5 @@ public abstract class DynamicEntity extends GenericEntity {
 		return canPassThroughWalls;
 	}
 
-	public void moveEntity(int translationX, int translationY){
-		if(translationX != 0) {
-			int signX = translationX / abs(translationX);
-			setX(getX() + translationX);
-			while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
-					(entityManager.checkObstaclesCollisions(this) && !canFly)) {
-				setX(getX() - signX);
-			}
-		}
-		if(translationY != 0) {
-			int signY = translationY / abs(translationY);
-			setY(getY() + translationY);
-			while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
-					(entityManager.checkObstaclesCollisions(this) && !canFly)) {
-				setY(getY() - signY);
-			}
-		}
-	}
+	public abstract void moveEntity();
 }

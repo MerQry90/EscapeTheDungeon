@@ -5,6 +5,8 @@ import Components.Vector2D;
 
 import java.awt.*;
 
+import static java.lang.Math.*;
+
 public class Player extends DynamicEntity {
 
 	private Image LEFT_PLAYER;
@@ -45,7 +47,7 @@ public class Player extends DynamicEntity {
 		setCBheightScalar(0.7);
 		initCollisionBox();
 
-		translation = new Vector2D(30);
+		translationVector2D = new Vector2D(30);
 		shootCoolDown = 15;
 		shootCoolDownValue = 0;
 		hasShot = false;
@@ -114,40 +116,61 @@ public class Player extends DynamicEntity {
 		this.nextPlayerInstruction = nextPlayerInstruction;
 	}
 
-	public void move() {
+	public void translateInputToMovement() {
 		boolean canMove = true;
 		switch (nextPlayerInstruction){
 			case "up-right" -> {
-				translation.setAngulationToObjective(1, -1);
+				translationVector2D.setAngulation(toRadians(315));
 			}
 			case "up-left" -> {
-				translation.setAngulationToObjective(-1, -1);
+				translationVector2D.setAngulation(toRadians(225));
 			}
 			case "down-right" -> {
-				translation.setAngulationToObjective(1, 1);
+				translationVector2D.setAngulation(toRadians(45));
 			}
 			case "down-left" -> {
-				translation.setAngulationToObjective(-1, 1);
+				translationVector2D.setAngulation(toRadians(135));
 			}
 			case "up" -> {
-				translation.setAngulationToObjective(0, -1);
+				translationVector2D.setAngulation(toRadians(270));
 			}
 			case "down" -> {
-				translation.setAngulationToObjective(0, 1);
+				translationVector2D.setAngulation(toRadians(90));
 			}
 			case "right" -> {
-				translation.setAngulationToObjective(1, 0);
+				translationVector2D.setAngulation(toRadians(0));
 			}
 			case "left" -> {
-				translation.setAngulationToObjective(-1, 0);
+				translationVector2D.setAngulation(toRadians(180));
 			}
 			case "stop" -> {
-				translation.setAngulationToObjective(0, 0);
 				canMove = false;
 			}
 		}
 		if(canMove) {
-			moveEntity(translation.getXTranslation(), translation.getYTranslation());
+			moveEntity();
+		}
+	}
+	
+	@Override
+	public void moveEntity() {
+		int translationOnX = translationVector2D.getTranslationOnX();
+		int translationOnY = translationVector2D.getTranslationOnY();
+		if(translationOnX != 0) {
+			int signX = translationOnX / abs(translationOnX);
+			setX(getX() + translationOnX);
+			while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
+					(entityManager.checkObstaclesCollisions(this) && !canFly)) {
+				setX(getX() - signX);
+			}
+		}
+		if(translationOnY != 0) {
+			int signY = translationOnY / abs(translationOnY);
+			setY(getY() + translationOnY);
+			while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
+					(entityManager.checkObstaclesCollisions(this) && !canFly)) {
+				setY(getY() - signY);
+			}
 		}
 	}
 }

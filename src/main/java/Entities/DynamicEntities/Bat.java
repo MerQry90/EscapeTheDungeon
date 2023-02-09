@@ -34,7 +34,7 @@ public class Bat extends Enemy{
 		setCBheightScalar(0.9);
 		initCollisionBox();
 		
-		translation = new Vector2D(0);
+		translationVector2D = new Vector2D(0);
 		setRandomSpeed(1, 30);
 		setRandomHealth(2, 1);
 		setCanPassThroughWalls(false);
@@ -70,13 +70,13 @@ public class Bat extends Enemy{
 				case "aiming" -> {
 					int dX = getDeltaXToObjective(entityManager.getPlayerX());
 					int dY = getDeltaYToObjective(entityManager.getPlayerY());
-					translation.setAngulationToObjective(dX, dY);
+					translationVector2D.setAngulationFromCoordinates(dX, dY);
 					changeBehaviourTo("dashing");
 				}
 				case "dashing" -> {
 					movingCountdown--;
 					setActiveSprite(LIVING_BAT_OFF);
-					moveEntity(translation.getXTranslation(), translation.getYTranslation());
+					moveEntity();
 					if (movingCountdown <= 0) {
 						countdown = 0;
 						movingCountdown = 20;
@@ -86,6 +86,28 @@ public class Bat extends Enemy{
 					}
 				}
 				default -> changeBehaviourTo("stop-1");
+			}
+		}
+	}
+	
+	@Override
+	public void moveEntity() {
+		int translationOnX = translationVector2D.getTranslationOnX();
+		int translationOnY = translationVector2D.getTranslationOnY();
+		if(translationOnX != 0) {
+			int signX = translationOnX / abs(translationOnX);
+			setX(getX() + translationOnX);
+			while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
+					(entityManager.checkObstaclesCollisions(this) && !canFly)) {
+				setX(getX() - signX);
+			}
+		}
+		if(translationOnY != 0) {
+			int signY = translationOnY / abs(translationOnY);
+			setY(getY() + translationOnY);
+			while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
+					(entityManager.checkObstaclesCollisions(this) && !canFly)) {
+				setY(getY() - signY);
 			}
 		}
 	}
