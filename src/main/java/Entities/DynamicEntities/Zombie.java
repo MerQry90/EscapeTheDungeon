@@ -60,56 +60,45 @@ public class Zombie extends Enemy{
 	
 	@Override
 	public void moveEntity(){
-		//FIXME
+		//TODO sistemare l'impazzimento della IA quando lo zombie è coassiale al player
+		
 		int originalX = getX();
 		int originalY = getY();
 		double originalTheta = translationVector2D.getAngulation();
-		double epsilon = toRadians(90);
-		boolean positiveEpsilonEligible;
-		boolean negativeEpsilonEligible;
-		int iterator = -1;
-		int[] distanceArray = new int[2];
-		do{
-			iterator += 1;
-			positiveEpsilonEligible = false;
-			negativeEpsilonEligible = false;
-			//tentativo con epsilon positivo
-			translationVector2D.setAngulation(originalTheta + (epsilon * iterator));
-			setX(originalX + translationVector2D.getTranslationOnX());
-			setY(originalY + translationVector2D.getTranslationOnY());
-			if((!entityManager.checkWallsCollisions(this) || canPassThroughWalls) &&
-					(!entityManager.checkObstaclesCollisions(this) || canFly)){
-				positiveEpsilonEligible = true;
-				distanceArray[0] = getDistanceToObjective(entityManager.getPlayerX(), entityManager.getPlayerY());
-			}
-			//tentativo con epsilon negativo
-			translationVector2D.setAngulation(originalTheta - (epsilon * iterator));
-			setX(originalX + translationVector2D.getTranslationOnX());
-			setY(originalY + translationVector2D.getTranslationOnY());
-			if((!entityManager.checkWallsCollisions(this) || canPassThroughWalls) &&
-					(!entityManager.checkObstaclesCollisions(this) || canFly)){
-				negativeEpsilonEligible = true;
-				distanceArray[1] = getDistanceToObjective(entityManager.getPlayerX(), entityManager.getPlayerY());
-			}
-		}
-		while (!positiveEpsilonEligible && !negativeEpsilonEligible);
 		
-		//qui da warning ma è intellij stupido
-		if(positiveEpsilonEligible && negativeEpsilonEligible){
-			if(distanceArray[0] >= distanceArray[1]){
-				translationVector2D.setAngulation(originalTheta + (epsilon * iterator));
-			}
-			else {
-				translationVector2D.setAngulation(originalTheta - (epsilon * iterator));
-			}
-		}
-		else if(positiveEpsilonEligible){
-			translationVector2D.setAngulation(originalTheta + (epsilon * iterator));
-		}
-		else if(negativeEpsilonEligible){
-			translationVector2D.setAngulation(originalTheta - (epsilon * iterator));
-		}
+		boolean collisionOnX = false;
+		boolean collisionOnY = false;
+		
 		setX(originalX + translationVector2D.getTranslationOnX());
+		if(entityManager.checkObstaclesCollisions(this)){
+			collisionOnX = true;
+		}
+		setX(originalX);
+		
 		setY(originalY + translationVector2D.getTranslationOnY());
+		if(entityManager.checkObstaclesCollisions(this)){
+			collisionOnY = true;
+		}
+		setY(originalY);
+		
+		if(collisionOnX && collisionOnY){
+			do{
+				setX(getX() + translationVector2D.getSignOnX());
+				setY(getY() + translationVector2D.getSignOnY());
+			}
+			while(entityManager.checkObstaclesCollisions(this));
+		}
+		else if(collisionOnX){
+			setY(originalY + (getSpeed() * translationVector2D.getSignOnY()));
+		}
+		else if(collisionOnY){
+			setX(originalX + (getSpeed() * translationVector2D.getSignOnX()));
+		}
+		else {
+			setX(originalX + translationVector2D.getTranslationOnX());
+			setY(originalY + translationVector2D.getTranslationOnY());
+		}
+		
+		System.out.println("theta: "+toDegrees(translationVector2D.getAngulation()));
 	}
 }

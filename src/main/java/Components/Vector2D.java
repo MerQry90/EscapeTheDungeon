@@ -47,11 +47,29 @@ public class Vector2D {
 // 0 gradi a dx e poi in senso orario
 	public int getTranslationOnX(){
 		double tX = module * cos(angulation);
+		if(abs(tX) <= 0.5){
+			return 0;
+		}
 		return round((float) (tX));
 	}
 	public int getTranslationOnY(){
 		double tY = module * sin(angulation);
+		if(abs(tY) <= 0.5){
+			return 0;
+		}
 		return round((float) (tY));
+	}
+	public int getSignOnX(){
+		if(getTranslationOnX() >= 0){
+			return 1;
+		}
+		return -1;
+	}
+	public int getSignOnY(){
+		if(getTranslationOnY() >= 0){
+			return 1;
+		}
+		return -1;
 	}
 }
 
