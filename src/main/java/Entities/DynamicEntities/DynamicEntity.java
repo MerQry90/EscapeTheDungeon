@@ -3,6 +3,8 @@ package Entities.DynamicEntities;
 import Components.Vector2D;
 import Entities.GenericEntity;
 
+import java.util.List;
+
 import static java.lang.Math.*;
 
 public abstract class DynamicEntity extends GenericEntity {
@@ -56,6 +58,6 @@ public abstract class DynamicEntity extends GenericEntity {
 	public boolean getCanPassThroughWalls() {
 		return canPassThroughWalls;
 	}
-
+	
 	public abstract void moveEntity();
 }

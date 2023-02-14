@@ -60,11 +60,10 @@ public class Zombie extends Enemy{
 	
 	@Override
 	public void moveEntity(){
-		//TODO sistemare l'impazzimento della IA quando lo zombie è coassiale al player
-		
 		int originalX = getX();
 		int originalY = getY();
 		double originalTheta = translationVector2D.getAngulation();
+		double epsilon = toRadians(15.0);
 		
 		boolean collisionOnX = false;
 		boolean collisionOnY = false;
@@ -81,17 +80,10 @@ public class Zombie extends Enemy{
 		}
 		setY(originalY);
 		
-		if(collisionOnX && collisionOnY){
-			do{
-				setX(getX() + translationVector2D.getSignOnX());
-				setY(getY() + translationVector2D.getSignOnY());
-			}
-			while(entityManager.checkObstaclesCollisions(this));
-		}
-		else if(collisionOnX){
+		if(collisionOnX && !collisionOnY){
 			setY(originalY + (getSpeed() * translationVector2D.getSignOnY()));
 		}
-		else if(collisionOnY){
+		else if(collisionOnY && !collisionOnX){
 			setX(originalX + (getSpeed() * translationVector2D.getSignOnX()));
 		}
 		else {
@@ -101,4 +93,5 @@ public class Zombie extends Enemy{
 		
 		System.out.println("theta: "+toDegrees(translationVector2D.getAngulation()));
 	}
+	
 }
