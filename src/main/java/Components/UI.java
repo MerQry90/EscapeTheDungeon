@@ -35,7 +35,7 @@ public class UI {
 
 		HEART_FULL = GenericEntity.setSpriteFromPath("src/resources/sprites/png/full_heart.png");
 		HEART_EMPTY = GenericEntity.setSpriteFromPath("src/resources/sprites/png/empty_heart.png");
-		mapEnabled = false;
+		mapEnabled = true;
 	}
 
 	public void drawUI(Graphics g, Player player, List<Integer> foundRooms, List<Integer> almostFoundRooms, int playerCellID){

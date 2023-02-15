@@ -13,6 +13,7 @@ public abstract class DynamicEntity extends GenericEntity {
 	protected Vector2D translationVector2D;
 	protected boolean canFly;
 	protected boolean canPassThroughWalls;
+	protected boolean canBreakRocks = false;
 	
 	public int getSpeed() {
 		return round((float) (translationVector2D.getModule()));
@@ -57,6 +58,14 @@ public abstract class DynamicEntity extends GenericEntity {
 
 	public boolean getCanPassThroughWalls() {
 		return canPassThroughWalls;
+	}
+
+	public void setCanBreakRocks(){
+		canBreakRocks = true;
+	}
+
+	public boolean getCanBreakRocks(){
+		return canBreakRocks;
 	}
 	
 	public abstract void moveEntity();

@@ -20,6 +20,7 @@ public class EntityManager {
 	private List<Obstacle> obstacles;
 	private List<Item> items;
 	private List<PowerUp> powerUpList;
+	//private List<BloodStain> bloodStains;
 
 	public EntityGenerator entityGenerator;
 
@@ -80,8 +81,18 @@ public class EntityManager {
 	public boolean checkObstaclesCollisions(DynamicEntity entity){
 		boolean hasCollided = false;
 		for(Obstacle obstacle: obstacles){
-			if(entity.checkIfActive() && !entity.getCanFly() && obstacle.checkCollision(entity)){
-				hasCollided = true;
+			//per le pozze di sangue
+			if(obstacle instanceof BloodStain && obstacle != null && obstacle.checkIfActive() && !player.getCanFly() && obstacle.checkCollision(player) && player.isVulnerable()){
+				player.lowerHealth();
+				player.setInvulnerable();
+			}
+			else if(entity.checkIfActive() && !entity.getCanFly() && obstacle.checkCollision(entity) && !(obstacle instanceof BloodStain) && obstacle.checkIfActive()){
+				if(entity.getCanBreakRocks()){
+					obstacle.setInactive();
+				}
+				else {
+					hasCollided = true;
+				}
 			}
 		}
 		return hasCollided;
@@ -198,6 +209,9 @@ public class EntityManager {
 	public void updateEnemies(){
 		for(Enemy enemy: enemies){
 			enemy.updateBehaviour();
+			if(enemy instanceof Tank && !enemy.checkIfActive() && enemy.canGenerateBloodStain){
+				obstacles.add(enemy.generateBloodStain());
+			}
 		}
 	}
 
@@ -280,7 +294,9 @@ public class EntityManager {
 		}
 		room.paintDoors(g);
 		for (Obstacle obstacle: obstacles){
-			obstacle.paint(g);
+			if(obstacle.checkIfActive()) {
+				obstacle.paint(g);
+			}
 		}
 		player.paint(g);
 		for (Projectile arrow: friendlyArrows){
