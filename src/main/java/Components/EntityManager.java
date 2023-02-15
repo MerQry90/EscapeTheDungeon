@@ -117,6 +117,13 @@ public class EntityManager {
 				}
 			}
 		}
+		for(Projectile projectile: hostileProjectiles){
+			if(projectile.checkIfActive() && projectile.checkCollision(player) && player.isVulnerable()){
+				player.lowerHealth();
+				player.setInvulnerable();
+				projectile.setInactive();
+			}
+		}
 	}
 
 	public void checkItemsCollisions(){
@@ -138,7 +145,7 @@ public class EntityManager {
 	}
 	//------------------------------------------------------------------------------------------------------------------
 
-	//gestione frecce---------------------------------------------------------------------------------------------------
+	//gestione proiettili---------------------------------------------------------------------------------------------------
 	public void newArrow(String orientation){
 		friendlyArrows.add(new Arrow(getPlayerX() + 11, getPlayerY() + 11, orientation, this));
 		if (player.getMultipleShot()){
@@ -156,13 +163,34 @@ public class EntityManager {
 	public void updateArrows(){
 		for (int i = 0; i < friendlyArrows.size(); i++){
 			if(friendlyArrows.get(i).checkIfActive()){
-				friendlyArrows.get(i).move();
+				friendlyArrows.get(i).moveEntity();
 			}
 			if(!friendlyArrows.get(i).checkIfActive()){
 				friendlyArrows.remove(i);
 				i -= 1;
 			}
 		}
+	}
+	
+	public void newHostileProjectile(int startingX, int startingY, int objectiveX, int objectiveY){
+		hostileProjectiles.add(new Peas(startingX, startingY, objectiveX, objectiveY, this));
+	}
+	
+	public void updateHostileProjectiles(){
+		for (int i = 0; i < hostileProjectiles.size(); i++){
+			if(hostileProjectiles.get(i).checkIfActive()){
+				hostileProjectiles.get(i).moveEntity();
+			}
+			if(!hostileProjectiles.get(i).checkIfActive()){
+				hostileProjectiles.remove(i);
+				i -= 1;
+			}
+		}
+	}
+	
+	public void clearProjectiles(){
+		friendlyArrows.clear();
+		hostileProjectiles.clear();
 	}
 	//------------------------------------------------------------------------------------------------------------------
 
@@ -189,6 +217,8 @@ public class EntityManager {
 	}
 
 	//gestione stato----------------------------------------------------------------------------------------------------
+	
+	
 	public boolean isGameOver(){
 		if(!player.checkIfActive()){
 			return true;
@@ -204,6 +234,7 @@ public class EntityManager {
 		obstacles = entityGenerator.getGroupByID(getRoomID()).getObstacles();
 		items = entityGenerator.getGroupByID(getRoomID()).getItems();
 		powerUpList = entityGenerator.getGroupByID(getRoomID()).getPowerUpList();
+		clearProjectiles();
 	}
 	public Room getRoom(){
 		return room;
@@ -254,6 +285,9 @@ public class EntityManager {
 		player.paint(g);
 		for (Projectile arrow: friendlyArrows){
 			arrow.paint(g);
+		}
+		for (Projectile projectile: hostileProjectiles){
+			projectile.paint(g);
 		}
 		for (Enemy enemy: enemies) {
 			if(enemy.checkIfActive()) {

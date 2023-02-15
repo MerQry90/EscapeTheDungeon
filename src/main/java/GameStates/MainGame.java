@@ -176,6 +176,7 @@ public class MainGame extends GameState{
 			entityManager.getPlayer().updateCoolDown();
 			entityManager.updateArrows();
 			entityManager.updateEnemies();
+			entityManager.updateHostileProjectiles();
 			entityManager.checkEntityToEntityCollisions();
 			entityManager.checkItemsCollisions();
 			entityManager.checkPowerUpCollision();

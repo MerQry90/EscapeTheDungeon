@@ -5,5 +5,7 @@ import Components.EntityManager;
 import Entities.GenericEntity;
 
 public abstract class Projectile extends DynamicEntity {
-
+	
+	protected boolean stuckOnWall = false;
+	
 }

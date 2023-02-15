@@ -90,8 +90,6 @@ public class Zombie extends Enemy{
 			setX(originalX + translationVector2D.getTranslationOnX());
 			setY(originalY + translationVector2D.getTranslationOnY());
 		}
-		
-		System.out.println("theta: "+toDegrees(translationVector2D.getAngulation()));
 	}
 	
 }

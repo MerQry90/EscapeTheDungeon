@@ -46,11 +46,11 @@ public class Arrow extends Projectile {
 
 		translationVector2D = new Vector2D(arrowSpeed);
 	}
-
-	public void move() {
+	
+	@Override
+	public void moveEntity() {
+		
 		arrowCountdown--;
-		int oldX = this.getX();
-		int oldY = this.getY();
 		switch (arrowOrientation){
 			case "up" ->{
 				translationVector2D.setAngulationFromCoordinates(0, -1);
@@ -65,31 +65,31 @@ public class Arrow extends Projectile {
 				translationVector2D.setAngulationFromCoordinates(-1, 0);
 			}
 		}
-		moveEntity();
-		if(arrowCountdown <= 0){
+		
+		if(stuckOnWall){
 			setInactive();
 		}
-	}
-	
-	@Override
-	public void moveEntity() {
-		int translationOnX = translationVector2D.getTranslationOnX();
-		int translationOnY = translationVector2D.getTranslationOnY();
-		if(translationOnX != 0) {
-			int signX = translationOnX / abs(translationOnX);
-			setX(getX() + translationOnX);
-			while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
-					(entityManager.checkObstaclesCollisions(this) && !canFly)) {
+		if(translationVector2D.getTranslationOnX() != 0) {
+			int signX = translationVector2D.getTranslationOnX() / abs(translationVector2D.getTranslationOnX());
+			setX(getX() + translationVector2D.getTranslationOnX());
+			while ((entityManager.checkWallsCollisions(this)) ||
+					(entityManager.checkObstaclesCollisions(this))) {
 				setX(getX() - signX);
+				stuckOnWall = true;
 			}
 		}
-		if(translationOnY != 0) {
-			int signY = translationOnY / abs(translationOnY);
-			setY(getY() + translationOnY);
-			while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
-					(entityManager.checkObstaclesCollisions(this) && !canFly)) {
+		if(translationVector2D.getTranslationOnY() != 0) {
+			int signY = translationVector2D.getTranslationOnY() / abs(translationVector2D.getTranslationOnY());
+			setY(getY() + translationVector2D.getTranslationOnY());
+			while ((entityManager.checkWallsCollisions(this))||
+					(entityManager.checkObstaclesCollisions(this))) {
 				setY(getY() - signY);
+				stuckOnWall = true;
 			}
+		}
+		
+		if(arrowCountdown <= 0){
+			setInactive();
 		}
 	}
 }
