@@ -1,7 +1,10 @@
 package Components;
 
 import Entities.DynamicEntities.*;
+import Entities.DynamicEntities.Enemies.Enemy;
+import Entities.DynamicEntities.Enemies.Tank;
 import Entities.GenericEntity;
+import Entities.StaticEntities.BloodStain;
 import Entities.StaticEntities.Item;
 import Entities.StaticEntities.Obstacle;
 import Entities.StaticEntities.PowerUps.PowerUp;

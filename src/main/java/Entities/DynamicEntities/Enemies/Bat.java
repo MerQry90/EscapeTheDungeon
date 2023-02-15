@@ -1,4 +1,4 @@
-package Entities.DynamicEntities;
+package Entities.DynamicEntities.Enemies;
 
 import Components.EntityManager;
 import Components.Vector2D;

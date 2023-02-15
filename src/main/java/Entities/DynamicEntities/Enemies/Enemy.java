@@ -1,10 +1,13 @@
-package Entities.DynamicEntities;
+package Entities.DynamicEntities.Enemies;
+
+import Entities.StaticEntities.BloodStain;
+import Entities.DynamicEntities.DynamicEntity;
 
 import java.util.Random;
 
 import static java.lang.Math.abs;
 
-public abstract class Enemy extends DynamicEntity{
+public abstract class Enemy extends DynamicEntity {
 
 	protected int activationWaiting = 20;
 	private String currentBehaviour;

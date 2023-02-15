@@ -1,9 +1,7 @@
 package Components;
 
-import Entities.DynamicEntities.Bat;
-import Entities.DynamicEntities.Shooter;
-import Entities.DynamicEntities.Tank;
-import Entities.DynamicEntities.Zombie;
+import Entities.DynamicEntities.Enemies.Shooter;
+import Entities.DynamicEntities.Enemies.Tank;
 import Entities.StaticEntities.PowerUps.LifeUp;
 import Entities.StaticEntities.PowerUps.MultipleShot;
 import Entities.StaticEntities.Rock;

@@ -1,7 +1,7 @@
 package Components;
 
-import Entities.DynamicEntities.Bat;
-import Entities.DynamicEntities.Enemy;
+import Entities.DynamicEntities.Enemies.Bat;
+import Entities.DynamicEntities.Enemies.Enemy;
 
 import java.util.List;
 import java.util.Random;

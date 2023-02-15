@@ -1,6 +1,6 @@
 package Components;
 
-import Entities.DynamicEntities.Enemy;
+import Entities.DynamicEntities.Enemies.Enemy;
 import Entities.StaticEntities.Item;
 import Entities.StaticEntities.Obstacle;
 import Entities.StaticEntities.PowerUps.PowerUp;

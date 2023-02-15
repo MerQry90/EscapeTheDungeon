@@ -1,4 +1,4 @@
-package Entities.DynamicEntities;
+package Entities.StaticEntities;
 
 import Entities.StaticEntities.Obstacle;
 
