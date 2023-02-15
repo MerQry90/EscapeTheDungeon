@@ -1,6 +1,7 @@
 package Components;
 
 import Entities.DynamicEntities.Enemies.FiftyFifty;
+import Entities.DynamicEntities.Enemies.Ghost;
 import Entities.DynamicEntities.Enemies.Shooter;
 import Entities.DynamicEntities.Enemies.Tank;
 import Entities.StaticEntities.PowerUps.LifeUp;
@@ -71,7 +72,7 @@ public class EntityGenerator {
 				//STANZA COMUNE CON I NEMICI
 				switch (difficulty) {
 					case "easy" -> {
-						switch (random.nextInt(1)) {
+						switch (random.nextInt(2)) {
 							case 0 -> {
 								
 								//group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(3)));
@@ -86,8 +87,9 @@ public class EntityGenerator {
 
 							}
 							case 1 -> {
-								group.getEnemies().add(new Shooter(Tile.getTile(7), Tile.getTile(2), entityManager));
+								//group.getEnemies().add(new Shooter(Tile.getTile(7), Tile.getTile(2), entityManager));
 								group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(3)));
+								group.getEnemies().add(new Ghost(Tile.getTile(7), Tile.getTile(2), entityManager));
 							}
 						}
 					}

@@ -62,8 +62,6 @@ public class Zombie extends Enemy{
 	public void moveEntity(){
 		int originalX = getX();
 		int originalY = getY();
-		double originalTheta = translationVector2D.getAngulation();
-		double epsilon = toRadians(15.0);
 		
 		boolean collisionOnX = false;
 		boolean collisionOnY = false;
