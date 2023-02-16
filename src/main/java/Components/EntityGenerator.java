@@ -1,9 +1,6 @@
 package Components;
 
-import Entities.DynamicEntities.Enemies.FiftyFifty;
-import Entities.DynamicEntities.Enemies.Ghost;
-import Entities.DynamicEntities.Enemies.Shooter;
-import Entities.DynamicEntities.Enemies.Tank;
+import Entities.DynamicEntities.Enemies.*;
 import Entities.StaticEntities.PowerUps.LifeUp;
 import Entities.StaticEntities.PowerUps.MultipleShot;
 import Entities.StaticEntities.Rock;
@@ -83,7 +80,7 @@ public class EntityGenerator {
 								//group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(5)));
 
 
-								group.getEnemies().add(new FiftyFifty(Tile.getTile(7), Tile.getTile(2), entityManager));
+								group.getEnemies().add(new Mage(Tile.getTile(7), Tile.getTile(2), entityManager));
 
 							}
 							case 1 -> {

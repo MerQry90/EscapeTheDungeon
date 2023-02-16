@@ -56,7 +56,7 @@ public class Shooter extends Enemy{
 					idleCountdown -= 1;
 				}
 				case "shoot" -> {
-					entityManager.newHostileProjectile(getX(), getY(), entityManager.getPlayerX(), entityManager.getPlayerY());
+					entityManager.newHostileProjectile(getX(), getY(), entityManager.getPlayerX(), entityManager.getPlayerY(), this);
 					idleCountdown = 30;
 					changeBehaviourTo("idle");
 				}

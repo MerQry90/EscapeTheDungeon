@@ -2,6 +2,8 @@ package Components;
 
 import Entities.DynamicEntities.*;
 import Entities.DynamicEntities.Enemies.Enemy;
+import Entities.DynamicEntities.Enemies.Mage;
+import Entities.DynamicEntities.Enemies.Shooter;
 import Entities.DynamicEntities.Enemies.Tank;
 import Entities.GenericEntity;
 import Entities.StaticEntities.BloodStain;
@@ -186,8 +188,13 @@ public class EntityManager {
 		}
 	}
 	
-	public void newHostileProjectile(int startingX, int startingY, int objectiveX, int objectiveY){
-		hostileProjectiles.add(new Peas(startingX, startingY, objectiveX, objectiveY, this));
+	public void newHostileProjectile(int startingX, int startingY, int objectiveX, int objectiveY, Enemy enemy){
+		if(enemy instanceof Shooter) {
+			hostileProjectiles.add(new Peas(startingX, startingY, objectiveX, objectiveY, this));
+		}
+		else if (enemy instanceof Mage) {
+			hostileProjectiles.add(new MagicBall(startingX, startingY, objectiveX, objectiveY, this));
+		}
 	}
 	
 	public void updateHostileProjectiles(){
