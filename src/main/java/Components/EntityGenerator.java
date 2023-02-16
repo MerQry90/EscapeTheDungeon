@@ -69,7 +69,7 @@ public class EntityGenerator {
 				//STANZA COMUNE CON I NEMICI
 				switch (difficulty) {
 					case "easy" -> {
-						switch (random.nextInt(2)) {
+						switch (random.nextInt(1)) {
 							case 0 -> {
 								
 								//group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(3)));
@@ -81,6 +81,9 @@ public class EntityGenerator {
 
 
 								group.getEnemies().add(new Mage(Tile.getTile(7), Tile.getTile(2), entityManager));
+								group.getEnemies().add(new Shooter(Tile.getTile(2), Tile.getTile(2), entityManager));
+								group.getEnemies().add(new FiftyFifty(Tile.getTile(8), Tile.getTile(7), entityManager));
+								group.getEnemies().add(new Ghost(Tile.getTile(15), Tile.getTile(2), entityManager));
 
 							}
 							case 1 -> {

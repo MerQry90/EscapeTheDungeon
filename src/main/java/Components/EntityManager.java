@@ -190,10 +190,10 @@ public class EntityManager {
 	
 	public void newHostileProjectile(int startingX, int startingY, int objectiveX, int objectiveY, Enemy enemy){
 		if(enemy instanceof Shooter) {
-			hostileProjectiles.add(new Peas(startingX, startingY, objectiveX, objectiveY, this));
+			hostileProjectiles.add(new Peas(startingX + 16, startingY + 16, objectiveX, objectiveY, this));
 		}
 		else if (enemy instanceof Mage) {
-			hostileProjectiles.add(new MagicBall(startingX, startingY, objectiveX, objectiveY, this));
+			hostileProjectiles.add(new MagicBall(startingX + 16, startingY + 16, objectiveX, objectiveY, this));
 		}
 	}
 	
@@ -292,6 +292,8 @@ public class EntityManager {
 	//------------------------------------------------------------------------------------------------------------------
 	
 	public void renderEntities(Graphics g){
+		System.out.println("x " + player.getX());
+		System.out.println("y " + player.getY());
 		for(Item item: items){
 			if(item.checkIfActive()){
 				item.paint(g);

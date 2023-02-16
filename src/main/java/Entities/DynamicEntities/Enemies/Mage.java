@@ -27,10 +27,10 @@ public class Mage extends Enemy{
         initCollisionBox();
 
         translationVector2D = new Vector2D(0);
-        setRandomHealth(2, 1);
+        setRandomHealth(3, 3);
         setCanPassThroughWalls(false);
         setCanFly(false);
-        changeBehaviourTo("idle");
+        changeBehaviourTo("teleport");
 
         idleCountdown = 30;
         teleportCountdown = 20;
@@ -62,32 +62,7 @@ public class Mage extends Enemy{
                 }
                 case  "teleport" ->{
                     idleCountdown = 40;
-                    Random random = new Random();
-                    int minimumSpace = 64;
-                    int bound = 128;
-                    int randomX, randomY;
-                    int actualX = getX();
-                    int actualY = getY();
-                    randomX = entityManager.getPlayerX();
-                    randomY = entityManager.getPlayerY();
-                    if(random.nextBoolean()){
-                        randomX += random.nextInt(bound) + minimumSpace;
-                    }
-                    else {
-                        randomX -= random.nextInt(bound) + minimumSpace;
-                    }
-                    if(random.nextBoolean()){
-                        randomY += random.nextInt(bound) + minimumSpace;
-                    }
-                    else {
-                        randomY -= random.nextInt(bound) + minimumSpace;
-                    }
-                    setX(randomX);
-                    setY(randomY);
-                    if(getX() < 65 || getX() > 1023 || getY() < 65 || getY() > 511){
-                       setX(actualX);
-                       setY(actualY);
-                    }
+                    moveEntity();
                     changeBehaviourTo("idle");
                 }
                 case "dead" -> {
@@ -102,6 +77,28 @@ public class Mage extends Enemy{
 
     @Override
     public void moveEntity() {
-
+        Random random = new Random();
+        int minimumSpace = 128;
+        int bound = 128;
+        int randomX, randomY;
+        do{
+            randomX = entityManager.getPlayerX();
+            randomY = entityManager.getPlayerY();
+            if(random.nextBoolean()){
+                randomX += random.nextInt(bound) + minimumSpace;
+            }
+            else {
+                randomX -= random.nextInt(bound) + minimumSpace;
+            }
+            if(random.nextBoolean()){
+                randomY += random.nextInt(bound) + minimumSpace;
+            }
+            else {
+                randomY -= random.nextInt(bound) + minimumSpace;
+            }
+            setX(randomX);
+            setY(randomY);
+        }
+        while(getX() < 65 || getX() > 960 || getY() < 65 || getY() > 448);
     }
 }

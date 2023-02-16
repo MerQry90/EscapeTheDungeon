@@ -9,7 +9,7 @@ import static java.lang.Math.abs;
 
 public abstract class Enemy extends DynamicEntity {
 
-	protected int activationWaiting = 20;
+	protected int activationWaiting = 10;
 	private String currentBehaviour;
 	public boolean canGenerateBloodStain = false;
 	
