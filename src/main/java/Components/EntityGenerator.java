@@ -59,6 +59,7 @@ public class EntityGenerator {
 		for(Group group: groups) {
 			if(bossRoomID == group.getID()){
 				//STANZA DEL BOSS
+				group.getEnemies().add(new Boss(entityManager));
 			}
 			else if(checkIfSpecialRoom(group.getID())){
 				//STANZA SPECIALE

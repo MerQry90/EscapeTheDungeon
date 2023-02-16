@@ -2,6 +2,8 @@ package Entities.DynamicEntities.Enemies;
 
 import Components.EntityManager;
 import Components.Vector2D;
+import Entities.DynamicEntities.MagicBall;
+import Entities.DynamicEntities.Peas;
 
 import java.awt.*;
 
@@ -56,7 +58,8 @@ public class Shooter extends Enemy{
 					idleCountdown -= 1;
 				}
 				case "shoot" -> {
-					entityManager.newHostileProjectile(getX(), getY(), entityManager.getPlayerX(), entityManager.getPlayerY(), this);
+					entityManager.newHostileProjectile(new MagicBall(getX(), getY(),
+							entityManager.getPlayerX(), entityManager.getPlayerY(), entityManager));
 					idleCountdown = 30;
 					changeBehaviourTo("idle");
 				}

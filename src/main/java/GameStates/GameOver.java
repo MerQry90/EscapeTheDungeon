@@ -2,11 +2,11 @@ package GameStates;
 
 import Application.KeyHandler;
 
-public class End extends GameState{
+public class GameOver extends GameState{
 	
-	public End(KeyHandler keyH) {
+	public GameOver(KeyHandler keyH) {
 		this.keyH = keyH;
-		background.loadEndBackground();
+		background.loadGameOverBackground();
 		setActive();
 	}
 	

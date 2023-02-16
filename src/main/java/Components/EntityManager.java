@@ -1,10 +1,7 @@
 package Components;
 
 import Entities.DynamicEntities.*;
-import Entities.DynamicEntities.Enemies.Enemy;
-import Entities.DynamicEntities.Enemies.Mage;
-import Entities.DynamicEntities.Enemies.Shooter;
-import Entities.DynamicEntities.Enemies.Tank;
+import Entities.DynamicEntities.Enemies.*;
 import Entities.GenericEntity;
 import Entities.StaticEntities.BloodStain;
 import Entities.StaticEntities.Item;
@@ -31,7 +28,10 @@ public class EntityManager {
 
 	private Room room;
 	
+	private boolean bossHasBeenDefeated;
+	
 	public EntityManager(){
+		bossHasBeenDefeated = false;
 		player = new Player(this);
 
 		enemies = new ArrayList<>();
@@ -87,7 +87,7 @@ public class EntityManager {
 		boolean hasCollided = false;
 		for(Obstacle obstacle: obstacles){
 			//per le pozze di sangue
-			if(obstacle instanceof BloodStain && obstacle != null && obstacle.checkIfActive() && !player.getCanFly() && obstacle.checkCollision(player) && player.isVulnerable()){
+			if(obstacle instanceof BloodStain && obstacle.checkIfActive() && !player.getCanFly() && obstacle.checkCollision(player) && player.isVulnerable()){
 				player.lowerHealth();
 				player.setInvulnerable();
 			}
@@ -188,13 +188,16 @@ public class EntityManager {
 		}
 	}
 	
-	public void newHostileProjectile(int startingX, int startingY, int objectiveX, int objectiveY, Enemy enemy){
+	/*public void newHostileProjectile(int startingX, int startingY, int objectiveX, int objectiveY, Enemy enemy){
 		if(enemy instanceof Shooter) {
 			hostileProjectiles.add(new Peas(startingX + 16, startingY + 16, objectiveX, objectiveY, this));
 		}
 		else if (enemy instanceof Mage) {
 			hostileProjectiles.add(new MagicBall(startingX + 16, startingY + 16, objectiveX, objectiveY, this));
 		}
+	}*/
+	public void newHostileProjectile(Projectile newProjectile){
+		hostileProjectiles.add(newProjectile);
 	}
 	
 	public void updateHostileProjectiles(){
@@ -222,6 +225,9 @@ public class EntityManager {
 			if(enemy instanceof Tank && !enemy.checkIfActive() && enemy.canGenerateBloodStain){
 				obstacles.add(enemy.generateBloodStain());
 			}
+			if(enemy instanceof Boss && !enemy.checkIfActive()){
+				bossHasBeenDefeated = true;
+			}
 		}
 	}
 
@@ -248,6 +254,9 @@ public class EntityManager {
 			return true;
 		}
 		return false;
+	}
+	public boolean isBossDead(){
+		return bossHasBeenDefeated;
 	}
 	
 	public void setNewRoom(int ID, int nID, int eID, int sID, int wID){

@@ -38,7 +38,6 @@ public class Peas extends Projectile{
 		int dX = getDeltaXToObjective(entityManager.getPlayerX());
 		int dY = getDeltaYToObjective(entityManager.getPlayerY());
 		translationVector2D.setAngulationFromCoordinates(dX, dY);
-		System.out.println(objectiveX + " " + objectiveY);
 		//System.out.println(toDegrees(translationVector2D.getAngulation()));
 		setCanPassThroughWalls(false);
 		setCanFly(false);

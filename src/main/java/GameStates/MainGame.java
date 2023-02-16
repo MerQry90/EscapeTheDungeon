@@ -20,6 +20,8 @@ public class MainGame extends GameState{
 	private CellManager cellManager;
 	private UI ui;
 	
+	public boolean win;
+	
 	public MainGame(KeyHandler keyH){
 		this.keyH = keyH;
 		setActive();
@@ -166,10 +168,12 @@ public class MainGame extends GameState{
 		mapCountdown--;
 		processInput();
 		if(!pause) {
-			if (clearedTotalStages >= 10) {
+			if(entityManager.isBossDead()){
+				win = true;
 				setInactive();
 			}
 			if(entityManager.isGameOver()){
+				win = false;
 				setInactive();
 			}
 			entityManager.getPlayer().translateInputToMovement();

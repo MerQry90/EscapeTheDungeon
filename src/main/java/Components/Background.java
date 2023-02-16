@@ -20,7 +20,8 @@ public class Background {
 	private Image background;
 	private ImageIcon MainMenuBackground;
 	private ImageIcon MainGameBackground;
-	private ImageIcon EndBackground;
+	private ImageIcon GameOverBackground;
+	private ImageIcon GameWinBackground;
 
 	private Tile tile;
 
@@ -33,7 +34,8 @@ public class Background {
 		tile = new Tile();
 		MainMenuBackground = new ImageIcon("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
 		MainGameBackground = new ImageIcon("src/resources/sprites/backgrounds/backgroundNew_placeholder.png");
-		EndBackground = new ImageIcon("src/resources/sprites/backgrounds/gameOver_placeHolder.png");
+		GameOverBackground = new ImageIcon("src/resources/sprites/backgrounds/gameOver_placeHolder.png");
+		GameWinBackground = new ImageIcon("src/resources/sprites/backgrounds/victory_screen.png");
 	}
 
 	public int getWidth() {
@@ -50,8 +52,11 @@ public class Background {
 	public void loadMainGameBackground(){
 		background = MainGameBackground.getImage();
 	}
-	public void loadEndBackground(){
-		background = EndBackground.getImage();
+	public void loadGameOverBackground(){
+		background = GameOverBackground.getImage();
+	}
+	public void loadGameWinBackground(){
+		background = GameWinBackground.getImage();
 	}
 	public void paint(Graphics g){
 		g.drawImage(background, 0, 0, width, height, null);

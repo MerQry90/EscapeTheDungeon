@@ -1,10 +1,7 @@
 package Application;
 
 import Components.Background;
-import GameStates.End;
-import GameStates.GameState;
-import GameStates.MainGame;
-import GameStates.MainMenu;
+import GameStates.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,9 +78,14 @@ public class GamePanel extends JPanel implements ActionListener {
 			gameState = new MainGame(keyH);
 		}
 		else if (gameState instanceof MainGame) {
-			gameState = new End(keyH);
+			if(((MainGame) gameState).win) {
+				gameState = new GameWin(keyH);
+			}
+			else {
+				gameState = new GameOver(keyH);
+			}
 		}
-		else if (gameState instanceof End || gameState == null) {
+		else {
 			gameState = new MainMenu(keyH);
 		}
 	}

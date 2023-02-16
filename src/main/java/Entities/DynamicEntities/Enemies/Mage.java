@@ -2,6 +2,7 @@ package Entities.DynamicEntities.Enemies;
 
 import Components.EntityManager;
 import Components.Vector2D;
+import Entities.DynamicEntities.Peas;
 
 import java.awt.*;
 import java.util.Random;
@@ -55,7 +56,8 @@ public class Mage extends Enemy{
                     idleCountdown -= 1;
                 }
                 case "shoot" -> {
-                    entityManager.newHostileProjectile(getX(), getY(), entityManager.getPlayerX(), entityManager.getPlayerY(), this);
+                    entityManager.newHostileProjectile(new Peas(getX(), getY(),
+                            entityManager.getPlayerX(), entityManager.getPlayerY(), entityManager));
                     idleCountdown = 10;
                     shotNumber += 1;
                     changeBehaviourTo("idle");
