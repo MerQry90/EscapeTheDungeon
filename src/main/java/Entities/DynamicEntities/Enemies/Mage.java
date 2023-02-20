@@ -2,6 +2,7 @@ package Entities.DynamicEntities.Enemies;
 
 import Components.EntityManager;
 import Components.Vector2D;
+import Entities.DynamicEntities.MagicBall;
 import Entities.DynamicEntities.Peas;
 
 import java.awt.*;
@@ -56,7 +57,7 @@ public class Mage extends Enemy{
                     idleCountdown -= 1;
                 }
                 case "shoot" -> {
-                    entityManager.newHostileProjectile(new Peas(getX(), getY(),
+                    entityManager.newHostileProjectile(new MagicBall(getX(), getY(),
                             entityManager.getPlayerX(), entityManager.getPlayerY(), entityManager));
                     idleCountdown = 10;
                     shotNumber += 1;
@@ -101,6 +102,6 @@ public class Mage extends Enemy{
             setX(randomX);
             setY(randomY);
         }
-        while(getX() < 65 || getX() > 960 || getY() < 65 || getY() > 448);
+        while(getX() < 65 || getX() > 960 || getY() < 65 || getY() > 448 || entityManager.checkObstaclesCollisions(this));
     }
 }

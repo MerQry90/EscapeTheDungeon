@@ -10,7 +10,7 @@ import static java.lang.Math.abs;
 public class Arrow extends Projectile {
 
 	private Image RIGHT_ARROW;
-	private int arrowCountdown;
+	private int arrowDuration;
 	
 	//la freccia deve essere visibile finché non collide con qualcosa
 	private final int arrowSpeed = 20;
@@ -41,7 +41,7 @@ public class Arrow extends Projectile {
 			setCBheightScalar(0.9);
 		}
 		initCollisionBox();
-		arrowCountdown = 35;
+		arrowDuration = 60;
 		setCanFly(true);
 
 		translationVector2D = new Vector2D(arrowSpeed);
@@ -50,7 +50,7 @@ public class Arrow extends Projectile {
 	@Override
 	public void moveEntity() {
 		
-		arrowCountdown--;
+		arrowDuration--;
 		switch (arrowOrientation){
 			case "up" ->{
 				translationVector2D.setAngulationFromCoordinates(0, -1);
@@ -88,7 +88,7 @@ public class Arrow extends Projectile {
 			}
 		}
 		
-		if(arrowCountdown <= 0){
+		if(arrowDuration <= 0){
 			setInactive();
 		}
 	}

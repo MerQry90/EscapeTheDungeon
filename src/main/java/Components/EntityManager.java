@@ -187,15 +187,6 @@ public class EntityManager {
 			}
 		}
 	}
-	
-	/*public void newHostileProjectile(int startingX, int startingY, int objectiveX, int objectiveY, Enemy enemy){
-		if(enemy instanceof Shooter) {
-			hostileProjectiles.add(new Peas(startingX + 16, startingY + 16, objectiveX, objectiveY, this));
-		}
-		else if (enemy instanceof Mage) {
-			hostileProjectiles.add(new MagicBall(startingX + 16, startingY + 16, objectiveX, objectiveY, this));
-		}
-	}*/
 	public void newHostileProjectile(Projectile newProjectile){
 		hostileProjectiles.add(newProjectile);
 	}

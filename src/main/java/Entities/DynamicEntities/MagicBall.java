@@ -36,7 +36,7 @@ public class MagicBall extends Projectile {
         int dY = getDeltaYToObjective(entityManager.getPlayerY());
         translationVector2D.setAngulationFromCoordinates(dX, dY);
         setCanPassThroughWalls(false);
-        setCanFly(false);
+        setCanFly(true);
     }
     @Override
     public void moveEntity() {
