@@ -161,7 +161,7 @@ public class EntityManager {
 	}
 	//------------------------------------------------------------------------------------------------------------------
 
-	//gestione proiettili---------------------------------------------------------------------------------------------------
+	//gestione proiettili-----------------------------------------------------------------------------------------------
 	public void newArrow(String orientation){
 		friendlyArrows.add(new Arrow(getPlayerX() + 11, getPlayerY() + 11, orientation, this));
 		if (player.getMultipleShot()){
@@ -292,8 +292,6 @@ public class EntityManager {
 	//------------------------------------------------------------------------------------------------------------------
 	
 	public void renderEntities(Graphics g){
-		System.out.println("x " + player.getX());
-		System.out.println("y " + player.getY());
 		for(Item item: items){
 			if(item.checkIfActive()){
 				item.paint(g);
