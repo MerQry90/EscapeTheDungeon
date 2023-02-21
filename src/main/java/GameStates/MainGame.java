@@ -164,10 +164,10 @@ public class MainGame extends GameState{
 	public void render(Graphics g) {
 		super.render(g);
 		entityManager.renderEntities(g);
-		ui.drawUI(g, entityManager.getPlayer(), cellManager.getFoundRooms(), cellManager.getAlmostFoundRooms(), entityManager.getRoomID());
-		//TEST DI DISEGNO DEL FONT
-		g.setFont(new Font("Verdana", Font.BOLD, 35));
-		g.drawString("# of keys: " + numberOfKeys, Tile.getTile(0) + 10, Tile.getTile(9) - 20);
+		ui.drawMap(cellManager.getFoundRooms(), cellManager.getAlmostFoundRooms(), entityManager.getRoomID(), g);
+		ui.drawPlayerHeart(g, entityManager.getPlayer());
+		ui.drawKeyNumber(numberOfKeys, g);
+		ui.drawRepelMessage(g);
 	}
 	
 	@Override
@@ -197,6 +197,7 @@ public class MainGame extends GameState{
 			if(collisionID > 0){
 				if(entityManager.entityGenerator.checkIfBossRoom(collisionID) && !checkIfEnoughKeys()){
 					goToStartingRoom();
+					ui.refreshRepelMessage();
 				}
 				else {
 					if(entityManager.entityGenerator.checkIfSpecialRoom(collisionID)){

@@ -4,9 +4,7 @@ import Entities.DynamicEntities.Player;
 import Entities.GenericEntity;
 
 import java.awt.*;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class UI {
 	private Image NORMAL_ROOM;
@@ -24,6 +22,8 @@ public class UI {
 
 	private List<Integer> specialRoomsIDS;
 	private int bossRoomID;
+	
+	private int repelMessageCountdown;
 
 	public UI(){
 		NORMAL_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/NormalRoom.png");
@@ -36,14 +36,9 @@ public class UI {
 		HEART_FULL = GenericEntity.setSpriteFromPath("src/resources/sprites/png/full_heart.png");
 		HEART_EMPTY = GenericEntity.setSpriteFromPath("src/resources/sprites/png/empty_heart.png");
 		mapEnabled = true;
+		repelMessageCountdown = 0;
 	}
-
-	public void drawUI(Graphics g, Player player, List<Integer> foundRooms, List<Integer> almostFoundRooms, int playerCellID){
-		drawPlayerHeart(g, player);
-		renderMap(foundRooms, almostFoundRooms, playerCellID, g);
-		//chiamare qui tutti i metodi della UI
-	}
-
+	
 	public void drawPlayerHeart(Graphics g, Player player){
 		for(int i = 0; i < player.getMaxHealth(); i += 1){
 			if(i < player.getHealth()) {
@@ -62,8 +57,24 @@ public class UI {
 	public void disableMap(){
 		mapEnabled = false;
 	}
+	
+	public void drawKeyNumber(int numberOfKeys, Graphics g){
+		g.setFont(new Font("Verdana", Font.BOLD, 30));
+		g.drawString("# of keys: " + numberOfKeys, Tile.getTile(0) + 10, Tile.getTile(9) - 20);
+	}
+	
+	public void refreshRepelMessage(){
+		repelMessageCountdown = 90;
+	}
+	public void drawRepelMessage(Graphics g){
+		if(repelMessageCountdown > 0){
+			repelMessageCountdown -= 1;
+			g.setFont(new Font("Verdana", Font.BOLD, 30));
+			g.drawString("A mysterious force repel you...", Tile.getTile(4), Tile.getTile(5));
+		}
+	}
 
-	private void renderMap(List<Integer> foundRooms, List<Integer> almostFoundRooms, int playerCellID, Graphics g){
+	public void drawMap(List<Integer> foundRooms, List<Integer> almostFoundRooms, int playerCellID, Graphics g){
 		if(mapEnabled){
 			int IDX, IDY;
 			int mapCellX, mapCellY;
