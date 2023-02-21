@@ -13,6 +13,7 @@ public class MainGame extends GameState{
 	private boolean toggleMap;
 	private int pauseCountdown;
 	private int mapCountdown;
+	private int numberOfKeys;
 	
 	private int clearedTotalStages;
 	
@@ -34,12 +35,20 @@ public class MainGame extends GameState{
 		clearedTotalStages = 0;
 		pause = false;
 		toggleMap = false;
+		numberOfKeys = 0;
 		
 		cellManager = new CellManager();
 		setEntityGroups();
-		translateCellToNewRoom(-1);
+		goToStartingRoom();
 		ui = new UI();
 		setUI();
+	}
+	
+	public void addKey(){
+		numberOfKeys += 1;
+	}
+	public boolean checkIfEnoughKeys(){
+		return numberOfKeys >= 3;
 	}
 	
 	public void setUI(){
@@ -56,33 +65,32 @@ public class MainGame extends GameState{
 		entityManager.entityGenerator.generateEntities();
 	}
 	
+	public void goToStartingRoom(){
+		entityManager.setNewRoom(cellManager.STARTING_CELL,
+				cellManager.getCellByID(cellManager.STARTING_CELL).getNorthDoorID(),
+				cellManager.getCellByID(cellManager.STARTING_CELL).getEastDoorID(),
+				cellManager.getCellByID(cellManager.STARTING_CELL).getSouthDoorID(),
+				cellManager.getCellByID(cellManager.STARTING_CELL).getWestDoorID());
+		entityManager.setDefaultPlayerPositionCenter();
+		entityManager.setRoomAsDeadEnd();
+		cellManager.addNewFoundRoom(cellManager.STARTING_CELL);
+	}
+	
 	public void translateCellToNewRoom(int newID){
-		if(entityManager.getRoom() == null){
-			entityManager.setNewRoom(cellManager.STARTING_CELL,
-					cellManager.getCellByID(cellManager.STARTING_CELL).getNorthDoorID(),
-					cellManager.getCellByID(cellManager.STARTING_CELL).getEastDoorID(),
-					cellManager.getCellByID(cellManager.STARTING_CELL).getSouthDoorID(),
-					cellManager.getCellByID(cellManager.STARTING_CELL).getWestDoorID());
-			entityManager.setDefaultPlayerPositionCenter();
-			entityManager.setRoomAsDeadEnd();
-			newID = cellManager.STARTING_CELL;
+		if (entityManager.getRoomID() == newID + 10) {
+			entityManager.setDefaultPlayerPositionDown();
+		} else if (entityManager.getRoomID() == newID - 1) {
+			entityManager.setDefaultPlayerPositionLeft();
+		} else if (entityManager.getRoomID() == newID - 10) {
+			entityManager.setDefaultPlayerPositionUp();
+		} else if (entityManager.getRoomID() == newID + 1) {
+			entityManager.setDefaultPlayerPositionRight();
 		}
-		else {
-			if (entityManager.getRoomID() == newID + 10) {
-				entityManager.setDefaultPlayerPositionDown();
-			} else if (entityManager.getRoomID() == newID - 1) {
-				entityManager.setDefaultPlayerPositionLeft();
-			} else if (entityManager.getRoomID() == newID - 10) {
-				entityManager.setDefaultPlayerPositionUp();
-			} else if (entityManager.getRoomID() == newID + 1) {
-				entityManager.setDefaultPlayerPositionRight();
-			}
-			entityManager.setNewRoom(newID,
-					cellManager.getCellByID(newID).getNorthDoorID(),
-					cellManager.getCellByID(newID).getEastDoorID(),
-					cellManager.getCellByID(newID).getSouthDoorID(),
-					cellManager.getCellByID(newID).getWestDoorID());
-		}
+		entityManager.setNewRoom(newID,
+				cellManager.getCellByID(newID).getNorthDoorID(),
+				cellManager.getCellByID(newID).getEastDoorID(),
+				cellManager.getCellByID(newID).getSouthDoorID(),
+				cellManager.getCellByID(newID).getWestDoorID());
 		cellManager.addNewFoundRoom(newID);
 	}
 	
@@ -158,8 +166,8 @@ public class MainGame extends GameState{
 		entityManager.renderEntities(g);
 		ui.drawUI(g, entityManager.getPlayer(), cellManager.getFoundRooms(), cellManager.getAlmostFoundRooms(), entityManager.getRoomID());
 		//TEST DI DISEGNO DEL FONT
-		g.setFont(new Font("Verdana", Font.BOLD, 80));
-		g.drawString("Test", 64*10, 64*7);
+		g.setFont(new Font("Verdana", Font.BOLD, 35));
+		g.drawString("# of keys: " + numberOfKeys, Tile.getTile(0) + 10, Tile.getTile(9) - 20);
 	}
 	
 	@Override
@@ -187,7 +195,15 @@ public class MainGame extends GameState{
 			entityManager.checkRoomCompletion();
 			int collisionID = entityManager.checkPlayerToDoorsCollisions();
 			if(collisionID > 0){
-				translateCellToNewRoom(collisionID);
+				if(entityManager.entityGenerator.checkIfBossRoom(collisionID) && !checkIfEnoughKeys()){
+					goToStartingRoom();
+				}
+				else {
+					if(entityManager.entityGenerator.checkIfSpecialRoom(collisionID)){
+						addKey();
+					}
+					translateCellToNewRoom(collisionID);
+				}
 			}
 		}
 	}
