@@ -9,6 +9,7 @@ public class KeyHandler implements KeyListener {
 	public boolean shootUp, shootDown, shootLeft, shootRight;
 	public boolean enterPressed, escapePressed, mPressed;
 	public boolean killAll;
+	public boolean tpToBoss;
 
 	@Override
 	public void keyTyped(KeyEvent e)  { }
@@ -33,6 +34,7 @@ public class KeyHandler implements KeyListener {
 			case KeyEvent.VK_M -> mPressed = true;
 
 			case KeyEvent.VK_K -> killAll = true;
+			case KeyEvent.VK_B -> tpToBoss = true;
 		}
 	}
 
@@ -55,6 +57,7 @@ public class KeyHandler implements KeyListener {
 			case KeyEvent.VK_M -> mPressed = false;
 
 			case KeyEvent.VK_K -> killAll = false;
+			case KeyEvent.VK_B -> tpToBoss = false;
 		}
 	}
 }

@@ -157,6 +157,10 @@ public class MainGame extends GameState{
 		if(keyH.killAll){
 			entityManager.killAll();
 		}
+		if(keyH.tpToBoss){
+			entityManager.setDefaultPlayerPositionUp();
+			translateCellToNewRoom(cellManager.getBossRoomID());
+		}
 		
 	}
 
