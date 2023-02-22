@@ -2,8 +2,7 @@ package Entities.DynamicEntities.Enemies;
 
 import Components.EntityManager;
 import Components.Vector2D;
-import Entities.DynamicEntities.MagicBall;
-import Entities.DynamicEntities.Peas;
+import Entities.DynamicEntities.Projectiles.Peas;
 
 import java.awt.*;
 

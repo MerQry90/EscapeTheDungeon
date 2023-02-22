@@ -1,7 +1,8 @@
-package Entities.DynamicEntities;
+package Entities.DynamicEntities.Projectiles;
 
 import Components.EntityManager;
 import Components.Vector2D;
+import Entities.GenericEntity;
 
 import java.awt.*;
 
@@ -27,7 +28,7 @@ public class Arrow extends Projectile {
 	@Override
 	public void init() {
 		//CARICAMENTO SPRITE
-		RIGHT_ARROW = setSpriteFromPath("src/resources/sprites/projectiles/arrow.png");
+		RIGHT_ARROW = GenericEntity.setSpriteFromPath("src/resources/sprites/projectiles/arrow.png");
 		setActiveSprite(RIGHT_ARROW);
 		
 		setWidth(40);
@@ -70,7 +71,7 @@ public class Arrow extends Projectile {
 			setInactive();
 		}
 		if(translationVector2D.getTranslationOnX() != 0) {
-			int signX = translationVector2D.getTranslationOnX() / abs(translationVector2D.getTranslationOnX());
+			int signX = translationVector2D.getTranslationOnX() / Math.abs(translationVector2D.getTranslationOnX());
 			setX(getX() + translationVector2D.getTranslationOnX());
 			while ((entityManager.checkWallsCollisions(this)) ||
 					(entityManager.checkObstaclesCollisions(this))) {
@@ -79,7 +80,7 @@ public class Arrow extends Projectile {
 			}
 		}
 		if(translationVector2D.getTranslationOnY() != 0) {
-			int signY = translationVector2D.getTranslationOnY() / abs(translationVector2D.getTranslationOnY());
+			int signY = translationVector2D.getTranslationOnY() / Math.abs(translationVector2D.getTranslationOnY());
 			setY(getY() + translationVector2D.getTranslationOnY());
 			while ((entityManager.checkWallsCollisions(this))||
 					(entityManager.checkObstaclesCollisions(this))) {

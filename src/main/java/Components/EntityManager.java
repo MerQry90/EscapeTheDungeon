@@ -2,6 +2,8 @@ package Components;
 
 import Entities.DynamicEntities.*;
 import Entities.DynamicEntities.Enemies.*;
+import Entities.DynamicEntities.Projectiles.Arrow;
+import Entities.DynamicEntities.Projectiles.Projectile;
 import Entities.GenericEntity;
 import Entities.StaticEntities.BloodStain;
 import Entities.StaticEntities.Item;

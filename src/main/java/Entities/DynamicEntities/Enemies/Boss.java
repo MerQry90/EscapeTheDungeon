@@ -5,10 +5,13 @@ import Components.Tile;
 import Components.Vector2D;
 
 import java.awt.*;
+import java.util.Objects;
+import java.util.Random;
 
 public class Boss extends Enemy{
 	
 	private Image BOSS_TMP;
+	private int behaviourCountdown;
 	
 	public Boss(EntityManager entityManager){
 		this.entityManager = entityManager;
@@ -34,23 +37,49 @@ public class Boss extends Enemy{
 		initCollisionBox();
 		
 		translationVector2D = new Vector2D(3);
-		setRandomHealth(2, 2);
+		setHealth(10);
 		setCanPassThroughWalls(false);
 		setCanFly(false);
-		changeBehaviourTo("taunt");
+		changeBehaviourTo("fastBalls");
+		behaviourCountdown = 30 * 10;
 	}
 	
 	@Override
 	public void updateBehaviour() {
+		if(getHealth() > 70){
+			if(behaviourCountdown > 0){
+				behaviourCountdown -= 1;
+			}
+			else {
+				behaviourCountdown = 30 * 10;
+				Random random = new Random();
+				int randomInt = random.nextInt(3);
+				if(randomInt == 0 && getCurrentBehaviour().equals("slimeTrail")){
+					changeBehaviourTo("looseSwirlingBalls");
+				}
+				else if(randomInt == 0){
+					changeBehaviourTo("denseSwirlingBalls");
+				}
+				else if(randomInt == 1){
+					changeBehaviourTo("fastBalls");
+				}
+				else {
+					changeBehaviourTo("slimeTrail");
+				}
+			}
+		}
+		else {
+			changeBehaviourTo("finalRage");
+		}
 		if(checkActivation()) {
 			switch (getCurrentBehaviour()) {
-				case "taunt" -> {
-
+				case "denseSwirlingBalls" -> {
+				
 				}
-				case "swirlingBalls" -> {
-
+				case "looseSwirlingBalls" -> {
+				
 				}
-				case "homingBalls" -> {
+				case "fastBalls" -> {
 
 				}
 				case "slimeTrail" -> {
@@ -66,8 +95,12 @@ public class Boss extends Enemy{
 		}
 	}
 	
+	
+	
+	
+	
 	@Override
 	public void moveEntity() {
-	
+		//nulla
 	}
 }

@@ -1,12 +1,12 @@
-package Entities.DynamicEntities;
+package Entities.DynamicEntities.Projectiles;
 
 import Components.EntityManager;
 import Components.Vector2D;
+import Entities.GenericEntity;
 
 import java.awt.*;
 
 import static java.lang.Math.abs;
-import static java.lang.Math.toDegrees;
 
 public class Peas extends Projectile{
 	
@@ -25,7 +25,7 @@ public class Peas extends Projectile{
 	@Override
 	public void init() {
 		//CARICAMENTO SPRITE
-		PEAS = setSpriteFromPath("src/resources/sprites/projectiles/peas.png");
+		PEAS = GenericEntity.setSpriteFromPath("src/resources/sprites/projectiles/peas.png");
 		setActiveSprite(PEAS);
 		
 		setWidth(32);
@@ -49,7 +49,7 @@ public class Peas extends Projectile{
 			setInactive();
 		}
 		if(translationVector2D.getTranslationOnX() != 0) {
-			int signX = translationVector2D.getTranslationOnX() / abs(translationVector2D.getTranslationOnX());
+			int signX = translationVector2D.getTranslationOnX() / Math.abs(translationVector2D.getTranslationOnX());
 			setX(getX() + translationVector2D.getTranslationOnX());
 			while ((entityManager.checkWallsCollisions(this)) ||
 					(entityManager.checkObstaclesCollisions(this))) {
@@ -58,7 +58,7 @@ public class Peas extends Projectile{
 			}
 		}
 		if(translationVector2D.getTranslationOnY() != 0) {
-			int signY = translationVector2D.getTranslationOnY() / abs(translationVector2D.getTranslationOnY());
+			int signY = translationVector2D.getTranslationOnY() / Math.abs(translationVector2D.getTranslationOnY());
 			setY(getY() + translationVector2D.getTranslationOnY());
 			while ((entityManager.checkWallsCollisions(this))||
 					(entityManager.checkObstaclesCollisions(this))) {
