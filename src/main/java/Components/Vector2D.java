@@ -44,6 +44,7 @@ public class Vector2D {
 			}
 		}
 	}
+
 // 0 gradi a dx e poi in senso orario
 	public int getTranslationOnX(){
 		double tX = module * cos(angulation);
