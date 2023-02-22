@@ -3,6 +3,7 @@ package Entities.DynamicEntities.Enemies;
 import Components.EntityManager;
 import Components.Tile;
 import Components.Vector2D;
+import Entities.DynamicEntities.Projectiles.OrbitalSlimeBalls;
 import Entities.DynamicEntities.Projectiles.DirectSlimeBalls;
 
 import java.awt.*;
@@ -11,6 +12,7 @@ import java.util.Random;
 
 import static java.lang.Math.atan;
 import static java.lang.Math.toRadians;
+
 
 public class Boss extends Enemy{
 	
@@ -45,10 +47,10 @@ public class Boss extends Enemy{
 		finalRageCountDown = 45;
 
 		translationVector2D = new Vector2D(3);
-		setHealth(69);
+		setHealth(300);
 		setCanPassThroughWalls(false);
 		setCanFly(false);
-		changeBehaviourTo("fastBalls");
+		changeBehaviourTo("denseSwirlingBalls");
 		behaviourCountdown = 30 * 10;
 	}
 	
@@ -83,7 +85,15 @@ public class Boss extends Enemy{
 		if(checkActivation()) {
 			switch (getCurrentBehaviour()) {
 				case "denseSwirlingBalls" -> {
-				
+					System.out.println("proiettile boss sparato");
+					
+					//basso dx
+					for(int i = 50; i < 500; i += 30){
+						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+								getX(), getY(), i, toRadians(45), 30 * 30, entityManager));
+					}
+					
+					changeBehaviourTo("idle");
 				}
 				case "looseSwirlingBalls" -> {
 				
@@ -128,12 +138,17 @@ public class Boss extends Enemy{
 						finalRageCountDown = 45;
 					}
 				}
+				case "idle" ->{
+					//Do nothing
+				}
 				default -> {
-					changeBehaviourTo("taunt");
+					changeBehaviourTo("fastBalls");
 				}
 			}
 		}
 	}
+	
+	
 	
 	
 	
