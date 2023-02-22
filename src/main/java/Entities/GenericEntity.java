@@ -78,6 +78,18 @@ public abstract class GenericEntity {
 	public int getHeight() {
 		return height;
 	}
+	public void setXFromCenter(int x){
+		setX(x - (getWidth() / 2));
+	}
+	public void setYFromCenter(int y){
+		setY(y - (getHeight() / 2));
+	}
+	public int getCenterX(){
+		return getX() + (getWidth() / 2);
+	}
+	public int getCenterY(){
+		return getY() + (getHeight() / 2);
+	}
 	public static Image setSpriteFromPath(String path){
 		ImageIcon icon = new ImageIcon(path);
 		return icon.getImage();

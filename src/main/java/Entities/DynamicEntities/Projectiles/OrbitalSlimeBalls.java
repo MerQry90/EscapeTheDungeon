@@ -16,7 +16,7 @@ public class OrbitalSlimeBalls extends Projectile{
 	private double angulationFromCenter;
 	private int duration;
 	
-	private final double EPSILON = toRadians(1);
+	private final double EPSILON = toRadians(2);
 	
 	public OrbitalSlimeBalls(int centerX, int centerY, double distanceFromCenter,
 							 double startingAngulation, int duration, EntityManager entityManager){
@@ -32,8 +32,8 @@ public class OrbitalSlimeBalls extends Projectile{
 	public void updateCoordinates(){
 		double tX = distanceFromCenter * cos(angulationFromCenter);
 		double tY = distanceFromCenter * sin(angulationFromCenter);
-		setX((int)(centerX + round(tX)));
-		setY((int)(centerY + round(tY)));
+		setXFromCenter((int)(centerX + round(tX)));
+		setYFromCenter((int)(centerY + round(tY)));
 	}
 	
 	@Override

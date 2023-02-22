@@ -34,11 +34,11 @@ public class Boss extends Enemy{
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		//verrà sommato a minimumSpeed
 		
-		setX(Tile.getTile(7));
-		setY(Tile.getTile(3));
+		setX(Tile.getTile(8));
+		setY(Tile.getTile(4));
 		
-		setWidth(64 * 3);
-		setHeight(64 * 3);
+		setWidth(Tile.getTile(1));
+		setHeight(Tile.getTile(1));
 		setCBwidthScalar(1.0);
 		setCBheightScalar(1.0);
 		initCollisionBox();
@@ -46,8 +46,8 @@ public class Boss extends Enemy{
 		shootCuntDown = 15;
 		finalRageCountDown = 45;
 
-		translationVector2D = new Vector2D(3);
-		setHealth(300);
+		translationVector2D = new Vector2D(0);
+		setHealth(200);
 		setCanPassThroughWalls(false);
 		setCanFly(false);
 		changeBehaviourTo("denseSwirlingBalls");
@@ -57,7 +57,7 @@ public class Boss extends Enemy{
 	@Override
 	public void updateBehaviour() {
 		System.out.println(getCurrentBehaviour());
-		if(getHealth() > 70){
+		if(getHealth() > 50){
 			if(behaviourCountdown > 0){
 				behaviourCountdown -= 1;
 			}
@@ -85,12 +85,14 @@ public class Boss extends Enemy{
 		if(checkActivation()) {
 			switch (getCurrentBehaviour()) {
 				case "denseSwirlingBalls" -> {
-					System.out.println("proiettile boss sparato");
+					System.out.println(getCenterX());
+					System.out.println(getCenterY());
+					
 					
 					//basso dx
 					for(int i = 50; i < 500; i += 30){
 						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
-								getX(), getY(), i, toRadians(45), 30 * 30, entityManager));
+								getCenterX(), getCenterY(), i, toRadians(45), 30 * 10, entityManager));
 					}
 					
 					changeBehaviourTo("idle");
@@ -121,7 +123,8 @@ public class Boss extends Enemy{
 							angulation = (float) (theta);
 						}
 						if(shootCuntDown <= 0){
-							entityManager.newHostileProjectile(new DirectSlimeBalls(Tile.getTile(8), Tile.getTile(4), 30, angulation, entityManager));
+							entityManager.newHostileProjectile(new DirectSlimeBalls(
+									getCenterX(), getCenterY(), 30, angulation, entityManager));
 							shootCuntDown = 15;
 						}
 					}
@@ -133,7 +136,8 @@ public class Boss extends Enemy{
 					finalRageCountDown -= 1;
 					if(finalRageCountDown <= 0) {
 						for (double i = 0; i <= 4.5; i += 0.1) {
-							entityManager.newHostileProjectile(new DirectSlimeBalls(Tile.getTile(8), Tile.getTile(4), 5, i, entityManager));
+							entityManager.newHostileProjectile(new DirectSlimeBalls(
+									getCenterX(), getCenterY(), 5, i, entityManager));
 						}
 						finalRageCountDown = 45;
 					}

@@ -14,8 +14,8 @@ public class DirectSlimeBalls extends Projectile{
 
     public DirectSlimeBalls(int x, int y, int speed , double angulation, EntityManager entityManager){
         this.entityManager = entityManager;
-        setX(x);
-        setY(y);
+        setXFromCenter(x);
+        setYFromCenter(y);
         this.speed = speed;
         this.angulation = angulation;
         init();
