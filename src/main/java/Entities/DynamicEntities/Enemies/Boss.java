@@ -74,8 +74,11 @@ public class Boss extends Enemy{
 				else if(randomInt == 1){
 					changeBehaviourTo("fastBalls");
 				}
-				else {
+				else if(!(getCurrentBehaviour().equals("slimeTrail"))){
 					changeBehaviourTo("slimeTrail");
+				}
+				else{
+					changeBehaviourTo("looseSwirlingBalls");
 				}
 			}
 		}
@@ -85,20 +88,30 @@ public class Boss extends Enemy{
 		if(checkActivation()) {
 			switch (getCurrentBehaviour()) {
 				case "denseSwirlingBalls" -> {
-					System.out.println(getCenterX());
-					System.out.println(getCenterY());
-					
-					
-					//basso dx
-					for(int i = 50; i < 500; i += 30){
+					for(int i = 50; i < 600; i += 50){
 						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
 								getCenterX(), getCenterY(), i, toRadians(45), 30 * 10, entityManager));
+						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+								getCenterX(), getCenterY(), i, toRadians(135), 30 * 10, entityManager));
+						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+								getCenterX(), getCenterY(), i, toRadians(225), 30 * 10, entityManager));
+						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+								getCenterX(), getCenterY(), i, toRadians(315), 30 * 10, entityManager));
 					}
-					
 					changeBehaviourTo("idle");
 				}
 				case "looseSwirlingBalls" -> {
-				
+					for(int i = 50; i < 600; i += 150){
+						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+								getCenterX(), getCenterY(), i, toRadians(45), 30 * 10, entityManager));
+						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+								getCenterX(), getCenterY(), i, toRadians(135), 30 * 10, entityManager));
+						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+								getCenterX(), getCenterY(), i, toRadians(225), 30 * 10, entityManager));
+						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+								getCenterX(), getCenterY(), i, toRadians(315), 30 * 10, entityManager));
+					}
+					changeBehaviourTo("idle");
 				}
 				case "fastBalls" -> {
 					shootCuntDown -= 1;
