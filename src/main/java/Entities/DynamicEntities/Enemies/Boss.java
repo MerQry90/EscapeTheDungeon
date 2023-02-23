@@ -5,20 +5,21 @@ import Components.Tile;
 import Components.Vector2D;
 import Entities.DynamicEntities.Projectiles.OrbitalSlimeBalls;
 import Entities.DynamicEntities.Projectiles.DirectSlimeBalls;
+import Entities.DynamicEntities.Projectiles.RageSlimeBall;
 
 import java.awt.*;
 import java.util.Objects;
 import java.util.Random;
 
-import static java.lang.Math.atan;
-import static java.lang.Math.toRadians;
+import static java.lang.Math.*;
 
 
 public class Boss extends Enemy{
 	
 	private Image BOSS_TMP;
 	private int behaviourCountdown;
-	int shootCuntDown, finalRageCountDown;
+	private int shootCuntDown, finalRageCountDown;
+	private double previousHoleAngulation;
 	
 	public Boss(EntityManager entityManager){
 		this.entityManager = entityManager;
@@ -44,10 +45,13 @@ public class Boss extends Enemy{
 		initCollisionBox();
 
 		shootCuntDown = 15;
-		finalRageCountDown = 45;
+		finalRageCountDown = 75;
+
+		Random random = new Random();
+		previousHoleAngulation = toRadians(random.nextDouble(365));
 
 		translationVector2D = new Vector2D(0);
-		setHealth(200);
+		setHealth(49);
 		setCanPassThroughWalls(false);
 		setCanFly(false);
 		changeBehaviourTo("denseSwirlingBalls");
@@ -115,31 +119,10 @@ public class Boss extends Enemy{
 				}
 				case "fastBalls" -> {
 					shootCuntDown -= 1;
-					int dX = getDeltaXToObjective(entityManager.getPlayerX());
-					int dY = getDeltaYToObjective(entityManager.getPlayerY());
-					float angulation;
-					if(dX == 0 && dY == 0){
-						angulation = 0;
-					}
-					else {
-						double theta = atan((double) (dY) / (double) (dX));
-						// 2o e 3o quad
-						if (dX < 0) {
-							angulation = (float) (toRadians(180) + theta);
-						}
-						// 4o quad
-						else if (dY < 0) {
-							angulation = (float) (toRadians(360) + theta);
-						}
-						// 1o quad
-						else {
-							angulation = (float) (theta);
-						}
-						if(shootCuntDown <= 0){
-							entityManager.newHostileProjectile(new DirectSlimeBalls(
-									getCenterX(), getCenterY(), 30, angulation, entityManager));
-							shootCuntDown = 15;
-						}
+					if(shootCuntDown <= 0){
+						entityManager.newHostileProjectile(new DirectSlimeBalls(
+								getCenterX(), getCenterY(), 30, getPlayerAngulation(), entityManager));
+						shootCuntDown = 15;
 					}
 				}
 				case "slimeTrail" -> {
@@ -147,12 +130,22 @@ public class Boss extends Enemy{
 				}
 				case "finalRage" -> {
 					finalRageCountDown -= 1;
+
 					if(finalRageCountDown <= 0) {
-						for (double i = 0; i <= 4.5; i += 0.1) {
-							entityManager.newHostileProjectile(new DirectSlimeBalls(
-									getCenterX(), getCenterY(), 5, i, entityManager));
+						double epsilon = toRadians(9);
+						Random random = new Random();
+						if(random.nextBoolean()){
+							previousHoleAngulation += toRadians(60);
 						}
-						finalRageCountDown = 45;
+						else {
+							previousHoleAngulation -= toRadians(60);
+						}
+						for(int i = 0; i <= 360/(toDegrees(epsilon) + 1.2); i += 1){
+							entityManager.newHostileProjectile(new RageSlimeBall(
+									getCenterX(), getCenterY(), epsilon * i + previousHoleAngulation, entityManager
+							));
+						}
+						finalRageCountDown = 60;
 					}
 				}
 				case "idle" ->{
@@ -164,8 +157,29 @@ public class Boss extends Enemy{
 			}
 		}
 	}
-	
-	
+
+	public float getPlayerAngulation(){
+		int dX = getDeltaXToObjective(entityManager.getPlayerX());
+		int dY = getDeltaYToObjective(entityManager.getPlayerY());
+		if(dX == 0 && dY == 0){
+			return 0;
+		}
+		else {
+			double theta = atan((double) (dY) / (double) (dX));
+			// 2o e 3o quad
+			if (dX < 0) {
+				return (float) (toRadians(180) + theta);
+			}
+			// 4o quad
+			else if (dY < 0) {
+				return (float) (toRadians(360) + theta);
+			}
+			// 1o quad
+			else {
+				return (float) (theta);
+			}
+		}
+	}
 	
 	
 	
