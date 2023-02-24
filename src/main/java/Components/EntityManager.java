@@ -9,6 +9,8 @@ import Entities.StaticEntities.BloodStain;
 import Entities.StaticEntities.Item;
 import Entities.StaticEntities.Obstacle;
 import Entities.StaticEntities.PowerUps.PowerUp;
+import GameStates.MainGame;
+
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.Random;
 
 public class EntityManager {
 
+	private MainGame mainGameReference;
+	
 	private Player player;
 	private List<Enemy> enemies;
 	private List<Arrow> friendlyArrows;
@@ -31,7 +35,8 @@ public class EntityManager {
 	
 	private boolean bossHasBeenDefeated;
 	
-	public EntityManager(){
+	public EntityManager(MainGame mainGameReference){
+		this.mainGameReference = mainGameReference;
 		bossHasBeenDefeated = false;
 		player = new Player(this);
 
@@ -126,6 +131,7 @@ public class EntityManager {
 			if(enemy.checkIfActive() && enemy.checkCollision(player) && player.isVulnerable()){
 				player.lowerHealth();
 				player.setInvulnerable();
+				mainGameReference.playSoundEffect(1);
 			}
 			for(Projectile arrow: friendlyArrows){
 				if(enemy.checkIfActive() && enemy.checkCollision(arrow)){
@@ -139,6 +145,7 @@ public class EntityManager {
 				player.lowerHealth();
 				player.setInvulnerable();
 				projectile.setInactive();
+				mainGameReference.playSoundEffect(1);
 			}
 		}
 	}

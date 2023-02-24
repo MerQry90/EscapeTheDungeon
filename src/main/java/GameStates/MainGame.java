@@ -17,6 +17,7 @@ public class MainGame extends GameState{
 	
 	private int clearedTotalStages;
 	
+	private AudioManager audioManager;
 	private EntityManager entityManager;
 	private CellManager cellManager;
 	private UI ui;
@@ -28,7 +29,7 @@ public class MainGame extends GameState{
 		setActive();
 		background.loadMainGameBackground();
 		
-		entityManager = new EntityManager();
+		entityManager = new EntityManager(this);
 		
 		stage = new Stage(entityManager);
 		
@@ -42,6 +43,8 @@ public class MainGame extends GameState{
 		goToStartingRoom();
 		ui = new UI();
 		setUI();
+		audioManager = new AudioManager();
+		playMusic(0);
 	}
 	
 	public void addKey(){
@@ -49,6 +52,19 @@ public class MainGame extends GameState{
 	}
 	public boolean checkIfEnoughKeys(){
 		return numberOfKeys >= 3;
+	}
+	
+	public void playMusic(int i){
+		audioManager.setClip(i);
+		audioManager.play();
+		audioManager.loop();
+	}
+	public void stopMusic(){
+		audioManager.stop();
+	}
+	public void playSoundEffect(int i){
+		audioManager.setClip(i);
+		audioManager.play();
 	}
 	
 	public void setUI(){

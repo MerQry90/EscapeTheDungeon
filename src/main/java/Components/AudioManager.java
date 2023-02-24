@@ -1,29 +1,23 @@
 package Components;
 
-import Application.Application;
-import Application.GamePanel;
-
 import javax.sound.sampled.*;
-import javax.swing.*;
 import java.io.*;
-import java.net.URL;
-import java.util.*;
 
 public class AudioManager {
 	
 	private Clip clip;
-	private Map<String, URL> audioUrlMap;
+	private File[] audioFiles;
 	
 	public AudioManager(){
-		audioUrlMap = new HashMap<>();
-		
-		audioUrlMap.put("player got hit", getClass().getResource("src/resources/Audio/playerGotHit.wav"));
+		audioFiles = new File[30];
+		audioFiles[0] = new File("src/resources/audio/placeHolder.wav");
+		audioFiles[1] = new File("src/resources/audio/playerGotHit.wav");
 	}
 	
-	public void setClip(String audioName){
+	public void setClip(int i){
 		try {
-			AudioInputStream ais = AudioSystem.getAudioInputStream(audioUrlMap.get(audioName));
 			clip = AudioSystem.getClip();
+			AudioInputStream ais = AudioSystem.getAudioInputStream(audioFiles[i]);
 			clip.open(ais);
 		}
 		catch (Exception e){
