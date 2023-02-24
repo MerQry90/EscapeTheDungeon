@@ -9,7 +9,6 @@ import Entities.StaticEntities.BloodStain;
 import Entities.StaticEntities.Item;
 import Entities.StaticEntities.Obstacle;
 import Entities.StaticEntities.PowerUps.PowerUp;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +78,7 @@ public class EntityManager {
 		player.setY(64 * 4);
 	}
 	//------------------------------------------------------------------------------------------------------------------
-
+	
 	//collisioni--------------------------------------------------------------------------------------------------------
 	public boolean checkWallsCollisions(GenericEntity entity){
 		return room.checkWallsCollisions(entity);
