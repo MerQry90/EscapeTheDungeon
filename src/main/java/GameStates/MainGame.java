@@ -17,7 +17,6 @@ public class MainGame extends GameState{
 	
 	private int clearedTotalStages;
 	
-	private AudioManager audioManager;
 	private EntityManager entityManager;
 	private CellManager cellManager;
 	private UI ui;
@@ -52,19 +51,6 @@ public class MainGame extends GameState{
 	}
 	public boolean checkIfEnoughKeys(){
 		return numberOfKeys >= 3;
-	}
-	
-	public void playMusic(int i){
-		audioManager.setClip(i);
-		audioManager.play();
-		audioManager.loop();
-	}
-	public void stopMusic(){
-		audioManager.stop();
-	}
-	public void playSoundEffect(int i){
-		audioManager.setClip(i);
-		audioManager.play();
 	}
 	
 	public void setUI(){
