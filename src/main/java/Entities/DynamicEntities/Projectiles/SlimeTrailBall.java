@@ -34,7 +34,7 @@ public class SlimeTrailBall extends Projectile{
 		setHeight(24);
 		setCBwidthScalar(0.9);
 		setCBheightScalar(0.9);
-		initCollisionBox();
+		activateCollisionBox();
 
 	}
 

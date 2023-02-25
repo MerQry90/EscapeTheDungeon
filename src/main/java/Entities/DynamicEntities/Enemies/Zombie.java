@@ -8,7 +8,6 @@ import java.awt.*;
 public class Zombie extends Enemy{
 	
 	private Image LIVING_ZOMBIE_LEFT;
-	//TODO altri sprite
 	
 	public Zombie(int x, int y, EntityManager entityManager) {
 		this.entityManager = entityManager;

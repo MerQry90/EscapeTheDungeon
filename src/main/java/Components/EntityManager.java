@@ -303,11 +303,11 @@ public class EntityManager {
 		}
 		
 		if (!entityGenerator.getGroupByID(getRoomID()).isDefeated()){
-			enemies = entityGenerator.getGroupByID(getRoomID()).getEnemies();
+			enemies = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getEnemies());
 		}
-		obstacles = entityGenerator.getGroupByID(getRoomID()).getObstacles();
-		items = entityGenerator.getGroupByID(getRoomID()).getItems();
-		powerUpList = entityGenerator.getGroupByID(getRoomID()).getPowerUpList();
+		obstacles = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getObstacles());
+		items = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getItems());
+		powerUpList = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getPowerUpList());
 	}
 	public Room getRoom(){
 		return room;

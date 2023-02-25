@@ -17,6 +17,6 @@ public class SlimePuddle extends Hazard{
 		setHeight(64);
 		setCBwidthScalar(1);
 		setCBheightScalar(1);
-		initCollisionBox();
+		activateCollisionBox();
 	}
 }
