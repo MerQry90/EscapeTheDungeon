@@ -161,19 +161,21 @@ public class EntityManager {
 	}
 
 	public void checkItemsCollisions(){
-		for(Item item: items) {
-			if (item.checkIfActive() && item.checkCollision(player) && player.getHealth() < player.getMaxHealth()) {
+		for(int i = 0; i < items.size(); i += 1){
+			if (items.get(i).checkIfActive() && items.get(i).checkCollision(player) && (player.getHealth() < player.getMaxHealth())) {
 				player.setHealth(player.getHealth() + 1);
-				item.setInactive();
+				items.remove(i);
+				i -= 1;
 			}
 		}
 	}
 
 	public void checkPowerUpCollision(){
-		for(PowerUp powerUp: powerUpList){
-			if(powerUp.checkIfActive() && powerUp.checkCollision(player)){
-				powerUp.activate(player);
-				powerUp.setInactive();
+		for(int i = 0; i < powerUpList.size(); i += 1){
+			if(powerUpList.get(i).checkIfActive() && powerUpList.get(i).checkCollision(player)){
+				powerUpList.get(i).activate(player);
+				powerUpList.remove(i);
+				i -= 1;
 			}
 		}
 	}
@@ -236,11 +238,6 @@ public class EntityManager {
 			}
 		}
 	}
-	
-	public void clearProjectiles(){
-		friendlyArrows.clear();
-		hostileProjectiles.clear();
-	}
 	//------------------------------------------------------------------------------------------------------------------
 
 	//gestione nemici---------------------------------------------------------------------------------------------------
@@ -272,8 +269,6 @@ public class EntityManager {
 	}
 
 	//gestione stato----------------------------------------------------------------------------------------------------
-	
-	
 	public boolean isGameOver(){
 		if(!player.checkIfActive()){
 			return true;
@@ -286,13 +281,33 @@ public class EntityManager {
 	
 	public void setNewRoom(int ID, int nID, int eID, int sID, int wID){
 		room = new Room(ID, nID, eID, sID, wID);
+		
+		//Pulizia liste
+		if(enemies != null){
+			enemies.clear();
+		}
+		if(friendlyArrows != null){
+			friendlyArrows.clear();
+		}
+		if(hostileProjectiles != null){
+			hostileProjectiles.clear();
+		}
+		if(powerUpList != null){
+			powerUpList.clear();
+		}
+		if(items != null){
+			items.clear();
+		}
+		if(obstacles != null){
+			obstacles.clear();
+		}
+		
 		if (!entityGenerator.getGroupByID(getRoomID()).isDefeated()){
 			enemies = entityGenerator.getGroupByID(getRoomID()).getEnemies();
 		}
 		obstacles = entityGenerator.getGroupByID(getRoomID()).getObstacles();
 		items = entityGenerator.getGroupByID(getRoomID()).getItems();
 		powerUpList = entityGenerator.getGroupByID(getRoomID()).getPowerUpList();
-		clearProjectiles();
 	}
 	public Room getRoom(){
 		return room;
@@ -327,27 +342,19 @@ public class EntityManager {
 	
 	public void renderEntities(Graphics g){
 		for(Item item: items){
-			if(item.checkIfActive()){
-				item.paint(g);
-			}
+			item.paint(g);
 		}
 		for(PowerUp powerUp: powerUpList){
-			if(powerUp.checkIfActive()){
-				powerUp.paint(g);
-			}
+			powerUp.paint(g);
 		}
-		room.paintDoors(g);
 		for (Obstacle obstacle: obstacles){
-			if(obstacle.checkIfActive()) {
-				obstacle.paint(g);
-			}
+			obstacle.paint(g);
 		}
 		for (Hazard hazard: hazards){
 			if(hazard.checkIfActive()) {
 				hazard.paint(g);
 			}
 		}
-		player.paint(g);
 		for (Projectile arrow: friendlyArrows){
 			arrow.paint(g);
 		}
@@ -355,9 +362,10 @@ public class EntityManager {
 			projectile.paint(g);
 		}
 		for (Enemy enemy: enemies) {
-			if(enemy.checkIfActive()) {
-				enemy.paint(g);
-			}
+			enemy.paint(g);
 		}
+		
+		player.paint(g);
+		room.paintDoors(g);
 	}
 }

@@ -32,7 +32,7 @@ public class Peas extends Projectile{
 		setHeight(32);
 		setCBwidthScalar(0.9);
 		setCBheightScalar(0.9);
-		initCollisionBox();
+		activateCollisionBox();
 		
 		translationVector2D = new Vector2D(10);
 		int dX = getDeltaXToObjective(entityManager.getPlayerX());

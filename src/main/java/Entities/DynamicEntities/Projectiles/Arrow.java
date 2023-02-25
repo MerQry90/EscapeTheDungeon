@@ -41,7 +41,7 @@ public class Arrow extends Projectile {
 			setCBwidthScalar(0.5);
 			setCBheightScalar(0.9);
 		}
-		initCollisionBox();
+		activateCollisionBox();
 		arrowDuration = 60;
 		setCanFly(true);
 

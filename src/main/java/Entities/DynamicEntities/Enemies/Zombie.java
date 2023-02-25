@@ -3,7 +3,6 @@ package Entities.DynamicEntities.Enemies;
 import Components.EntityManager;
 import Components.Vector2D;
 import java.awt.*;
-import static java.lang.Math.*;
 
 
 public class Zombie extends Enemy{
@@ -31,7 +30,7 @@ public class Zombie extends Enemy{
 		setHeight(64);
 		setCBwidthScalar(0.7);
 		setCBheightScalar(0.9);
-		initCollisionBox();
+		activateCollisionBox();
 		
 		translationVector2D = new Vector2D(0);
 		setRandomSpeed(5, 4);

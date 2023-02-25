@@ -1,7 +1,5 @@
 package Entities.StaticEntities;
 
-import Entities.StaticEntities.Obstacle;
-
 import java.awt.*;
 
 public class BloodStain extends Hazard{
@@ -19,6 +17,6 @@ public class BloodStain extends Hazard{
         setHeight(64);
         setCBwidthScalar(1);
         setCBheightScalar(1);
-        initCollisionBox();
+        activateCollisionBox();
     }
 }

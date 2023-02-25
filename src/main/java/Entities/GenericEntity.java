@@ -24,8 +24,14 @@ public abstract class GenericEntity {
 	
 	public abstract void init();
 
-	public void initCollisionBox(){
+	public void activateCollisionBox(){
 		cb = new CollisionBox(getX(), getY(), getWidth(), getHeight(), getCBwidthScalar(), getCBheightScalar());
+	}
+	public void disableCollisionBox(){
+		cb = null;
+	}
+	public boolean isCollisionBoxActive(){
+		return cb != null;
 	}
 	
 	//Attivazione e disattivazione dell'entità--------------------------------------------------------------------------
@@ -42,26 +48,26 @@ public abstract class GenericEntity {
 	//Getter e setter dei parametri dell'entità-------------------------------------------------------------------------
 	public void setX(int x) {
 		this.x = x;
-		if(cb != null) {
+		if(isCollisionBoxActive()) {
 			cb.setCBx(x, getWidth());
 		}
 	}
 	public void setY(int y) {
 		this.y = y;
-		if(cb != null) {
+		if(isCollisionBoxActive()) {
 			cb.setCBy(y, getHeight());
 		}
 	}
 	public void setWidth(int width){
 		this.width = width;
-		if(cb != null){
+		if(isCollisionBoxActive()){
 			cb.setCBw(width);
 			
 		}
 	}
 	public void setHeight(int height){
 		this.height = height;
-		if(cb != null){
+		if(isCollisionBoxActive()){
 			cb.setCBh(height);
 		}
 	}
@@ -119,7 +125,10 @@ public abstract class GenericEntity {
 		return cb;
 	}
 	public boolean checkCollision(GenericEntity other){
-		return this.getCollisionBox().getHitBox().intersects(other.getCollisionBox().getHitBox());
+		if(this.isCollisionBoxActive() && other.isCollisionBoxActive()){
+			return this.getCollisionBox().getHitBox().intersects(other.getCollisionBox().getHitBox());
+		}
+		return false;
 	}
 	//------------------------------------------------------------------------------------------------------------------
 	
@@ -128,7 +137,9 @@ public abstract class GenericEntity {
 		g.setColor(Color.CYAN);
 		g.drawRect(getX(), getY(), getWidth(), getHeight());
 		g.setColor(Color.GREEN);
-		g.drawRect(cb.getCBx(), cb.getCBy(), cb.getCBw(), cb.getCBh());
+		if(isCollisionBoxActive()) {
+			g.drawRect(cb.getCBx(), cb.getCBy(), cb.getCBw(), cb.getCBh());
+		}
 	}
 	
 }

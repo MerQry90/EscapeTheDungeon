@@ -29,7 +29,7 @@ public class DirectSlimeBalls extends Projectile{
         setHeight(32);
         setCBwidthScalar(0.9);
         setCBheightScalar(0.9);
-        initCollisionBox();
+        activateCollisionBox();
 
         translationVector2D = new Vector2D(speed);
         translationVector2D.setAngulation(angulation);

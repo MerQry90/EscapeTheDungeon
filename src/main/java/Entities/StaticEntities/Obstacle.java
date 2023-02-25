@@ -17,6 +17,6 @@ public class Obstacle extends GenericEntity {
 	public void init() {
 		setCBwidthScalar(1);
 		setCBheightScalar(1);
-		initCollisionBox();
+		activateCollisionBox();
 	}
 }

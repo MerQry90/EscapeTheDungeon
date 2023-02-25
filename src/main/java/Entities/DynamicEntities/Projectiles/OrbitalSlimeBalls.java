@@ -15,6 +15,7 @@ public class OrbitalSlimeBalls extends Projectile{
 	private double distanceFromCenter;
 	private double angulationFromCenter;
 	private int duration;
+	private int noCollisionDuration;
 	
 	private final double EPSILON = toRadians(2);
 	
@@ -47,11 +48,19 @@ public class OrbitalSlimeBalls extends Projectile{
 		setHeight(32);
 		setCBwidthScalar(0.9);
 		setCBheightScalar(0.9);
-		initCollisionBox();
+		
+		noCollisionDuration = 30;
 	}
 	
 	@Override
 	public void moveEntity() {
+		if(noCollisionDuration > 0){
+			noCollisionDuration -= 1;
+		}
+		else if(!isCollisionBoxActive()){
+			activateCollisionBox();
+		}
+		
 		if(duration > 0) {
 			duration -= 1;
 			angulationFromCenter += EPSILON;

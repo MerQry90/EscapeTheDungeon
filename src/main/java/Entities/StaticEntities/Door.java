@@ -1,6 +1,5 @@
 package Entities.StaticEntities;
 
-import Components.EntityManager;
 import Entities.GenericEntity;
 
 import java.awt.*;
@@ -29,7 +28,7 @@ public class Door extends GenericEntity {
 		setWidth(64);
 		setHeight(64);
 		
-		initCollisionBox();
+		activateCollisionBox();
 	}
 	
 	public int leadsTo(){

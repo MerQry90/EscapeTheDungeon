@@ -10,7 +10,7 @@ import static java.lang.Math.abs;
 public abstract class Enemy extends DynamicEntity {
 
 	protected int activationWaiting = 10;
-	private String currentBehaviour;
+	private String currentBehaviour = "default";
 	public boolean canGenerateBloodStain = false;
 	
 	public boolean checkActivation(){

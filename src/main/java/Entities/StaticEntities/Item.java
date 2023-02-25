@@ -22,6 +22,6 @@ public class Item extends GenericEntity {
 		setActiveSprite(HEART);
 		setCBwidthScalar(1);
 		setCBheightScalar(1);
-		initCollisionBox();
+		activateCollisionBox();
 	}
 }

@@ -29,7 +29,7 @@ public class Tank extends Enemy{
         setHeight(128);
         setCBwidthScalar(0.7);
         setCBheightScalar(0.9);
-        initCollisionBox();
+        activateCollisionBox();
 
         canGenerateBloodStain = true;
         canBreakRocks = true;

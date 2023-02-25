@@ -35,7 +35,7 @@ public class Ghost extends Enemy{
 		setHeight(64);
 		setCBwidthScalar(0.6);
 		setCBheightScalar(0.6);
-		initCollisionBox();
+		activateCollisionBox();
 		
 		translationVector2D = new Vector2D(4);
 		setRandomHealth(3, 2);

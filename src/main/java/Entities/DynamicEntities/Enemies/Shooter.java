@@ -32,7 +32,7 @@ public class Shooter extends Enemy{
 		setHeight(64);
 		setCBwidthScalar(0.8);
 		setCBheightScalar(0.9);
-		initCollisionBox();
+		activateCollisionBox();
 		
 		translationVector2D = new Vector2D(0);
 		setRandomHealth(6, 4);

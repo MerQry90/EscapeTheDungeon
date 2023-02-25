@@ -16,6 +16,6 @@ public class Rock extends Obstacle{
 		setActiveSprite(ROCK_IMAGE);
 		setCBwidthScalar(1);
 		setCBheightScalar(1);
-		initCollisionBox();
+		activateCollisionBox();
 	}
 }

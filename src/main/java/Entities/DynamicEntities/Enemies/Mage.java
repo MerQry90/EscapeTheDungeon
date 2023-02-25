@@ -9,7 +9,9 @@ import java.util.Random;
 
 public class Mage extends Enemy{
 
-    public Image MAGE;
+    private Image MAGE;
+    private Image DEAD_MAGE;
+    
     private int idleCountdown, teleportCountdown, shotNumber;
     public Mage(int x, int y, EntityManager entityManager){
         setX(x);
@@ -20,12 +22,13 @@ public class Mage extends Enemy{
     @Override
     public void init() {
         MAGE = setSpriteFromPath("src/resources/sprites/png/Mage.png");
+        DEAD_MAGE = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
         setActiveSprite(MAGE);
         setWidth(64);
         setHeight(64);
         setCBwidthScalar(0.8);
         setCBheightScalar(0.9);
-        initCollisionBox();
+        activateCollisionBox();
 
         translationVector2D = new Vector2D(0);
         setRandomHealth(3, 3);
@@ -68,7 +71,8 @@ public class Mage extends Enemy{
                     changeBehaviourTo("idle");
                 }
                 case "dead" -> {
-                    //cambio di sprite
+                    disableCollisionBox();
+                    setActiveSprite(DEAD_MAGE);
                 }
                 default -> {
                     changeBehaviourTo("idle");

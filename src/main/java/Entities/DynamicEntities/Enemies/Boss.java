@@ -43,7 +43,7 @@ public class Boss extends Enemy{
 		setHeight(Tile.getTile(1));
 		setCBwidthScalar(1.0);
 		setCBheightScalar(1.0);
-		initCollisionBox();
+		activateCollisionBox();
 
 		shootCuntDown = 15;
 		finalRageCountDown = 75;
@@ -55,7 +55,6 @@ public class Boss extends Enemy{
 		setHealth(60);
 		setCanPassThroughWalls(false);
 		setCanFly(false);
-		changeBehaviourTo("fastBalls");
 		behaviourCountdown = 30 * 10;
 	}
 	
@@ -162,7 +161,7 @@ public class Boss extends Enemy{
 					//Do nothing
 				}
 				default -> {
-					changeBehaviourTo("fastBalls");
+					changeBehaviourTo("denseSwirlingBalls");
 				}
 			}
 		}

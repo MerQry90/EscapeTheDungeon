@@ -4,7 +4,6 @@ import Components.EntityManager;
 import Entities.GenericEntity;
 
 import java.awt.*;
-import java.util.Random;
 
 import static java.lang.Math.*;
 
@@ -35,7 +34,7 @@ public class RageSlimeBall extends Projectile{
 		setHeight(24);
 		setCBwidthScalar(0.9);
 		setCBheightScalar(0.9);
-		initCollisionBox();
+		activateCollisionBox();
 
 		updateRageSlimeBall();
 	}
