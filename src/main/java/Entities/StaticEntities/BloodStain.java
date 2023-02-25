@@ -4,10 +4,10 @@ import Entities.StaticEntities.Obstacle;
 
 import java.awt.*;
 
-public class BloodStain extends Obstacle {
+public class BloodStain extends Hazard{
     private Image BLOODSTAIN;
     public BloodStain(int x, int y){
-        super(x, y, 64, 64);
+        super(x, y, 64, 64, 60);
     }
 
     @Override

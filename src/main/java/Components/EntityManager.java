@@ -5,9 +5,7 @@ import Entities.DynamicEntities.Enemies.*;
 import Entities.DynamicEntities.Projectiles.Arrow;
 import Entities.DynamicEntities.Projectiles.Projectile;
 import Entities.GenericEntity;
-import Entities.StaticEntities.BloodStain;
-import Entities.StaticEntities.Item;
-import Entities.StaticEntities.Obstacle;
+import Entities.StaticEntities.*;
 import Entities.StaticEntities.PowerUps.PowerUp;
 import GameStates.MainGame;
 
@@ -27,7 +25,7 @@ public class EntityManager {
 	private List<Obstacle> obstacles;
 	private List<Item> items;
 	private List<PowerUp> powerUpList;
-	//private List<BloodStain> bloodStains;
+	private List<Hazard> hazards;
 
 	public EntityGenerator entityGenerator;
 
@@ -45,6 +43,7 @@ public class EntityManager {
 		hostileProjectiles = new ArrayList<>();
 		obstacles = new ArrayList<>();
 		powerUpList = new ArrayList<>();
+		hazards = new ArrayList<>();
 
 		entityGenerator = new EntityGenerator(this);
 	}
@@ -92,12 +91,14 @@ public class EntityManager {
 	public boolean checkObstaclesCollisions(DynamicEntity entity){
 		boolean hasCollided = false;
 		for(Obstacle obstacle: obstacles){
-			//per le pozze di sangue
-			if(obstacle instanceof BloodStain && obstacle.checkIfActive() && !player.getCanFly() && obstacle.checkCollision(player) && player.isVulnerable()){
+			//per le pozze
+			/*if((obstacle instanceof BloodStain || obstacle instanceof SlimePuddle) && obstacle.checkIfActive() &&
+					!player.getCanFly() && obstacle.checkCollision(player) && player.isVulnerable()){
 				player.lowerHealth();
 				player.setInvulnerable();
-			}
-			else if(entity.checkIfActive() && !entity.getCanFly() && obstacle.checkCollision(entity) && !(obstacle instanceof BloodStain) && obstacle.checkIfActive()){
+			}*/
+			if(entity.checkIfActive() && !entity.getCanFly() && obstacle.checkCollision(entity) &&
+					!(obstacle instanceof BloodStain || obstacle instanceof SlimePuddle) && obstacle.checkIfActive()){
 				if(entity.getCanBreakRocks()){
 					obstacle.setInactive();
 				}
@@ -108,7 +109,16 @@ public class EntityManager {
 		}
 		return hasCollided;
 	}
-	
+
+	public void checkHazardsCollision(){
+		for (Hazard hazard: hazards){
+			if(hazard.checkIfActive() && !player.getCanFly() && hazard.checkCollision(player) && player.isVulnerable()){
+				player.lowerHealth();
+				player.setInvulnerable();
+			}
+		}
+	}
+
 	public int checkPlayerToDoorsCollisions(){
 		int collisionID = -1;
 		if(room.hasNorthernDoor() && room.getNorthernDoor().checkCollision(player)){
@@ -210,6 +220,22 @@ public class EntityManager {
 			}
 		}
 	}
+
+	public void generateSlimePuddle(int x, int y){
+		hazards.add(new SlimePuddle(x, y));
+	}
+
+	public void updateHazards(){
+		for (int i = 0; i < hazards.size(); i++){
+			if(hazards.get(i).checkIfActive()){
+				hazards.get(i).updateHazard();
+			}
+			else{
+				hazards.remove(i);
+				i -= 1;
+			}
+		}
+	}
 	
 	public void clearProjectiles(){
 		friendlyArrows.clear();
@@ -222,7 +248,7 @@ public class EntityManager {
 		for(Enemy enemy: enemies){
 			enemy.updateBehaviour();
 			if(enemy instanceof Tank && !enemy.checkIfActive() && enemy.canGenerateBloodStain){
-				obstacles.add(enemy.generateBloodStain());
+				hazards.add(enemy.generateBloodStain());
 			}
 			if(enemy instanceof Boss && !enemy.checkIfActive()){
 				bossHasBeenDefeated = true;
@@ -314,6 +340,11 @@ public class EntityManager {
 		for (Obstacle obstacle: obstacles){
 			if(obstacle.checkIfActive()) {
 				obstacle.paint(g);
+			}
+		}
+		for (Hazard hazard: hazards){
+			if(hazard.checkIfActive()) {
+				hazard.paint(g);
 			}
 		}
 		player.paint(g);

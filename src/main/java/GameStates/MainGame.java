@@ -194,10 +194,12 @@ public class MainGame extends GameState{
 			entityManager.getPlayer().updateCoolDown();
 			entityManager.updateArrows();
 			entityManager.updateEnemies();
+			entityManager.updateHazards();
 			entityManager.updateHostileProjectiles();
 			entityManager.checkEntityToEntityCollisions();
 			entityManager.checkItemsCollisions();
 			entityManager.checkPowerUpCollision();
+			entityManager.checkHazardsCollision();
 			entityManager.checkRoomCompletion();
 			int collisionID = entityManager.checkPlayerToDoorsCollisions();
 			if(collisionID > 0){

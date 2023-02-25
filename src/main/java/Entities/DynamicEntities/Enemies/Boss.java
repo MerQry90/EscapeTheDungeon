@@ -6,6 +6,7 @@ import Components.Vector2D;
 import Entities.DynamicEntities.Projectiles.OrbitalSlimeBalls;
 import Entities.DynamicEntities.Projectiles.DirectSlimeBalls;
 import Entities.DynamicEntities.Projectiles.RageSlimeBall;
+import Entities.DynamicEntities.Projectiles.SlimeTrailBall;
 
 import java.awt.*;
 import java.util.Objects;
@@ -51,10 +52,10 @@ public class Boss extends Enemy{
 		previousHoleAngulation = toRadians(random.nextDouble(365));
 
 		translationVector2D = new Vector2D(0);
-		setHealth(49);
+		setHealth(60);
 		setCanPassThroughWalls(false);
 		setCanFly(false);
-		changeBehaviourTo("denseSwirlingBalls");
+		changeBehaviourTo("fastBalls");
 		behaviourCountdown = 30 * 10;
 	}
 	
@@ -126,7 +127,16 @@ public class Boss extends Enemy{
 					}
 				}
 				case "slimeTrail" -> {
-
+					Random random = new Random();
+					if(random.nextBoolean()){
+						entityManager.newHostileProjectile(new SlimeTrailBall(getCenterX(), getCenterY(), "up", entityManager));
+						entityManager.newHostileProjectile(new SlimeTrailBall(getCenterX(), getCenterY(), "down", entityManager));
+					}
+					else {
+						entityManager.newHostileProjectile(new SlimeTrailBall(getCenterX(), getCenterY(), "right", entityManager));
+						entityManager.newHostileProjectile(new SlimeTrailBall(getCenterX(), getCenterY(), "left", entityManager));
+					}
+					changeBehaviourTo("looseSwirlingBalls");
 				}
 				case "finalRage" -> {
 					finalRageCountDown -= 1;

@@ -81,7 +81,7 @@ public class EntityGenerator {
 								group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(5)));
 
 
-								group.getEnemies().add(new Mage(Tile.getTile(7), Tile.getTile(2), entityManager));
+								group.getEnemies().add(new Tank(Tile.getTile(7), Tile.getTile(2), entityManager));
 
 
 							}
