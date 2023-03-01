@@ -9,6 +9,7 @@ import java.awt.*;
 public class Shooter extends Enemy{
 	
 	private Image LIVING_SHOOTER_LEFT;
+	private Image DEAD_SHOOTER;
 	
 	private int idleCountdown;
 	
@@ -23,6 +24,7 @@ public class Shooter extends Enemy{
 	public void init() {
 		//CARICAMENTO SPRITE
 		LIVING_SHOOTER_LEFT = setSpriteFromPath("src/resources/sprites/png/plant.png");
+		DEAD_SHOOTER = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
 		setActiveSprite(LIVING_SHOOTER_LEFT);
 		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
@@ -38,7 +40,6 @@ public class Shooter extends Enemy{
 		setRandomHealth(6, 4);
 		setCanPassThroughWalls(false);
 		setCanFly(false);
-		changeBehaviourTo("idle");
 		
 		idleCountdown = 30;
 	}
@@ -63,7 +64,8 @@ public class Shooter extends Enemy{
 					changeBehaviourTo("idle");
 				}
 				case "dead" -> {
-					//cambio di sprite
+					disableCollisionBox();
+					setActiveSprite(DEAD_SHOOTER);
 				}
 				default -> {
 					changeBehaviourTo("idle");

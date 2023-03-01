@@ -8,6 +8,7 @@ import java.awt.*;
 public class Zombie extends Enemy{
 	
 	private Image LIVING_ZOMBIE_LEFT;
+	private Image DEAD_ZOMBIE;
 	
 	public Zombie(int x, int y, EntityManager entityManager) {
 		this.entityManager = entityManager;
@@ -20,6 +21,7 @@ public class Zombie extends Enemy{
 	public void init(){
 		//CARICAMENTO SPRITE
 		LIVING_ZOMBIE_LEFT = setSpriteFromPath("src/resources/sprites/png/zombie.png");
+		DEAD_ZOMBIE = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
 		setActiveSprite(LIVING_ZOMBIE_LEFT);
 		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
@@ -36,18 +38,24 @@ public class Zombie extends Enemy{
 		setRandomHealth(3, 2);
 		setCanPassThroughWalls(false);
 		setCanFly(false);
-		changeBehaviourTo("follow-player");
 	}
 	
 	@Override
 	public void updateBehaviour() {
 		if(checkActivation()) {
+			if(!checkIfActive()){
+				changeBehaviourTo("dead");
+			}
 			switch (getCurrentBehaviour()) {
 				case "follow-player" -> {
 					int dX = getDeltaXToObjective(entityManager.getPlayerX());
 					int dY = getDeltaYToObjective(entityManager.getPlayerY());
 					translationVector2D.setAngulationFromCoordinates(dX, dY);
 					moveEntity();
+				}
+				case "dead" -> {
+					disableCollisionBox();
+					setActiveSprite(DEAD_ZOMBIE);
 				}
 				default -> {
 					changeBehaviourTo("follow-player");

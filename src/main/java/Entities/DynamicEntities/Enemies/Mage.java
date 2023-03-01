@@ -34,7 +34,6 @@ public class Mage extends Enemy{
         setRandomHealth(3, 3);
         setCanPassThroughWalls(false);
         setCanFly(false);
-        changeBehaviourTo("teleport");
 
         idleCountdown = 30;
         teleportCountdown = 20;

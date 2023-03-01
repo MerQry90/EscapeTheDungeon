@@ -11,6 +11,7 @@ public class Bat extends Enemy{
 
 	private Image LIVING_BAT_OFF;
 	private Image LIVING_BAT_ON;
+	private Image DEAD_BAT;
 	
 	private int wait, countdown, movingCountdown;
 	
@@ -26,6 +27,7 @@ public class Bat extends Enemy{
 		//CARICAMENTO SPRITE
 		LIVING_BAT_OFF = setSpriteFromPath("src/resources/sprites/png/player_sample.png");
 		LIVING_BAT_ON = setSpriteFromPath("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
+		DEAD_BAT = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
 		setActiveSprite(LIVING_BAT_OFF);
 		
 		setWidth(64);
@@ -42,12 +44,14 @@ public class Bat extends Enemy{
 		wait = 40;
 		countdown = 0;
 		movingCountdown = 20;
-		changeBehaviourTo("stop-1");
 	}
 
 	@Override
 	public void updateBehaviour() {
 		if(checkActivation()) {
+			if(!checkIfActive()){
+				changeBehaviourTo("dead");
+			}
 			switch (getCurrentBehaviour()) {
 				case "stop-1" -> {
 					countdown++;
@@ -84,6 +88,10 @@ public class Bat extends Enemy{
 					if (countdown <= wait) {
 						changeBehaviourTo("stop-1");
 					}
+				}
+				case "dead" -> {
+					disableCollisionBox();
+					setActiveSprite(DEAD_BAT);
 				}
 				default -> changeBehaviourTo("stop-1");
 			}

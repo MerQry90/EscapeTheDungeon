@@ -9,6 +9,7 @@ import static java.lang.Math.toRadians;
 
 public class Tank extends Enemy{
     private Image TANK;
+    private Image DEAD_TANK;
 
     public Tank(int x, int y, EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -20,6 +21,7 @@ public class Tank extends Enemy{
     public void init() {
         //CARICAMENTO SPRITE
         TANK = setSpriteFromPath("src/resources/sprites/png/zombie.png");
+        DEAD_TANK = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
         setActiveSprite(TANK);
 
         //l'estremo è escluso, velocità a cui viene sommata maximumSpeed
@@ -39,7 +41,6 @@ public class Tank extends Enemy{
         setRandomHealth(5, 18);
         setCanPassThroughWalls(false);
         setCanFly(false);
-        changeBehaviourTo("follow-player");
     }
 
     @Override
@@ -79,12 +80,19 @@ public class Tank extends Enemy{
     @Override
     public void updateBehaviour() {
         if(checkActivation()) {
+            if(!checkIfActive()){
+                changeBehaviourTo("dead");
+            }
             switch (getCurrentBehaviour()) {
                 case "follow-player" -> {
                     int dX = getDeltaXToObjective(entityManager.getPlayerX());
                     int dY = getDeltaYToObjective(entityManager.getPlayerY());
                     translationVector2D.setAngulationFromCoordinates(dX, dY);
                     moveEntity();
+                }
+                case "dead" ->{
+                    disableCollisionBox();
+                    setActiveSprite(DEAD_TANK);
                 }
                 default -> {
                     changeBehaviourTo("follow-player");

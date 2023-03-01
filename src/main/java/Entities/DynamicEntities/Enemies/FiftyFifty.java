@@ -12,6 +12,8 @@ public class FiftyFifty extends Enemy{
 
     private int wait, countdown, movingCountdown;
     private Image FIFTYFIFTY;
+    private Image DEAD_FIFTYFIFTY;
+    
     public FiftyFifty(int x, int y, EntityManager entityManager){
         this.entityManager = entityManager;
         setX(x);
@@ -22,6 +24,7 @@ public class FiftyFifty extends Enemy{
     public void init() {
         //CARICAMENTO SPRITE
         FIFTYFIFTY = setSpriteFromPath("src/resources/sprites/projectiles/peas.png");
+        DEAD_FIFTYFIFTY = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
         setActiveSprite(FIFTYFIFTY);
 
         setWidth(48);
@@ -38,33 +41,14 @@ public class FiftyFifty extends Enemy{
         wait = 18;
         countdown = 0;
         movingCountdown = 3;
-        changeBehaviourTo("stop-1");
-    }
-    @Override
-    public void moveEntity() {
-        int translationOnX = translationVector2D.getTranslationOnX();
-        int translationOnY = translationVector2D.getTranslationOnY();
-        if(translationOnX != 0) {
-            int signX = translationOnX / abs(translationOnX);
-            setX(getX() + translationOnX);
-            while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
-                    (entityManager.checkObstaclesCollisions(this) && !canFly)) {
-                setX(getX() - signX);
-            }
-        }
-        if(translationOnY != 0) {
-            int signY = translationOnY / abs(translationOnY);
-            setY(getY() + translationOnY);
-            while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
-                    (entityManager.checkObstaclesCollisions(this) && !canFly)) {
-                setY(getY() - signY);
-            }
-        }
     }
 
     @Override
     public void updateBehaviour() {
         if(checkActivation()) {
+            if(!checkIfActive()){
+                changeBehaviourTo("dead");
+            }
             switch (getCurrentBehaviour()) {
                 case "stop-1" -> {
                     countdown++;
@@ -107,10 +91,35 @@ public class FiftyFifty extends Enemy{
                         changeBehaviourTo("stop-1");
                     }
                 }
+                case "dead" -> {
+                    disableCollisionBox();
+                    setActiveSprite(DEAD_FIFTYFIFTY);
+                }
                 default -> changeBehaviourTo("stop-1");
             }
         }
     }
-
+    
+    @Override
+    public void moveEntity() {
+        int translationOnX = translationVector2D.getTranslationOnX();
+        int translationOnY = translationVector2D.getTranslationOnY();
+        if(translationOnX != 0) {
+            int signX = translationOnX / abs(translationOnX);
+            setX(getX() + translationOnX);
+            while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
+                    (entityManager.checkObstaclesCollisions(this) && !canFly)) {
+                setX(getX() - signX);
+            }
+        }
+        if(translationOnY != 0) {
+            int signY = translationOnY / abs(translationOnY);
+            setY(getY() + translationOnY);
+            while ((entityManager.checkWallsCollisions(this) && !canPassThroughWalls)||
+                    (entityManager.checkObstaclesCollisions(this) && !canFly)) {
+                setY(getY() - signY);
+            }
+        }
+    }
 
 }

@@ -75,12 +75,12 @@ public class EntityGenerator {
 								
 								group.getEnemies().add(new Mage(Tile.getTile(7), Tile.getTile(2), entityManager));
 								
-								group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(3)));
+								/*group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(3)));
 								group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(4)));
 								group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(5)));
 								group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(3)));
 								group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(4)));
-								group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(5)));
+								group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(5)));*/
 
 
 								//group.getEnemies().add(new Tank(Tile.getTile(7), Tile.getTile(2), entityManager))
@@ -88,8 +88,7 @@ public class EntityGenerator {
 
 							}
 							case 1 -> {
-								//group.getEnemies().add(new Shooter(Tile.getTile(7), Tile.getTile(2), entityManager));
-								group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(3)));
+								group.getEnemies().add(new Shooter(Tile.getTile(7), Tile.getTile(2), entityManager));
 								group.getEnemies().add(new Ghost(Tile.getTile(7), Tile.getTile(2), entityManager));
 							}
 						}

@@ -10,7 +10,7 @@ import static java.lang.Math.abs;
 public class Ghost extends Enemy{
 	
 	private Image VISIBLE_GHOST_LEFT;
-	private Image INVISIBLE_GHOST;
+	private Image DEAD_GHOST;
 	
 	private int countdown;
 	
@@ -25,7 +25,7 @@ public class Ghost extends Enemy{
 	public void init(){
 		//CARICAMENTO SPRITE
 		VISIBLE_GHOST_LEFT = setSpriteFromPath("src/resources/sprites/png/ghost.png");
-		INVISIBLE_GHOST = setSpriteFromPath("src/resources/sprites/png/invisible_cube.png");
+		DEAD_GHOST = setSpriteFromPath("src/resources/sprites/png/invisible_cube.png");
 		setActiveSprite(VISIBLE_GHOST_LEFT);
 		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
@@ -41,19 +41,21 @@ public class Ghost extends Enemy{
 		setRandomHealth(3, 2);
 		setCanPassThroughWalls(true);
 		setCanFly(true);
-		changeBehaviourTo("visible");
 		countdown = 60;
 	}
 	
 	@Override
 	public void updateBehaviour() {
 		if(checkActivation()) {
+			if(!checkIfActive()){
+				changeBehaviourTo("dead");
+			}
 			switch (getCurrentBehaviour()) {
 				case "visible" -> {
 					if(countdown <= 0){
 						changeBehaviourTo("invisible");
 						countdown = 60;
-						setActiveSprite(INVISIBLE_GHOST);
+						//setActiveSprite(DEAD_GHOST);
 					}
 					else {
 						countdown -= 1;
@@ -76,6 +78,10 @@ public class Ghost extends Enemy{
 					int dY = getDeltaYToObjective(entityManager.getPlayerY());
 					translationVector2D.setAngulationFromCoordinates(dX, dY);
 					moveEntity();
+				}
+				case "dead" -> {
+					disableCollisionBox();
+					setActiveSprite(DEAD_GHOST);
 				}
 				default -> {
 					changeBehaviourTo("visible");
