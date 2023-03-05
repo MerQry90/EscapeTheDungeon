@@ -1,6 +1,7 @@
 package Components;
 
 import Entities.DynamicEntities.Enemies.*;
+import Entities.StaticEntities.PowerUps.Key;
 import Entities.StaticEntities.PowerUps.LifeUp;
 import Entities.StaticEntities.PowerUps.MultipleShot;
 import Entities.StaticEntities.Rock;
@@ -65,6 +66,7 @@ public class EntityGenerator {
 				//STANZA SPECIALE
 				group.getPowerUpList().add(new LifeUp());
 				group.getPowerUpList().add(new MultipleShot());
+				group.getPowerUpList().add(new Key());
 			}
 			else if(group.getID() != 35){
 				//STANZA COMUNE CON I NEMICI

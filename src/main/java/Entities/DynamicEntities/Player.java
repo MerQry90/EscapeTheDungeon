@@ -21,6 +21,7 @@ public class Player extends DynamicEntity {
 	private boolean vulnerability;
 	private int invulnerabilityCountdown;
 	private int maxHealth;
+	private int numberOfKeys;
 
 	public Player(EntityManager entityManager) {
 		this.entityManager = entityManager;
@@ -54,6 +55,14 @@ public class Player extends DynamicEntity {
 		setCanPassThroughWalls(false);
 
 		multipleShot = false;
+		numberOfKeys = 0;
+	}
+	
+	public void addKey(){
+		numberOfKeys += 1;
+	}
+	public int getNumberOfKeys(){
+		return numberOfKeys;
 	}
 
 	//Getter e setter metodi specifici del giocatore--------------------------------------------------------------------

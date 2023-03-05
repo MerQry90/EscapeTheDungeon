@@ -13,7 +13,6 @@ public class MainGame extends GameState{
 	private boolean toggleMap;
 	private int pauseCountdown;
 	private int mapCountdown;
-	private int numberOfKeys;
 	
 	private int clearedTotalStages;
 	
@@ -35,7 +34,6 @@ public class MainGame extends GameState{
 		clearedTotalStages = 0;
 		pause = false;
 		toggleMap = false;
-		numberOfKeys = 0;
 		
 		cellManager = new CellManager();
 		setEntityGroups();
@@ -44,13 +42,6 @@ public class MainGame extends GameState{
 		setUI();
 		audioManager = new AudioManager();
 		playMusic(0);
-	}
-	
-	public void addKey(){
-		numberOfKeys += 1;
-	}
-	public boolean checkIfEnoughKeys(){
-		return numberOfKeys >= 3;
 	}
 	
 	public void setUI(){
@@ -172,7 +163,7 @@ public class MainGame extends GameState{
 		entityManager.renderEntities(g);
 		ui.drawMap(cellManager.getFoundRooms(), cellManager.getAlmostFoundRooms(), entityManager.getRoomID(), g);
 		ui.drawPlayerHeart(g, entityManager.getPlayer());
-		ui.drawKeyNumber(numberOfKeys, g);
+		ui.drawKeyNumber(entityManager.getPlayer().getNumberOfKeys(), g);
 		ui.drawRepelMessage(g);
 	}
 	
@@ -203,14 +194,12 @@ public class MainGame extends GameState{
 			entityManager.checkRoomCompletion();
 			int collisionID = entityManager.checkPlayerToDoorsCollisions();
 			if(collisionID > 0){
-				if(entityManager.entityGenerator.checkIfBossRoom(collisionID) && !checkIfEnoughKeys()){
+				if(entityManager.entityGenerator.checkIfBossRoom(collisionID) && entityManager.getPlayer().getNumberOfKeys() < 3){
 					goToStartingRoom();
+					cellManager.addNewFoundRoom(cellManager.getBossRoomID());
 					ui.refreshRepelMessage();
 				}
 				else {
-					if(entityManager.entityGenerator.checkIfSpecialRoom(collisionID)){
-						addKey();
-					}
 					translateCellToNewRoom(collisionID);
 				}
 			}

@@ -302,12 +302,12 @@ public class EntityManager {
 			obstacles.clear();
 		}
 		
-		if (!entityGenerator.getGroupByID(getRoomID()).isDefeated()){
-			enemies = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getEnemies());
+		enemies = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getEnemies());
+		if(!entityGenerator.getGroupByID(getRoomID()).isDefeated()){
+			powerUpList = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getPowerUpList());
 		}
 		obstacles = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getObstacles());
 		items = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getItems());
-		powerUpList = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getPowerUpList());
 	}
 	public Room getRoom(){
 		return room;
@@ -324,18 +324,20 @@ public class EntityManager {
 	
 	public void checkRoomCompletion(){
 		boolean completed = true;
-		for(Enemy enemy: enemies){
-			if(enemy.checkIfActive()){
-				completed = false;
+		if(!enemies.isEmpty()){
+			for(Enemy enemy: enemies){
+				if (!enemy.getCurrentBehaviour().equals("dead")) {
+					completed = false;
+					break;
+				}
 			}
 		}
+		else if(!powerUpList.isEmpty()){
+			completed = false;
+		}
 		if(completed){
-			entityGenerator.getGroupByID(getRoomID()).setAsDefeated();
 			room.openDoors();
-			if(!entityGenerator.getGroupByID(getRoomID()).isItemsDropped()){
-				dropItems();
-				entityGenerator.getGroupByID(getRoomID()).setItemsDropped();
-			}
+			entityGenerator.getGroupByID(getRoomID()).setAsDefeated();
 		}
 	}
 	//------------------------------------------------------------------------------------------------------------------
