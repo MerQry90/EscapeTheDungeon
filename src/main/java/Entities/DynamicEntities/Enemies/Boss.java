@@ -20,10 +20,12 @@ public class Boss extends Enemy{
 	private int behaviourCountdown;
 	private int shootCountDown, finalRageCountDown;
 	private double previousHoleAngulation;
+	private boolean cleanProjectilesOnce;
 	
-	private final int FRAME_DURATION = 30;
-	private final int ORBITAL_BEHAVIOUR_DURATION = 20;
-	private final int FASTBALL_BEHAVIOUR_DURATION = 10;
+	private final int FPS = 30;
+	private final int ORBITAL_BEHAVIOUR_DURATION = 20 * FPS;
+	private final int FASTBALL_BEHAVIOUR_DURATION = 8 * FPS;
+	//private final int SLIMETRAIL_BEHAVIOUR_DURATION = 3 * FPS;
 	
 	public Boss(EntityManager entityManager){
 		this.entityManager = entityManager;
@@ -44,8 +46,8 @@ public class Boss extends Enemy{
 		
 		setWidth(Tile.getTile(1));
 		setHeight(Tile.getTile(1));
-		setCBwidthScalar(1.0);
-		setCBheightScalar(1.0);
+		setCBwidthScalar(1.2);
+		setCBheightScalar(1.2);
 		activateCollisionBox();
 
 		shootCountDown = 15;
@@ -55,15 +57,14 @@ public class Boss extends Enemy{
 		previousHoleAngulation = toRadians(random.nextDouble(365));
 
 		translationVector2D = new Vector2D(0);
-		setHealth(60);
-		setCanPassThroughWalls(false);
-		setCanFly(false);
+		setHealth(51);
 		behaviourCountdown = 0;
+		cleanProjectilesOnce = true;
 	}
 	
 	@Override
 	public void updateBehaviour() {
-		//System.out.println(getCurrentBehaviour());
+		System.out.println(getCurrentBehaviour());
 		if(getHealth() > 50){
 			if(behaviourCountdown > 0){
 				behaviourCountdown -= 1;
@@ -73,27 +74,30 @@ public class Boss extends Enemy{
 				int randomInt = random.nextInt(3);
 				if(randomInt == 0 && getCurrentBehaviour().equals("slimeTrail")){
 					changeBehaviourTo("looseSwirlingBalls");
-					behaviourCountdown = FRAME_DURATION * ORBITAL_BEHAVIOUR_DURATION;
+					behaviourCountdown = ORBITAL_BEHAVIOUR_DURATION;
 				}
 				else if(randomInt == 0){
 					changeBehaviourTo("denseSwirlingBalls");
-					behaviourCountdown = FRAME_DURATION * ORBITAL_BEHAVIOUR_DURATION;
+					behaviourCountdown = ORBITAL_BEHAVIOUR_DURATION;
 				}
 				else if(randomInt == 1){
 					changeBehaviourTo("fastBalls");
-					behaviourCountdown = FRAME_DURATION * FASTBALL_BEHAVIOUR_DURATION;
+					behaviourCountdown = FASTBALL_BEHAVIOUR_DURATION;
 				}
 				else if(!(getCurrentBehaviour().equals("slimeTrail"))){
 					changeBehaviourTo("slimeTrail");
-				}
-				else{
-					changeBehaviourTo("looseSwirlingBalls");
+					behaviourCountdown = 0;
 				}
 			}
 		}
 		else {
+			if(cleanProjectilesOnce){
+				cleanProjectilesOnce = false;
+				entityManager.cleanHostileProjectiles();
+			}
 			changeBehaviourTo("finalRage");
 		}
+		
 		if(checkActivation()) {
 			switch (getCurrentBehaviour()) {
 				case "denseSwirlingBalls" -> {
@@ -102,16 +106,16 @@ public class Boss extends Enemy{
 						loopCount += 1;
 						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
 								getCenterX(), getCenterY(), i, toRadians(45),
-								FRAME_DURATION * ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
+								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
 						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
 								getCenterX(), getCenterY(), i, toRadians(135),
-								FRAME_DURATION * ORBITAL_BEHAVIOUR_DURATION,loopCount * 20, entityManager));
+								ORBITAL_BEHAVIOUR_DURATION,loopCount * 20, entityManager));
 						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
 								getCenterX(), getCenterY(), i, toRadians(225),
-								FRAME_DURATION * ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
+								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
 						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
 								getCenterX(), getCenterY(), i, toRadians(315),
-								FRAME_DURATION * ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
+								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
 					}
 					changeBehaviourTo("idle");
 				}
@@ -121,16 +125,16 @@ public class Boss extends Enemy{
 						loopCount += 1;
 						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
 								getCenterX(), getCenterY(), i, toRadians(45),
-								FRAME_DURATION * ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
+								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
 						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
 								getCenterX(), getCenterY(), i, toRadians(135),
-								FRAME_DURATION * ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
+								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
 						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
 								getCenterX(), getCenterY(), i, toRadians(225),
-								FRAME_DURATION * ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
+								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
 						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
 								getCenterX(), getCenterY(), i, toRadians(315),
-								FRAME_DURATION * ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
+								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
 					}
 					changeBehaviourTo("idle");
 				}
@@ -145,14 +149,13 @@ public class Boss extends Enemy{
 				case "slimeTrail" -> {
 					Random random = new Random();
 					if(random.nextBoolean()){
-						entityManager.newHostileProjectile(new SlimeTrailBall(getCenterX(), getCenterY(), "up", entityManager));
-						entityManager.newHostileProjectile(new SlimeTrailBall(getCenterX(), getCenterY(), "down", entityManager));
+						entityManager.newHostileProjectile(new SlimeTrailBall(getX(), getY(), "up", entityManager));
+						entityManager.newHostileProjectile(new SlimeTrailBall(getX(), getY(), "down", entityManager));
 					}
 					else {
-						entityManager.newHostileProjectile(new SlimeTrailBall(getCenterX(), getCenterY(), "right", entityManager));
-						entityManager.newHostileProjectile(new SlimeTrailBall(getCenterX(), getCenterY(), "left", entityManager));
+						entityManager.newHostileProjectile(new SlimeTrailBall(getX(), getY(), "right", entityManager));
+						entityManager.newHostileProjectile(new SlimeTrailBall(getX(), getY(), "left", entityManager));
 					}
-					changeBehaviourTo("looseSwirlingBalls");
 				}
 				case "finalRage" -> {
 					finalRageCountDown -= 1;
@@ -171,7 +174,7 @@ public class Boss extends Enemy{
 									getCenterX(), getCenterY(), epsilon * i + previousHoleAngulation, entityManager
 							));
 						}
-						finalRageCountDown = 60;
+						finalRageCountDown = 80;
 					}
 				}
 				case "idle" ->{

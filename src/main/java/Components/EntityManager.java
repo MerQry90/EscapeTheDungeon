@@ -223,6 +223,10 @@ public class EntityManager {
 		}
 	}
 
+	public void cleanHostileProjectiles(){
+		hostileProjectiles.clear();
+	}
+	
 	public void generateSlimePuddle(int x, int y){
 		hazards.add(new SlimePuddle(x, y));
 	}

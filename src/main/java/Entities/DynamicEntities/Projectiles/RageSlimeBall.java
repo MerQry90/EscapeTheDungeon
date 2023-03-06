@@ -40,7 +40,7 @@ public class RageSlimeBall extends Projectile{
 	}
 	@Override
 	public void moveEntity() {
-		distance += 3;
+		distance += 2;
 		updateRageSlimeBall();
 	}
 
