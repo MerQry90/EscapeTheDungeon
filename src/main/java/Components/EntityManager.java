@@ -91,12 +91,6 @@ public class EntityManager {
 	public boolean checkObstaclesCollisions(DynamicEntity entity){
 		boolean hasCollided = false;
 		for(Obstacle obstacle: obstacles){
-			//per le pozze
-			/*if((obstacle instanceof BloodStain || obstacle instanceof SlimePuddle) && obstacle.checkIfActive() &&
-					!player.getCanFly() && obstacle.checkCollision(player) && player.isVulnerable()){
-				player.lowerHealth();
-				player.setInvulnerable();
-			}*/
 			if(entity.checkIfActive() && !entity.getCanFly() && obstacle.checkCollision(entity) &&
 					!(obstacle instanceof BloodStain || obstacle instanceof SlimePuddle) && obstacle.checkIfActive()){
 				if(entity.getCanBreakRocks()){
@@ -342,6 +336,10 @@ public class EntityManager {
 		if(completed){
 			room.openDoors();
 			entityGenerator.getGroupByID(getRoomID()).setAsDefeated();
+			if(!entityGenerator.getGroupByID(getRoomID()).isItemsDropped()){
+				dropItems();
+				entityGenerator.getGroupByID(getRoomID()).setItemsDropped();
+			}
 		}
 	}
 	//------------------------------------------------------------------------------------------------------------------
