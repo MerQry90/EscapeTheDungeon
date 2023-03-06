@@ -10,7 +10,7 @@ public class AudioManager {
 	
 	public AudioManager(){
 		audioFiles = new File[30];
-		audioFiles[0] = new File("src/resources/audio/placeHolder.wav");
+		audioFiles[0] = new File("src/resources/audio/BeepBox-Song2.wav");
 		audioFiles[1] = new File("src/resources/audio/playerGotHit.wav");
 	}
 	
