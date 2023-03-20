@@ -26,9 +26,7 @@ public class Player extends DynamicEntity {
 	private Image PLAYER_LEFT_6;
 	private Image PLAYER_LEFT_7;
 	private Image PLAYER_LEFT_8_IDLE;
-	
-	//tmp
-	//private Image LEFT_PLAYER;
+
 	private Image INVULNERABLE_PLAYER;
 
 	private boolean multipleShot;
