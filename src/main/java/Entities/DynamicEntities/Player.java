@@ -34,8 +34,7 @@ public class Player extends DynamicEntity {
 	private boolean multipleShot;
 
 	private String nextPlayerInstruction = "stop";
-	private int shootCoolDown; //valore fisso che indica ogni quanti frame il giocatore può sparare una freccia
-	private int shootCoolDownValue; //valore che incrementa
+	private int shootCoolDown;
 	private boolean hasShot;
 	private boolean vulnerability;
 	private boolean isFacingRight;
@@ -92,7 +91,6 @@ public class Player extends DynamicEntity {
 
 		translationVector2D = new Vector2D(8);
 		shootCoolDown = 15;
-		shootCoolDownValue = 0;
 		hasShot = false;
 		setCanPassThroughWalls(false);
 
@@ -134,8 +132,8 @@ public class Player extends DynamicEntity {
 
 	//Metodi per la gestione del cool down per sparare------------------------------------------------------------------
 	public void updateCoolDown(){
-		shootCoolDownValue += 1;
-		invulnerabilityCountdown --;
+		shootCoolDown -= 1;
+		invulnerabilityCountdown -= 1;
 		if(invulnerabilityCountdown <= 0){
 			//setActiveSprite(LEFT_PLAYER);
 			vulnerability = true;
@@ -143,21 +141,12 @@ public class Player extends DynamicEntity {
 	}
 	
 	public boolean canShoot() {
-		if (hasShot) {
-			if (shootCoolDown - shootCoolDownValue > 0) {
-				//shootCoolDownValue += 1;
-			}
-			else {
-				hasShot = false;
-				shootCoolDownValue = 0;
-			}
-			return false;
-		}
-		//hasShoot = false, quindi il player può sparare
-		else {
-			hasShot = true;
-			shootCoolDownValue = 0;
+		if(shootCoolDown < 0){
+			shootCoolDown = 15;
 			return true;
+		}
+		else {
+			return false;
 		}
 	}
 	//------------------------------------------------------------------------------------------------------------------
