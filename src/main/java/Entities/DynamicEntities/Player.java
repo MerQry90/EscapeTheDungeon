@@ -88,7 +88,7 @@ public class Player extends DynamicEntity {
 		setCBheightScalar(0.7);
 		activateCollisionBox();
 
-		translationVector2D = new Vector2D(8);
+		translationVector2D = new Vector2D(10);
 		shootCoolDown = 15;
 		setCanPassThroughWalls(false);
 
@@ -280,7 +280,6 @@ public class Player extends DynamicEntity {
 		if(canMove) {
 			moveEntity();
 		}
-		System.out.println(this.animationIndex);
 	}
 	
 	@Override

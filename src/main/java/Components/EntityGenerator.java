@@ -74,15 +74,15 @@ public class EntityGenerator {
 					case "easy" -> {
 						switch (random.nextInt(1)) {
 							case 0 -> {
+								group.getEnemies().add(new Ghost(Tile.getTile(5), Tile.getTile(4), entityManager));
 
-
-								group.getEnemies().add(new Tank(Tile.getTile(8), Tile.getTile(3), entityManager));
+								/*group.getEnemies().add(new Tank(Tile.getTile(8), Tile.getTile(3), entityManager));
 								group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(2)));
 								group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(5)));
 								group.getObstacles().add(new Rock(Tile.getTile(7), Tile.getTile(3)));
 								group.getObstacles().add(new Rock(Tile.getTile(7), Tile.getTile(4)));
 								group.getObstacles().add(new Rock(Tile.getTile(9), Tile.getTile(3)));
-								group.getObstacles().add(new Rock(Tile.getTile(9), Tile.getTile(4)));
+								group.getObstacles().add(new Rock(Tile.getTile(9), Tile.getTile(4)));*/
 							}
 							case 1 -> {
 								group.getEnemies().add(new Zombie(Tile.getTile(1), Tile.getTile(1), entityManager));
