@@ -72,8 +72,19 @@ public class EntityGenerator {
 				//STANZA COMUNE CON I NEMICI
 				switch (difficulty) {
 					case "easy" -> {
-						switch (random.nextInt(5)) {
+						switch (random.nextInt(1)) {
 							case 0 -> {
+
+
+								group.getEnemies().add(new Tank(Tile.getTile(8), Tile.getTile(3), entityManager));
+								group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(2)));
+								group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(5)));
+								group.getObstacles().add(new Rock(Tile.getTile(7), Tile.getTile(3)));
+								group.getObstacles().add(new Rock(Tile.getTile(7), Tile.getTile(4)));
+								group.getObstacles().add(new Rock(Tile.getTile(9), Tile.getTile(3)));
+								group.getObstacles().add(new Rock(Tile.getTile(9), Tile.getTile(4)));
+							}
+							case 1 -> {
 								group.getEnemies().add(new Zombie(Tile.getTile(1), Tile.getTile(1), entityManager));
 								group.getEnemies().add(new Zombie(Tile.getTile(1), Tile.getTile(7), entityManager));
 								group.getEnemies().add(new Zombie(Tile.getTile(15), Tile.getTile(1), entityManager));
@@ -86,19 +97,6 @@ public class EntityGenerator {
 								group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(3)));
 								group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(4)));
 								group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(5)));
-
-
-							}
-							case 1 -> {
-								group.getEnemies().add(new Tank(Tile.getTile(8), Tile.getTile(3), entityManager));
-								group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(2)));
-								group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(5)));
-								group.getObstacles().add(new Rock(Tile.getTile(7), Tile.getTile(3)));
-								group.getObstacles().add(new Rock(Tile.getTile(7), Tile.getTile(4)));
-								group.getObstacles().add(new Rock(Tile.getTile(9), Tile.getTile(3)));
-								group.getObstacles().add(new Rock(Tile.getTile(9), Tile.getTile(4)));
-
-
 							}
 							case 2 ->{
 								group.getEnemies().add(new Shooter(Tile.getTile(8), Tile.getTile(4), entityManager));

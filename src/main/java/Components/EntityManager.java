@@ -357,7 +357,9 @@ public class EntityManager {
 			powerUp.paint(g);
 		}
 		for (Obstacle obstacle: obstacles){
-			obstacle.paint(g);
+			if(obstacle.checkIfActive()) {
+				obstacle.paint(g);
+			}
 		}
 		for (Hazard hazard: hazards){
 			if(hazard.checkIfActive()) {

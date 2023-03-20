@@ -35,7 +35,7 @@ public abstract class Enemy extends DynamicEntity {
 	}
 	public BloodStain generateBloodStain(){
 		canGenerateBloodStain = false;
-		return new BloodStain(this.getX(), this.getY());
+		return new BloodStain(this.getCenterX() - 48, this.getCenterY() - 48);
 	}
 	//metodi riguardanti lo stato del nemico----------------------------------------------------------------------------
 	public String getCurrentBehaviour(){
