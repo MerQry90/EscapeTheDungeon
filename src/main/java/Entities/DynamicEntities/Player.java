@@ -130,12 +130,11 @@ public class Player extends DynamicEntity {
 	}
 	//------------------------------------------------------------------------------------------------------------------
 
-	//Metodi per la gestione del cool down per sparare------------------------------------------------------------------
+	//Metodi per la gestione del cool down del player------------------------------------------------------------------
 	public void updateCoolDown(){
 		shootCoolDown -= 1;
 		invulnerabilityCountdown -= 1;
 		if(invulnerabilityCountdown <= 0){
-			//setActiveSprite(LEFT_PLAYER);
 			vulnerability = true;
 		}
 	}
@@ -145,9 +144,7 @@ public class Player extends DynamicEntity {
 			shootCoolDown = 15;
 			return true;
 		}
-		else {
-			return false;
-		}
+		return false;
 	}
 	//------------------------------------------------------------------------------------------------------------------
 
