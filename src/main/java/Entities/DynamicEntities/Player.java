@@ -35,7 +35,6 @@ public class Player extends DynamicEntity {
 
 	private String nextPlayerInstruction = "stop";
 	private int shootCoolDown;
-	private boolean hasShot;
 	private boolean vulnerability;
 	private boolean isFacingRight;
 	private int animationIndex;
@@ -91,7 +90,6 @@ public class Player extends DynamicEntity {
 
 		translationVector2D = new Vector2D(8);
 		shootCoolDown = 15;
-		hasShot = false;
 		setCanPassThroughWalls(false);
 
 		multipleShot = false;
@@ -164,25 +162,25 @@ public class Player extends DynamicEntity {
 			case 0 -> {
 				setActiveSprite(PLAYER_RIGHT_1);
 			}
-			case 10 -> {
+			case 4 -> {
 				setActiveSprite(PLAYER_RIGHT_2);
 			}
-			case 20 -> {
+			case 8 -> {
 				setActiveSprite(PLAYER_RIGHT_3);
 			}
-			case 30 -> {
+			case 12 -> {
 				setActiveSprite(PLAYER_RIGHT_4);
 			}
-			case 40 -> {
+			case 16 -> {
 				setActiveSprite(PLAYER_RIGHT_5);
 			}
-			case 50 -> {
+			case 20 -> {
 				setActiveSprite(PLAYER_RIGHT_6);
 			}
-			case 60 -> {
+			case 24 -> {
 				setActiveSprite(PLAYER_RIGHT_7);
 			}
-			case 70 -> {
+			case 28 -> {
 				setActiveSprite(PLAYER_RIGHT_8_IDLE);
 				animationIndex = 0;
 			}
@@ -194,25 +192,25 @@ public class Player extends DynamicEntity {
 			case 0 -> {
 				setActiveSprite(PLAYER_LEFT_1);
 			}
-			case 10 -> {
+			case 4 -> {
 				setActiveSprite(PLAYER_LEFT_2);
 			}
-			case 20 -> {
+			case 8 -> {
 				setActiveSprite(PLAYER_LEFT_3);
 			}
-			case 30 -> {
+			case 12 -> {
 				setActiveSprite(PLAYER_LEFT_4);
 			}
-			case 40 -> {
+			case 16 -> {
 				setActiveSprite(PLAYER_LEFT_5);
 			}
-			case 50 -> {
+			case 20 -> {
 				setActiveSprite(PLAYER_LEFT_6);
 			}
-			case 60 -> {
+			case 24 -> {
 				setActiveSprite(PLAYER_LEFT_7);
 			}
-			case 70 -> {
+			case 28 -> {
 				setActiveSprite(PLAYER_LEFT_8_IDLE);
 				animationIndex = 0;
 			}
