@@ -15,6 +15,11 @@ import java.util.List;
 import java.util.Random;
 
 public class EntityManager {
+	
+	/*
+	* link agli sprite di sharon
+	* https://drive.google.com/drive/folders/1iUHRR4yvI7v8MohoRNtiPgisIckRKKzU?usp=sharing
+	* */
 
 	private MainGame mainGameReference;
 	
