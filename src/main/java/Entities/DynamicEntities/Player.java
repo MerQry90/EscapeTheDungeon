@@ -86,7 +86,7 @@ public class Player extends DynamicEntity {
 		setCBheightScalar(0.7);
 		activateCollisionBox();
 
-		translationVector2D = new Vector2D(10);
+		translationVector2D = new Vector2D(30);
 		shootCoolDown = 15;
 		setCanPassThroughWalls(false);
 

@@ -19,6 +19,7 @@ public class Bat extends Enemy{
 	private Image BAT_8;
 	private Image BAT_9;
 	private Image BAT_10;
+	private Image DEAD_BAT;
 	
 	private int wait, countdown, movingCountdown, animationIndex;
 	
@@ -42,11 +43,7 @@ public class Bat extends Enemy{
 		BAT_8 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pistrello8.png");
 		BAT_9 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pistrello9.png");
 		BAT_10 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pistrello10.png");
-
-		/*LIVING_BAT_OFF = setSpriteFromPath("src/resources/sprites/png/player_sample.png");
-		LIVING_BAT_ON = setSpriteFromPath("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
-		DEAD_BAT = setSpriteFromPath("src/resources/sprites/png/deadMage.png");*/
-		//setActiveSprite(LIVING_BAT_OFF);
+		DEAD_BAT = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
 		
 		setWidth(64);
 		setHeight(64);
@@ -110,7 +107,7 @@ public class Bat extends Enemy{
 				}
 				case "dead" -> {
 					disableCollisionBox();
-					nextAnimation();
+					setActiveSprite(DEAD_BAT);
 				}
 				default -> changeBehaviourTo("stop-1");
 			}

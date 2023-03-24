@@ -15,13 +15,14 @@ public class EntityGenerator {
 	private String difficulty;
 	private List<Group> groups;
 	private EntityManager entityManager;
-	private int bossRoomID;
+	private int bossRoomID, specialRoomNumber;
 	private List<Integer> specialRoomsIDS;
 
 	public EntityGenerator(EntityManager entityManager) {
 		this.groups = new ArrayList<>();
 		difficulty = "easy";
 		this.entityManager = entityManager;
+		specialRoomNumber = 0;
 	}
 
 	public void addGroup(int ID){
@@ -64,9 +65,14 @@ public class EntityGenerator {
 			}
 			else if(checkIfSpecialRoom(group.getID())){
 				//STANZA SPECIALE
-				group.getPowerUpList().add(new LifeUp());
-				group.getPowerUpList().add(new MultipleShot());
+				if(specialRoomNumber < 2){
+					group.getPowerUpList().add(new LifeUp());
+				}
+				else {
+					group.getPowerUpList().add(new MultipleShot());
+				}
 				group.getPowerUpList().add(new Key());
+				specialRoomNumber += 1;
 			}
 			else if(group.getID() != 35){
 				//STANZA COMUNE CON I NEMICI
