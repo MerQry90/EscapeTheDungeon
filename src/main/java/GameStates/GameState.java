@@ -10,7 +10,7 @@ public abstract class GameState {
 
 	private boolean active;
 	protected Background background = new Background();
-	protected AudioManager audioManager;
+	public AudioManager audioManager;
 	protected KeyHandler keyH;
 	
 	public void render(Graphics g){
@@ -25,19 +25,6 @@ public abstract class GameState {
 	}
 	public void setInactive() {
 		active = false;
-	}
-	
-	public void playMusic(int i){
-		audioManager.setClip(i);
-		audioManager.play();
-		audioManager.loop();
-	}
-	public void stopMusic(){
-		audioManager.stop();
-	}
-	public void playSoundEffect(int i){
-		audioManager.setClip(i);
-		audioManager.play();
 	}
 	
 	public abstract void processInput();

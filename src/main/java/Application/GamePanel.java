@@ -1,5 +1,6 @@
 package Application;
 
+import Components.AudioManager;
 import Components.Background;
 import GameStates.*;
 
@@ -21,6 +22,8 @@ public class GamePanel extends JPanel implements ActionListener {
 	private Timer timer;
 	private Background background;
 	private KeyHandler keyH;
+	private AudioManager audioManager;
+	
 	public GamePanel() {
 		
 		//impostazioni finestra 17x9
@@ -34,6 +37,9 @@ public class GamePanel extends JPanel implements ActionListener {
 		
 		//lo stato iniziale dell'applicazione è quello di menu principale
 		nextState();
+		
+		//audiomanager
+		audioManager = new AudioManager();
 		
 		//avvio del programma
 		timer = new Timer(Delay(), this);
@@ -75,7 +81,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	 */
 	public void nextState(){
 		if (gameState instanceof MainMenu) {
-			gameState = new MainGame(keyH);
+			gameState = new MainGame(keyH, audioManager);
 		}
 		else if (gameState instanceof MainGame) {
 			if(((MainGame) gameState).win) {

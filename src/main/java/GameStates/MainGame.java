@@ -22,8 +22,10 @@ public class MainGame extends GameState{
 	
 	public boolean win;
 	
-	public MainGame(KeyHandler keyH){
+	public MainGame(KeyHandler keyH, AudioManager audioManager){
 		this.keyH = keyH;
+		this.audioManager = audioManager;
+		
 		setActive();
 		background.loadMainGameBackground();
 		
@@ -40,8 +42,7 @@ public class MainGame extends GameState{
 		goToStartingRoom();
 		ui = new UI();
 		setUI();
-		audioManager = new AudioManager();
-		playMusic(0);
+		audioManager.playMusic(2);
 	}
 	
 	public void setUI(){
@@ -178,6 +179,7 @@ public class MainGame extends GameState{
 				setInactive();
 			}
 			if(entityManager.isGameOver()){
+				audioManager.stopMusic();
 				win = false;
 				setInactive();
 			}
