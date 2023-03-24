@@ -42,7 +42,7 @@ public class MainGame extends GameState{
 		goToStartingRoom();
 		ui = new UI();
 		setUI();
-		audioManager.playMusic(2);
+		audioManager.playSoundLoop(2);
 	}
 	
 	public void setUI(){
@@ -179,7 +179,6 @@ public class MainGame extends GameState{
 				setInactive();
 			}
 			if(entityManager.isGameOver()){
-				audioManager.stopMusic();
 				win = false;
 				setInactive();
 			}

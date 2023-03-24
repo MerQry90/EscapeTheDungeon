@@ -1,11 +1,13 @@
 package GameStates;
 
 import Application.KeyHandler;
+import Components.AudioManager;
 
 public class GameOver extends GameState{
 	
-	public GameOver(KeyHandler keyH) {
+	public GameOver(KeyHandler keyH, AudioManager audioManager) {
 		this.keyH = keyH;
+		this.audioManager = audioManager;
 		background.loadGameOverBackground();
 		setActive();
 	}

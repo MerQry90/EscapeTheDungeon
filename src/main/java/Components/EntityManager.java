@@ -114,7 +114,7 @@ public class EntityManager {
 			if(hazard.checkIfActive() && !player.getCanFly() && hazard.checkCollision(player) && player.isVulnerable()){
 				player.lowerHealth();
 				player.setInvulnerable();
-				mainGameReference.audioManager.playSoundEffect(1);
+				mainGameReference.audioManager.playSoundOnce(1);
 			}
 		}
 	}
@@ -141,7 +141,7 @@ public class EntityManager {
 			if(enemy.checkIfActive() && enemy.checkCollision(player) && player.isVulnerable()){
 				player.lowerHealth();
 				player.setInvulnerable();
-				mainGameReference.audioManager.playSoundEffect(1);
+				mainGameReference.audioManager.playSoundOnce(1);
 			}
 			for(Projectile arrow: friendlyArrows){
 				if(enemy.checkIfActive() && enemy.checkCollision(arrow)){
@@ -155,7 +155,7 @@ public class EntityManager {
 				player.lowerHealth();
 				player.setInvulnerable();
 				projectile.setInactive();
-				mainGameReference.audioManager.playSoundEffect(1);
+				mainGameReference.audioManager.playSoundOnce(1);
 			}
 		}
 	}
