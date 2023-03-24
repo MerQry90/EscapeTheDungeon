@@ -100,7 +100,7 @@ public class Player extends DynamicEntity {
 	public int getNumberOfKeys(){
 		return numberOfKeys;
 	}
-
+ 
 	//Getter e setter metodi specifici del giocatore--------------------------------------------------------------------
 	public int getMaxHealth(){
 		return maxHealth;
