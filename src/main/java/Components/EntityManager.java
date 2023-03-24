@@ -305,6 +305,9 @@ public class EntityManager {
 		if(obstacles != null){
 			obstacles.clear();
 		}
+		if(hazards != null){
+			hazards.clear();
+		}
 		
 		enemies = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getEnemies());
 		if(!entityGenerator.getGroupByID(getRoomID()).isDefeated()){
