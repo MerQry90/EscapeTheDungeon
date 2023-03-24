@@ -67,16 +67,16 @@ public class Player extends DynamicEntity {
 		PLAYER_LEFT_6 = setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim17.png");
 		PLAYER_LEFT_7 = setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim18.png");
 		PLAYER_LEFT_8_IDLE = setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim19.png");
-		
-		//LEFT_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_front.png");
-		INVULNERABLE_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_invulnerable.png");
+
+		INVULNERABLE_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_front.png");
 		isFacingRight = false;
 		animationIndex = 0;
+		vulnerability = true;
 		setIdleAnimation();
 
 		maxHealth = 3;
 		setHealth(maxHealth);
-		vulnerability = true;
+
 
 		setX(512);
 		setY(256);
@@ -112,7 +112,6 @@ public class Player extends DynamicEntity {
 
 	public void setInvulnerable(){
 		vulnerability = false;
-		setActiveSprite(INVULNERABLE_PLAYER);
 		invulnerabilityCountdown = 40;
 	}
 	public boolean isVulnerable(){
@@ -126,7 +125,7 @@ public class Player extends DynamicEntity {
 	}
 	//------------------------------------------------------------------------------------------------------------------
 
-	//Metodi per la gestione del cool down del player------------------------------------------------------------------
+	//Metodi per la gestione del cool down del player-------------------------------------------------------------------
 	public void updateCoolDown(){
 		shootCoolDown -= 1;
 		invulnerabilityCountdown -= 1;
@@ -146,71 +145,86 @@ public class Player extends DynamicEntity {
 
 	//Movimento del giocatore-------------------------------------------------------------------------------------------
 	public void setIdleAnimation(){
-		if(isFacingRight){
-			setActiveSprite(PLAYER_RIGHT_8_IDLE);
+		if(!isVulnerable()){
+			setActiveSprite(INVULNERABLE_PLAYER);
 		}
 		else {
-			setActiveSprite(PLAYER_LEFT_8_IDLE);
+			if (isFacingRight) {
+				setActiveSprite(PLAYER_RIGHT_8_IDLE);
+			} else {
+				setActiveSprite(PLAYER_LEFT_8_IDLE);
+			}
 		}
 		animationIndex = 0;
 	}
 	public void nextAnimationRight(){
-		animationIndex += 1;
-		switch (animationIndex){
-			case 0 -> {
-				setActiveSprite(PLAYER_RIGHT_1);
-			}
-			case 4 -> {
-				setActiveSprite(PLAYER_RIGHT_2);
-			}
-			case 8 -> {
-				setActiveSprite(PLAYER_RIGHT_3);
-			}
-			case 12 -> {
-				setActiveSprite(PLAYER_RIGHT_4);
-			}
-			case 16 -> {
-				setActiveSprite(PLAYER_RIGHT_5);
-			}
-			case 20 -> {
-				setActiveSprite(PLAYER_RIGHT_6);
-			}
-			case 24 -> {
-				setActiveSprite(PLAYER_RIGHT_7);
-			}
-			case 28 -> {
-				setActiveSprite(PLAYER_RIGHT_8_IDLE);
-				animationIndex = 0;
+
+		if(!isVulnerable()){
+			setActiveSprite(INVULNERABLE_PLAYER);
+		}
+		else {
+			animationIndex += 1;
+			switch (animationIndex) {
+				case 0 -> {
+					setActiveSprite(PLAYER_RIGHT_1);
+				}
+				case 4 -> {
+					setActiveSprite(PLAYER_RIGHT_2);
+				}
+				case 8 -> {
+					setActiveSprite(PLAYER_RIGHT_3);
+				}
+				case 12 -> {
+					setActiveSprite(PLAYER_RIGHT_4);
+				}
+				case 16 -> {
+					setActiveSprite(PLAYER_RIGHT_5);
+				}
+				case 20 -> {
+					setActiveSprite(PLAYER_RIGHT_6);
+				}
+				case 24 -> {
+					setActiveSprite(PLAYER_RIGHT_7);
+				}
+				case 28 -> {
+					setActiveSprite(PLAYER_RIGHT_8_IDLE);
+					animationIndex = 0;
+				}
 			}
 		}
 	}
 	public void nextAnimationLeft(){
-		animationIndex += 1;
-		switch (animationIndex){
-			case 0 -> {
-				setActiveSprite(PLAYER_LEFT_1);
-			}
-			case 4 -> {
-				setActiveSprite(PLAYER_LEFT_2);
-			}
-			case 8 -> {
-				setActiveSprite(PLAYER_LEFT_3);
-			}
-			case 12 -> {
-				setActiveSprite(PLAYER_LEFT_4);
-			}
-			case 16 -> {
-				setActiveSprite(PLAYER_LEFT_5);
-			}
-			case 20 -> {
-				setActiveSprite(PLAYER_LEFT_6);
-			}
-			case 24 -> {
-				setActiveSprite(PLAYER_LEFT_7);
-			}
-			case 28 -> {
-				setActiveSprite(PLAYER_LEFT_8_IDLE);
-				animationIndex = 0;
+		if(!isVulnerable()){
+			setActiveSprite(INVULNERABLE_PLAYER);
+		}
+		else {
+			animationIndex += 1;
+			switch (animationIndex) {
+				case 0 -> {
+					setActiveSprite(PLAYER_LEFT_1);
+				}
+				case 4 -> {
+					setActiveSprite(PLAYER_LEFT_2);
+				}
+				case 8 -> {
+					setActiveSprite(PLAYER_LEFT_3);
+				}
+				case 12 -> {
+					setActiveSprite(PLAYER_LEFT_4);
+				}
+				case 16 -> {
+					setActiveSprite(PLAYER_LEFT_5);
+				}
+				case 20 -> {
+					setActiveSprite(PLAYER_LEFT_6);
+				}
+				case 24 -> {
+					setActiveSprite(PLAYER_LEFT_7);
+				}
+				case 28 -> {
+					setActiveSprite(PLAYER_LEFT_8_IDLE);
+					animationIndex = 0;
+				}
 			}
 		}
 	}
