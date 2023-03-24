@@ -86,7 +86,7 @@ public class Player extends DynamicEntity {
 		setCBheightScalar(0.7);
 		activateCollisionBox();
 
-		translationVector2D = new Vector2D(30);
+		translationVector2D = new Vector2D(10);
 		shootCoolDown = 15;
 		setCanPassThroughWalls(false);
 
@@ -100,7 +100,7 @@ public class Player extends DynamicEntity {
 	public int getNumberOfKeys(){
 		return numberOfKeys;
 	}
-
+ 
 	//Getter e setter metodi specifici del giocatore--------------------------------------------------------------------
 	public int getMaxHealth(){
 		return maxHealth;

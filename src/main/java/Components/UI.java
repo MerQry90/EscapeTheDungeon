@@ -16,6 +16,10 @@ public class UI {
 
 	private Image HEART_FULL;
 	private Image HEART_EMPTY;
+	
+	private Image KEY;
+	
+	private Image NOTHING;
 
 	private boolean mapEnabled;
 	private static int mapRoomDimension = 24;
@@ -35,6 +39,11 @@ public class UI {
 
 		HEART_FULL = GenericEntity.setSpriteFromPath("src/resources/sprites/png/full_heart.png");
 		HEART_EMPTY = GenericEntity.setSpriteFromPath("src/resources/sprites/png/empty_heart.png");
+		
+		KEY = GenericEntity.setSpriteFromPath("src/resources/sprites/png/key.png");
+		
+		NOTHING = GenericEntity.setSpriteFromPath("src/resources/sprites/png/invisible_cube.png");
+		
 		mapEnabled = true;
 		repelMessageCountdown = 0;
 	}
@@ -59,8 +68,30 @@ public class UI {
 	}
 	
 	public void drawKeyNumber(int numberOfKeys, Graphics g){
-		g.setFont(new Font("Verdana", Font.BOLD, 30));
-		g.drawString("# of keys: " + numberOfKeys, Tile.getTile(0) + 10, Tile.getTile(9) - 20);
+		//g.setFont(new Font("Verdana", Font.BOLD, 30));
+		//g.drawString("# of keys: " + numberOfKeys, Tile.getTile(0) + 10, Tile.getTile(9) - 20);
+	
+		if(numberOfKeys > 0){
+			g.drawImage(KEY, 10, Tile.getTile(8) + 10, 40, 40, null);
+		}
+		else {
+			g.drawImage(NOTHING, 10, Tile.getTile(8) + 10, 40, 40, null);
+		}
+		
+		if(numberOfKeys > 1){
+			g.drawImage(KEY, 40, Tile.getTile(8) + 10, 40, 40, null);
+		}
+		else {
+			g.drawImage(NOTHING, 40, Tile.getTile(8) + 10, 40, 40, null);
+		}
+		
+		if(numberOfKeys > 2){
+			g.drawImage(KEY, 70, Tile.getTile(8) + 10, 40, 40, null);
+		}
+		else {
+			g.drawImage(NOTHING, 70, Tile.getTile(8) + 10, 40, 40, null);
+		}
+	
 	}
 	
 	public void refreshRepelMessage(){
