@@ -9,8 +9,8 @@ public class Key extends PowerUp{
 	
 	private Image KEY;
 	
-	public Key() {
-		super(Tile.getTile(3), Tile.getTile(3));
+	public Key(int x, int y) {
+		super(x, y);
 		KEY = setSpriteFromPath("src/resources/sprites/png/key.png");
 		setActiveSprite(KEY);
 	}

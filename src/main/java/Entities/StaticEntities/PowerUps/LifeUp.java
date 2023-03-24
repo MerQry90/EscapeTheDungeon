@@ -7,19 +7,21 @@ import java.awt.*;
 public class LifeUp extends PowerUp{
 	Image LIFE_UP;
 
-	public LifeUp(){
-		super(64 * 10, 64 * 5);
+	public LifeUp(int x, int y){
+		super(x, y);
 		LIFE_UP = setSpriteFromPath("src/resources/sprites/png/fungus.png");
 		setActiveSprite(LIFE_UP);
 	}
 
 	@Override
 	public void activate(Player player) {
-		if(player.getMaxHealth() < 6) {
-			player.setMaxHealth(player.getMaxHealth() + 1);
-		}
-		if(player.getHealth() < player.getMaxHealth()){
-			player.setHealth(player.getHealth() + 1);
+		for(int i = 0; i < 2; i++) {
+			if (player.getMaxHealth() < 6) {
+				player.setMaxHealth(player.getMaxHealth() + 1);
+			}
+			if (player.getHealth() < player.getMaxHealth()) {
+				player.setHealth(player.getHealth() + 1);
+			}
 		}
 	}
 }
