@@ -4,6 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 
 /*
+todo: fixare boss(probabilmente timer attacchi)
+	aggiungere scritte power up
+ 	creare qualche stanza nuova
+*/
+
+
+/*
 Application estende JFrame in quanto è il frame principale, quello su cui va "incollato" GamePanel
 e in quanto tale diventa runnable
  */
