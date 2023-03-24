@@ -60,6 +60,7 @@ public class Bat extends Enemy{
 		countdown = 0;
 		movingCountdown = 20;
 		animationIndex = 0;
+		setActiveSprite(BAT_1);
 	}
 
 	@Override

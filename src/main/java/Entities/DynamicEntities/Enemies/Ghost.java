@@ -60,6 +60,7 @@ public class Ghost extends Enemy{
 		setCanPassThroughWalls(true);
 		setCanFly(true);
 		countdown = 54 + 9;
+		setActiveSprite(GHOST_1);
 	}
 	
 	public void nextAnimation(){

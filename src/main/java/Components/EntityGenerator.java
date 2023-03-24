@@ -82,6 +82,7 @@ public class EntityGenerator {
 							case 0 -> {
 								group.getEnemies().add(new Ghost(Tile.getTile(5), Tile.getTile(4), entityManager));
 								group.getEnemies().add(new Bat(Tile.getTile(8), Tile.getTile(3), entityManager));
+								group.getEnemies().add(new Zombie(Tile.getTile(6), Tile.getTile(3), entityManager));
 
 								/*group.getEnemies().add(new Tank(Tile.getTile(8), Tile.getTile(3), entityManager));
 								group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(2)));
