@@ -84,7 +84,7 @@ public class GamePanel extends JPanel implements ActionListener {
 			gameState = new MainGame(keyH, audioManager);
 		}
 		else if (gameState instanceof MainGame) {
-			gameState.audioManager.stopSoundLoop(gameState.audioManager.currentSoundLoop);
+			gameState.audioManager.stopSoundLoop();
 			if(((MainGame) gameState).win) {
 				gameState = new GameWin(keyH);
 			}

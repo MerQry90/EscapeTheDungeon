@@ -42,7 +42,7 @@ public class MainGame extends GameState{
 		goToStartingRoom();
 		ui = new UI();
 		setUI();
-		audioManager.playSoundLoop(2);
+		audioManager.playSoundLoop(0);
 	}
 	
 	public void setUI(){

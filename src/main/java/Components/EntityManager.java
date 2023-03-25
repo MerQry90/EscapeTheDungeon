@@ -6,6 +6,7 @@ import Entities.DynamicEntities.Projectiles.Arrow;
 import Entities.DynamicEntities.Projectiles.Projectile;
 import Entities.GenericEntity;
 import Entities.StaticEntities.*;
+import Entities.StaticEntities.PowerUps.Key;
 import Entities.StaticEntities.PowerUps.PowerUp;
 import GameStates.MainGame;
 
@@ -37,10 +38,12 @@ public class EntityManager {
 	private Room room;
 	
 	private boolean bossHasBeenDefeated;
+	private boolean roomHasBeenCompleted_actionPerformedOnce;
 	
 	public EntityManager(MainGame mainGameReference){
 		this.mainGameReference = mainGameReference;
 		bossHasBeenDefeated = false;
+		roomHasBeenCompleted_actionPerformedOnce = false;
 		player = new Player(this);
 
 		enemies = new ArrayList<>();
@@ -147,6 +150,7 @@ public class EntityManager {
 				if(enemy.checkIfActive() && enemy.checkCollision(arrow)){
 					arrow.setInactive();
 					enemy.lowerHealth();
+					mainGameReference.audioManager.playSoundOnce(5);
 				}
 			}
 		}
@@ -174,6 +178,9 @@ public class EntityManager {
 		for(int i = 0; i < powerUpList.size(); i += 1){
 			if(powerUpList.get(i).checkIfActive() && powerUpList.get(i).checkCollision(player)){
 				powerUpList.get(i).activate(player);
+				if(powerUpList.get(i) instanceof Key){
+					mainGameReference.audioManager.playSoundOnce(4);
+				}
 				powerUpList.remove(i);
 				i -= 1;
 			}
@@ -194,6 +201,7 @@ public class EntityManager {
 				friendlyArrows.add(new Arrow(getPlayerX() + 11 + 64, getPlayerY() + 11, orientation, this));
 			}
 		}
+		mainGameReference.audioManager.playSoundOnce(3);
 	}
 
 	public void updateArrows(){
@@ -307,11 +315,18 @@ public class EntityManager {
 		}
 		
 		enemies = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getEnemies());
+		roomHasBeenCompleted_actionPerformedOnce = false;
 		if(!entityGenerator.getGroupByID(getRoomID()).isDefeated()){
 			powerUpList = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getPowerUpList());
+			roomHasBeenCompleted_actionPerformedOnce = true;
 		}
 		obstacles = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getObstacles());
 		items = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getItems());
+		
+		if(entityGenerator.checkIfBossRoom(ID)){
+			mainGameReference.audioManager.stopSoundLoop();
+			mainGameReference.audioManager.playSoundLoop(2);
+		}
 	}
 	public Room getRoom(){
 		return room;
@@ -341,6 +356,10 @@ public class EntityManager {
 		}
 		if(completed){
 			room.openDoors();
+			if(roomHasBeenCompleted_actionPerformedOnce) {
+				roomHasBeenCompleted_actionPerformedOnce = false;
+				mainGameReference.audioManager.playSoundOnce(6);
+			}
 			entityGenerator.getGroupByID(getRoomID()).setAsDefeated();
 			if(!entityGenerator.getGroupByID(getRoomID()).isItemsDropped()){
 				dropItems();

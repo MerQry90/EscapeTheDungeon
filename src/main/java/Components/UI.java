@@ -110,8 +110,8 @@ public class UI {
 	public void updateOnscreenMessage(Graphics g){
 		if(messageTime > 0) {
 			g.setFont(new Font("Verdana", Font.BOLD, 30));
-			g.setColor(Color.LIGHT_GRAY);
-			g.drawString(messages[messageIndex], Tile.getTile(5), Tile.getTile(6));
+			g.setColor(Color.ORANGE);
+			g.drawString(messages[messageIndex], Tile.getTile(1), Tile.getTile(8));
 			messageTime -= 1;
 		}
 	}
