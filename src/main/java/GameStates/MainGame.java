@@ -18,7 +18,7 @@ public class MainGame extends GameState{
 	
 	private EntityManager entityManager;
 	private CellManager cellManager;
-	private UI ui;
+	public UI ui;
 	
 	public boolean win;
 	
@@ -165,7 +165,7 @@ public class MainGame extends GameState{
 		ui.drawMap(cellManager.getFoundRooms(), cellManager.getAlmostFoundRooms(), entityManager.getRoomID(), g);
 		ui.drawPlayerHeart(g, entityManager.getPlayer());
 		ui.drawKeyNumber(entityManager.getPlayer().getNumberOfKeys(), g);
-		ui.drawRepelMessage(g);
+		ui.updateOnscreenMessage(g);
 	}
 	
 	@Override
@@ -191,6 +191,18 @@ public class MainGame extends GameState{
 			entityManager.checkEntityToEntityCollisions();
 			entityManager.checkItemsCollisions();
 			entityManager.checkPowerUpCollision();
+			if(entityManager.getPlayer().showPowerUpMessageMS){
+				entityManager.getPlayer().showPowerUpMessageMS = false;
+				ui.setOnscreenMessage(1);
+			}
+			if(entityManager.getPlayer().showPowerUpMessageLU){
+				entityManager.getPlayer().showPowerUpMessageLU = false;
+				ui.setOnscreenMessage(2);
+			}
+			if(entityManager.getPlayer().showPowerUpMessageFF){
+				entityManager.getPlayer().showPowerUpMessageFF = false;
+				ui.setOnscreenMessage(3);
+			}
 			entityManager.checkHazardsCollision();
 			entityManager.checkRoomCompletion();
 			int collisionID = entityManager.checkPlayerToDoorsCollisions();
@@ -198,7 +210,7 @@ public class MainGame extends GameState{
 				if(entityManager.entityGenerator.checkIfBossRoom(collisionID) && entityManager.getPlayer().getNumberOfKeys() < 3){
 					goToStartingRoom();
 					cellManager.addNewFoundRoom(cellManager.getBossRoomID());
-					ui.refreshRepelMessage();
+					ui.setOnscreenMessage(0);
 				}
 				else {
 					translateCellToNewRoom(collisionID);

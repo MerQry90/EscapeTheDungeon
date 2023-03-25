@@ -27,7 +27,9 @@ public class UI {
 	private List<Integer> specialRoomsIDS;
 	private int bossRoomID;
 	
-	private int repelMessageCountdown;
+	private int messageTime;
+	private int messageIndex;
+	private String[] messages;
 
 	public UI(){
 		NORMAL_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/NormalRoom.png");
@@ -45,7 +47,14 @@ public class UI {
 		NOTHING = GenericEntity.setSpriteFromPath("src/resources/sprites/png/invisible_cube.png");
 		
 		mapEnabled = true;
-		repelMessageCountdown = 0;
+		messageTime = 0;
+		
+		messageIndex = 0;
+		messages = new String[5];
+		messages[0] = "A mysterious force repel you...";
+		messages[1] = "3 is better than 1!";
+		messages[2] = "You feel better than ever!";
+		messages[3] = "SUPER-FAST!";
 	}
 	
 	public void drawPlayerHeart(Graphics g, Player player){
@@ -94,16 +103,19 @@ public class UI {
 	
 	}
 	
-	public void refreshRepelMessage(){
-		repelMessageCountdown = 90;
+	public void setOnscreenMessage(int index){
+		messageIndex = index;
+		messageTime = 90;
 	}
-	public void drawRepelMessage(Graphics g){
-		if(repelMessageCountdown > 0){
-			repelMessageCountdown -= 1;
+	public void updateOnscreenMessage(Graphics g){
+		if(messageTime > 0) {
 			g.setFont(new Font("Verdana", Font.BOLD, 30));
-			g.drawString("A mysterious force repel you...", Tile.getTile(4), Tile.getTile(5));
+			g.setColor(Color.LIGHT_GRAY);
+			g.drawString(messages[messageIndex], Tile.getTile(5), Tile.getTile(6));
+			messageTime -= 1;
 		}
 	}
+	
 
 	public void drawMap(List<Integer> foundRooms, List<Integer> almostFoundRooms, int playerCellID, Graphics g){
 		if(mapEnabled){

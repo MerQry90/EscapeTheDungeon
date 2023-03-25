@@ -274,10 +274,7 @@ public class EntityManager {
 
 	//gestione stato----------------------------------------------------------------------------------------------------
 	public boolean isGameOver(){
-		if(!player.checkIfActive()){
-			return true;
-		}
-		return false;
+		return !player.checkIfActive();
 	}
 	public boolean isBossDead(){
 		return bossHasBeenDefeated;

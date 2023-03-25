@@ -15,5 +15,6 @@ public class FastFeet extends PowerUp{
 	@Override
 	public void activate(Player player) {
 		player.setSpeed(player.getSpeed() + 3);
+		player.showPowerUpMessageFF = true;
 	}
 }

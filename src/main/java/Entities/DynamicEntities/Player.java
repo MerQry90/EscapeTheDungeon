@@ -39,6 +39,10 @@ public class Player extends DynamicEntity {
 	private int invulnerabilityCountdown;
 	private int maxHealth;
 	private int numberOfKeys;
+	
+	public boolean showPowerUpMessageMS;
+	public boolean showPowerUpMessageLU;
+	public boolean showPowerUpMessageFF;
 
 	public Player(EntityManager entityManager) {
 		this.entityManager = entityManager;
@@ -92,6 +96,10 @@ public class Player extends DynamicEntity {
 
 		multipleShot = false;
 		numberOfKeys = 0;
+		
+		showPowerUpMessageMS = false;
+		showPowerUpMessageLU = false;
+		showPowerUpMessageFF = false;
 	}
 	
 	public void addKey(){

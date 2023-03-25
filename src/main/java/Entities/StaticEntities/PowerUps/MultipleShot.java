@@ -16,5 +16,6 @@ public class MultipleShot extends PowerUp{
 	@Override
 	public void activate(Player player) {
 		player.activateMultipleShot();
+		player.showPowerUpMessageMS = true;
 	}
 }

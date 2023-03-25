@@ -23,5 +23,6 @@ public class LifeUp extends PowerUp{
 				player.setHealth(player.getHealth() + 1);
 			}
 		}
+		player.showPowerUpMessageLU = true;
 	}
 }
