@@ -12,7 +12,7 @@ public class Rock extends Obstacle{
 
 	@Override
 	public void init() {
-		ROCK_IMAGE = setSpriteFromPath("src/resources/sprites/png/rock.png");
+		ROCK_IMAGE = setSpriteFromPath("src/resources/sprites/Rocks/roccia.png");
 		setActiveSprite(ROCK_IMAGE);
 		setCBwidthScalar(1);
 		setCBheightScalar(1);

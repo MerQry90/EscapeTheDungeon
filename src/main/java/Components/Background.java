@@ -33,7 +33,7 @@ public class Background {
 	public Background(){
 		tile = new Tile();
 		MainMenuBackground = new ImageIcon("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
-		MainGameBackground = new ImageIcon("src/resources/sprites/backgrounds/pavimento.png");
+		MainGameBackground = new ImageIcon("src/resources/sprites/Backgrounds - Doors/murofin.png");
 		GameOverBackground = new ImageIcon("src/resources/sprites/backgrounds/gameOver_placeHolder.png");
 		GameWinBackground = new ImageIcon("src/resources/sprites/backgrounds/victory_screen.png");
 	}

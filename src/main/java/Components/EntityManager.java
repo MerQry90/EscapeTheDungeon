@@ -356,7 +356,6 @@ public class EntityManager {
 	public void renderEntities(Graphics g){
 		for (Enemy enemy: enemies) {
 			enemy.paint(g);
-			System.out.println("si");
 		}
 		for(Item item: items){
 			item.paint(g);
@@ -380,8 +379,7 @@ public class EntityManager {
 		for (Projectile projectile: hostileProjectiles){
 			projectile.paint(g);
 		}
-		
-		player.paint(g);
 		room.paintDoors(g);
+		player.paint(g);
 	}
 }

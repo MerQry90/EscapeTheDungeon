@@ -9,10 +9,10 @@ import java.util.Random;
 
 public class Mage extends Enemy{
 
-    private Image MAGE;
-    private Image DEAD_MAGE;
+    private Image MAGE_IDLE, MAGE_SHOOTING, DEAD_MAGE;
+    private Image MAGETP1, MAGETP2, MAGETP3, MAGETP4, MAGETP5;
     
-    private int idleCountdown, teleportCountdown, shotNumber;
+    private int idleCountdown, shotNumber, animationIndex;
     public Mage(int x, int y, EntityManager entityManager){
         setX(x);
         setY(y);
@@ -21,9 +21,18 @@ public class Mage extends Enemy{
     }
     @Override
     public void init() {
-        MAGE = setSpriteFromPath("src/resources/sprites/png/Mage.png");
+        MAGE_IDLE = setSpriteFromPath("src/resources/sprites/Enemies/Mage/magikino1.png");
+        MAGE_SHOOTING  = setSpriteFromPath("src/resources/sprites/Enemies/Mage/magikino2.png");
+
+        MAGETP1 = setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline1.png");
+        MAGETP2 = setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline2.png");
+        MAGETP3 = setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline3.png");
+        MAGETP4 = setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline4.png");
+        MAGETP5 = setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline5.png");
+
         DEAD_MAGE = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
-        setActiveSprite(MAGE);
+
+        setActiveSprite(MAGE_IDLE);
         setWidth(64);
         setHeight(64);
         setCBwidthScalar(0.8);
@@ -36,8 +45,8 @@ public class Mage extends Enemy{
         setCanFly(false);
 
         idleCountdown = 30;
-        teleportCountdown = 20;
         shotNumber = 0;
+        animationIndex = 0;
     }
 
     @Override
@@ -49,15 +58,25 @@ public class Mage extends Enemy{
             switch (getCurrentBehaviour()) {
                 case "idle" -> {
                     if(shotNumber >= 3){
+                        setActiveSprite(MAGE_IDLE);
                         shotNumber = 0;
+                        nextAnimation();
                         changeBehaviourTo("teleport");
                     }
                     if(idleCountdown <= 0){
+                        setActiveSprite(MAGE_SHOOTING);
                         changeBehaviourTo("shoot");
+                    }
+                    else if(idleCountdown > 30){
+                        nextAnimation();
+                    }
+                    else {
+                        setActiveSprite(MAGE_IDLE);
                     }
                     idleCountdown -= 1;
                 }
                 case "shoot" -> {
+                    setActiveSprite(MAGE_SHOOTING);
                     entityManager.newHostileProjectile(new MagicBall(getX(), getY(),
                             entityManager.getPlayerX(), entityManager.getPlayerY(), entityManager));
                     idleCountdown = 10;
@@ -76,6 +95,28 @@ public class Mage extends Enemy{
                 default -> {
                     changeBehaviourTo("idle");
                 }
+            }
+        }
+    }
+
+    public void nextAnimation(){
+        animationIndex += 1;
+        switch (animationIndex){
+            case 0 ->{
+                setActiveSprite(MAGETP1);
+            }
+            case 2 ->{
+                setActiveSprite(MAGETP2);
+            }
+            case 4 ->{
+                setActiveSprite(MAGETP3);
+            }
+            case 6 ->{
+                setActiveSprite(MAGETP4);
+            }
+            case 8 ->{
+                setActiveSprite(MAGETP5);
+                animationIndex = 0;
             }
         }
     }

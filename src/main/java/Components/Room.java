@@ -69,20 +69,20 @@ public class Room {
 		westernUpperWall = new Obstacle(0, 64, 64, 64 * 3);
 		
 		if(hasNorthernDoor){
-			northernDoor = new Door(northernCenterWall.getX(), northernCenterWall.getY(),
-					1.0, 0.1, northLeadsTo);
+			northernDoor = new Door(northernCenterWall.getX(), northernCenterWall.getY() - 5,
+					1.0, 0.1, northLeadsTo, "n");
 		}
 		if(hasEasternDoor){
-			easternDoor = new Door(easternCenterWall.getX(), easternCenterWall.getY(),
-					0.1, 1.0, eastLeadsTo);
+			easternDoor = new Door(easternCenterWall.getX() - 9, easternCenterWall.getY(),
+					0.1, 1.0, eastLeadsTo, "e");
 		}
 		if(hasSouthernDoor){
-			southernDoor = new Door(southernCenterWall.getX(), southernCenterWall.getY(),
-					1.0, 0.1, southLeadsTo);
+			southernDoor = new Door(southernCenterWall.getX() + 9, southernCenterWall.getY() + 5,
+					1.0, 0.1, southLeadsTo, "s");
 		}
 		if(hasWesternDoor){
 			westernDoor = new Door(westernCenterWall.getX(), westernCenterWall.getY(),
-					0.1, 1.0, westLeadsTo);
+					0.1, 1.0, westLeadsTo, "w");
 		}
 		
 		isCleared = false;
@@ -115,16 +115,28 @@ public class Room {
 	}
 	
 	public void paintDoors(Graphics g){
-		if(hasNorthernDoor && isCleared){
+		if(hasNorthernDoor){
+			if(isCleared){
+				northernDoor.openDoor();
+			}
 			northernDoor.paint(g);
 		}
-		if(hasEasternDoor && isCleared){
+		if(hasEasternDoor){
+			if(isCleared){
+				easternDoor.openDoor();
+			}
 			easternDoor.paint(g);
 		}
-		if(hasSouthernDoor && isCleared){
+		if(hasSouthernDoor){
+			if(isCleared){
+				southernDoor.openDoor();
+			}
 			southernDoor.paint(g);
 		}
-		if(hasWesternDoor && isCleared){
+		if(hasWesternDoor){
+			if(isCleared){
+				westernDoor.openDoor();
+			}
 			westernDoor.paint(g);
 		}
 	}

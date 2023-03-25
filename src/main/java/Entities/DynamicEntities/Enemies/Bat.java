@@ -9,16 +9,8 @@ import static java.lang.Math.abs;
 
 public class Bat extends Enemy{
 
-	private Image BAT_1;
-	private Image BAT_2;
-	private Image BAT_3;
-	private Image BAT_4;
-	private Image BAT_5;
-	private Image BAT_6;
-	private Image BAT_7;
-	private Image BAT_8;
-	private Image BAT_9;
-	private Image BAT_10;
+	private Image BAT_1, BAT_2, BAT_3, BAT_4, BAT_5, BAT_6, BAT_7, BAT_8, BAT_9, BAT_10;
+	private Image BATBALL_1, BATBALL_2, BATBALL_3, BATBALL_4, BATBALL_5, BATBALL_6, BATBALL_7, BATBALL_8, BATBALL_9;
 	private Image DEAD_BAT;
 	
 	private int wait, countdown, movingCountdown, animationIndex;
@@ -33,16 +25,27 @@ public class Bat extends Enemy{
 	@Override
 	public void init() {
 		//CARICAMENTO SPRITE
-		BAT_1 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pistrello1.png");
-		BAT_2 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pistrello2.png");
-		BAT_3 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pistrello3.png");
-		BAT_4 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pistrello4.png");
-		BAT_5 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pistrello5.png");
-		BAT_6 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pistrello6.png");
-		BAT_7 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pistrello7.png");
-		BAT_8 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pistrello8.png");
-		BAT_9 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pistrello9.png");
-		BAT_10 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pistrello10.png");
+		BAT_1 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello1.png");
+		BAT_2 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello2.png");
+		BAT_3 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello3.png");
+		BAT_4 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello4.png");
+		BAT_5 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello5.png");
+		BAT_6 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello6.png");
+		BAT_7 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello7.png");
+		BAT_8 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello8.png");
+		BAT_9 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello9.png");
+		BAT_10 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello10.png");
+
+		BATBALL_1 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello4.png");
+		BATBALL_2 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello5.png");
+		BATBALL_3 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello6.png");
+		BATBALL_4 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello7.png");
+		BATBALL_5 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello8.png");
+		BATBALL_6 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello9.png");
+		/*BATBALL_7 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello10.png");
+		BATBALL_8 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello11.png");
+		BATBALL_9 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello12.png");*/
+
 		DEAD_BAT = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
 		
 		setWidth(64);
@@ -96,7 +99,7 @@ public class Bat extends Enemy{
 				}
 				case "dashing" -> {
 					movingCountdown--;
-					nextAnimation();
+					setActiveSprite(BATBALL_6);
 					moveEntity();
 					if (movingCountdown <= 0) {
 						countdown = 0;
@@ -121,32 +124,47 @@ public class Bat extends Enemy{
 			case 0 ->{
 				setActiveSprite(BAT_1);
 			}
-			case 4 ->{
+			case 3 ->{
 				setActiveSprite(BAT_2);
 			}
-			case 8 ->{
+			case 6 ->{
 				setActiveSprite(BAT_3);
 			}
-			case 12 ->{
+			case 9 ->{
 				setActiveSprite(BAT_4);
 			}
-			case 16 ->{
+			case 12 ->{
 				setActiveSprite(BAT_5);
 			}
-			case 20 ->{
+			case 15 ->{
 				setActiveSprite(BAT_6);
 			}
-			case 24 ->{
+			case 18 ->{
 				setActiveSprite(BAT_7);
 			}
-			case 28 ->{
+			case 21 ->{
 				setActiveSprite(BAT_8);
 			}
-			case 32 ->{
+			case 24 ->{
 				setActiveSprite(BAT_9);
 			}
-			case 36 ->{
+			case 27 ->{
 				setActiveSprite(BAT_10);
+			}
+			case 30 ->{
+				setActiveSprite(BATBALL_1);
+			}
+			case 33 ->{
+				setActiveSprite(BATBALL_2);
+			}
+			case 36 ->{
+				setActiveSprite(BATBALL_3);
+			}
+			case 39 ->{
+				setActiveSprite(BATBALL_4);
+			}
+			case 42 ->{
+				setActiveSprite(BATBALL_5);
 				animationIndex = 0;
 			}
 		}
