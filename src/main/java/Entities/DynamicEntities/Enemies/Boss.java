@@ -25,7 +25,7 @@ public class Boss extends Enemy{
 	private final int FPS = 30;
 	private final int ORBITAL_BEHAVIOUR_DURATION = 20 * FPS;
 	private final int FASTBALL_BEHAVIOUR_DURATION = 8 * FPS;
-	//private final int SLIMETRAIL_BEHAVIOUR_DURATION = 3 * FPS;
+	private final int SLIMETRAIL_BEHAVIOUR_DURATION = 3 * FPS;
 	
 	public Boss(EntityManager entityManager){
 		this.entityManager = entityManager;
@@ -86,7 +86,7 @@ public class Boss extends Enemy{
 				}
 				else if(!(getCurrentBehaviour().equals("slimeTrail"))){
 					changeBehaviourTo("slimeTrail");
-					behaviourCountdown = 0;
+					behaviourCountdown = SLIMETRAIL_BEHAVIOUR_DURATION;
 				}
 			}
 		}
@@ -143,18 +143,20 @@ public class Boss extends Enemy{
 					if(shootCountDown <= 0){
 						entityManager.newHostileProjectile(new DirectSlimeBalls(
 								getCenterX(), getCenterY(), 15, getPlayerAngulation(), entityManager));
-						shootCountDown = 7;
+						shootCountDown = 10;
 					}
 				}
 				case "slimeTrail" -> {
 					Random random = new Random();
-					if(random.nextBoolean()){
-						entityManager.newHostileProjectile(new SlimeTrailBall(getX(), getY(), "up", entityManager));
-						entityManager.newHostileProjectile(new SlimeTrailBall(getX(), getY(), "down", entityManager));
-					}
-					else {
-						entityManager.newHostileProjectile(new SlimeTrailBall(getX(), getY(), "right", entityManager));
-						entityManager.newHostileProjectile(new SlimeTrailBall(getX(), getY(), "left", entityManager));
+					if(behaviourCountdown >= SLIMETRAIL_BEHAVIOUR_DURATION){
+						if(random.nextBoolean()){
+							entityManager.newHostileProjectile(new SlimeTrailBall(getX(), getY(), "up", entityManager));
+							entityManager.newHostileProjectile(new SlimeTrailBall(getX(), getY(), "down", entityManager));
+						}
+						else {
+							entityManager.newHostileProjectile(new SlimeTrailBall(getX(), getY(), "right", entityManager));
+							entityManager.newHostileProjectile(new SlimeTrailBall(getX(), getY(), "left", entityManager));
+						}
 					}
 				}
 				case "finalRage" -> {
