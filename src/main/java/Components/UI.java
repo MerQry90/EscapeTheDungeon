@@ -88,17 +88,17 @@ public class UI {
 		}
 		
 		if(numberOfKeys > 1){
-			g.drawImage(KEY, 40, Tile.getTile(8) + 10, 40, 40, null);
+			g.drawImage(KEY, 60, Tile.getTile(8) + 10, 40, 40, null);
 		}
 		else {
-			g.drawImage(NOTHING, 40, Tile.getTile(8) + 10, 40, 40, null);
+			g.drawImage(NOTHING, 60, Tile.getTile(8) + 10, 40, 40, null);
 		}
 		
 		if(numberOfKeys > 2){
-			g.drawImage(KEY, 70, Tile.getTile(8) + 10, 40, 40, null);
+			g.drawImage(KEY, 110, Tile.getTile(8) + 10, 40, 40, null);
 		}
 		else {
-			g.drawImage(NOTHING, 70, Tile.getTile(8) + 10, 40, 40, null);
+			g.drawImage(NOTHING, 110, Tile.getTile(8) + 10, 40, 40, null);
 		}
 	
 	}

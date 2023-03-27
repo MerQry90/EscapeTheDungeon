@@ -35,6 +35,9 @@ public class Player extends DynamicEntity {
 	private int shootCoolDown;
 	private boolean vulnerability;
 	private boolean isFacingRight;
+	private boolean isShootingRight;
+	private boolean isShootingLeft;
+	private int timeGateBackwardsShooting;
 	private int animationIndex;
 	private int invulnerabilityCountdown;
 	private int maxHealth;
@@ -74,6 +77,7 @@ public class Player extends DynamicEntity {
 
 		INVULNERABLE_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_front.png");
 		isFacingRight = false;
+		setAnimationNotShooting();
 		animationIndex = 0;
 		vulnerability = true;
 		setIdleAnimation();
@@ -152,6 +156,43 @@ public class Player extends DynamicEntity {
 	//------------------------------------------------------------------------------------------------------------------
 
 	//Movimento del giocatore-------------------------------------------------------------------------------------------
+	public void setAnimationShootingRight(){
+		isShootingRight = true;
+		isShootingLeft = false;
+		if(!isFacingRight){
+			resetTimeGateBackwardsShooting();
+		}
+	}
+	public void setAnimationShootingLeft(){
+		isShootingLeft = true;
+		isShootingRight = false;
+		if(isFacingRight){
+			resetTimeGateBackwardsShooting();
+		}
+	}
+	public void setAnimationNotShooting(){
+		isShootingRight = false;
+		isShootingLeft = false;
+	}
+	public void resetTimeGateBackwardsShooting(){
+		timeGateBackwardsShooting = 12;
+	}
+	public void stopBackwardShooting(){
+		timeGateBackwardsShooting = 0;
+	}
+	public boolean checkBackwardShooting(){
+		//System.out.println(timeGateBackwardsShooting);
+		if(timeGateBackwardsShooting > 0){
+			return false;
+		}
+		return true;
+	}
+	public void updateBackwardShooting(){
+		if(timeGateBackwardsShooting > 0){
+			timeGateBackwardsShooting -= 1;
+		}
+	}
+	
 	public void setIdleAnimation(){
 		if(!isVulnerable()){
 			setActiveSprite(INVULNERABLE_PLAYER);
@@ -166,12 +207,22 @@ public class Player extends DynamicEntity {
 		animationIndex = 0;
 	}
 	public void nextAnimationRight(){
-
 		if(!isVulnerable()){
 			setActiveSprite(INVULNERABLE_PLAYER);
 		}
 		else {
-			animationIndex += 1;
+			if(checkBackwardShooting()){
+				animationIndex -= 1;
+				if(animationIndex <= -4){
+					animationIndex = 28;
+				}
+			}
+			else {
+				animationIndex += 1;
+				if(animationIndex >= 32){
+					animationIndex = 0;
+				}
+			}
 			switch (animationIndex) {
 				case 0 -> {
 					setActiveSprite(PLAYER_RIGHT_1);
@@ -196,7 +247,6 @@ public class Player extends DynamicEntity {
 				}
 				case 28 -> {
 					setActiveSprite(PLAYER_RIGHT_8_IDLE);
-					animationIndex = 0;
 				}
 			}
 		}
@@ -206,7 +256,18 @@ public class Player extends DynamicEntity {
 			setActiveSprite(INVULNERABLE_PLAYER);
 		}
 		else {
-			animationIndex += 1;
+			if(checkBackwardShooting()){
+				animationIndex -= 1;
+				if(animationIndex <= -4){
+					animationIndex = 28;
+				}
+			}
+			else {
+				animationIndex += 1;
+				if(animationIndex >= 32){
+					animationIndex = 0;
+				}
+			}
 			switch (animationIndex) {
 				case 0 -> {
 					setActiveSprite(PLAYER_LEFT_1);
@@ -231,7 +292,6 @@ public class Player extends DynamicEntity {
 				}
 				case 28 -> {
 					setActiveSprite(PLAYER_LEFT_8_IDLE);
-					animationIndex = 0;
 				}
 			}
 		}
@@ -246,60 +306,114 @@ public class Player extends DynamicEntity {
 		switch (nextPlayerInstruction){
 			case "up-right" -> {
 				translationVector2D.setAngulation(toRadians(315));
-				nextAnimationRight();
+				if(checkBackwardShooting()) {
+					nextAnimationRight();
+				}
+				else {
+					nextAnimationLeft();
+				}
 				isFacingRight = true;
 			}
 			case "up-left" -> {
 				translationVector2D.setAngulation(toRadians(225));
-				nextAnimationLeft();
+				if(checkBackwardShooting()) {
+					nextAnimationLeft();
+				}
+				else {
+					nextAnimationRight();
+				}
 				isFacingRight = false;
 			}
 			case "down-right" -> {
 				translationVector2D.setAngulation(toRadians(45));
-				nextAnimationRight();
+				if(checkBackwardShooting()) {
+					nextAnimationRight();
+				}
+				else {
+					nextAnimationLeft();
+				}
 				isFacingRight = true;
 			}
 			case "down-left" -> {
 				translationVector2D.setAngulation(toRadians(135));
-				nextAnimationLeft();
+				if(checkBackwardShooting()) {
+					nextAnimationLeft();
+				}
+				else {
+					nextAnimationRight();
+				}
 				isFacingRight = false;
 			}
 			case "up" -> {
 				translationVector2D.setAngulation(toRadians(270));
 				if(isFacingRight){
-					nextAnimationRight();
+					if(checkBackwardShooting()) {
+						nextAnimationRight();
+					}
+					else {
+						nextAnimationLeft();
+					}
 				}
 				else {
-					nextAnimationLeft();
+					if(checkBackwardShooting()) {
+						nextAnimationLeft();
+					}
+					else {
+						nextAnimationRight();
+					}
 				}
 			}
 			case "down" -> {
 				translationVector2D.setAngulation(toRadians(90));
 				if(isFacingRight){
+					if(checkBackwardShooting()) {
+						nextAnimationRight();
+					}
+					else {
+						nextAnimationLeft();
+					}
+				}
+				else {
+					if(checkBackwardShooting()) {
+						nextAnimationLeft();
+					}
+					else {
+						nextAnimationRight();
+					}
+				}
+			}
+			case "right" -> {
+				translationVector2D.setAngulation(toRadians(0));
+				if(checkBackwardShooting()) {
 					nextAnimationRight();
 				}
 				else {
 					nextAnimationLeft();
 				}
-			}
-			case "right" -> {
-				translationVector2D.setAngulation(toRadians(0));
-				nextAnimationRight();
 				isFacingRight = true;
 			}
 			case "left" -> {
 				translationVector2D.setAngulation(toRadians(180));
-				nextAnimationLeft();
+				if(checkBackwardShooting()) {
+					nextAnimationLeft();
+				}
+				else {
+					nextAnimationRight();
+				}
 				isFacingRight = false;
 			}
 			case "stop" -> {
 				canMove = false;
 				setIdleAnimation();
+				stopBackwardShooting();
 			}
 		}
 		if(canMove) {
 			moveEntity();
 		}
+		setAnimationNotShooting();
+		updateBackwardShooting();
+		System.out.println(timeGateBackwardsShooting);
 	}
 	
 	@Override
