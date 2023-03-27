@@ -11,7 +11,7 @@ public class Key extends PowerUp{
 	
 	public Key(int x, int y) {
 		super(x, y);
-		KEY = setSpriteFromPath("src/resources/sprites/png/key.png");
+		KEY = setSpriteFromPath("src/resources/sprites/Items/chiave.png");
 		setActiveSprite(KEY);
 	}
 	

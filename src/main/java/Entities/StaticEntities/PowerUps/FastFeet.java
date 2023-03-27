@@ -8,7 +8,7 @@ public class FastFeet extends PowerUp{
 	Image FAST_FEET;
 	public FastFeet(int x, int y) {
 		super(x, y);
-		FAST_FEET = setSpriteFromPath("src/resources/sprites/png/fungus.png");
+		FAST_FEET = setSpriteFromPath("src/resources/sprites/PowerUps/fast.png");
 		setActiveSprite(FAST_FEET);
 	}
 

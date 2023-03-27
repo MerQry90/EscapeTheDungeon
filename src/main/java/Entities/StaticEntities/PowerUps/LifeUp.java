@@ -9,7 +9,7 @@ public class LifeUp extends PowerUp{
 
 	public LifeUp(int x, int y){
 		super(x, y);
-		LIFE_UP = setSpriteFromPath("src/resources/sprites/png/fungus.png");
+		LIFE_UP = setSpriteFromPath("src/resources/sprites/PowerUps/onelife.png");
 		setActiveSprite(LIFE_UP);
 	}
 

@@ -42,7 +42,7 @@ public class UI {
 		HEART_FULL = GenericEntity.setSpriteFromPath("src/resources/sprites/png/full_heart.png");
 		HEART_EMPTY = GenericEntity.setSpriteFromPath("src/resources/sprites/png/empty_heart.png");
 		
-		KEY = GenericEntity.setSpriteFromPath("src/resources/sprites/png/key.png");
+		KEY = GenericEntity.setSpriteFromPath("src/resources/sprites/Items/chiave.png");
 		
 		NOTHING = GenericEntity.setSpriteFromPath("src/resources/sprites/png/invisible_cube.png");
 		

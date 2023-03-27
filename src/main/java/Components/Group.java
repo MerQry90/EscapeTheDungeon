@@ -1,7 +1,7 @@
 package Components;
 
 import Entities.DynamicEntities.Enemies.Enemy;
-import Entities.StaticEntities.Item;
+import Entities.StaticEntities.HeartItem;
 import Entities.StaticEntities.Obstacle;
 import Entities.StaticEntities.PowerUps.PowerUp;
 
@@ -15,13 +15,13 @@ public class Group {
 
 	private List<Enemy> enemies;
 	private List<Obstacle> obstacles;
-	private List<Item> items;
+	private List<HeartItem> heartItems;
 	private List<PowerUp> powerUpList;
 
 	public Group(int ID){
 		enemies = new ArrayList<>();
 		obstacles = new ArrayList<>();
-		items = new ArrayList<>();
+		heartItems = new ArrayList<>();
 		powerUpList = new ArrayList<>();
 		this.ID = ID;
 		defeated = false;
@@ -46,8 +46,8 @@ public class Group {
 		return powerUpList;
 	}
 
-	public List<Item> getItems() {
-		return items;
+	public List<HeartItem> getItems() {
+		return heartItems;
 	}
 
 	public boolean isDefeated() {

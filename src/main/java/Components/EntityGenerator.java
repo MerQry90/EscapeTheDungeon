@@ -82,9 +82,7 @@ public class EntityGenerator {
 				//STANZA COMUNE CON I NEMICI
 				switch (random.nextInt(8)){
 					case 0 -> {
-						group.getEnemies().add(new Mage(Tile.getTile(8), Tile.getTile(3), entityManager));
-						group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(2)));
-
+						group.getEnemies().add(new FiftyFifty(Tile.getTile(8), Tile.getTile(3), entityManager));
 						/*group.getEnemies().add(new Tank(Tile.getTile(8), Tile.getTile(3), entityManager));
 						group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(2)));
 						group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(5)));

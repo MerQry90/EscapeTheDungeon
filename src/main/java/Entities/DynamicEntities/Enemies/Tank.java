@@ -8,8 +8,10 @@ import java.awt.*;
 import static java.lang.Math.toRadians;
 
 public class Tank extends Enemy{
-    private Image TANK;
+    private Image TANK1_R, TANK2_R, TANK3_R, TANK4_R, TANK1_L, TANK2_L, TANK3_L, TANK4_L;
     private Image DEAD_TANK;
+
+    private int  animationIndex;
 
     public Tank(int x, int y, EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -20,15 +22,27 @@ public class Tank extends Enemy{
     @Override
     public void init() {
         //CARICAMENTO SPRITE
-        TANK = setSpriteFromPath("src/resources/sprites/png/zombie.png");
+        TANK1_R = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank1_right.png");
+        TANK2_R = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank2_right.png");
+        TANK3_R = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank3_right.png");
+        TANK4_R = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank4_right.png");
+
+        TANK1_L = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank1_left.png");
+        TANK2_L = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank2_left.png");
+        TANK3_L = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank3_left.png");
+        TANK4_L = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank4_left.png");
+
         DEAD_TANK = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
-        setActiveSprite(TANK);
+
+        setActiveSprite(TANK1_L);
+        animationIndex = 0;
+
 
         //l'estremo è escluso, velocità a cui viene sommata maximumSpeed
         //verrà sommato a minimumSpeed
 
-        setWidth(64);
-        setHeight(64 * 2);
+        setWidth(76);
+        setHeight(112);
         setCBwidthScalar(0.7);
         setCBheightScalar(0.9);
         activateCollisionBox();
@@ -88,6 +102,7 @@ public class Tank extends Enemy{
                     int dX = getDeltaXToObjective(entityManager.getPlayerX());
                     int dY = getDeltaYToObjective(entityManager.getPlayerY());
                     translationVector2D.setAngulationFromCoordinates(dX, dY);
+                    nextAnimation();
                     moveEntity();
                 }
                 case "dead" ->{
@@ -97,6 +112,54 @@ public class Tank extends Enemy{
                 default -> {
                     changeBehaviourTo("follow-player");
                 }
+            }
+        }
+    }
+
+    public void nextAnimation(){
+        if(entityManager.getPlayerX() >= this.getX()){
+            nextAnimationRight();
+        }
+        else {
+            nextAnimationLeft();
+        }
+    }
+    public void nextAnimationLeft(){
+        animationIndex += 1;
+
+        switch (animationIndex){
+            case 0 ->{
+                setActiveSprite(TANK1_L);
+            }
+            case 5 ->{
+                setActiveSprite(TANK2_L);
+            }
+            case 10 ->{
+                setActiveSprite(TANK3_L);
+            }
+            case 15 ->{
+                setActiveSprite(TANK4_L);
+                animationIndex = 0;
+            }
+        }
+    }
+
+    public void nextAnimationRight(){
+        animationIndex += 1;
+
+        switch (animationIndex){
+            case 0 ->{
+                setActiveSprite(TANK1_R);
+            }
+            case 5 ->{
+                setActiveSprite(TANK2_R);
+            }
+            case 10 ->{
+                setActiveSprite(TANK3_R);
+            }
+            case 15 ->{
+                setActiveSprite(TANK4_R);
+                animationIndex = 0;
             }
         }
     }

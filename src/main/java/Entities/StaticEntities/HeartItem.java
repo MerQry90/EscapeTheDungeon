@@ -4,10 +4,10 @@ import Entities.GenericEntity;
 
 import java.awt.*;
 
-public class Item extends GenericEntity {
+public class HeartItem extends GenericEntity {
 	private Image HEART;
 
-	public Item(int x, int y){
+	public HeartItem(int x, int y){
 		setX(x);
 		setY(y);
 		setWidth(32);

@@ -9,7 +9,7 @@ public class MultipleShot extends PowerUp{
 
 	public MultipleShot(int x, int y){
 		super(x, y);
-		MULTIPLESHOT = setSpriteFromPath("src/resources/sprites/png/multipleshot.png");
+		MULTIPLESHOT = setSpriteFromPath("src/resources/sprites/PowerUps/trpleshot.png");
 		setActiveSprite(MULTIPLESHOT);
 	}
 

@@ -7,8 +7,10 @@ import java.awt.*;
 
 public class Zombie extends Enemy{
 	
-	private Image LIVING_ZOMBIE_LEFT;
+	private Image ZOMBIE1_L, ZOMBIE2_L, ZOMBIE3_L, ZOMBIE4_L, ZOMBIE1_R, ZOMBIE2_R, ZOMBIE3_R, ZOMBIE4_R;
 	private Image DEAD_ZOMBIE;
+
+	private int animationIndex;
 	
 	public Zombie(int x, int y, EntityManager entityManager) {
 		this.entityManager = entityManager;
@@ -20,9 +22,20 @@ public class Zombie extends Enemy{
 	@Override
 	public void init(){
 		//CARICAMENTO SPRITE
-		LIVING_ZOMBIE_LEFT = setSpriteFromPath("src/resources/sprites/png/zombie.png");
+		ZOMBIE1_L = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie1_L.png");
+		ZOMBIE2_L = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie2_L.png");
+		ZOMBIE3_L = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie3_L.png");
+		ZOMBIE4_L = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie4_L.png");
+
+		ZOMBIE1_R = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie1_R.png");
+		ZOMBIE2_R = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie2_R.png");
+		ZOMBIE3_R = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie3_R.png");
+		ZOMBIE4_R = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie4_R.png");
+
 		DEAD_ZOMBIE = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
-		setActiveSprite(LIVING_ZOMBIE_LEFT);
+
+		setActiveSprite(ZOMBIE1_L);
+		animationIndex = 0;
 		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		//verrà sommato a minimumSpeed
@@ -49,6 +62,7 @@ public class Zombie extends Enemy{
 			}
 			switch (getCurrentBehaviour()) {
 				case "follow-player" -> {
+					nextAnimation();
 					int dX = getDeltaXToObjective(entityManager.getPlayerX());
 					int dY = getDeltaYToObjective(entityManager.getPlayerY());
 					translationVector2D.setAngulationFromCoordinates(dX, dY);
@@ -94,6 +108,54 @@ public class Zombie extends Enemy{
 		else {
 			setX(originalX + translationVector2D.getTranslationOnX());
 			setY(originalY + translationVector2D.getTranslationOnY());
+		}
+	}
+
+	public void nextAnimation(){
+		if(entityManager.getPlayerX() >= this.getX()){
+			nextAnimationRight();
+		}
+		else {
+			nextAnimationLeft();
+		}
+	}
+	public void nextAnimationLeft(){
+		animationIndex += 1;
+
+		switch (animationIndex){
+			case 0 ->{
+				setActiveSprite(ZOMBIE1_L);
+			}
+			case 4 ->{
+				setActiveSprite(ZOMBIE2_L);
+			}
+			case 8 ->{
+				setActiveSprite(ZOMBIE3_L);
+			}
+			case 12 ->{
+				setActiveSprite(ZOMBIE4_L);
+				animationIndex = 0;
+			}
+		}
+	}
+
+	public void nextAnimationRight(){
+		animationIndex += 1;
+
+		switch (animationIndex){
+			case 0 ->{
+				setActiveSprite(ZOMBIE1_R);
+			}
+			case 4 ->{
+				setActiveSprite(ZOMBIE2_R);
+			}
+			case 8 ->{
+				setActiveSprite(ZOMBIE3_R);
+			}
+			case 12 ->{
+				setActiveSprite(ZOMBIE4_R);
+				animationIndex = 0;
+			}
 		}
 	}
 	

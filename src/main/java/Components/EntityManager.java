@@ -29,7 +29,7 @@ public class EntityManager {
 	private List<Arrow> friendlyArrows;
 	private List<Projectile> hostileProjectiles;
 	private List<Obstacle> obstacles;
-	private List<Item> items;
+	private List<HeartItem> heartItems;
 	private List<PowerUp> powerUpList;
 	private List<Hazard> hazards;
 
@@ -165,10 +165,10 @@ public class EntityManager {
 	}
 
 	public void checkItemsCollisions(){
-		for(int i = 0; i < items.size(); i += 1){
-			if (items.get(i).checkIfActive() && items.get(i).checkCollision(player) && (player.getHealth() < player.getMaxHealth())) {
+		for(int i = 0; i < heartItems.size(); i += 1){
+			if (heartItems.get(i).checkIfActive() && heartItems.get(i).checkCollision(player) && (player.getHealth() < player.getMaxHealth())) {
 				player.setHealth(player.getHealth() + 1);
-				items.remove(i);
+				heartItems.remove(i);
 				i -= 1;
 			}
 		}
@@ -276,7 +276,7 @@ public class EntityManager {
 	public void dropItems(){
 		Random random = new Random();
 		if(random.nextInt(4) == 0){
-			items.add(new Item(512, 256));
+			heartItems.add(new HeartItem(512, 256));
 		}
 	}
 
@@ -304,8 +304,8 @@ public class EntityManager {
 		if(powerUpList != null){
 			powerUpList.clear();
 		}
-		if(items != null){
-			items.clear();
+		if(heartItems != null){
+			heartItems.clear();
 		}
 		if(obstacles != null){
 			obstacles.clear();
@@ -321,7 +321,7 @@ public class EntityManager {
 			roomHasBeenCompleted_actionPerformedOnce = true;
 		}
 		obstacles = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getObstacles());
-		items = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getItems());
+		heartItems = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getItems());
 		
 		if(entityGenerator.checkIfBossRoom(ID)){
 			mainGameReference.audioManager.stopSoundLoop();
@@ -373,8 +373,8 @@ public class EntityManager {
 		for (Enemy enemy: enemies) {
 			enemy.paint(g);
 		}
-		for(Item item: items){
-			item.paint(g);
+		for(HeartItem heartItem : heartItems){
+			heartItem.paint(g);
 		}
 		for(PowerUp powerUp: powerUpList){
 			powerUp.paint(g);
