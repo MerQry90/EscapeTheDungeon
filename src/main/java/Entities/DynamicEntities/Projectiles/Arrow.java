@@ -10,7 +10,7 @@ import static java.lang.Math.abs;
 
 public class Arrow extends Projectile {
 
-	private Image RIGHT_ARROW;
+	private Image ARROW_RIGHT, ARROW_LEFT, ARROW_UP, ARROW_DOWN;
 	private int arrowDuration;
 	
 	//la freccia deve essere visibile finché non collide con qualcosa
@@ -28,16 +28,31 @@ public class Arrow extends Projectile {
 	@Override
 	public void init() {
 		//CARICAMENTO SPRITE
-		RIGHT_ARROW = GenericEntity.setSpriteFromPath("src/resources/sprites/projectiles/arrow.png");
-		setActiveSprite(RIGHT_ARROW);
+		ARROW_UP = setSpriteFromPath("src/resources/sprites/Projectiles/freccia_up.png");
+		ARROW_DOWN = setSpriteFromPath("src/resources/sprites/Projectiles/freccia_down.png");
+		ARROW_LEFT = setSpriteFromPath("src/resources/sprites/Projectiles/freccia_left.png");
+		ARROW_RIGHT = setSpriteFromPath("src/resources/sprites/Projectiles/freccia_right.png");
+
 		
 		setWidth(40);
 		setHeight(40);
 		if(arrowOrientation.compareTo("right") == 0 || arrowOrientation.compareTo("left") == 0) {
+			if(arrowOrientation.compareTo("right") == 0){
+				setActiveSprite(ARROW_RIGHT);
+			}
+			else {
+				setActiveSprite(ARROW_LEFT);
+			}
 			setCBwidthScalar(0.9);
 			setCBheightScalar(0.5);
 		}
 		if(arrowOrientation.compareTo("up") == 0 || arrowOrientation.compareTo("down") == 0) {
+			if(arrowOrientation.compareTo("up") == 0){
+				setActiveSprite(ARROW_UP);
+			}
+			else  {
+				setActiveSprite(ARROW_DOWN);
+			}
 			setCBwidthScalar(0.5);
 			setCBheightScalar(0.9);
 		}

@@ -1,6 +1,7 @@
 package Components;
 
 import Entities.DynamicEntities.Enemies.*;
+import Entities.StaticEntities.HeartItem;
 import Entities.StaticEntities.PowerUps.FastFeet;
 import Entities.StaticEntities.PowerUps.Key;
 import Entities.StaticEntities.PowerUps.LifeUp;
@@ -159,6 +160,13 @@ public class EntityGenerator {
 					}
 				}
 			}
+		}
+	}
+
+	public void generateHearts(int id){
+		Random random = new Random();
+		if(random.nextInt(4) == 0){
+			getGroupByID(id).getItems().add(new HeartItem(512, 256));
 		}
 	}
 }

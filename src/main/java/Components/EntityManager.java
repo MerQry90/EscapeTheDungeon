@@ -266,17 +266,9 @@ public class EntityManager {
 	}
 
 	//DEBUG ONLY
-	public void killAll(){
-		for (Enemy enemy: enemies){
+	public void killAll() {
+		for (Enemy enemy : enemies) {
 			enemy.setInactive();
-		}
-	}
-	//------------------------------------------------------------------------------------------------------------------
-
-	public void dropItems(){
-		Random random = new Random();
-		if(random.nextInt(4) == 0){
-			heartItems.add(new HeartItem(512, 256));
 		}
 	}
 
@@ -362,7 +354,7 @@ public class EntityManager {
 			}
 			entityGenerator.getGroupByID(getRoomID()).setAsDefeated();
 			if(!entityGenerator.getGroupByID(getRoomID()).isItemsDropped()){
-				dropItems();
+				entityGenerator.generateHearts(getRoomID());
 				entityGenerator.getGroupByID(getRoomID()).setItemsDropped();
 			}
 		}
