@@ -25,7 +25,7 @@ public class Boss extends Enemy{
 	private final int FPS = 30;
 	private final int ORBITAL_BEHAVIOUR_DURATION = 20 * FPS;
 	private final int FASTBALL_BEHAVIOUR_DURATION = 8 * FPS;
-	private final int SLIMETRAIL_BEHAVIOUR_DURATION = 3 * FPS;
+	private final int SLIMETRAIL_BEHAVIOUR_DURATION = 2 * FPS;
 	
 	public Boss(EntityManager entityManager){
 		this.entityManager = entityManager;

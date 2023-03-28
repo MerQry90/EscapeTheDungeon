@@ -55,6 +55,7 @@ public class UI {
 		messages[1] = "3 is better than 1!";
 		messages[2] = "You feel better than ever!";
 		messages[3] = "SUPER-FAST!";
+		messages[4] = "PAUSE";
 	}
 	
 	public void drawPlayerHeart(Graphics g, Player player){
@@ -104,8 +105,14 @@ public class UI {
 	}
 	
 	public void setOnscreenMessage(int index){
-		messageIndex = index;
-		messageTime = 90;
+		if(index != 4) {
+			messageIndex = index;
+			messageTime = 90;
+		}
+		else {
+			messageIndex = index;
+			messageTime += 1;
+		}
 	}
 	public void updateOnscreenMessage(Graphics g){
 		if(messageTime > 0) {

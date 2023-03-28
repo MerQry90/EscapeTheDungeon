@@ -7,7 +7,7 @@ public class KeyHandler implements KeyListener {
 
 	public boolean upPressed, downPressed, leftPressed, rightPressed;
 	public boolean shootUp, shootDown, shootLeft, shootRight;
-	public boolean enterPressed, escapePressed, mPressed;
+	public boolean enterPressed, escapePressed, mPressed, cPressed, iPressed;
 	public boolean killAll;
 	public boolean tpToBoss;
 
@@ -31,6 +31,9 @@ public class KeyHandler implements KeyListener {
 
 			case KeyEvent.VK_ENTER -> enterPressed = true;
 			case KeyEvent.VK_ESCAPE -> escapePressed = true;
+
+			case KeyEvent.VK_C -> cPressed = true;
+			case KeyEvent.VK_I -> iPressed = true;
 			case KeyEvent.VK_M -> mPressed = true;
 
 			case KeyEvent.VK_K -> killAll = true;
@@ -54,6 +57,9 @@ public class KeyHandler implements KeyListener {
 
 			case KeyEvent.VK_ENTER -> enterPressed = false;
 			case KeyEvent.VK_ESCAPE -> escapePressed = false;
+
+			case KeyEvent.VK_C -> cPressed = false;
+			case KeyEvent.VK_I -> iPressed = false;
 			case KeyEvent.VK_M -> mPressed = false;
 
 			case KeyEvent.VK_K -> killAll = false;

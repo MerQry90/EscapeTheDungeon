@@ -219,5 +219,8 @@ public class MainGame extends GameState{
 				}
 			}
 		}
+		else {
+			ui.setOnscreenMessage(4);
+		}
 	}
 }

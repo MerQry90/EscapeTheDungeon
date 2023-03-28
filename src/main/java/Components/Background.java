@@ -18,10 +18,7 @@ public class Background {
 	private final int height = 9 * 64;
 
 	private Image background;
-	private ImageIcon MainMenuBackground;
-	private ImageIcon MainGameBackground;
-	private ImageIcon GameOverBackground;
-	private ImageIcon GameWinBackground;
+	private ImageIcon MainMenuBackground, BLACK_BACKGROUND, COMMAND_BACKGROUND, MainGameBackground, GameOverBackground, GameWinBackground;
 
 	private Tile tile;
 
@@ -33,6 +30,9 @@ public class Background {
 	public Background(){
 		tile = new Tile();
 		MainMenuBackground = new ImageIcon("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
+		BLACK_BACKGROUND = new ImageIcon("src/resources/sprites/backgrounds/black_background.png");
+		COMMAND_BACKGROUND = new ImageIcon("src/resources/sprites/backgrounds/mainmenucommands.png");
+
 		MainGameBackground = new ImageIcon("src/resources/sprites/Backgrounds - Doors/murofin.png");
 		GameOverBackground = new ImageIcon("src/resources/sprites/backgrounds/gameOver_placeHolder.png");
 		GameWinBackground = new ImageIcon("src/resources/sprites/backgrounds/victory_screen.png");
@@ -46,6 +46,12 @@ public class Background {
 		return height;
 	}
 
+	public void loadBlackBackground(){
+		background = BLACK_BACKGROUND.getImage();
+	}
+	public void loadCommandBackground(){
+		background = COMMAND_BACKGROUND.getImage();
+	}
 	public void loadMainMenuBackground(){
 		background = MainMenuBackground.getImage();
 	}
