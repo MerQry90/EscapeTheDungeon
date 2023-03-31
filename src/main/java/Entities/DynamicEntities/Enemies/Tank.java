@@ -1,9 +1,11 @@
 package Entities.DynamicEntities.Enemies;
 
+import Components.AudioManager;
 import Components.EntityManager;
 import Components.Vector2D;
 
 import java.awt.*;
+import java.util.Random;
 
 import static java.lang.Math.toRadians;
 
@@ -99,6 +101,10 @@ public class Tank extends Enemy{
             }
             switch (getCurrentBehaviour()) {
                 case "follow-player" -> {
+                    Random random = new Random();
+                    if(random.nextInt(0, 5*30) == 0){
+                        entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.TANK_SOUND_INDEX);
+                    }
                     int dX = getDeltaXToObjective(entityManager.getPlayerX());
                     int dY = getDeltaYToObjective(entityManager.getPlayerY());
                     translationVector2D.setAngulationFromCoordinates(dX, dY);

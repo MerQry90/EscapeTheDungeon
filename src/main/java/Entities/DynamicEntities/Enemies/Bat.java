@@ -1,5 +1,6 @@
 package Entities.DynamicEntities.Enemies;
 
+import Components.AudioManager;
 import Components.EntityManager;
 import Components.Vector2D;
 
@@ -95,6 +96,7 @@ public class Bat extends Enemy{
 					int dX = getDeltaXToObjective(entityManager.getPlayerX());
 					int dY = getDeltaYToObjective(entityManager.getPlayerY());
 					translationVector2D.setAngulationFromCoordinates(dX, dY);
+					entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.BAT_SOUND_INDEX);
 					changeBehaviourTo("dashing");
 				}
 				case "dashing" -> {

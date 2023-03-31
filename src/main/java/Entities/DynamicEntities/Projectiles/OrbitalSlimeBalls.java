@@ -1,5 +1,6 @@
 package Entities.DynamicEntities.Projectiles;
 
+import Components.AudioManager;
 import Components.EntityManager;
 import Entities.GenericEntity;
 
@@ -64,6 +65,7 @@ public class OrbitalSlimeBalls extends Projectile{
 			spawnTime -= 1;
 		}
 		else if(!isCollisionBoxActive()){
+			entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.SLIME_SOUND_INDEX);
 			activateCollisionBox();
 			setActiveSprite(SLIME_BALL);
 		}

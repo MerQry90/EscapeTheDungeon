@@ -67,6 +67,5 @@ public abstract class DynamicEntity extends GenericEntity {
 	public boolean getCanBreakRocks(){
 		return canBreakRocks;
 	}
-	
 	public abstract void moveEntity();
 }

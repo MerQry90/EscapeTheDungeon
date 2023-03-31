@@ -1,5 +1,6 @@
 package Entities.DynamicEntities.Projectiles;
 
+import Components.AudioManager;
 import Components.EntityManager;
 import Components.Vector2D;
 import Entities.GenericEntity;
@@ -35,6 +36,7 @@ public class DirectSlimeBalls extends Projectile{
         translationVector2D.setAngulation(angulation);
         setCanPassThroughWalls(false);
         setCanFly(true);
+        entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.SLIME_SOUND_INDEX);
     }
 
     @Override

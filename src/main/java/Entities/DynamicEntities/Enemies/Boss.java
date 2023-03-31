@@ -13,6 +13,8 @@ import java.util.Random;
 
 import static java.lang.Math.*;
 
+//TODO
+// fare suoni migliori per il boss
 
 public class Boss extends Enemy{
 	

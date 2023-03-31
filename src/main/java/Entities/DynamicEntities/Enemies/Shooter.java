@@ -1,5 +1,6 @@
 package Entities.DynamicEntities.Enemies;
 
+import Components.AudioManager;
 import Components.EntityManager;
 import Components.Vector2D;
 import Entities.DynamicEntities.Projectiles.Peas;
@@ -13,6 +14,8 @@ public class Shooter extends Enemy{
 	private Image DEAD_SHOOTER;
 	
 	private int idleCountdown, animationIndex;
+	
+	private boolean performDeathActions;
 	
 	public Shooter(int x, int y, EntityManager entityManager){
 		this.entityManager = entityManager;
@@ -42,6 +45,7 @@ public class Shooter extends Enemy{
 
 		setActiveSprite(SHOOTER1_L);
 		animationIndex = 0;
+		performDeathActions = true;
 		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		//verrà sommato a minimumSpeed
@@ -82,8 +86,12 @@ public class Shooter extends Enemy{
 					changeBehaviourTo("idle");
 				}
 				case "dead" -> {
-					disableCollisionBox();
-					setActiveSprite(DEAD_SHOOTER);
+					if(performDeathActions) {
+						performDeathActions = false;
+						disableCollisionBox();
+						setActiveSprite(DEAD_SHOOTER);
+						entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.ROCK_BROKEN_INDEX);
+					}
 				}
 				default -> {
 					changeBehaviourTo("idle");

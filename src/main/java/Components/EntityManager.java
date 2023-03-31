@@ -22,7 +22,7 @@ public class EntityManager {
 	* https://drive.google.com/drive/folders/1iUHRR4yvI7v8MohoRNtiPgisIckRKKzU?usp=sharing
 	* */
 
-	private MainGame mainGameReference;
+	public MainGame mainGameReference;
 	
 	private Player player;
 	private List<Enemy> enemies;
@@ -103,6 +103,7 @@ public class EntityManager {
 					!(obstacle instanceof BloodStain || obstacle instanceof SlimePuddle) && obstacle.checkIfActive()){
 				if(entity.getCanBreakRocks()){
 					obstacle.setInactive();
+					mainGameReference.audioManager.playSoundOnce(AudioManager.ROCK_BROKEN_INDEX);
 				}
 				else {
 					hasCollided = true;
@@ -168,6 +169,7 @@ public class EntityManager {
 		for(int i = 0; i < heartItems.size(); i += 1){
 			if (heartItems.get(i).checkIfActive() && heartItems.get(i).checkCollision(player) && (player.getHealth() < player.getMaxHealth())) {
 				player.setHealth(player.getHealth() + 1);
+				mainGameReference.audioManager.playSoundOnce(AudioManager.PLAYER_HEALED);
 				heartItems.remove(i);
 				i -= 1;
 			}

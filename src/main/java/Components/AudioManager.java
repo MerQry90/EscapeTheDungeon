@@ -12,7 +12,6 @@ public class AudioManager {
 	public static final int KEY_PICKEDUP_INDEX = 4;
 	public static final int STANDARD_ENEMY_HURTED_INDEX = 5;
 	public static final int DOORS_OPENING_INDEX = 6;
-	
 	public static final int BAT_SOUND_INDEX = 7;
 	public static final int ROCK_BROKEN_INDEX = 8;
 	public static final int PLAYER_HEALED = 9;

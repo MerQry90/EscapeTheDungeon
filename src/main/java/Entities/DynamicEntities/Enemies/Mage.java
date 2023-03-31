@@ -1,5 +1,6 @@
 package Entities.DynamicEntities.Enemies;
 
+import Components.AudioManager;
 import Components.EntityManager;
 import Components.Vector2D;
 import Entities.DynamicEntities.Projectiles.MagicBall;
@@ -84,6 +85,11 @@ public class Mage extends Enemy{
                     changeBehaviourTo("idle");
                 }
                 case  "teleport" ->{
+                    Random random = new Random();
+                    //50% di fare il suono
+                    if(random.nextInt(0, 2) == 0){
+                        entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.MAGE_SOUND_INDEX);
+                    }
                     idleCountdown = 40;
                     moveEntity();
                     changeBehaviourTo("idle");
