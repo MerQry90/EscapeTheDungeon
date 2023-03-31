@@ -41,8 +41,8 @@ public class Tank extends Enemy{
         //l'estremo è escluso, velocità a cui viene sommata maximumSpeed
         //verrà sommato a minimumSpeed
 
-        setWidth(76);
-        setHeight(112);
+        setWidth(100);
+        setHeight(100);
         setCBwidthScalar(0.7);
         setCBheightScalar(0.9);
         activateCollisionBox();

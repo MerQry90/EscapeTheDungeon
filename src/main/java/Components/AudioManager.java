@@ -5,6 +5,22 @@ import java.io.*;
 
 public class AudioManager {
 	
+	public static final int NORMAL_MUSIC_INDEX = 0;
+	public static final int PLAYER_HURTED_INDEX = 1;
+	public static final int BOSS_MUSIC_INDEX = 2;
+	public static final int ARROW_SHOOTING_INDEX = 3;
+	public static final int KEY_PICKEDUP_INDEX = 4;
+	public static final int STANDARD_ENEMY_HURTED_INDEX = 5;
+	public static final int DOORS_OPENING_INDEX = 6;
+	
+	public static final int BAT_SOUND_INDEX = 7;
+	public static final int ROCK_BROKEN_INDEX = 8;
+	public static final int PLAYER_HEALED = 9;
+	public static final int MAGE_SOUND_INDEX = 10;
+	public static final int SLIME_SOUND_INDEX = 11;
+	public static final int TANK_SOUND_INDEX = 12;
+	
+	
 	private File[] audioFiles;
 	private Clip[] clips;
 	private int currentSoundLoop;
@@ -15,19 +31,32 @@ public class AudioManager {
 		currentSoundLoop = 0;
 		
 		//dungeon music
-		audioFiles[0] = new File("src/resources/audio/dungeonOstVer2.wav");
+		audioFiles[NORMAL_MUSIC_INDEX] = new File("src/resources/audio/dungeonOstVer2.wav");
 		//player gets hit
-		audioFiles[1] = new File("src/resources/audio/playerGotHit.wav");
+		audioFiles[PLAYER_HURTED_INDEX] = new File("src/resources/audio/playerGotHit.wav");
 		//boss music
-		audioFiles[2] = new File("src/resources/audio/bossOst.wav");
+		audioFiles[BOSS_MUSIC_INDEX] = new File("src/resources/audio/bossOst.wav");
 		//arrow shot
-		audioFiles[3] = new File("src/resources/audio/shoot.wav");
+		audioFiles[ARROW_SHOOTING_INDEX] = new File("src/resources/audio/shoot.wav");
 		//key picked up
-		audioFiles[4] = new File("src/resources/audio/keyPickup.wav");
+		audioFiles[KEY_PICKEDUP_INDEX] = new File("src/resources/audio/keyPickup.wav");
 		//enemy hit with an arrow
-		audioFiles[5] = new File("src/resources/audio/enemyHit.wav");
+		audioFiles[STANDARD_ENEMY_HURTED_INDEX] = new File("src/resources/audio/enemyHit.wav");
 		//doors opening
-		audioFiles[6] = new File("src/resources/audio/doorOpening.wav");
+		audioFiles[DOORS_OPENING_INDEX] = new File("src/resources/audio/doorOpening.wav");
+		//bat sounds
+		audioFiles[BAT_SOUND_INDEX] = new File("src/resources/audio/BatSound.wav");
+		//broken rock
+		audioFiles[ROCK_BROKEN_INDEX] = new File("src/resources/audio/brokenRock.wav");
+		//healing sound
+		audioFiles[PLAYER_HEALED] = new File("src/resources/audio/heal.wav");
+		//mage sound
+		audioFiles[MAGE_SOUND_INDEX] = new File("src/resources/audio/mageSound.wav");
+		//slime sound
+		audioFiles[SLIME_SOUND_INDEX] = new File("src/resources/audio/SlimeSound.wav");
+		//tank sound
+		audioFiles[TANK_SOUND_INDEX] = new File("src/resources/audio/tankSound.wav");
+		
 	}
 	
 	private void setClip(int i){
