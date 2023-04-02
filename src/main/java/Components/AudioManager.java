@@ -12,13 +12,17 @@ public class AudioManager {
 	public static final int KEY_PICKEDUP_INDEX = 4;
 	public static final int STANDARD_ENEMY_HURTED_INDEX = 5;
 	public static final int DOORS_OPENING_INDEX = 6;
-	public static final int BAT_SOUND_INDEX = 7;
+	public static final int BAT_SOUND_1_INDEX = 7;
 	public static final int ROCK_BROKEN_INDEX = 8;
 	public static final int PLAYER_HEALED = 9;
-	public static final int MAGE_SOUND_INDEX = 10;
+	public static final int MAGE_DEATH_SOUND_INDEX = 10;
 	public static final int SLIME_SOUND_INDEX = 11;
 	public static final int TANK_SOUND_INDEX = 12;
-	
+	public static final int TELEPORT_SOUND_INDEX = 13;
+	public static final int BAT_SOUND_2_INDEX = 14;
+	public static final int POWERUP_PICKED_INDEX = 15;
+	public static final int ROCK_THROW_1_INDEX = 16;
+	public static final int ROCK_THROW_2_INDEX = 17;
 	
 	private File[] audioFiles;
 	private Clip[] clips;
@@ -44,18 +48,25 @@ public class AudioManager {
 		//doors opening
 		audioFiles[DOORS_OPENING_INDEX] = new File("src/resources/audio/doorOpening.wav");
 		//bat sounds
-		audioFiles[BAT_SOUND_INDEX] = new File("src/resources/audio/BatSound.wav");
+		audioFiles[BAT_SOUND_1_INDEX] = new File("src/resources/audio/batDash1.wav");
+		audioFiles[BAT_SOUND_2_INDEX] = new File("src/resources/audio/batDash2.wav");
 		//broken rock
 		audioFiles[ROCK_BROKEN_INDEX] = new File("src/resources/audio/brokenRock.wav");
 		//healing sound
 		audioFiles[PLAYER_HEALED] = new File("src/resources/audio/heal.wav");
 		//mage sound
-		audioFiles[MAGE_SOUND_INDEX] = new File("src/resources/audio/mageSound.wav");
+		audioFiles[MAGE_DEATH_SOUND_INDEX] = new File("src/resources/audio/mageSound.wav");
+		//teleport
+		audioFiles[TELEPORT_SOUND_INDEX] = new File("src/resources/audio/teleport.wav");
 		//slime sound
 		audioFiles[SLIME_SOUND_INDEX] = new File("src/resources/audio/SlimeSound.wav");
 		//tank sound
 		audioFiles[TANK_SOUND_INDEX] = new File("src/resources/audio/tankSound.wav");
-		
+		//powerup
+		audioFiles[POWERUP_PICKED_INDEX] = new File("src/resources/audio/powerUp.wav");
+		//rock throw
+		audioFiles[ROCK_THROW_1_INDEX] = new File("src/resources/audio/rockThrow1.wav");
+		audioFiles[ROCK_THROW_2_INDEX] = new File("src/resources/audio/rockThrow2.wav");
 	}
 	
 	private void setClip(int i){

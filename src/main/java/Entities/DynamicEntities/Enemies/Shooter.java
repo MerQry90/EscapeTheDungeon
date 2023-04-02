@@ -6,6 +6,7 @@ import Components.Vector2D;
 import Entities.DynamicEntities.Projectiles.Peas;
 
 import java.awt.*;
+import java.util.Random;
 
 public class Shooter extends Enemy{
 
@@ -61,7 +62,7 @@ public class Shooter extends Enemy{
 		setCanPassThroughWalls(false);
 		setCanFly(false);
 		
-		idleCountdown = 30;
+		idleCountdown = 20;
 	}
 	
 	@Override
@@ -72,8 +73,10 @@ public class Shooter extends Enemy{
 			}
 			switch (getCurrentBehaviour()) {
 				case "idle" -> {
+					Random random = new Random();
 					nextAnimation();
-					if(idleCountdown <= 0){
+					if(idleCountdown <= 0 && random.nextInt(0, 5) == 0){
+						entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.ROCK_THROW_2_INDEX);
 						changeBehaviourTo("shoot");
 					}
 					idleCountdown -= 1;
@@ -82,7 +85,7 @@ public class Shooter extends Enemy{
 					nextAnimation();
 					entityManager.newHostileProjectile(new Peas(getX(), getY(),
 							entityManager.getPlayerX(), entityManager.getPlayerY(), entityManager));
-					idleCountdown = 30;
+					idleCountdown = 20;
 					changeBehaviourTo("idle");
 				}
 				case "dead" -> {

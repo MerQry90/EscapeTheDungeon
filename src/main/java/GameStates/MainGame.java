@@ -184,7 +184,7 @@ public class MainGame extends GameState{
 				win = false;
 				setInactive();
 			}
-			entityManager.getPlayer().translateInputToMovement();
+			entityManager.getPlayer().translateInputToAction();
 			entityManager.getPlayer().updateCoolDown();
 			entityManager.updateArrows();
 			entityManager.updateEnemies();

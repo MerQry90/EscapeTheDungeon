@@ -181,7 +181,10 @@ public class EntityManager {
 			if(powerUpList.get(i).checkIfActive() && powerUpList.get(i).checkCollision(player)){
 				powerUpList.get(i).activate(player);
 				if(powerUpList.get(i) instanceof Key){
-					mainGameReference.audioManager.playSoundOnce(4);
+					mainGameReference.audioManager.playSoundOnce(AudioManager.KEY_PICKEDUP_INDEX);
+				}
+				else {
+					mainGameReference.audioManager.playSoundOnce(AudioManager.POWERUP_PICKED_INDEX);
 				}
 				powerUpList.remove(i);
 				i -= 1;

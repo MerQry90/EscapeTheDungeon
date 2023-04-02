@@ -198,9 +198,18 @@ public class Player extends DynamicEntity {
 			setActiveSprite(INVULNERABLE_PLAYER);
 		}
 		else {
-			if (isFacingRight) {
+			if(isShootingRight){
 				setActiveSprite(PLAYER_RIGHT_8_IDLE);
-			} else {
+				isFacingRight = true;
+			}
+			else if(isShootingLeft){
+				setActiveSprite(PLAYER_LEFT_8_IDLE);
+				isFacingRight = false;
+			}
+			else if(isFacingRight){
+				setActiveSprite(PLAYER_RIGHT_8_IDLE);
+			}
+			else {
 				setActiveSprite(PLAYER_LEFT_8_IDLE);
 			}
 		}
@@ -301,7 +310,7 @@ public class Player extends DynamicEntity {
 		this.nextPlayerInstruction = nextPlayerInstruction;
 	}
 
-	public void translateInputToMovement() {
+	public void translateInputToAction() {
 		boolean canMove = true;
 		switch (nextPlayerInstruction){
 			case "up-right" -> {
@@ -405,7 +414,7 @@ public class Player extends DynamicEntity {
 			case "stop" -> {
 				canMove = false;
 				setIdleAnimation();
-				stopBackwardShooting();
+				//stopBackwardShooting();
 			}
 		}
 		if(canMove) {

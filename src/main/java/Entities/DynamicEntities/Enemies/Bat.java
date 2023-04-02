@@ -5,6 +5,7 @@ import Components.EntityManager;
 import Components.Vector2D;
 
 import java.awt.*;
+import java.util.Random;
 
 import static java.lang.Math.abs;
 
@@ -15,6 +16,8 @@ public class Bat extends Enemy{
 	private Image DEAD_BAT;
 	
 	private int wait, countdown, movingCountdown, animationIndex;
+	
+	private boolean performDeathActions;
 	
 	public Bat(int x, int y, EntityManager entityManager){
 		this.entityManager = entityManager;
@@ -48,6 +51,8 @@ public class Bat extends Enemy{
 		BATBALL_9 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello12.png");*/
 
 		DEAD_BAT = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
+		
+		performDeathActions = true;
 		
 		setWidth(64);
 		setHeight(64);
@@ -96,8 +101,17 @@ public class Bat extends Enemy{
 					int dX = getDeltaXToObjective(entityManager.getPlayerX());
 					int dY = getDeltaYToObjective(entityManager.getPlayerY());
 					translationVector2D.setAngulationFromCoordinates(dX, dY);
-					entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.BAT_SOUND_INDEX);
-					changeBehaviourTo("dashing");
+					Random random = new Random();
+					//20% di dash
+					if(random.nextInt(0,5) == 0) {
+						if(random.nextInt(0, 1) == 0){
+							entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.BAT_SOUND_1_INDEX);
+						}
+						else {
+							entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.BAT_SOUND_2_INDEX);
+						}
+						changeBehaviourTo("dashing");
+					}
 				}
 				case "dashing" -> {
 					movingCountdown--;
@@ -112,8 +126,12 @@ public class Bat extends Enemy{
 					}
 				}
 				case "dead" -> {
-					disableCollisionBox();
-					setActiveSprite(DEAD_BAT);
+					if(performDeathActions) {
+						performDeathActions = false;
+						disableCollisionBox();
+						setActiveSprite(DEAD_BAT);
+						entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.BAT_SOUND_1_INDEX);
+					}
 				}
 				default -> changeBehaviourTo("stop-1");
 			}
