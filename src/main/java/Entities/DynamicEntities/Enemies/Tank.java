@@ -14,6 +14,10 @@ public class Tank extends Enemy{
     private Image DEAD_TANK;
 
     private int  animationIndex;
+    
+    private int soundCountDown;
+    
+    private boolean performDeathAction;
 
     public Tank(int x, int y, EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -38,8 +42,10 @@ public class Tank extends Enemy{
 
         setActiveSprite(TANK1_L);
         animationIndex = 0;
+        soundCountDown = 0;
 
-
+        performDeathAction = true;
+        
         //l'estremo è escluso, velocità a cui viene sommata maximumSpeed
         //verrà sommato a minimumSpeed
 
@@ -101,19 +107,20 @@ public class Tank extends Enemy{
             }
             switch (getCurrentBehaviour()) {
                 case "follow-player" -> {
-                    Random random = new Random();
-                    if(random.nextInt(0, 5*30) == 0){
-                        entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.TANK_SOUND_INDEX);
-                    }
                     int dX = getDeltaXToObjective(entityManager.getPlayerX());
                     int dY = getDeltaYToObjective(entityManager.getPlayerY());
                     translationVector2D.setAngulationFromCoordinates(dX, dY);
                     nextAnimation();
                     moveEntity();
+                    trySound();
                 }
                 case "dead" ->{
-                    disableCollisionBox();
-                    setActiveSprite(DEAD_TANK);
+                    if(performDeathAction) {
+                        performDeathAction = false;
+                        disableCollisionBox();
+                        setActiveSprite(DEAD_TANK);
+                        entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.TANK_DEATH_INDEX);
+                    }
                 }
                 default -> {
                     changeBehaviourTo("follow-player");
@@ -166,6 +173,19 @@ public class Tank extends Enemy{
             case 15 ->{
                 setActiveSprite(TANK4_R);
                 animationIndex = 0;
+            }
+        }
+    }
+    
+    public void trySound(){
+        if(soundCountDown > 0){
+            soundCountDown -= 1;
+        }
+        else {
+            Random random = new Random();
+            if(random.nextInt(0, 5) == 0){
+                soundCountDown = 30 * 3;
+                entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.TANK_SOUND_INDEX);
             }
         }
     }

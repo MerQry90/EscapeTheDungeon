@@ -422,7 +422,6 @@ public class Player extends DynamicEntity {
 		}
 		setAnimationNotShooting();
 		updateBackwardShooting();
-		System.out.println(timeGateBackwardsShooting);
 	}
 	
 	@Override

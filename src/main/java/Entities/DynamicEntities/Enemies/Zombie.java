@@ -1,8 +1,10 @@
 package Entities.DynamicEntities.Enemies;
 
+import Components.AudioManager;
 import Components.EntityManager;
 import Components.Vector2D;
 import java.awt.*;
+import java.util.Random;
 
 
 public class Zombie extends Enemy{
@@ -11,6 +13,9 @@ public class Zombie extends Enemy{
 	private Image DEAD_ZOMBIE;
 
 	private int animationIndex;
+	private int soundCountDown;
+	
+	private boolean performDeathAction;
 	
 	public Zombie(int x, int y, EntityManager entityManager) {
 		this.entityManager = entityManager;
@@ -36,6 +41,8 @@ public class Zombie extends Enemy{
 
 		setActiveSprite(ZOMBIE1_L);
 		animationIndex = 0;
+		performDeathAction = true;
+		soundCountDown = 0;
 		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		//verrà sommato a minimumSpeed
@@ -67,10 +74,15 @@ public class Zombie extends Enemy{
 					int dY = getDeltaYToObjective(entityManager.getPlayerY());
 					translationVector2D.setAngulationFromCoordinates(dX, dY);
 					moveEntity();
+					trySound();
 				}
 				case "dead" -> {
-					disableCollisionBox();
-					setActiveSprite(DEAD_ZOMBIE);
+					if(performDeathAction) {
+						performDeathAction = false;
+						disableCollisionBox();
+						setActiveSprite(DEAD_ZOMBIE);
+						entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.ZOMBIE_DEATH_INDEX);
+					}
 				}
 				default -> {
 					changeBehaviourTo("follow-player");
@@ -155,6 +167,24 @@ public class Zombie extends Enemy{
 			case 12 ->{
 				setActiveSprite(ZOMBIE4_R);
 				animationIndex = 0;
+			}
+		}
+	}
+	
+	public void trySound(){
+		if(soundCountDown > 0){
+			soundCountDown -= 1;
+		}
+		else {
+			Random random = new Random();
+			if(random.nextInt(0, 10) == 0){
+				soundCountDown = 30 * 3;
+				if(random.nextInt(0, 2) == 0){
+					entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.ZOMBIE_SOUND_1_INDEX);
+				}
+				else {
+					entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.ZOMBIE_SOUND_2_INDEX);
+				}
 			}
 		}
 	}

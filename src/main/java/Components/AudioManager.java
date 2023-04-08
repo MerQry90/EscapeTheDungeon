@@ -17,20 +17,26 @@ public class AudioManager {
 	public static final int PLAYER_HEALED = 9;
 	public static final int MAGE_DEATH_SOUND_INDEX = 10;
 	public static final int SLIME_SOUND_INDEX = 11;
-	public static final int TANK_SOUND_INDEX = 12;
 	public static final int TELEPORT_SOUND_INDEX = 13;
 	public static final int BAT_SOUND_2_INDEX = 14;
 	public static final int POWERUP_PICKED_INDEX = 15;
 	public static final int ROCK_THROW_1_INDEX = 16;
 	public static final int ROCK_THROW_2_INDEX = 17;
+	public static final int TANK_SOUND_INDEX = 12;
+	public static final int TANK_DEATH_INDEX = 18;
+	public static final int ZOMBIE_SOUND_1_INDEX = 19;
+	public static final int ZOMBIE_SOUND_2_INDEX = 20;
+	public static final int ZOMBIE_DEATH_INDEX = 21;
+	
 	
 	private File[] audioFiles;
 	private Clip[] clips;
 	private int currentSoundLoop;
 	
 	public AudioManager(){
-		audioFiles = new File[20];
-		clips = new Clip[20];
+		int audioNumber = 30;
+		audioFiles = new File[audioNumber];
+		clips = new Clip[audioNumber];
 		currentSoundLoop = 0;
 		
 		//dungeon music
@@ -60,13 +66,18 @@ public class AudioManager {
 		audioFiles[TELEPORT_SOUND_INDEX] = new File("src/resources/audio/teleport.wav");
 		//slime sound
 		audioFiles[SLIME_SOUND_INDEX] = new File("src/resources/audio/SlimeSound.wav");
-		//tank sound
-		audioFiles[TANK_SOUND_INDEX] = new File("src/resources/audio/tankSound.wav");
 		//powerup
 		audioFiles[POWERUP_PICKED_INDEX] = new File("src/resources/audio/powerUp.wav");
 		//rock throw
 		audioFiles[ROCK_THROW_1_INDEX] = new File("src/resources/audio/rockThrow1.wav");
 		audioFiles[ROCK_THROW_2_INDEX] = new File("src/resources/audio/rockThrow2.wav");
+		//tank sounds
+		audioFiles[TANK_SOUND_INDEX] = new File("src/resources/audio/TankSound.wav");
+		audioFiles[TANK_DEATH_INDEX] = new File("src/resources/audio/TankDeath.wav");
+		//zombie sounds
+		audioFiles[ZOMBIE_SOUND_1_INDEX] = new File("src/resources/audio/ZombieSound1.wav");
+		audioFiles[ZOMBIE_SOUND_2_INDEX] = new File("src/resources/audio/ZombieSound2.wav");
+		audioFiles[ZOMBIE_DEATH_INDEX] = new File("src/resources/audio/ZombieDeath.wav");
 	}
 	
 	private void setClip(int i){
@@ -75,7 +86,7 @@ public class AudioManager {
 			AudioInputStream ais = AudioSystem.getAudioInputStream(audioFiles[i]);
 			clips[i].open(ais);
 		}
-		catch (Exception e){
+		catch (Throwable e){
 			e.printStackTrace();
 		}
 	}
