@@ -175,17 +175,14 @@ public class Player extends DynamicEntity {
 		isShootingLeft = false;
 	}
 	public void resetTimeGateBackwardsShooting(){
-		timeGateBackwardsShooting = 12;
+		timeGateBackwardsShooting = 16;
 	}
 	public void stopBackwardShooting(){
 		timeGateBackwardsShooting = 0;
 	}
 	public boolean checkBackwardShooting(){
 		//System.out.println(timeGateBackwardsShooting);
-		if(timeGateBackwardsShooting > 0){
-			return false;
-		}
-		return true;
+		return timeGateBackwardsShooting > 0;
 	}
 	public void updateBackwardShooting(){
 		if(timeGateBackwardsShooting > 0){
@@ -221,6 +218,7 @@ public class Player extends DynamicEntity {
 		}
 		else {
 			if(checkBackwardShooting()){
+				System.out.println("backward shooting");
 				animationIndex -= 1;
 				if(animationIndex <= -4){
 					animationIndex = 28;
@@ -266,6 +264,7 @@ public class Player extends DynamicEntity {
 		}
 		else {
 			if(checkBackwardShooting()){
+				System.out.println("backward shooting");
 				animationIndex -= 1;
 				if(animationIndex <= -4){
 					animationIndex = 28;
@@ -315,7 +314,7 @@ public class Player extends DynamicEntity {
 		switch (nextPlayerInstruction){
 			case "up-right" -> {
 				translationVector2D.setAngulation(toRadians(315));
-				if(checkBackwardShooting()) {
+				if(!checkBackwardShooting()) {
 					nextAnimationRight();
 				}
 				else {
@@ -325,7 +324,7 @@ public class Player extends DynamicEntity {
 			}
 			case "up-left" -> {
 				translationVector2D.setAngulation(toRadians(225));
-				if(checkBackwardShooting()) {
+				if(!checkBackwardShooting()) {
 					nextAnimationLeft();
 				}
 				else {
@@ -335,7 +334,7 @@ public class Player extends DynamicEntity {
 			}
 			case "down-right" -> {
 				translationVector2D.setAngulation(toRadians(45));
-				if(checkBackwardShooting()) {
+				if(!checkBackwardShooting()) {
 					nextAnimationRight();
 				}
 				else {
@@ -345,7 +344,7 @@ public class Player extends DynamicEntity {
 			}
 			case "down-left" -> {
 				translationVector2D.setAngulation(toRadians(135));
-				if(checkBackwardShooting()) {
+				if(!checkBackwardShooting()) {
 					nextAnimationLeft();
 				}
 				else {
@@ -356,7 +355,7 @@ public class Player extends DynamicEntity {
 			case "up" -> {
 				translationVector2D.setAngulation(toRadians(270));
 				if(isFacingRight){
-					if(checkBackwardShooting()) {
+					if(!checkBackwardShooting()) {
 						nextAnimationRight();
 					}
 					else {
@@ -364,7 +363,7 @@ public class Player extends DynamicEntity {
 					}
 				}
 				else {
-					if(checkBackwardShooting()) {
+					if(!checkBackwardShooting()) {
 						nextAnimationLeft();
 					}
 					else {
@@ -375,7 +374,7 @@ public class Player extends DynamicEntity {
 			case "down" -> {
 				translationVector2D.setAngulation(toRadians(90));
 				if(isFacingRight){
-					if(checkBackwardShooting()) {
+					if(!checkBackwardShooting()) {
 						nextAnimationRight();
 					}
 					else {
@@ -383,7 +382,7 @@ public class Player extends DynamicEntity {
 					}
 				}
 				else {
-					if(checkBackwardShooting()) {
+					if(!checkBackwardShooting()) {
 						nextAnimationLeft();
 					}
 					else {
@@ -393,7 +392,7 @@ public class Player extends DynamicEntity {
 			}
 			case "right" -> {
 				translationVector2D.setAngulation(toRadians(0));
-				if(checkBackwardShooting()) {
+				if(!checkBackwardShooting()) {
 					nextAnimationRight();
 				}
 				else {
@@ -403,7 +402,7 @@ public class Player extends DynamicEntity {
 			}
 			case "left" -> {
 				translationVector2D.setAngulation(toRadians(180));
-				if(checkBackwardShooting()) {
+				if(!checkBackwardShooting()) {
 					nextAnimationLeft();
 				}
 				else {
