@@ -11,7 +11,6 @@ import java.util.List;
 public class Group {
 	private int ID;
 	private boolean defeated;
-	private boolean itemsDropped;
 
 	private List<Enemy> enemies;
 	private List<Obstacle> obstacles;
@@ -25,15 +24,6 @@ public class Group {
 		powerUpList = new ArrayList<>();
 		this.ID = ID;
 		defeated = false;
-		itemsDropped = false;
-	}
-
-	public boolean isItemsDropped() {
-		return itemsDropped;
-	}
-
-	public void setItemsDropped() {
-		this.itemsDropped = true;
 	}
 
 	public List<Enemy> getEnemies() {

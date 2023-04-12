@@ -4,29 +4,14 @@ import Components.EntityManager;
 import Components.Vector2D;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import static java.lang.Math.*;
 
 public class Player extends DynamicEntity {
 
-	private Image PLAYER_RIGHT_1;
-	private Image PLAYER_RIGHT_2;
-	private Image PLAYER_RIGHT_3;
-	private Image PLAYER_RIGHT_4;
-	private Image PLAYER_RIGHT_5;
-	private Image PLAYER_RIGHT_6;
-	private Image PLAYER_RIGHT_7;
-	private Image PLAYER_RIGHT_8_IDLE;
-	
-	private Image PLAYER_LEFT_1;
-	private Image PLAYER_LEFT_2;
-	private Image PLAYER_LEFT_3;
-	private Image PLAYER_LEFT_4;
-	private Image PLAYER_LEFT_5;
-	private Image PLAYER_LEFT_6;
-	private Image PLAYER_LEFT_7;
-	private Image PLAYER_LEFT_8_IDLE;
-
+	private ArrayList<Image> playerLeftSprites;
+	private ArrayList<Image> playerRightSprites;
 	private Image INVULNERABLE_PLAYER;
 
 	private boolean multipleShot;
@@ -55,25 +40,27 @@ public class Player extends DynamicEntity {
 	}
 	@Override
 	public void init() {
+		playerLeftSprites = new ArrayList<>();
+		playerRightSprites = new ArrayList<>();
+
 		//CARICAMENTO SPRITE
-		
-		PLAYER_RIGHT_1 = setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0001.png");
-		PLAYER_RIGHT_2 = setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0002.png");
-		PLAYER_RIGHT_3 = setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0003.png");
-		PLAYER_RIGHT_4 = setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0004.png");
-		PLAYER_RIGHT_5 = setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0005.png");
-		PLAYER_RIGHT_6 = setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0006.png");
-		PLAYER_RIGHT_7 = setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0007.png");
-		PLAYER_RIGHT_8_IDLE = setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0008.png");
-		
-		PLAYER_LEFT_1 = setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim12.png");
-		PLAYER_LEFT_2 = setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim13.png");
-		PLAYER_LEFT_3 = setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim14.png");
-		PLAYER_LEFT_4 = setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim15.png");
-		PLAYER_LEFT_5 = setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim16.png");
-		PLAYER_LEFT_6 = setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim17.png");
-		PLAYER_LEFT_7 = setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim18.png");
-		PLAYER_LEFT_8_IDLE = setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim19.png");
+		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim12.png"));
+		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim13.png"));
+		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim14.png"));
+		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim15.png"));
+		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim16.png"));
+		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim17.png"));
+		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim18.png"));
+		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim19.png"));
+
+		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0001.png"));
+		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0002.png"));
+		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0003.png"));
+		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0004.png"));
+		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0005.png"));
+		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0006.png"));
+		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0007.png"));
+		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0008.png"));
 
 		INVULNERABLE_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_front.png");
 		isFacingRight = false;
@@ -88,8 +75,8 @@ public class Player extends DynamicEntity {
 
 		setX(512);
 		setY(256);
-		setHeight(64); //tmp
-		setWidth(64); //tmp
+		setHeight(64);
+		setWidth(64);
 		setCBwidthScalar(0.7);
 		setCBheightScalar(0.7);
 		activateCollisionBox();
@@ -196,18 +183,18 @@ public class Player extends DynamicEntity {
 		}
 		else {
 			if(isShootingRight){
-				setActiveSprite(PLAYER_RIGHT_8_IDLE);
+				setActiveSprite(playerRightSprites.get(7));
 				isFacingRight = true;
 			}
 			else if(isShootingLeft){
-				setActiveSprite(PLAYER_LEFT_8_IDLE);
+				setActiveSprite(playerLeftSprites.get(7));
 				isFacingRight = false;
 			}
 			else if(isFacingRight){
-				setActiveSprite(PLAYER_RIGHT_8_IDLE);
+				setActiveSprite(playerRightSprites.get(7));
 			}
 			else {
-				setActiveSprite(PLAYER_LEFT_8_IDLE);
+				setActiveSprite(playerLeftSprites.get(7));
 			}
 		}
 		animationIndex = 0;
@@ -232,28 +219,28 @@ public class Player extends DynamicEntity {
 			}
 			switch (animationIndex) {
 				case 0 -> {
-					setActiveSprite(PLAYER_RIGHT_1);
+					setActiveSprite(playerRightSprites.get(0));
 				}
 				case 4 -> {
-					setActiveSprite(PLAYER_RIGHT_2);
+					setActiveSprite(playerRightSprites.get(1));
 				}
 				case 8 -> {
-					setActiveSprite(PLAYER_RIGHT_3);
+					setActiveSprite(playerRightSprites.get(2));
 				}
 				case 12 -> {
-					setActiveSprite(PLAYER_RIGHT_4);
+					setActiveSprite(playerRightSprites.get(3));
 				}
 				case 16 -> {
-					setActiveSprite(PLAYER_RIGHT_5);
+					setActiveSprite(playerRightSprites.get(4));
 				}
 				case 20 -> {
-					setActiveSprite(PLAYER_RIGHT_6);
+					setActiveSprite(playerRightSprites.get(5));
 				}
 				case 24 -> {
-					setActiveSprite(PLAYER_RIGHT_7);
+					setActiveSprite(playerRightSprites.get(6));
 				}
 				case 28 -> {
-					setActiveSprite(PLAYER_RIGHT_8_IDLE);
+					setActiveSprite(playerRightSprites.get(7));
 				}
 			}
 		}
@@ -278,28 +265,28 @@ public class Player extends DynamicEntity {
 			}
 			switch (animationIndex) {
 				case 0 -> {
-					setActiveSprite(PLAYER_LEFT_1);
+					setActiveSprite(playerLeftSprites.get(0));
 				}
 				case 4 -> {
-					setActiveSprite(PLAYER_LEFT_2);
+					setActiveSprite(playerLeftSprites.get(1));
 				}
 				case 8 -> {
-					setActiveSprite(PLAYER_LEFT_3);
+					setActiveSprite(playerLeftSprites.get(2));
 				}
 				case 12 -> {
-					setActiveSprite(PLAYER_LEFT_4);
+					setActiveSprite(playerLeftSprites.get(3));
 				}
 				case 16 -> {
-					setActiveSprite(PLAYER_LEFT_5);
+					setActiveSprite(playerLeftSprites.get(4));
 				}
 				case 20 -> {
-					setActiveSprite(PLAYER_LEFT_6);
+					setActiveSprite(playerLeftSprites.get(5));
 				}
 				case 24 -> {
-					setActiveSprite(PLAYER_LEFT_7);
+					setActiveSprite(playerLeftSprites.get(6));
 				}
 				case 28 -> {
-					setActiveSprite(PLAYER_LEFT_8_IDLE);
+					setActiveSprite(playerLeftSprites.get(7));
 				}
 			}
 		}

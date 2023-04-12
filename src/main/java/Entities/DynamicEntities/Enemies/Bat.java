@@ -5,15 +5,17 @@ import Components.EntityManager;
 import Components.Vector2D;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 import static java.lang.Math.abs;
 
 public class Bat extends Enemy{
 
-	private Image BAT_1, BAT_2, BAT_3, BAT_4, BAT_5, BAT_6, BAT_7, BAT_8, BAT_9, BAT_10;
-	private Image BATBALL_1, BATBALL_2, BATBALL_3, BATBALL_4, BATBALL_5, BATBALL_6, BATBALL_7, BATBALL_8, BATBALL_9;
 	private Image DEAD_BAT;
+
+	private ArrayList<Image> batSprites;
+	private ArrayList<Image> batBallSprites;
 	
 	private int wait, countdown, movingCountdown, animationIndex;
 	
@@ -28,27 +30,28 @@ public class Bat extends Enemy{
 
 	@Override
 	public void init() {
-		//CARICAMENTO SPRITE
-		BAT_1 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello1.png");
-		BAT_2 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello2.png");
-		BAT_3 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello3.png");
-		BAT_4 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello4.png");
-		BAT_5 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello5.png");
-		BAT_6 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello6.png");
-		BAT_7 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello7.png");
-		BAT_8 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello8.png");
-		BAT_9 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello9.png");
-		BAT_10 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello10.png");
+		batSprites = new ArrayList<>();
+		batBallSprites = new ArrayList<>();
 
-		BATBALL_1 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello4.png");
-		BATBALL_2 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello5.png");
-		BATBALL_3 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello6.png");
-		BATBALL_4 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello7.png");
-		BATBALL_5 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello8.png");
-		BATBALL_6 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello9.png");
-		/*BATBALL_7 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello10.png");
-		BATBALL_8 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello11.png");
-		BATBALL_9 = setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello12.png");*/
+		//CARICAMENTO SPRITE
+
+		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello1.png"));
+		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello2.png"));
+		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello3.png"));
+		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello4.png"));
+		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello5.png"));
+		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello6.png"));
+		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello7.png"));
+		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello8.png"));
+		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello9.png"));
+		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello10.png"));
+
+		batBallSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello4.png"));
+		batBallSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello5.png"));
+		batBallSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello6.png"));
+		batBallSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello7.png"));
+		batBallSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello8.png"));
+		batBallSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello9.png"));
 
 		DEAD_BAT = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
 		
@@ -69,7 +72,7 @@ public class Bat extends Enemy{
 		countdown = 0;
 		movingCountdown = 20;
 		animationIndex = 0;
-		setActiveSprite(BAT_1);
+		setActiveSprite(batSprites.get(0));
 	}
 
 	@Override
@@ -115,7 +118,7 @@ public class Bat extends Enemy{
 				}
 				case "dashing" -> {
 					movingCountdown--;
-					setActiveSprite(BATBALL_6);
+					setActiveSprite(batBallSprites.get(5));
 					moveEntity();
 					if (movingCountdown <= 0) {
 						countdown = 0;
@@ -142,49 +145,49 @@ public class Bat extends Enemy{
 		animationIndex += 1;
 		switch (animationIndex){
 			case 0 ->{
-				setActiveSprite(BAT_1);
+				setActiveSprite(batSprites.get(0));
 			}
 			case 3 ->{
-				setActiveSprite(BAT_2);
+				setActiveSprite(batSprites.get(1));
 			}
 			case 6 ->{
-				setActiveSprite(BAT_3);
+				setActiveSprite(batSprites.get(2));
 			}
 			case 9 ->{
-				setActiveSprite(BAT_4);
+				setActiveSprite(batSprites.get(3));
 			}
 			case 12 ->{
-				setActiveSprite(BAT_5);
+				setActiveSprite(batSprites.get(4));
 			}
 			case 15 ->{
-				setActiveSprite(BAT_6);
+				setActiveSprite(batSprites.get(5));
 			}
 			case 18 ->{
-				setActiveSprite(BAT_7);
+				setActiveSprite(batSprites.get(6));
 			}
 			case 21 ->{
-				setActiveSprite(BAT_8);
+				setActiveSprite(batSprites.get(7));
 			}
 			case 24 ->{
-				setActiveSprite(BAT_9);
+				setActiveSprite(batSprites.get(8));
 			}
 			case 27 ->{
-				setActiveSprite(BAT_10);
+				setActiveSprite(batSprites.get(9));
 			}
 			case 30 ->{
-				setActiveSprite(BATBALL_1);
+				setActiveSprite(batBallSprites.get(0));
 			}
 			case 33 ->{
-				setActiveSprite(BATBALL_2);
+				setActiveSprite(batBallSprites.get(1));
 			}
 			case 36 ->{
-				setActiveSprite(BATBALL_3);
+				setActiveSprite(batBallSprites.get(2));
 			}
 			case 39 ->{
-				setActiveSprite(BATBALL_4);
+				setActiveSprite(batBallSprites.get(3));
 			}
 			case 42 ->{
-				setActiveSprite(BATBALL_5);
+				setActiveSprite(batSprites.get(4));
 				animationIndex = 0;
 			}
 		}

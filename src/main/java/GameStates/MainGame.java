@@ -2,6 +2,7 @@ package GameStates;
 
 import Application.KeyHandler;
 import Components.*;
+import Entities.DynamicEntities.Player;
 
 import java.awt.*;
 
@@ -149,7 +150,7 @@ public class MainGame extends GameState{
 			entityManager.getPlayer().setAnimationShootingRight();
 		}
 
-		//DEBUG ONLY
+		//DEBUG ONLY*****************************************************************************************
 		if(keyH.killAll){
 			entityManager.killAll();
 		}
@@ -157,7 +158,13 @@ public class MainGame extends GameState{
 			entityManager.setDefaultPlayerPositionUp();
 			translateCellToNewRoom(cellManager.getBossRoomID());
 		}
-		
+		if(keyH.damagePlayer && mapCountdown <= 0){
+			entityManager.getPlayer().lowerHealth();
+			mapCountdown = 10;
+		}
+		if(keyH.fast){
+			entityManager.getPlayer().setSpeed(entityManager.getPlayer().getSpeed() + 2);
+		}
 	}
 
 	@Override

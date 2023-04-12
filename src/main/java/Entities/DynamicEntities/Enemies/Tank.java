@@ -5,19 +5,20 @@ import Components.EntityManager;
 import Components.Vector2D;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 import static java.lang.Math.toRadians;
 
 public class Tank extends Enemy{
-    private Image TANK1_R, TANK2_R, TANK3_R, TANK4_R, TANK1_L, TANK2_L, TANK3_L, TANK4_L;
-    private Image DEAD_TANK;
+   private ArrayList<Image> tankLeftSprites, tankRightSprites;
+   private Image DEAD_TANK;
 
-    private int  animationIndex;
+   private int  animationIndex;
     
-    private int soundCountDown;
+   private int soundCountDown;
     
-    private boolean performDeathAction;
+   private boolean performDeathAction;
 
     public Tank(int x, int y, EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -27,20 +28,23 @@ public class Tank extends Enemy{
     }
     @Override
     public void init() {
-        //CARICAMENTO SPRITE
-        TANK1_R = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank1_right.png");
-        TANK2_R = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank2_right.png");
-        TANK3_R = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank3_right.png");
-        TANK4_R = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank4_right.png");
+        tankLeftSprites = new ArrayList<>();
+        tankRightSprites = new ArrayList<>();
 
-        TANK1_L = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank1_left.png");
-        TANK2_L = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank2_left.png");
-        TANK3_L = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank3_left.png");
-        TANK4_L = setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank4_left.png");
+        //CARICAMENTO SPRITE
+        tankLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank1_left.png"));
+        tankLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank2_left.png"));
+        tankLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank3_left.png"));
+        tankLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank4_left.png"));
+
+        tankRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank1_right.png"));
+        tankRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank2_right.png"));
+        tankRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank3_right.png"));
+        tankRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank4_right.png"));
 
         DEAD_TANK = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
 
-        setActiveSprite(TANK1_L);
+        setActiveSprite(tankLeftSprites.get(0));
         animationIndex = 0;
         soundCountDown = 0;
 
@@ -142,16 +146,16 @@ public class Tank extends Enemy{
 
         switch (animationIndex){
             case 0 ->{
-                setActiveSprite(TANK1_L);
+                setActiveSprite(tankLeftSprites.get(0));
             }
             case 5 ->{
-                setActiveSprite(TANK2_L);
+                setActiveSprite(tankLeftSprites.get(1));
             }
             case 10 ->{
-                setActiveSprite(TANK3_L);
+                setActiveSprite(tankLeftSprites.get(2));
             }
             case 15 ->{
-                setActiveSprite(TANK4_L);
+                setActiveSprite(tankLeftSprites.get(3));
                 animationIndex = 0;
             }
         }
@@ -162,16 +166,16 @@ public class Tank extends Enemy{
 
         switch (animationIndex){
             case 0 ->{
-                setActiveSprite(TANK1_R);
+                setActiveSprite(tankRightSprites.get(0));
             }
             case 5 ->{
-                setActiveSprite(TANK2_R);
+                setActiveSprite(tankRightSprites.get(1));
             }
             case 10 ->{
-                setActiveSprite(TANK3_R);
+                setActiveSprite(tankRightSprites.get(2));
             }
             case 15 ->{
-                setActiveSprite(TANK4_R);
+                setActiveSprite(tankRightSprites.get(3));
                 animationIndex = 0;
             }
         }

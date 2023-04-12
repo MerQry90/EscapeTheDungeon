@@ -168,9 +168,10 @@ public class EntityManager {
 	public void checkItemsCollisions(){
 		for(int i = 0; i < heartItems.size(); i += 1){
 			if (heartItems.get(i).checkIfActive() && heartItems.get(i).checkCollision(player) && (player.getHealth() < player.getMaxHealth())) {
+				entityGenerator.getGroupByID(getRoomID()).getItems().remove(i);
+				heartItems = entityGenerator.getGroupByID(getRoomID()).getItems();
 				player.setHealth(player.getHealth() + 1);
 				mainGameReference.audioManager.playSoundOnce(AudioManager.PLAYER_HEALED);
-				heartItems.remove(i);
 				i -= 1;
 			}
 		}
@@ -319,7 +320,7 @@ public class EntityManager {
 		}
 		obstacles = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getObstacles());
 		heartItems = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getItems());
-		
+
 		if(entityGenerator.checkIfBossRoom(ID)){
 			mainGameReference.audioManager.stopSoundLoop();
 			mainGameReference.audioManager.playSoundLoop(2);
@@ -356,12 +357,10 @@ public class EntityManager {
 			if(roomHasBeenCompleted_actionPerformedOnce) {
 				roomHasBeenCompleted_actionPerformedOnce = false;
 				mainGameReference.audioManager.playSoundOnce(6);
+				entityGenerator.generateHearts(getRoomID());
+				heartItems = entityGenerator.getGroupByID(getRoomID()).getItems();
 			}
 			entityGenerator.getGroupByID(getRoomID()).setAsDefeated();
-			if(!entityGenerator.getGroupByID(getRoomID()).isItemsDropped()){
-				entityGenerator.generateHearts(getRoomID());
-				entityGenerator.getGroupByID(getRoomID()).setItemsDropped();
-			}
 		}
 	}
 	//------------------------------------------------------------------------------------------------------------------

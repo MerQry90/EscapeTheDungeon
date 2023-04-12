@@ -6,12 +6,13 @@ import Components.Vector2D;
 import Entities.DynamicEntities.Projectiles.MagicBall;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Mage extends Enemy{
 	
 	private Image MAGE_IDLE, MAGE_SHOOTING, DEAD_MAGE;
-	private Image MAGETP1, MAGETP2, MAGETP3, MAGETP4, MAGETP5;
+	private ArrayList<Image> mageTeleportSprites;
 	
 	private boolean performDeathActions;
 	
@@ -24,14 +25,16 @@ public class Mage extends Enemy{
 	}
 	@Override
 	public void init() {
+		mageTeleportSprites = new ArrayList<>();
+
 		MAGE_IDLE = setSpriteFromPath("src/resources/sprites/Enemies/Mage/magikino1.png");
 		MAGE_SHOOTING  = setSpriteFromPath("src/resources/sprites/Enemies/Mage/magikino2.png");
 		
-		MAGETP1 = setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline1.png");
-		MAGETP2 = setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline2.png");
-		MAGETP3 = setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline3.png");
-		MAGETP4 = setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline4.png");
-		MAGETP5 = setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline5.png");
+		mageTeleportSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline1.png"));
+		mageTeleportSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline2.png"));
+		mageTeleportSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline3.png"));
+		mageTeleportSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline4.png"));
+		mageTeleportSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline5.png"));
 		
 		DEAD_MAGE = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
 		
@@ -112,19 +115,19 @@ public class Mage extends Enemy{
 		animationIndex += 1;
 		switch (animationIndex){
 			case 0 ->{
-				setActiveSprite(MAGETP1);
+				setActiveSprite(mageTeleportSprites.get(0));
 			}
 			case 2 ->{
-				setActiveSprite(MAGETP2);
+				setActiveSprite(mageTeleportSprites.get(1));
 			}
 			case 4 ->{
-				setActiveSprite(MAGETP3);
+				setActiveSprite(mageTeleportSprites.get(2));
 			}
 			case 6 ->{
-				setActiveSprite(MAGETP4);
+				setActiveSprite(mageTeleportSprites.get(3));
 			}
 			case 8 ->{
-				setActiveSprite(MAGETP5);
+				setActiveSprite(mageTeleportSprites.get(4));
 				animationIndex = 0;
 			}
 		}

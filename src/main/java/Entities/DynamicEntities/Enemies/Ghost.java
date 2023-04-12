@@ -4,20 +4,14 @@ import Components.EntityManager;
 import Components.Vector2D;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 import static java.lang.Math.abs;
 
 public class Ghost extends Enemy{
-	
-	private Image GHOST_1;
-	private Image GHOST_2;
-	private Image GHOST_3;
-	private Image GHOST_4;
-	private Image GHOST_5;
-	private Image GHOST_6;
-	private Image GHOST_7;
-	
-	private Image VISIBLE_GHOST_LEFT;
+
+	private ArrayList<Image> ghostSprites;
+
 	private Image DEAD_GHOST;
 	
 	private int countdown;
@@ -32,18 +26,19 @@ public class Ghost extends Enemy{
 	
 	@Override
 	public void init(){
+		ghostSprites = new ArrayList<>();
+
 		//CARICAMENTO SPRITE
-		GHOST_1 = setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino1.png");
-		GHOST_2 = setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino2.png");
-		GHOST_3 = setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino3.png");
-		GHOST_4 = setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino4.png");
-		GHOST_5 = setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino5.png");
-		GHOST_6 = setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino6.png");
-		GHOST_7 = setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino7.png");
-		
-		VISIBLE_GHOST_LEFT = setSpriteFromPath("src/resources/sprites/png/ghost.png");
+		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino1.png"));
+		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino2.png"));
+		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino3.png"));
+		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino4.png"));
+		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino5.png"));
+		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino6.png"));
+		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino7.png"));
+
+
 		DEAD_GHOST = setSpriteFromPath("src/resources/sprites/png/invisible_cube.png");
-		//setActiveSprite(VISIBLE_GHOST_LEFT);
 		animationIndex = 0;
 		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
@@ -60,32 +55,32 @@ public class Ghost extends Enemy{
 		setCanPassThroughWalls(true);
 		setCanFly(true);
 		countdown = 54 + 9;
-		setActiveSprite(GHOST_1);
+		setActiveSprite(ghostSprites.get(0));
 	}
 	
 	public void nextAnimation(){
 		animationIndex += 1;
 		switch (animationIndex){
 			case 0 -> {
-				setActiveSprite(GHOST_1);
+				setActiveSprite(ghostSprites.get(0));
 			}
 			case 3 -> {
-				setActiveSprite(GHOST_2);
+				setActiveSprite(ghostSprites.get(1));
 			}
 			case 6 -> {
-				setActiveSprite(GHOST_3);
+				setActiveSprite(ghostSprites.get(2));
 			}
 			case 9 -> {
-				setActiveSprite(GHOST_4);
+				setActiveSprite(ghostSprites.get(3));
 			}
 			case 12 -> {
-				setActiveSprite(GHOST_5);
+				setActiveSprite(ghostSprites.get(4));
 			}
 			case 15 -> {
-				setActiveSprite(GHOST_6);
+				setActiveSprite(ghostSprites.get(5));
 			}
 			case 18 -> {
-				setActiveSprite(GHOST_7);
+				setActiveSprite(ghostSprites.get(6));
 				animationIndex = 0;
 			}
 		}

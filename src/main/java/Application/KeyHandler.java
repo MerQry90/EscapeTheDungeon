@@ -8,8 +8,10 @@ public class KeyHandler implements KeyListener {
 	public boolean upPressed, downPressed, leftPressed, rightPressed;
 	public boolean shootUp, shootDown, shootLeft, shootRight;
 	public boolean enterPressed, escapePressed, mPressed, cPressed, iPressed;
-	public boolean killAll;
-	public boolean tpToBoss;
+
+	//DEBUG ONLY*****************************************************************************
+	public boolean killAll, tpToBoss, damagePlayer, fast;
+	//***************************************************************************************
 
 	@Override
 	public void keyTyped(KeyEvent e)  { }
@@ -36,8 +38,12 @@ public class KeyHandler implements KeyListener {
 			case KeyEvent.VK_I -> iPressed = true;
 			case KeyEvent.VK_M -> mPressed = true;
 
+			//DEBUG ONLY*****************************************************************************
 			case KeyEvent.VK_K -> killAll = true;
 			case KeyEvent.VK_B -> tpToBoss = true;
+			case KeyEvent.VK_L -> damagePlayer = true;
+			case KeyEvent.VK_F -> fast = true;
+			//***************************************************************************************
 		}
 	}
 
@@ -62,8 +68,12 @@ public class KeyHandler implements KeyListener {
 			case KeyEvent.VK_I -> iPressed = false;
 			case KeyEvent.VK_M -> mPressed = false;
 
+			//DEBUG ONLY*****************************************************************************
 			case KeyEvent.VK_K -> killAll = false;
 			case KeyEvent.VK_B -> tpToBoss = false;
+			case KeyEvent.VK_L -> damagePlayer = false;
+			case KeyEvent.VK_F -> fast = false;
+			//***************************************************************************************
 		}
 	}
 }
