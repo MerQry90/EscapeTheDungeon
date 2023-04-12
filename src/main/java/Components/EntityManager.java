@@ -319,10 +319,8 @@ public class EntityManager {
 			roomHasBeenCompleted_actionPerformedOnce = true;
 		}
 		obstacles = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getObstacles());
-		System.out.println(heartItems);
 		heartItems = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getItems());
-		System.out.println(heartItems);
-		
+
 		if(entityGenerator.checkIfBossRoom(ID)){
 			mainGameReference.audioManager.stopSoundLoop();
 			mainGameReference.audioManager.playSoundLoop(2);
@@ -359,12 +357,10 @@ public class EntityManager {
 			if(roomHasBeenCompleted_actionPerformedOnce) {
 				roomHasBeenCompleted_actionPerformedOnce = false;
 				mainGameReference.audioManager.playSoundOnce(6);
+				entityGenerator.generateHearts(getRoomID());
+				heartItems = entityGenerator.getGroupByID(getRoomID()).getItems();
 			}
 			entityGenerator.getGroupByID(getRoomID()).setAsDefeated();
-			if(!entityGenerator.getGroupByID(getRoomID()).isItemsDropped()){
-				entityGenerator.generateHearts(getRoomID());
-				entityGenerator.getGroupByID(getRoomID()).setItemsDropped();
-			}
 		}
 	}
 	//------------------------------------------------------------------------------------------------------------------
