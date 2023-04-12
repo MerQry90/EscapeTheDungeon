@@ -2,6 +2,8 @@ package Components;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class Background {
 	
@@ -9,6 +11,7 @@ public class Background {
 	protected final static int LOWER_BOUND = 64 * 8;
 	protected final static int LEFT_BOUND = 64;
 	protected final static int RIGHT_BOUND = 64 * 16;
+	private int index;
 	
 	/*
 	width e height sono le misure del background e conseguentemente della finestra di gioco
@@ -19,6 +22,7 @@ public class Background {
 
 	private Image background;
 	private ImageIcon MainMenuBackground, BLACK_BACKGROUND, COMMAND_BACKGROUND, MainGameBackground, GameOverBackground, GameWinBackground;
+	private ArrayList<ImageIcon> introductionPages;
 
 	private Tile tile;
 
@@ -29,6 +33,8 @@ public class Background {
 	 */
 	public Background(){
 		tile = new Tile();
+		introductionPages = new ArrayList<>();
+
 		MainMenuBackground = new ImageIcon("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
 		BLACK_BACKGROUND = new ImageIcon("src/resources/sprites/backgrounds/black_background.png");
 		COMMAND_BACKGROUND = new ImageIcon("src/resources/sprites/backgrounds/mainmenucommands.png");
@@ -36,6 +42,9 @@ public class Background {
 		MainGameBackground = new ImageIcon("src/resources/sprites/Backgrounds - Doors/murofin.png");
 		GameOverBackground = new ImageIcon("src/resources/sprites/backgrounds/gameOver_placeHolder.png");
 		GameWinBackground = new ImageIcon("src/resources/sprites/backgrounds/victory_screen.png");
+		introductionPages.add(GameOverBackground);
+		introductionPages.add(GameWinBackground);
+		index = 0;
 	}
 
 	public int getWidth() {
@@ -63,6 +72,16 @@ public class Background {
 	}
 	public void loadGameWinBackground(){
 		background = GameWinBackground.getImage();
+	}
+	public void loadIntroductionPage(String direction){
+		background = introductionPages.get(index).getImage();
+		if(Objects.equals(direction, "next") && index < 5){
+			index += 1;
+		}
+		else if (index > 0) {
+			index -= 1;
+		}
+		background = introductionPages.get(index).getImage();
 	}
 	public void paint(Graphics g){
 		g.drawImage(background, 0, 0, width, height, null);

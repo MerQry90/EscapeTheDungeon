@@ -6,13 +6,15 @@ import Components.Vector2D;
 import Entities.DynamicEntities.Projectiles.Peas;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Shooter extends Enemy{
 
-	private Image SHOOTER1_L, SHOOTER2_L, SHOOTER3_L, SHOOTER4_L, SHOOTER5_L, SHOOTER6_L,
-			SHOOTER1_R,	SHOOTER2_R, SHOOTER3_R, SHOOTER4_R, SHOOTER5_R, SHOOTER6_R;
 	private Image DEAD_SHOOTER;
+
+	private ArrayList<Image> shooterLeftSprites;
+	private ArrayList<Image> shooterRightSprites;
 	
 	private int idleCountdown, animationIndex;
 	
@@ -27,24 +29,28 @@ public class Shooter extends Enemy{
 
 	@Override
 	public void init() {
-		//CARICAMENTO SPRITE
-		SHOOTER1_L = setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter1_L.png");
-		SHOOTER2_L = setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter2_L.png");
-		SHOOTER3_L = setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter3_L.png");
-		SHOOTER4_L = setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter4_L.png");
-		SHOOTER5_L = setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter5_L.png");
-		SHOOTER6_L = setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter6_L.png");
+		shooterLeftSprites = new ArrayList<>();
+		shooterRightSprites = new ArrayList<>();
 
-		SHOOTER1_R = setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter1_R.png");
-		SHOOTER2_R = setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter2_R.png");
-		SHOOTER3_R = setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter3_R.png");
-		SHOOTER4_R = setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter4_R.png");
-		SHOOTER5_R = setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter5_R.png");
-		SHOOTER6_R = setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter6_R.png");
+		//CARICAMENTO SPRITE
+
+		shooterLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter1_L.png"));
+		shooterLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter2_L.png"));
+		shooterLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter3_L.png"));
+		shooterLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter4_L.png"));
+		shooterLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter5_L.png"));
+		shooterLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter6_L.png"));
+
+		shooterRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter1_R.png"));
+		shooterRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter2_R.png"));
+		shooterRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter3_R.png"));
+		shooterRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter4_R.png"));
+		shooterRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter5_R.png"));
+		shooterRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter6_R.png"));
 
 		DEAD_SHOOTER = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
 
-		setActiveSprite(SHOOTER1_L);
+		setActiveSprite(shooterLeftSprites.get(0));
 		animationIndex = 0;
 		performDeathActions = true;
 		
@@ -120,24 +126,22 @@ public class Shooter extends Enemy{
 
 		switch (animationIndex){
 			case 0 ->{
-				setActiveSprite(SHOOTER1_L);
+				setActiveSprite(shooterLeftSprites.get(0));
 			}
 			case 5 ->{
-				setActiveSprite(SHOOTER2_L);
+				setActiveSprite(shooterLeftSprites.get(1));
 			}
 			case 10 ->{
-				setActiveSprite(SHOOTER3_L);
+				setActiveSprite(shooterLeftSprites.get(2));
 			}
 			case 15 ->{
-				setActiveSprite(SHOOTER4_L);
+				setActiveSprite(shooterLeftSprites.get(3));
 			}
 			case 20 ->{
-				setActiveSprite(SHOOTER5_L);
+				setActiveSprite(shooterLeftSprites.get(4));
 			}
 			case 25 ->{
-				setActiveSprite(SHOOTER6_L);
-			}
-			case 29 ->{
+				setActiveSprite(shooterLeftSprites.get(5));
 				animationIndex = 0;
 			}
 		}
@@ -148,24 +152,22 @@ public class Shooter extends Enemy{
 
 		switch (animationIndex){
 			case 0 ->{
-				setActiveSprite(SHOOTER1_R);
+				setActiveSprite(shooterRightSprites.get(0));
 			}
 			case 5 ->{
-				setActiveSprite(SHOOTER2_R);
+				setActiveSprite(shooterRightSprites.get(1));
 			}
 			case 10 ->{
-				setActiveSprite(SHOOTER3_R);
+				setActiveSprite(shooterRightSprites.get(2));
 			}
 			case 15 ->{
-				setActiveSprite(SHOOTER4_R);
+				setActiveSprite(shooterRightSprites.get(3));
 			}
 			case 20 ->{
-				setActiveSprite(SHOOTER5_R);
+				setActiveSprite(shooterRightSprites.get(4));
 			}
 			case 25 ->{
-				setActiveSprite(SHOOTER6_R);
-			}
-			case 29 ->{
+				setActiveSprite(shooterRightSprites.get(5));
 				animationIndex = 0;
 			}
 		}

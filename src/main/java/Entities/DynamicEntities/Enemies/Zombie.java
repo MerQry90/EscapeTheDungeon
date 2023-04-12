@@ -4,12 +4,14 @@ import Components.AudioManager;
 import Components.EntityManager;
 import Components.Vector2D;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 
 public class Zombie extends Enemy{
-	
-	private Image ZOMBIE1_L, ZOMBIE2_L, ZOMBIE3_L, ZOMBIE4_L, ZOMBIE1_R, ZOMBIE2_R, ZOMBIE3_R, ZOMBIE4_R;
+
+	private ArrayList<Image> zombieLeftSprites;
+	private ArrayList<Image> zombieRightSprites;
 	private Image DEAD_ZOMBIE;
 
 	private int animationIndex;
@@ -26,20 +28,24 @@ public class Zombie extends Enemy{
 	
 	@Override
 	public void init(){
-		//CARICAMENTO SPRITE
-		ZOMBIE1_L = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie1_L.png");
-		ZOMBIE2_L = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie2_L.png");
-		ZOMBIE3_L = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie3_L.png");
-		ZOMBIE4_L = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie4_L.png");
+		zombieLeftSprites = new ArrayList<>();
+		zombieRightSprites = new ArrayList<>();
 
-		ZOMBIE1_R = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie1_R.png");
-		ZOMBIE2_R = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie2_R.png");
-		ZOMBIE3_R = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie3_R.png");
-		ZOMBIE4_R = setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie4_R.png");
+		//CARICAMENTO SPRITE
+
+		zombieLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie1_L.png"));
+		zombieLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie2_L.png"));
+		zombieLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie3_L.png"));
+		zombieLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie4_L.png"));
+
+		zombieRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie1_R.png"));
+		zombieRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie2_R.png"));
+		zombieRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie3_R.png"));
+		zombieRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie4_R.png"));
 
 		DEAD_ZOMBIE = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
 
-		setActiveSprite(ZOMBIE1_L);
+		setActiveSprite(zombieLeftSprites.get(0));
 		animationIndex = 0;
 		performDeathAction = true;
 		soundCountDown = 0;
@@ -54,8 +60,8 @@ public class Zombie extends Enemy{
 		activateCollisionBox();
 		
 		translationVector2D = new Vector2D(0);
-		setRandomSpeed(5, 2);
-		//setSpeed(6);
+		//setRandomSpeed(5, 2);
+		setSpeed(5);
 		setRandomHealth(3, 2);
 		setCanPassThroughWalls(false);
 		setCanFly(false);
@@ -136,16 +142,16 @@ public class Zombie extends Enemy{
 
 		switch (animationIndex){
 			case 0 ->{
-				setActiveSprite(ZOMBIE1_L);
+				setActiveSprite(zombieLeftSprites.get(0));
 			}
 			case 4 ->{
-				setActiveSprite(ZOMBIE2_L);
+				setActiveSprite(zombieLeftSprites.get(1));
 			}
 			case 8 ->{
-				setActiveSprite(ZOMBIE3_L);
+				setActiveSprite(zombieLeftSprites.get(2));
 			}
 			case 12 ->{
-				setActiveSprite(ZOMBIE4_L);
+				setActiveSprite(zombieLeftSprites.get(3));
 				animationIndex = 0;
 			}
 		}
@@ -156,16 +162,16 @@ public class Zombie extends Enemy{
 
 		switch (animationIndex){
 			case 0 ->{
-				setActiveSprite(ZOMBIE1_R);
+				setActiveSprite(zombieRightSprites.get(0));
 			}
 			case 4 ->{
-				setActiveSprite(ZOMBIE2_R);
+				setActiveSprite(zombieRightSprites.get(1));
 			}
 			case 8 ->{
-				setActiveSprite(ZOMBIE3_R);
+				setActiveSprite(zombieRightSprites.get(2));
 			}
 			case 12 ->{
-				setActiveSprite(ZOMBIE4_R);
+				setActiveSprite(zombieRightSprites.get(3));
 				animationIndex = 0;
 			}
 		}

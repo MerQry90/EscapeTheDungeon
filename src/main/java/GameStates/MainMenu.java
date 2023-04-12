@@ -28,15 +28,21 @@ public class MainMenu extends GameState {
 			if (keyH.iPressed && !showCommands || showIntroduction) {
 				inputCountdown = 6;
 				showIntroduction = true;
-				background.loadBlackBackground();
-				if(keyH.escapePressed){
+				background.loadIntroductionPage("");
+				if(keyH.shootLeft && showIntroduction){
+					System.out.println("dentro");
+					inputCountdown = 6;
+					background.loadIntroductionPage("next");
+				}
+				else if(keyH.shootRight && showIntroduction){
+					inputCountdown = 6;
+					background.loadIntroductionPage("previous");
+				}
+				else if(keyH.escapePressed && showIntroduction){
 					inputCountdown = 6;
 					showIntroduction = false;
 					background.loadMainMenuBackground();
 				}
-				/*
-				todo: implementare un'introduzione (testo che scorre o pagine)
-				 */
 			}
 			else if (keyH.cPressed || showCommands) {
 				inputCountdown = 6;
