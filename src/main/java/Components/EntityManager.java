@@ -168,9 +168,10 @@ public class EntityManager {
 	public void checkItemsCollisions(){
 		for(int i = 0; i < heartItems.size(); i += 1){
 			if (heartItems.get(i).checkIfActive() && heartItems.get(i).checkCollision(player) && (player.getHealth() < player.getMaxHealth())) {
+				entityGenerator.getGroupByID(getRoomID()).getItems().remove(i);
+				heartItems = entityGenerator.getGroupByID(getRoomID()).getItems();
 				player.setHealth(player.getHealth() + 1);
 				mainGameReference.audioManager.playSoundOnce(AudioManager.PLAYER_HEALED);
-				heartItems.remove(i);
 				i -= 1;
 			}
 		}
@@ -318,7 +319,9 @@ public class EntityManager {
 			roomHasBeenCompleted_actionPerformedOnce = true;
 		}
 		obstacles = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getObstacles());
+		System.out.println(heartItems);
 		heartItems = new ArrayList<>(entityGenerator.getGroupByID(getRoomID()).getItems());
+		System.out.println(heartItems);
 		
 		if(entityGenerator.checkIfBossRoom(ID)){
 			mainGameReference.audioManager.stopSoundLoop();
