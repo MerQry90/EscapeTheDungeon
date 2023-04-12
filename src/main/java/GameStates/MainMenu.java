@@ -27,14 +27,15 @@ public class MainMenu extends GameState {
 		if(inputCountdown <= 0) {
 			if (keyH.iPressed && !showCommands || showIntroduction) {
 				inputCountdown = 6;
+				if(!showIntroduction){
+					background.loadIntroductionPage("");
+				}
 				showIntroduction = true;
-				background.loadIntroductionPage("");
-				if(keyH.shootLeft && showIntroduction){
-					System.out.println("dentro");
+				if(keyH.shootRight && showIntroduction){
 					inputCountdown = 6;
 					background.loadIntroductionPage("next");
 				}
-				else if(keyH.shootRight && showIntroduction){
+				else if(keyH.shootLeft && showIntroduction){
 					inputCountdown = 6;
 					background.loadIntroductionPage("previous");
 				}

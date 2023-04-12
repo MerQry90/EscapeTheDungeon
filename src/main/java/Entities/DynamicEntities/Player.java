@@ -251,7 +251,6 @@ public class Player extends DynamicEntity {
 		}
 		else {
 			if(checkBackwardShooting()){
-				System.out.println("backward shooting");
 				animationIndex -= 1;
 				if(animationIndex <= -4){
 					animationIndex = 28;

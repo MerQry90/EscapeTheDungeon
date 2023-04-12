@@ -44,6 +44,7 @@ public class Background {
 		GameWinBackground = new ImageIcon("src/resources/sprites/backgrounds/victory_screen.png");
 		introductionPages.add(GameOverBackground);
 		introductionPages.add(GameWinBackground);
+		introductionPages.add(BLACK_BACKGROUND);
 		index = 0;
 	}
 
@@ -74,7 +75,6 @@ public class Background {
 		background = GameWinBackground.getImage();
 	}
 	public void loadIntroductionPage(String direction){
-		background = introductionPages.get(index).getImage();
 		if(Objects.equals(direction, "next") && index < 5){
 			index += 1;
 		}
@@ -84,6 +84,7 @@ public class Background {
 		background = introductionPages.get(index).getImage();
 	}
 	public void paint(Graphics g){
+		System.out.println(index);
 		g.drawImage(background, 0, 0, width, height, null);
 	}
 }
