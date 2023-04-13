@@ -366,6 +366,11 @@ public class EntityManager {
 	//------------------------------------------------------------------------------------------------------------------
 	
 	public void renderEntities(Graphics g){
+		for (Hazard hazard: hazards){
+			if(hazard.checkIfActive()) {
+				hazard.paint(g);
+			}
+		}
 		for (Enemy enemy: enemies) {
 			enemy.paint(g);
 		}
@@ -378,11 +383,6 @@ public class EntityManager {
 		for (Obstacle obstacle: obstacles){
 			if(obstacle.checkIfActive()) {
 				obstacle.paint(g);
-			}
-		}
-		for (Hazard hazard: hazards){
-			if(hazard.checkIfActive()) {
-				hazard.paint(g);
 			}
 		}
 		for (Projectile arrow: friendlyArrows){
