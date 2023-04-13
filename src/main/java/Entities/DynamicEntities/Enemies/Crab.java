@@ -12,7 +12,6 @@ import static java.lang.Math.abs;
 public class Crab extends Enemy{
 	
 	private int wait, countdown, movingCountdown;
-	private Image FIFTYFIFTY;
 	private Image DEAD_FIFTYFIFTY;
 	
 	private int animationCountDown;
