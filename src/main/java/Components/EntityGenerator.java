@@ -83,8 +83,9 @@ public class EntityGenerator {
 				//STANZA COMUNE CON I NEMICI
 				switch (random.nextInt(1)){
 					case 0 -> {
-						group.getEnemies().add(new Mage(Tile.getTile(8), Tile.getTile(3), entityManager));
-						/*group.getEnemies().add(new Tank(Tile.getTile(8), Tile.getTile(3), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(1), Tile.getTile(1), entityManager));
+						/*group.getEnemies().add(new Mage(Tile.getTile(8), Tile.getTile(3), entityManager));
+						group.getEnemies().add(new Tank(Tile.getTile(8), Tile.getTile(3), entityManager));
 						group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(2)));
 						group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(5)));
 						group.getObstacles().add(new Rock(Tile.getTile(7), Tile.getTile(3)));
@@ -115,14 +116,14 @@ public class EntityGenerator {
 					case 4 -> {
 						group.getEnemies().add(new Bat(Tile.getTile(7), Tile.getTile(4), entityManager));
 						group.getEnemies().add(new Bat(Tile.getTile(9), Tile.getTile(4), entityManager));
-						group.getEnemies().add(new FiftyFifty(Tile.getTile(1), Tile.getTile(1), entityManager));
-						group.getEnemies().add(new FiftyFifty(Tile.getTile(15), Tile.getTile(7), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(1), Tile.getTile(1), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(15), Tile.getTile(7), entityManager));
 					}
 					case 5 -> {
-						group.getEnemies().add(new FiftyFifty(Tile.getTile(1), Tile.getTile(1), entityManager));
-						group.getEnemies().add(new FiftyFifty(Tile.getTile(1), Tile.getTile(7), entityManager));
-						group.getEnemies().add(new FiftyFifty(Tile.getTile(15), Tile.getTile(1), entityManager));
-						group.getEnemies().add(new FiftyFifty(Tile.getTile(15), Tile.getTile(7), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(1), Tile.getTile(1), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(1), Tile.getTile(7), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(15), Tile.getTile(1), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(15), Tile.getTile(7), entityManager));
 					}
 					case 6 -> {
 						group.getEnemies().add(new Mage(Tile.getTile(7), Tile.getTile(2), entityManager));
