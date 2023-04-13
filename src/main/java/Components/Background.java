@@ -2,7 +2,6 @@ package Components;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class Background {
@@ -12,9 +11,10 @@ public class Background {
 	protected final static int LEFT_BOUND = 64;
 	protected final static int RIGHT_BOUND = 64 * 16;
 
-	private boolean showIntroductionText;
+	private boolean showIntroductionText, showCommandText, showGameOverText, showGameWinText;
 	private int introductionIndex;
 	private String[] introductionText;
+	private String[] commandsText;
 	
 	/*
 	width e height sono le misure del background e conseguentemente della finestra di gioco
@@ -24,8 +24,7 @@ public class Background {
 	private final int height = 9 * 64;
 
 	private Image background;
-	private ImageIcon MainMenuBackground, BLACK_BACKGROUND, COMMAND_BACKGROUND, MainGameBackground, GameOverBackground, GameWinBackground;
-	private ArrayList<ImageIcon> introductionPages;
+	private ImageIcon MainMenuBackground, BLACK_BACKGROUND, MainGameBackground;
 
 	private Tile tile;
 
@@ -36,22 +35,19 @@ public class Background {
 	 */
 	public Background(){
 		tile = new Tile();
-		introductionPages = new ArrayList<>();
 
 		MainMenuBackground = new ImageIcon("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
 		BLACK_BACKGROUND = new ImageIcon("src/resources/sprites/backgrounds/black_background.png");
-		COMMAND_BACKGROUND = new ImageIcon("src/resources/sprites/backgrounds/mainmenucommands.png");
 
 		MainGameBackground = new ImageIcon("src/resources/sprites/Backgrounds - Doors/murofin.png");
-		GameOverBackground = new ImageIcon("src/resources/sprites/backgrounds/gameOver_placeHolder.png");
-		GameWinBackground = new ImageIcon("src/resources/sprites/backgrounds/victory_screen.png");
-		introductionPages.add(GameOverBackground);
-		introductionPages.add(GameWinBackground);
-		introductionPages.add(BLACK_BACKGROUND);
 
 		showIntroductionText = false;
-		introductionIndex = 0;
+		showCommandText = false;
+		showGameOverText = false;
+		showGameWinText = false;
 
+		/*TESTO INTRODUZIONE*/
+		introductionIndex = 0;
 		introductionText = new String[13];
 		introductionText[0] = "You were walking in a forest, hunting all alone.";
 		introductionText[1] = "These are though days, and you can rely only on your crossbow";
@@ -66,6 +62,14 @@ public class Background {
 		introductionText[10] = "But right after, an earthquake creates an huge crack on";
 		introductionText[11] = "the ground, causing you to fall into the into the depths";
 		introductionText[12] = "of the earth.";
+
+		/*TESTO SCHERMATA COMANDI*/
+		commandsText = new String[4];
+		commandsText[0] = "- use W, A, S, D, to move the character";
+		commandsText[1] = "- press the directional arrows to shoot";
+		commandsText[2] = "- press ESC to pause the game";
+		commandsText[3] = "- press M to toggle the map(on/off)";
+
 	}
 
 	public int getWidth() {
@@ -77,24 +81,30 @@ public class Background {
 	}
 
 	public void loadBlackBackground(){
-		background = BLACK_BACKGROUND.getImage();
 		showIntroductionText = true;
+		background = BLACK_BACKGROUND.getImage();
 	}
 	public void loadCommandBackground(){
-		background = COMMAND_BACKGROUND.getImage();
+		showCommandText = true;
+		background = BLACK_BACKGROUND.getImage();
 	}
 	public void loadMainMenuBackground(){
+		showGameWinText = false;
+		showGameOverText = false;
 		showIntroductionText = false;
+		showCommandText = false;
 		background = MainMenuBackground.getImage();
 	}
 	public void loadMainGameBackground(){
 		background = MainGameBackground.getImage();
 	}
 	public void loadGameOverBackground(){
-		background = GameOverBackground.getImage();
+		showGameOverText = true;
+		background = BLACK_BACKGROUND.getImage();
 	}
 	public void loadGameWinBackground(){
-		background = GameWinBackground.getImage();
+		showGameWinText = true;
+		background = BLACK_BACKGROUND.getImage();
 	}
 	public void loadIntroductionText(String direction){
 		if(Objects.equals(direction, "next") && introductionIndex < 12){
@@ -113,9 +123,33 @@ public class Background {
 				g.drawString(introductionText[i], 14,40 + (i * 40));
 			}
 			g.setColor(Color.RED);
-			g.setFont(new Font("Verdana", Font.BOLD, 10));
+			g.setFont(new Font("Verdana", Font.BOLD, 15));
 			g.drawString("Press ESC to return to the main menu, and left/right arrow to scroll text",
 					Tile.getTile(1), Tile.getTile(9) - 10);
+		}
+		if(showCommandText){
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Verdana", Font.BOLD, 45));
+			for(int i = 0; i < commandsText.length; i++){
+				g.drawString(commandsText[i], 14,64 + (i * 128));
+			}
+			g.setColor(Color.RED);
+			g.setFont(new Font("Verdana", Font.BOLD, 15));
+			g.drawString("Press ESC to return to the main menu", Tile.getTile(1), Tile.getTile(9) - 10);
+		}
+		if(showGameOverText){
+			g.setColor(Color.RED);
+			g.setFont(new Font("Verdana", Font.BOLD, 70));
+			g.drawString("YOU DIED", Tile.getTile(5) + 16, Tile.getTile(4) + 16);
+		}
+
+		if(showGameWinText){
+			g.setColor(Color.GREEN);
+			g.setFont(new Font("Verdana", Font.BOLD, 70));
+			g.drawString("YOU SURVIVED!", Tile.getTile(3) + 16, Tile.getTile(4) + 16);
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Verdana", Font.BOLD, 20));
+			g.drawString("good luck getting out of there!", Tile.getTile(5) + 32, Tile.getTile(5) + 16);
 		}
 	}
 }
