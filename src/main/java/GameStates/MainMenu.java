@@ -27,17 +27,15 @@ public class MainMenu extends GameState {
 		if(inputCountdown <= 0) {
 			if (keyH.iPressed && !showCommands || showIntroduction) {
 				inputCountdown = 6;
-				if(!showIntroduction){
-					background.loadIntroductionPage("");
-				}
+				background.loadBlackBackground();
 				showIntroduction = true;
 				if(keyH.shootRight && showIntroduction){
 					inputCountdown = 6;
-					background.loadIntroductionPage("next");
+					background.loadIntroductionText("next");
 				}
 				else if(keyH.shootLeft && showIntroduction){
 					inputCountdown = 6;
-					background.loadIntroductionPage("previous");
+					background.loadIntroductionText("previous");
 				}
 				else if(keyH.escapePressed && showIntroduction){
 					inputCountdown = 6;

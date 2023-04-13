@@ -11,7 +11,10 @@ public class Background {
 	protected final static int LOWER_BOUND = 64 * 8;
 	protected final static int LEFT_BOUND = 64;
 	protected final static int RIGHT_BOUND = 64 * 16;
-	private int index;
+
+	private boolean showIntroductionText;
+	private int introductionIndex;
+	private String[] introductionText;
 	
 	/*
 	width e height sono le misure del background e conseguentemente della finestra di gioco
@@ -45,7 +48,24 @@ public class Background {
 		introductionPages.add(GameOverBackground);
 		introductionPages.add(GameWinBackground);
 		introductionPages.add(BLACK_BACKGROUND);
-		index = 0;
+
+		showIntroductionText = false;
+		introductionIndex = 0;
+
+		introductionText = new String[13];
+		introductionText[0] = "You were walking in a forest, hunting all alone.";
+		introductionText[1] = "These are though days, and you can rely only on your crossbow";
+		introductionText[2] = "Everything is quiet and peaceful today, even the sun blesses";
+		introductionText[3] = "you with his warm presence, the trees around you seems";
+		introductionText[4] = "friendly, and you see a deer quietly walking around.";
+		introductionText[5] = "The perfect prey for the perfect day. In the last";
+		introductionText[6] = "days you didn't eat anything, so you silently start to";
+		introductionText[7] = "follow it until the right time to shoot.";
+		introductionText[8] = "Suddenly, a weird sound broke into the peaceful place,";
+		introductionText[9] = "making the deer run away, and leaving you starving.";
+		introductionText[10] = "But right after, an earthquake creates an huge crack on";
+		introductionText[11] = "the ground, causing you to fall into the into the depths";
+		introductionText[12] = "of the earth.";
 	}
 
 	public int getWidth() {
@@ -58,11 +78,13 @@ public class Background {
 
 	public void loadBlackBackground(){
 		background = BLACK_BACKGROUND.getImage();
+		showIntroductionText = true;
 	}
 	public void loadCommandBackground(){
 		background = COMMAND_BACKGROUND.getImage();
 	}
 	public void loadMainMenuBackground(){
+		showIntroductionText = false;
 		background = MainMenuBackground.getImage();
 	}
 	public void loadMainGameBackground(){
@@ -74,17 +96,26 @@ public class Background {
 	public void loadGameWinBackground(){
 		background = GameWinBackground.getImage();
 	}
-	public void loadIntroductionPage(String direction){
-		if(Objects.equals(direction, "next") && index < 5){
-			index += 1;
+	public void loadIntroductionText(String direction){
+		if(Objects.equals(direction, "next") && introductionIndex < 12){
+			introductionIndex += 1;
 		}
-		else if (index > 0) {
-			index -= 1;
+		else if (Objects.equals(direction, "previous") && introductionIndex > 0) {
+			introductionIndex -= 1;
 		}
-		background = introductionPages.get(index).getImage();
 	}
 	public void paint(Graphics g){
-		System.out.println(index);
 		g.drawImage(background, 0, 0, width, height, null);
+		if(showIntroductionText){
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Verdana", Font.BOLD, 30));
+			for(int i = 0; i <= introductionIndex; i++){
+				g.drawString(introductionText[i], 14,40 + (i * 40));
+			}
+			g.setColor(Color.RED);
+			g.setFont(new Font("Verdana", Font.BOLD, 10));
+			g.drawString("Press ESC to return to the main menu, and left/right arrow to scroll text",
+					Tile.getTile(1), Tile.getTile(9) - 10);
+		}
 	}
 }
