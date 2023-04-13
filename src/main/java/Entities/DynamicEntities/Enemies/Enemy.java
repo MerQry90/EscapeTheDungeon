@@ -3,6 +3,7 @@ package Entities.DynamicEntities.Enemies;
 import Entities.StaticEntities.BloodStain;
 import Entities.DynamicEntities.DynamicEntity;
 
+import java.awt.*;
 import java.util.Random;
 
 import static java.lang.Math.abs;
@@ -12,6 +13,8 @@ public abstract class Enemy extends DynamicEntity {
 	protected int activationWaiting = 10;
 	private String currentBehaviour = "default";
 	public boolean canGenerateBloodStain = false;
+	protected boolean performDeathActions = true;
+	//protected Image bloodPot;
 	
 	public boolean checkActivation(){
 		if(activationWaiting > 0){
@@ -35,7 +38,7 @@ public abstract class Enemy extends DynamicEntity {
 	}
 	public BloodStain generateBloodStain(){
 		canGenerateBloodStain = false;
-		return new BloodStain(this.getCenterX() - 48, this.getCenterY() - 48);
+		return new BloodStain(this.getCenterX() - 48, this.getCenterY());
 	}
 	//metodi riguardanti lo stato del nemico----------------------------------------------------------------------------
 	public String getCurrentBehaviour(){

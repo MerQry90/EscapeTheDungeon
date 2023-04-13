@@ -12,12 +12,11 @@ public class Zombie extends Enemy{
 
 	private ArrayList<Image> zombieLeftSprites;
 	private ArrayList<Image> zombieRightSprites;
+	private ArrayList<Image> deathAnimationSprites;
 	private Image DEAD_ZOMBIE;
 
 	private int animationIndex;
 	private int soundCountDown;
-	
-	private boolean performDeathAction;
 	
 	public Zombie(int x, int y, EntityManager entityManager) {
 		this.entityManager = entityManager;
@@ -30,6 +29,7 @@ public class Zombie extends Enemy{
 	public void init(){
 		zombieLeftSprites = new ArrayList<>();
 		zombieRightSprites = new ArrayList<>();
+		deathAnimationSprites = new ArrayList<>();
 
 		//CARICAMENTO SPRITE
 
@@ -43,11 +43,14 @@ public class Zombie extends Enemy{
 		zombieRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie3_R.png"));
 		zombieRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie4_R.png"));
 
-		DEAD_ZOMBIE = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/DeathAnimation/Zombiemorte1.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/DeathAnimation/Zombiemorte2.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/DeathAnimation/Zombiemorte3.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/DeathAnimation/Zombiemorte4.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/DeathAnimation/Zombiemorte5.png"));
 
 		setActiveSprite(zombieLeftSprites.get(0));
 		animationIndex = 0;
-		performDeathAction = true;
 		soundCountDown = 0;
 		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
@@ -83,12 +86,13 @@ public class Zombie extends Enemy{
 					trySound();
 				}
 				case "dead" -> {
-					if(performDeathAction) {
-						performDeathAction = false;
+					if(performDeathActions) {
+						performDeathActions = false;
 						disableCollisionBox();
-						setActiveSprite(DEAD_ZOMBIE);
+						animationIndex = 0;
 						entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.ZOMBIE_DEATH_INDEX);
 					}
+					deathAnimation();
 				}
 				default -> {
 					changeBehaviourTo("follow-player");
@@ -137,6 +141,29 @@ public class Zombie extends Enemy{
 			nextAnimationLeft();
 		}
 	}
+
+	public void deathAnimation(){
+		animationIndex += 1;
+
+		switch (animationIndex){
+			case 0 ->{
+				setActiveSprite(deathAnimationSprites.get(0));
+			}
+			case 4 ->{
+				setActiveSprite(deathAnimationSprites.get(1));
+			}
+			case 8 ->{
+				setActiveSprite(deathAnimationSprites.get(2));
+			}
+			case 12 ->{
+				setActiveSprite(deathAnimationSprites.get(3));
+			}
+			case 15 ->{
+				setActiveSprite(deathAnimationSprites.get(4));
+			}
+		}
+	}
+
 	public void nextAnimationLeft(){
 		animationIndex += 1;
 
