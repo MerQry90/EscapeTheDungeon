@@ -12,13 +12,12 @@ import static java.lang.Math.toRadians;
 
 public class Tank extends Enemy{
    private ArrayList<Image> tankLeftSprites, tankRightSprites;
+   private ArrayList<Image> deathAnimationSprites;
    private Image DEAD_TANK;
 
    private int  animationIndex;
     
    private int soundCountDown;
-    
-   private boolean performDeathAction;
 
     public Tank(int x, int y, EntityManager entityManager) {
         this.entityManager = entityManager;
@@ -30,6 +29,7 @@ public class Tank extends Enemy{
     public void init() {
         tankLeftSprites = new ArrayList<>();
         tankRightSprites = new ArrayList<>();
+        deathAnimationSprites = new ArrayList<>();
 
         //CARICAMENTO SPRITE
         tankLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank1_left.png"));
@@ -42,13 +42,15 @@ public class Tank extends Enemy{
         tankRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank3_right.png"));
         tankRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank4_right.png"));
 
-        DEAD_TANK = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
+        deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/DeathAnimation/tankMORTE1.png"));
+        deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/DeathAnimation/tankMORTE2.png"));
+        deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/DeathAnimation/tankMORTE3.png"));
+        deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/DeathAnimation/tankMORTE4.png"));
+        deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/DeathAnimation/tankMORTE5.png"));
 
         setActiveSprite(tankLeftSprites.get(0));
         animationIndex = 0;
         soundCountDown = 0;
-
-        performDeathAction = true;
         
         //l'estremo è escluso, velocità a cui viene sommata maximumSpeed
         //verrà sommato a minimumSpeed
@@ -119,12 +121,13 @@ public class Tank extends Enemy{
                     trySound();
                 }
                 case "dead" ->{
-                    if(performDeathAction) {
-                        performDeathAction = false;
+                    if(performDeathActions) {
+                        performDeathActions = false;
                         disableCollisionBox();
-                        setActiveSprite(DEAD_TANK);
+                        animationIndex = 0;
                         entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.TANK_DEATH_INDEX);
                     }
+                    deathAnimation();
                 }
                 default -> {
                     changeBehaviourTo("follow-player");
@@ -141,6 +144,29 @@ public class Tank extends Enemy{
             nextAnimationLeft();
         }
     }
+
+    public void deathAnimation(){
+        animationIndex += 1;
+
+        switch (animationIndex){
+            case 0 ->{
+                setActiveSprite(deathAnimationSprites.get(0));
+            }
+            case 5 ->{
+                setActiveSprite(deathAnimationSprites.get(1));
+            }
+            case 10 ->{
+                setActiveSprite(deathAnimationSprites.get(2));
+            }
+            case 15 ->{
+                setActiveSprite(deathAnimationSprites.get(3));
+            }
+            case 18 ->{
+                setActiveSprite(deathAnimationSprites.get(4));
+            }
+        }
+    }
+
     public void nextAnimationLeft(){
         animationIndex += 1;
 

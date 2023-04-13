@@ -10,13 +10,13 @@ public class BloodStain extends Hazard{
 
     @Override
     public void init() {
-        BLOODSTAIN = setSpriteFromPath("src/resources/sprites/mapTiles/BossRoom.png");
+        BLOODSTAIN = setSpriteFromPath("src/resources/sprites/Items/BloodPots/sanguegrande.png");
         setActiveSprite(BLOODSTAIN);
 
         setWidth(96);
         setHeight(96);
         setCBwidthScalar(1);
-        setCBheightScalar(1);
+        setCBheightScalar(0.3);
         activateCollisionBox();
     }
 }

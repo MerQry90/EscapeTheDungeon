@@ -13,9 +13,8 @@ public class Mage extends Enemy{
 	
 	private Image MAGE_IDLE, MAGE_SHOOTING, DEAD_MAGE;
 	private ArrayList<Image> mageTeleportSprites;
-	
-	private boolean performDeathActions;
-	
+	private ArrayList<Image> deathAnimationSprites;
+
 	private int idleCountdown, shotNumber, animationIndex;
 	public Mage(int x, int y, EntityManager entityManager){
 		setX(x);
@@ -26,6 +25,7 @@ public class Mage extends Enemy{
 	@Override
 	public void init() {
 		mageTeleportSprites = new ArrayList<>();
+		deathAnimationSprites = new ArrayList<>();
 
 		MAGE_IDLE = setSpriteFromPath("src/resources/sprites/Enemies/Mage/magikino1.png");
 		MAGE_SHOOTING  = setSpriteFromPath("src/resources/sprites/Enemies/Mage/magikino2.png");
@@ -35,9 +35,18 @@ public class Mage extends Enemy{
 		mageTeleportSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline3.png"));
 		mageTeleportSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline4.png"));
 		mageTeleportSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline5.png"));
-		
-		DEAD_MAGE = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
-		
+
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte1.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte2.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte3.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte4.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte5.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte6.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte7.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte8.png"));
+
+		DEAD_MAGE = setSpriteFromPath("");
+
 		setActiveSprite(MAGE_IDLE);
 		setWidth(64);
 		setHeight(64);
@@ -53,7 +62,6 @@ public class Mage extends Enemy{
 		idleCountdown = 30;
 		shotNumber = 0;
 		animationIndex = 0;
-		performDeathActions = true;
 	}
 	
 	@Override
@@ -101,12 +109,46 @@ public class Mage extends Enemy{
 						performDeathActions = false;
 						entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.MAGE_DEATH_SOUND_INDEX);
 						disableCollisionBox();
-						setActiveSprite(DEAD_MAGE);
+						animationIndex = 0;
 					}
+					deathAnimation();
 				}
 				default -> {
 					changeBehaviourTo("idle");
 				}
+			}
+		}
+	}
+
+	public void deathAnimation(){
+		animationIndex += 1;
+		switch (animationIndex){
+			case 0 ->{
+				setActiveSprite(deathAnimationSprites.get(0));
+			}
+			case 2 ->{
+				setActiveSprite(deathAnimationSprites.get(1));
+			}
+			case 4 ->{
+				setActiveSprite(deathAnimationSprites.get(2));
+			}
+			case 6 ->{
+				setActiveSprite(deathAnimationSprites.get(3));
+			}
+			case 8 ->{
+				setActiveSprite(deathAnimationSprites.get(4));
+			}
+			case 10 ->{
+				setActiveSprite(deathAnimationSprites.get(5));
+			}
+			case 12 ->{
+				setActiveSprite(deathAnimationSprites.get(6));
+			}
+			case 14 ->{
+				setActiveSprite(deathAnimationSprites.get(7));
+			}
+			case 16->{
+				setActiveSprite(DEAD_MAGE);
 			}
 		}
 	}

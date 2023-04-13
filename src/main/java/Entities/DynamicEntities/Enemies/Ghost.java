@@ -16,6 +16,7 @@ public class Ghost extends Enemy{
 	
 	private int countdown;
 	private int animationIndex;
+	private ArrayList<Image> deathAnimationSprites;
 	
 	public Ghost(int x, int y, EntityManager entityManager){
 		this.entityManager = entityManager;
@@ -27,6 +28,7 @@ public class Ghost extends Enemy{
 	@Override
 	public void init(){
 		ghostSprites = new ArrayList<>();
+		deathAnimationSprites = new ArrayList<>();
 
 		//CARICAMENTO SPRITE
 		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino1.png"));
@@ -37,6 +39,10 @@ public class Ghost extends Enemy{
 		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino6.png"));
 		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino7.png"));
 
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/DeathAnimation/fantasminomorte5.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/DeathAnimation/fantasminomorte6.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/DeathAnimation/fantasminomorte7.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/DeathAnimation/fantasminomorte8.png"));
 
 		DEAD_GHOST = setSpriteFromPath("src/resources/sprites/png/invisible_cube.png");
 		animationIndex = 0;
@@ -57,7 +63,23 @@ public class Ghost extends Enemy{
 		countdown = 54 + 9;
 		setActiveSprite(ghostSprites.get(0));
 	}
-	
+	public void deathAnimation(){
+		animationIndex += 1;
+		switch (animationIndex){
+			case 0 -> {
+				setActiveSprite(deathAnimationSprites.get(0));
+			}
+			case 5 -> {
+				setActiveSprite(deathAnimationSprites.get(1));
+			}
+			case 10 -> {
+				setActiveSprite(deathAnimationSprites.get(2));
+			}
+			case 15 -> {
+				setActiveSprite(deathAnimationSprites.get(3));
+			}
+		}
+	}
 	public void nextAnimation(){
 		animationIndex += 1;
 		switch (animationIndex){
@@ -123,8 +145,12 @@ public class Ghost extends Enemy{
 					moveEntity();
 				}
 				case "dead" -> {
+					if(performDeathActions){
+						performDeathActions = false;
+						animationIndex = 0;
+					}
 					disableCollisionBox();
-					setActiveSprite(DEAD_GHOST);
+					deathAnimation();
 				}
 				default -> {
 					changeBehaviourTo("visible");

@@ -15,10 +15,9 @@ public class Shooter extends Enemy{
 
 	private ArrayList<Image> shooterLeftSprites;
 	private ArrayList<Image> shooterRightSprites;
+	private ArrayList<Image> deathAnimationSprites;
 	
 	private int idleCountdown, animationIndex;
-	
-	private boolean performDeathActions;
 	
 	public Shooter(int x, int y, EntityManager entityManager){
 		this.entityManager = entityManager;
@@ -31,6 +30,7 @@ public class Shooter extends Enemy{
 	public void init() {
 		shooterLeftSprites = new ArrayList<>();
 		shooterRightSprites = new ArrayList<>();
+		deathAnimationSprites = new ArrayList<>();
 
 		//CARICAMENTO SPRITE
 
@@ -48,11 +48,11 @@ public class Shooter extends Enemy{
 		shooterRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter5_R.png"));
 		shooterRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter6_R.png"));
 
-		DEAD_SHOOTER = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/DeathAnimation/rockshootermorte1.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/DeathAnimation/rockshootermorte2.png"));
 
 		setActiveSprite(shooterLeftSprites.get(0));
 		animationIndex = 0;
-		performDeathActions = true;
 		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		//verrà sommato a minimumSpeed
@@ -98,9 +98,10 @@ public class Shooter extends Enemy{
 					if(performDeathActions) {
 						performDeathActions = false;
 						disableCollisionBox();
-						setActiveSprite(DEAD_SHOOTER);
 						entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.ROCK_BROKEN_INDEX);
+						animationIndex = 0;
 					}
+					deathAnimation();
 				}
 				default -> {
 					changeBehaviourTo("idle");
@@ -121,6 +122,19 @@ public class Shooter extends Enemy{
 			nextAnimationLeft();
 		}
 	}
+	public void deathAnimation(){
+		animationIndex += 1;
+
+		switch (animationIndex){
+			case 0 ->{
+				setActiveSprite(deathAnimationSprites.get(0));
+			}
+			case 5 ->{
+				setActiveSprite(deathAnimationSprites.get(1));
+			}
+		}
+	}
+
 	public void nextAnimationLeft(){
 		animationIndex += 1;
 

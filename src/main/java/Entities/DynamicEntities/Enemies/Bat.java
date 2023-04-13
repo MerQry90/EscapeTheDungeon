@@ -16,10 +16,9 @@ public class Bat extends Enemy{
 
 	private ArrayList<Image> batSprites;
 	private ArrayList<Image> batBallSprites;
+	private ArrayList<Image> deathAnimationSprites;
 	
 	private int wait, countdown, movingCountdown, animationIndex;
-	
-	private boolean performDeathActions;
 	
 	public Bat(int x, int y, EntityManager entityManager){
 		this.entityManager = entityManager;
@@ -32,6 +31,7 @@ public class Bat extends Enemy{
 	public void init() {
 		batSprites = new ArrayList<>();
 		batBallSprites = new ArrayList<>();
+		deathAnimationSprites = new ArrayList<>();
 
 		//CARICAMENTO SPRITE
 
@@ -53,9 +53,13 @@ public class Bat extends Enemy{
 		batBallSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello8.png"));
 		batBallSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello9.png"));
 
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/DeathAnimation/pistrellomorte1.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/DeathAnimation/pistrellomorte2.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/DeathAnimation/pistrellomorte3.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/DeathAnimation/pistrellomorte4.png"));
+		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/DeathAnimation/pistrellomorte5.png"));
+
 		DEAD_BAT = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
-		
-		performDeathActions = true;
 		
 		setWidth(64);
 		setHeight(64);
@@ -132,11 +136,33 @@ public class Bat extends Enemy{
 					if(performDeathActions) {
 						performDeathActions = false;
 						disableCollisionBox();
-						setActiveSprite(DEAD_BAT);
+						animationIndex = 0;
 						entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.BAT_SOUND_1_INDEX);
 					}
+					deathAnimation();
 				}
 				default -> changeBehaviourTo("stop-1");
+			}
+		}
+	}
+
+	public void deathAnimation(){
+		animationIndex += 1;
+		switch (animationIndex){
+			case 0 ->{
+				setActiveSprite(deathAnimationSprites.get(0));
+			}
+			case 3 ->{
+				setActiveSprite(deathAnimationSprites.get(1));
+			}
+			case 6 ->{
+				setActiveSprite(deathAnimationSprites.get(2));
+			}
+			case 9 ->{
+				setActiveSprite(deathAnimationSprites.get(3));
+			}
+			case 12 ->{
+				setActiveSprite(deathAnimationSprites.get(4));
 			}
 		}
 	}
