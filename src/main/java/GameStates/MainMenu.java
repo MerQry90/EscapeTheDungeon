@@ -1,21 +1,25 @@
 package GameStates;
 
 import Application.KeyHandler;
+import Components.AudioManager;
 
 public class MainMenu extends GameState {
 	public boolean showIntroduction, showCommands;
 	public int inputCountdown;
+	public AudioManager audioManager;
 
 	/*
 	il costruttore carica l'immagine, dopo aver settato 'active' lo stato
 	 */
-	public MainMenu(KeyHandler keyH) {
+	public MainMenu(KeyHandler keyH, AudioManager audioManager) {
 		this.keyH = keyH;
+		this.audioManager = audioManager;
 		showCommands = false;
 		showIntroduction = false;
 		inputCountdown = 6;
 		setActive();
 		background.loadMainMenuBackground();
+		audioManager.playSoundLoop(AudioManager.MAIN_MENU_MUSIC_INDEX);
 	}
 
 	@Override
@@ -23,6 +27,7 @@ public class MainMenu extends GameState {
 		inputCountdown --;
 		if(keyH.enterPressed && !showIntroduction && !showCommands){
 			setInactive();
+			audioManager.stopSoundLoop();
 		}
 		if(inputCountdown <= 0) {
 			if (keyH.iPressed && !showCommands || showIntroduction) {

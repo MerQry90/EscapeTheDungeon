@@ -186,10 +186,12 @@ public class MainGame extends GameState{
 			if(entityManager.isBossDead()){
 				win = true;
 				setInactive();
+				audioManager.stopSoundLoop();
 			}
 			if(entityManager.isGameOver()){
 				win = false;
 				setInactive();
+				audioManager.stopSoundLoop();
 			}
 			entityManager.getPlayer().translateInputToAction();
 			entityManager.getPlayer().updateCoolDown();

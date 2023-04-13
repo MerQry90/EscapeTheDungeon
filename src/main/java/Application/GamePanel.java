@@ -35,11 +35,11 @@ public class GamePanel extends JPanel implements ActionListener {
 		keyH = new KeyHandler();
 		addKeyListener(keyH);
 		
-		//lo stato iniziale dell'applicazione è quello di menu principale
-		nextState();
-		
 		//audiomanager
 		audioManager = new AudioManager();
+		
+		//lo stato iniziale dell'applicazione è quello di menu principale
+		nextState();
 		
 		//avvio del programma
 		timer = new Timer(Delay(), this);
@@ -84,17 +84,15 @@ public class GamePanel extends JPanel implements ActionListener {
 			gameState = new MainGame(keyH, audioManager);
 		}
 		else if (gameState instanceof MainGame) {
-			gameState.audioManager.stopSoundLoop();
 			if(((MainGame) gameState).win) {
 				gameState = new GameWin(keyH);
 			}
 			else {
 				gameState = new GameOver(keyH, audioManager);
-				gameState.audioManager.playSoundOnce(0);
 			}
 		}
 		else {
-			gameState = new MainMenu(keyH);
+			gameState = new MainMenu(keyH, audioManager);
 		}
 	}
 }
