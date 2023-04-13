@@ -28,7 +28,8 @@ public class AudioManager {
 	public static final int ZOMBIE_SOUND_2_INDEX = 20;
 	public static final int ZOMBIE_DEATH_INDEX = 21;
 	public static final	int MAIN_MENU_MUSIC_INDEX = 22;
-	
+	public static final int GAME_WIN_MUSIC_INDEX = 23;
+	public static final int GAME_OVER_MUSIC_INDEX = 24;
 	
 	private File[] audioFiles;
 	private Clip[] clips;
@@ -43,6 +44,8 @@ public class AudioManager {
 		//music
 		audioFiles[NORMAL_MUSIC_INDEX] = new File("src/resources/audio/dungeonOstVer2.wav");
 		audioFiles[MAIN_MENU_MUSIC_INDEX] = new File("src/resources/audio/mainMenuOst.wav");
+		audioFiles[GAME_WIN_MUSIC_INDEX] = new File("src/resources/audio/winMusic.wav");
+		audioFiles[GAME_OVER_MUSIC_INDEX] = new File("src/resources/audio/gameOver.wav");
 		
 		//player gets hit
 		audioFiles[PLAYER_HURTED_INDEX] = new File("src/resources/audio/playerGotHit.wav");

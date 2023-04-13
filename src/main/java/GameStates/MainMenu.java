@@ -34,15 +34,15 @@ public class MainMenu extends GameState {
 				inputCountdown = 6;
 				background.loadBlackBackground();
 				showIntroduction = true;
-				if(keyH.shootRight && showIntroduction){
+				if(keyH.shootRight){
 					inputCountdown = 6;
 					background.loadIntroductionText("next");
 				}
-				else if(keyH.shootLeft && showIntroduction){
+				else if(keyH.shootLeft){
 					inputCountdown = 6;
 					background.loadIntroductionText("previous");
 				}
-				else if(keyH.escapePressed && showIntroduction){
+				else if(keyH.escapePressed){
 					inputCountdown = 6;
 					showIntroduction = false;
 					background.loadMainMenuBackground();

@@ -85,7 +85,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 		else if (gameState instanceof MainGame) {
 			if(((MainGame) gameState).win) {
-				gameState = new GameWin(keyH);
+				gameState = new GameWin(keyH, audioManager);
 			}
 			else {
 				gameState = new GameOver(keyH, audioManager);

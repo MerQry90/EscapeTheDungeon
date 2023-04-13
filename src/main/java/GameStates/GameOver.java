@@ -10,6 +10,7 @@ public class GameOver extends GameState{
 		this.audioManager = audioManager;
 		background.loadGameOverBackground();
 		setActive();
+		audioManager.playSoundOnce(AudioManager.GAME_OVER_MUSIC_INDEX);
 	}
 	
 	@Override
