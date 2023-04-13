@@ -62,7 +62,7 @@ public class Player extends DynamicEntity {
 		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0007.png"));
 		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0008.png"));
 
-		INVULNERABLE_PLAYER = setSpriteFromPath("src/resources/sprites/png/player_front.png");
+		INVULNERABLE_PLAYER = setSpriteFromPath("src/resources/sprites/MainCharacter/hit.png");
 		isFacingRight = false;
 		setAnimationNotShooting();
 		animationIndex = 0;
