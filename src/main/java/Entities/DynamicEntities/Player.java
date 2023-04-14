@@ -4,6 +4,7 @@ import Components.EntityManager;
 import Components.Vector2D;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import static java.lang.Math.*;
@@ -12,7 +13,6 @@ public class Player extends DynamicEntity {
 
 	private ArrayList<Image> playerLeftSprites;
 	private ArrayList<Image> playerRightSprites;
-	private Image INVULNERABLE_PLAYER;
 
 	private boolean multipleShot;
 
@@ -20,6 +20,8 @@ public class Player extends DynamicEntity {
 	private int shootCoolDown;
 	private boolean vulnerability;
 	private boolean isFacingRight;
+	private boolean isBlinking;
+	private int blinkCount;
 	private boolean isShootingRight;
 	private boolean isShootingLeft;
 	private int timeGateBackwardsShooting;
@@ -62,11 +64,13 @@ public class Player extends DynamicEntity {
 		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0007.png"));
 		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0008.png"));
 
-		INVULNERABLE_PLAYER = setSpriteFromPath("src/resources/sprites/MainCharacter/hit.png");
+		//INVULNERABLE_PLAYER = (BufferedImage) setSpriteFromPath("src/resources/sprites/png/invisible_cube.png");
 		isFacingRight = false;
 		setAnimationNotShooting();
 		animationIndex = 0;
 		vulnerability = true;
+		isBlinking = true;
+		blinkCount = 0;
 		setIdleAnimation();
 
 		maxHealth = 3;
@@ -177,116 +181,155 @@ public class Player extends DynamicEntity {
 		}
 	}
 	
-	public void setIdleAnimation(){
-		if(!isVulnerable()){
-			setActiveSprite(INVULNERABLE_PLAYER);
+	public BufferedImage castImageToBimage(Image image){
+		if (image instanceof BufferedImage) {
+			return (BufferedImage) image;
 		}
-		else {
-			if(isShootingRight){
-				setActiveSprite(playerRightSprites.get(7));
-				isFacingRight = true;
+		// Create a buffered image with transparency
+		BufferedImage bimage = new BufferedImage(image.getWidth(null),
+				image.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+		// Draw the image on to the buffered image
+		Graphics2D bGr = bimage.createGraphics();
+		bGr.drawImage(image, 0, 0, null);
+		bGr.dispose();
+		// Return the buffered image
+		return bimage;
+	}
+	
+	public BufferedImage getNegativeImage(BufferedImage originalImage){
+		// Get image width and height
+		int width = originalImage.getWidth();
+		int height = originalImage.getHeight();
+		
+		//create new image
+		BufferedImage negativeImage = new BufferedImage(width, height,  BufferedImage.TYPE_INT_ARGB);
+		
+		// Convert to negative
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				int p = originalImage.getRGB(x, y);
+				int a = (p >> 24) & 0xff;
+				int r = (p >> 16) & 0xff;
+				int g = (p >> 8) & 0xff;
+				int b = p & 0xff;
+				
+				// subtract RGB from 255
+				r = 255 - r;
+				g = 255 - g;
+				b = 255 - b;
+				
+				// set new RGB value
+				p = (a << 24) | (r << 16) | (g << 8) | b;
+				negativeImage.setRGB(x, y, p);
 			}
-			else if(isShootingLeft){
-				setActiveSprite(playerLeftSprites.get(7));
-				isFacingRight = false;
-			}
-			else if(isFacingRight){
-				setActiveSprite(playerRightSprites.get(7));
+		}
+		return negativeImage;
+	}
+	
+	public void checkInvulnerabilitySprite(){
+		if(!isVulnerable()){
+			if(blinkCount > 0){
+				blinkCount -= 1;
 			}
 			else {
-				setActiveSprite(playerLeftSprites.get(7));
+				setActiveSprite(getNegativeImage(castImageToBimage(getActiveSprite())));
+				blinkCount = 8;
 			}
+		}
+	}
+	
+	public void setIdleAnimation() {
+		if (isShootingRight) {
+			setActiveSprite(playerRightSprites.get(7));
+			isFacingRight = true;
+		} else if (isShootingLeft) {
+			setActiveSprite(playerLeftSprites.get(7));
+			isFacingRight = false;
+		} else if (isFacingRight) {
+			setActiveSprite(playerRightSprites.get(7));
+		} else {
+			setActiveSprite(playerLeftSprites.get(7));
 		}
 		animationIndex = 0;
 	}
+	
 	public void nextAnimationRight(){
-		if(!isVulnerable()){
-			setActiveSprite(INVULNERABLE_PLAYER);
+		if(checkBackwardShooting()){
+			animationIndex -= 1;
+			if(animationIndex <= -4){
+				animationIndex = 28;
+			}
 		}
 		else {
-			if(checkBackwardShooting()){
-				System.out.println("backward shooting");
-				animationIndex -= 1;
-				if(animationIndex <= -4){
-					animationIndex = 28;
-				}
+			animationIndex += 1;
+			if(animationIndex >= 32){
+				animationIndex = 0;
 			}
-			else {
-				animationIndex += 1;
-				if(animationIndex >= 32){
-					animationIndex = 0;
-				}
+		}
+		switch (animationIndex) {
+			case 0 -> {
+				setActiveSprite(playerRightSprites.get(0));
 			}
-			switch (animationIndex) {
-				case 0 -> {
-					setActiveSprite(playerRightSprites.get(0));
-				}
-				case 4 -> {
-					setActiveSprite(playerRightSprites.get(1));
-				}
-				case 8 -> {
-					setActiveSprite(playerRightSprites.get(2));
-				}
-				case 12 -> {
-					setActiveSprite(playerRightSprites.get(3));
-				}
-				case 16 -> {
-					setActiveSprite(playerRightSprites.get(4));
-				}
-				case 20 -> {
-					setActiveSprite(playerRightSprites.get(5));
-				}
-				case 24 -> {
-					setActiveSprite(playerRightSprites.get(6));
-				}
-				case 28 -> {
-					setActiveSprite(playerRightSprites.get(7));
-				}
+			case 4 -> {
+				setActiveSprite(playerRightSprites.get(1));
+			}
+			case 8 -> {
+				setActiveSprite(playerRightSprites.get(2));
+			}
+			case 12 -> {
+				setActiveSprite(playerRightSprites.get(3));
+			}
+			case 16 -> {
+				setActiveSprite(playerRightSprites.get(4));
+			}
+			case 20 -> {
+				setActiveSprite(playerRightSprites.get(5));
+			}
+			case 24 -> {
+				setActiveSprite(playerRightSprites.get(6));
+			}
+			case 28 -> {
+				setActiveSprite(playerRightSprites.get(7));
 			}
 		}
 	}
 	public void nextAnimationLeft(){
-		if(!isVulnerable()){
-			setActiveSprite(INVULNERABLE_PLAYER);
+		if(checkBackwardShooting()){
+			animationIndex -= 1;
+			if(animationIndex <= -4){
+				animationIndex = 28;
+			}
 		}
 		else {
-			if(checkBackwardShooting()){
-				animationIndex -= 1;
-				if(animationIndex <= -4){
-					animationIndex = 28;
-				}
+			animationIndex += 1;
+			if(animationIndex >= 32){
+				animationIndex = 0;
 			}
-			else {
-				animationIndex += 1;
-				if(animationIndex >= 32){
-					animationIndex = 0;
-				}
+		}
+		switch (animationIndex) {
+			case 0 -> {
+				setActiveSprite(playerLeftSprites.get(0));
 			}
-			switch (animationIndex) {
-				case 0 -> {
-					setActiveSprite(playerLeftSprites.get(0));
-				}
-				case 4 -> {
-					setActiveSprite(playerLeftSprites.get(1));
-				}
-				case 8 -> {
-					setActiveSprite(playerLeftSprites.get(2));
-				}
-				case 12 -> {
-					setActiveSprite(playerLeftSprites.get(3));
-				}
-				case 16 -> {
-					setActiveSprite(playerLeftSprites.get(4));
-				}
-				case 20 -> {
-					setActiveSprite(playerLeftSprites.get(5));
-				}
-				case 24 -> {
-					setActiveSprite(playerLeftSprites.get(6));
-				}
-				case 28 -> {
-					setActiveSprite(playerLeftSprites.get(7));
-				}
+			case 4 -> {
+				setActiveSprite(playerLeftSprites.get(1));
+			}
+			case 8 -> {
+				setActiveSprite(playerLeftSprites.get(2));
+			}
+			case 12 -> {
+				setActiveSprite(playerLeftSprites.get(3));
+			}
+			case 16 -> {
+				setActiveSprite(playerLeftSprites.get(4));
+			}
+			case 20 -> {
+				setActiveSprite(playerLeftSprites.get(5));
+			}
+			case 24 -> {
+				setActiveSprite(playerLeftSprites.get(6));
+			}
+			case 28 -> {
+				setActiveSprite(playerLeftSprites.get(7));
 			}
 		}
 	}
@@ -407,6 +450,7 @@ public class Player extends DynamicEntity {
 		}
 		setAnimationNotShooting();
 		updateBackwardShooting();
+		checkInvulnerabilitySprite();
 	}
 	
 	@Override
