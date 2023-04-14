@@ -198,6 +198,7 @@ public class EntityGenerator {
 					//stanze di michele
 					case 20 -> {
 						group.getEnemies().add(new Zombie(Tile.getTile(1), Tile.getTile(1), entityManager));
+						group.getObstacles().add(new Rock(Tile.getTile(4), Tile.getTile(6)));
 					}
 					case 21 -> {
 					
