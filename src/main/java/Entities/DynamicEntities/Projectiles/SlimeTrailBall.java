@@ -36,13 +36,13 @@ public class SlimeTrailBall extends Projectile{
 		setCBwidthScalar(0.9);
 		setCBheightScalar(0.9);
 		activateCollisionBox();
-		entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.SLIME_SOUND_INDEX);
 	}
 
 	@Override
 	public void moveEntity() {
 		if (slimePuddleCountdown <= 0){
 			entityManager.generateSlimePuddle(this.getCenterX(), this.getCenterY());
+			entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.SLIME_SOUND_1_INDEX);
 			slimePuddleCountdown = 10;
 		}
 		slimePuddleCountdown -= 1;

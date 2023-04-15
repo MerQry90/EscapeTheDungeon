@@ -21,6 +21,8 @@ public class OrbitalSlimeBalls extends Projectile{
 	private int spawnTime;
 	private int changeDirectionWait;
 	
+	private boolean theChosenOneForAudio;
+	
 	private final double EPSILON = toRadians(2);
 	
 	public OrbitalSlimeBalls(int centerX, int centerY, double distanceFromCenter,
@@ -56,6 +58,8 @@ public class OrbitalSlimeBalls extends Projectile{
 		setCBheightScalar(0.9);
 		ttl = 0;
 		changeDirectionWait = 10;
+		
+		theChosenOneForAudio = angulationFromCenter == toRadians(45);
 	}
 	
 	@Override
@@ -65,7 +69,9 @@ public class OrbitalSlimeBalls extends Projectile{
 			spawnTime -= 1;
 		}
 		else if(!isCollisionBoxActive()){
-			entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.SLIME_SOUND_INDEX);
+			if(theChosenOneForAudio){
+				entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.SLIME_SOUND_1_INDEX);
+			}
 			activateCollisionBox();
 			setActiveSprite(SLIME_BALL);
 		}

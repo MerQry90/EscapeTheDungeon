@@ -5,14 +5,14 @@ import Components.AudioManager;
 
 public class GameWin extends GameState{
 	
-	public AudioManager audioManager;
+	private int nextGameStateCountdown;
 	
 	public GameWin(KeyHandler keyH, AudioManager audioManager){
 		this.keyH = keyH;
-		this.audioManager = audioManager;
 		background.loadGameWinBackground();
 		setActive();
 		audioManager.playSoundOnce(AudioManager.GAME_WIN_MUSIC_INDEX);
+		nextGameStateCountdown = 300;
 	}
 	
 	@Override
@@ -25,5 +25,11 @@ public class GameWin extends GameState{
 	@Override
 	public void update() {
 		processInput();
+		if(nextGameStateCountdown > 0){
+			nextGameStateCountdown -= 1;
+		}
+		else {
+			setInactive();
+		}
 	}
 }

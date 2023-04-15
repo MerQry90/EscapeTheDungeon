@@ -36,7 +36,6 @@ public class RageSlimeBall extends Projectile{
 		setCBwidthScalar(0.9);
 		setCBheightScalar(0.9);
 		activateCollisionBox();
-		entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.SLIME_SOUND_INDEX);
 		updateRageSlimeBall();
 	}
 	@Override

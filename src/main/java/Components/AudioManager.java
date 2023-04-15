@@ -16,7 +16,7 @@ public class AudioManager {
 	public static final int ROCK_BROKEN_INDEX = 8;
 	public static final int PLAYER_HEALED = 9;
 	public static final int MAGE_DEATH_SOUND_INDEX = 10;
-	public static final int SLIME_SOUND_INDEX = 11;
+	public static final int SLIME_SOUND_1_INDEX = 11;
 	public static final int TELEPORT_SOUND_INDEX = 13;
 	public static final int BAT_SOUND_2_INDEX = 14;
 	public static final int POWERUP_PICKED_INDEX = 15;
@@ -30,9 +30,10 @@ public class AudioManager {
 	public static final	int MAIN_MENU_MUSIC_INDEX = 22;
 	public static final int GAME_WIN_MUSIC_INDEX = 23;
 	public static final int GAME_OVER_MUSIC_INDEX = 24;
+	public static final int SLIME_SOUND_2_INDEX = 25;
 	
-	private File[] audioFiles;
-	private Clip[] clips;
+	private final File[] audioFiles;
+	private final Clip[] clips;
 	private int currentSoundLoop;
 	
 	public AudioManager(){
@@ -70,8 +71,6 @@ public class AudioManager {
 		audioFiles[MAGE_DEATH_SOUND_INDEX] = new File("src/resources/audio/mageSound.wav");
 		//teleport
 		audioFiles[TELEPORT_SOUND_INDEX] = new File("src/resources/audio/teleport.wav");
-		//slime sound
-		audioFiles[SLIME_SOUND_INDEX] = new File("src/resources/audio/SlimeSound.wav");
 		//powerup
 		audioFiles[POWERUP_PICKED_INDEX] = new File("src/resources/audio/powerUp.wav");
 		//rock throw
@@ -84,6 +83,9 @@ public class AudioManager {
 		audioFiles[ZOMBIE_SOUND_1_INDEX] = new File("src/resources/audio/ZombieSound1.wav");
 		audioFiles[ZOMBIE_SOUND_2_INDEX] = new File("src/resources/audio/ZombieSound2.wav");
 		audioFiles[ZOMBIE_DEATH_INDEX] = new File("src/resources/audio/ZombieDeath.wav");
+		//slime sounds
+		audioFiles[SLIME_SOUND_1_INDEX] = new File("src/resources/audio/SlimeSound.wav");
+		audioFiles[SLIME_SOUND_2_INDEX] = new File("src/resources/audio/slimeSound2.wav");
 	}
 	
 	private void setClip(int i){

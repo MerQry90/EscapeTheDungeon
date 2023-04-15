@@ -1,5 +1,6 @@
 package Entities.DynamicEntities.Enemies;
 
+import Components.AudioManager;
 import Components.EntityManager;
 import Components.Tile;
 import Components.Vector2D;
@@ -20,6 +21,7 @@ public class Boss extends Enemy{
 	
 	private Image BOSS_TMP;
 	private int behaviourCountdown;
+	private int previousRandomBehaviour;
 	private int shootCountDown, finalRageCountDown;
 	private double previousHoleAngulation;
 	private boolean cleanProjectilesOnce;
@@ -61,19 +63,23 @@ public class Boss extends Enemy{
 		translationVector2D = new Vector2D(0);
 		setHealth(51);
 		behaviourCountdown = 0;
+		previousRandomBehaviour = -1;
 		cleanProjectilesOnce = true;
 	}
 	
 	@Override
 	public void updateBehaviour() {
-		System.out.println(getCurrentBehaviour());
 		if(getHealth() > 50){
 			if(behaviourCountdown > 0){
 				behaviourCountdown -= 1;
 			}
 			else {
 				Random random = new Random();
-				int randomInt = random.nextInt(3);
+				int randomInt;
+				do{
+					randomInt = random.nextInt(3);
+				}
+				while(previousRandomBehaviour == randomInt);
 				if(randomInt == 0 && getCurrentBehaviour().equals("slimeTrail")){
 					changeBehaviourTo("looseSwirlingBalls");
 					behaviourCountdown = ORBITAL_BEHAVIOUR_DURATION;
@@ -139,6 +145,7 @@ public class Boss extends Enemy{
 								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
 					}
 					changeBehaviourTo("idle");
+					entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.SLIME_SOUND_1_INDEX);
 				}
 				case "fastBalls" -> {
 					shootCountDown -= 1;
@@ -178,6 +185,7 @@ public class Boss extends Enemy{
 									getCenterX(), getCenterY(), epsilon * i + previousHoleAngulation, entityManager
 							));
 						}
+						entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.SLIME_SOUND_1_INDEX);
 						finalRageCountDown = 80;
 					}
 				}
