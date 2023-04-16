@@ -32,7 +32,7 @@ public class MagicBall extends Projectile {
         setCBheightScalar(0.9);
         activateCollisionBox();
 
-        translationVector2D = new Vector2D(8);
+        translationVector2D = new Vector2D(7);
         int dX = getDeltaXToObjective(entityManager.getPlayerX());
         int dY = getDeltaYToObjective(entityManager.getPlayerY());
         translationVector2D.setAngulationFromCoordinates(dX, dY);
