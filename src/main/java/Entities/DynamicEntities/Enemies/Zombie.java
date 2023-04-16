@@ -64,7 +64,7 @@ public class Zombie extends Enemy{
 		
 		translationVector2D = new Vector2D(0);
 		//setRandomSpeed(5, 2);
-		setSpeed(5);
+		setSpeed(4);
 		setRandomHealth(3, 2);
 		setCanPassThroughWalls(false);
 		setCanFly(false);
