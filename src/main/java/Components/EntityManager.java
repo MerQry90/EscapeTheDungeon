@@ -195,17 +195,14 @@ public class EntityManager {
 	//------------------------------------------------------------------------------------------------------------------
 
 	//gestione proiettili-----------------------------------------------------------------------------------------------
-	public void newArrow(String orientation){
+	public void newArrow(int orientation){
+		// +11 perché centro del player
 		friendlyArrows.add(new Arrow(getPlayerX() + 11, getPlayerY() + 11, orientation, this));
 		if (player.getMultipleShot()){
-			if(orientation.compareTo("right") == 0 || orientation.compareTo("left") == 0) {
-				friendlyArrows.add(new Arrow(getPlayerX() + 11, getPlayerY() + 11 - 64, orientation, this));
-				friendlyArrows.add(new Arrow(getPlayerX() + 11, getPlayerY() + 11 + 64, orientation, this));
-			}
-			else{
-				friendlyArrows.add(new Arrow(getPlayerX() + 11 - 64, getPlayerY() + 11, orientation, this));
-				friendlyArrows.add(new Arrow(getPlayerX() + 11 + 64, getPlayerY() + 11, orientation, this));
-			}
+			friendlyArrows.add(new Arrow(getPlayerX() + 11, getPlayerY() + 11,
+					orientation + 1, this));
+			friendlyArrows.add(new Arrow(getPlayerX() + 11, getPlayerY() + 11,
+					orientation + 2, this));
 		}
 		mainGameReference.audioManager.playSoundOnce(3);
 	}
@@ -366,14 +363,6 @@ public class EntityManager {
 	//------------------------------------------------------------------------------------------------------------------
 	
 	public void renderEntities(Graphics g){
-		for (Hazard hazard: hazards){
-			if(hazard.checkIfActive()) {
-				hazard.paint(g);
-			}
-		}
-		for (Enemy enemy: enemies) {
-			enemy.paint(g);
-		}
 		for(HeartItem heartItem : heartItems){
 			heartItem.paint(g);
 		}
@@ -384,6 +373,14 @@ public class EntityManager {
 			if(obstacle.checkIfActive()) {
 				obstacle.paint(g);
 			}
+		}
+		for (Hazard hazard: hazards){
+			if(hazard.checkIfActive()) {
+				hazard.paint(g);
+			}
+		}
+		for (Enemy enemy: enemies) {
+			enemy.paint(g);
 		}
 		for (Projectile arrow: friendlyArrows){
 			arrow.paint(g);

@@ -36,7 +36,7 @@ public class DirectSlimeBalls extends Projectile{
         translationVector2D.setAngulation(angulation);
         setCanPassThroughWalls(false);
         setCanFly(true);
-        entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.SLIME_SOUND_INDEX);
+        entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.SLIME_SOUND_2_INDEX);
     }
 
     @Override

@@ -3,6 +3,7 @@ package GameStates;
 import Application.KeyHandler;
 import Components.*;
 import Entities.DynamicEntities.Player;
+import Entities.DynamicEntities.Projectiles.Arrow;
 
 import java.awt.*;
 
@@ -136,17 +137,17 @@ public class MainGame extends GameState{
 		
 		//shooting
 		if (keyH.shootUp && entityManager.getPlayer().canShoot()) {
-			entityManager.newArrow("up");
+			entityManager.newArrow(Arrow.ORIENTATION_UP_STRAIGHT);
 		}
 		else if (keyH.shootDown && entityManager.getPlayer().canShoot()) {
-			entityManager.newArrow("down");
+			entityManager.newArrow(Arrow.ORIENTATION_DOWN_STRAIGHT);
 		}
 		else if (keyH.shootLeft && entityManager.getPlayer().canShoot()) {
-			entityManager.newArrow("left");
+			entityManager.newArrow(Arrow.ORIENTATION_LEFT_STRAIGHT);
 			entityManager.getPlayer().setAnimationShootingLeft();
 		}
 		else if (keyH.shootRight && entityManager.getPlayer().canShoot()) {
-			entityManager.newArrow("right");
+			entityManager.newArrow(Arrow.ORIENTATION_RIGHT_STRAIGHT);
 			entityManager.getPlayer().setAnimationShootingRight();
 		}
 
@@ -164,6 +165,9 @@ public class MainGame extends GameState{
 		}
 		if(keyH.fast){
 			entityManager.getPlayer().setSpeed(entityManager.getPlayer().getSpeed() + 2);
+		}
+		if(keyH.tPressed){
+			entityManager.getPlayer().activateMultipleShot();
 		}
 	}
 

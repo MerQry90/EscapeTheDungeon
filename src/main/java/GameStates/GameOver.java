@@ -5,12 +5,14 @@ import Components.AudioManager;
 
 public class GameOver extends GameState{
 	
+	private int nextGameStateCountdown;
+	
 	public GameOver(KeyHandler keyH, AudioManager audioManager) {
 		this.keyH = keyH;
-		this.audioManager = audioManager;
 		background.loadGameOverBackground();
 		setActive();
 		audioManager.playSoundOnce(AudioManager.GAME_OVER_MUSIC_INDEX);
+		nextGameStateCountdown = 300;
 	}
 	
 	@Override
@@ -23,5 +25,11 @@ public class GameOver extends GameState{
 	@Override
 	public void update() {
 		processInput();
+		if(nextGameStateCountdown > 0){
+			nextGameStateCountdown -= 1;
+		}
+		else {
+			setInactive();
+		}
 	}
 }
