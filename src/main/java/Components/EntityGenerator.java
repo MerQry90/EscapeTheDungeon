@@ -197,6 +197,7 @@ public class EntityGenerator {
 					}
 					//stanze di michele
 					case 20 -> {
+						//labirinto maggico
 						group.getObstacles().add(new Rock(Tile.getTile(1), Tile.getTile(5)));
 						group.getObstacles().add(new Rock(Tile.getTile(1), Tile.getTile(6)));
 						group.getObstacles().add(new Rock(Tile.getTile(1), Tile.getTile(7)));
