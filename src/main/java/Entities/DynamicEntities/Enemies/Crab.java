@@ -45,7 +45,7 @@ public class Crab extends Enemy{
 		setRandomSpeed(1, 30);
 		setRandomHealth(2, 1);
 		setCanPassThroughWalls(false);
-		setCanFly(true);
+		setCanFly(false);
 		wait = 18;
 		countdown = 0;
 		movingCountdown = 3;

@@ -81,7 +81,9 @@ public class EntityGenerator {
 			}
 			else if(group.getID() != 35){
 				//STANZA COMUNE CON I NEMICI
-				switch (random.nextInt(10, 11)){
+				switch (random.nextInt(0, 25)){
+
+					//stanze di Simone
 					case 0 -> {
 						group.getEnemies().add(new Tank(Tile.getTile(8), Tile.getTile(3), entityManager));
 						group.getEnemies().add(new Mage(Tile.getTile(1), Tile.getTile(1), entityManager));
@@ -201,7 +203,6 @@ public class EntityGenerator {
 						group.getObstacles().add(new Rock(Tile.getTile(12), Tile.getTile(6)));
 						group.getObstacles().add(new Rock(Tile.getTile(12), Tile.getTile(7)));
 					}
-					//stanze di simone
 					case 8 -> {
 						group.getEnemies().add(new Mage(Tile.getTile(8), Tile.getTile(4), entityManager));
 						group.getEnemies().add(new Zombie(Tile.getTile(6), Tile.getTile(4), entityManager));
@@ -252,34 +253,151 @@ public class EntityGenerator {
 						group.getObstacles().add(new Rock(Tile.getTile(10), Tile.getTile(1)));
 					}
 					case 11 -> {
-					
+						group.getEnemies().add(new Tank(Tile.getTile(8), Tile.getTile(4), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(4), Tile.getTile(3), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(4), Tile.getTile(5), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(13), Tile.getTile(3), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(13), Tile.getTile(5), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(6), Tile.getTile(3), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(6), Tile.getTile(5), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(10), Tile.getTile(3), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(10), Tile.getTile(5), entityManager));
+
+						for(int x = 2; x < 15; x++){
+							group.getObstacles().add(new Rock(Tile.getTile(x), Tile.getTile(2)));
+							group.getObstacles().add(new Rock(Tile.getTile(x), Tile.getTile(6)));
+						}
+						group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(3)));
+						group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(5)));
+						group.getObstacles().add(new Rock(Tile.getTile(14), Tile.getTile(3)));
+						group.getObstacles().add(new Rock(Tile.getTile(14), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(14), Tile.getTile(5)));
 					}
 					case 12 -> {
-					
+						group.getEnemies().add(new Bat(Tile.getTile(1), Tile.getTile(1), entityManager));
+						group.getEnemies().add(new Bat(Tile.getTile(15), Tile.getTile(7), entityManager));
+						group.getEnemies().add(new Shooter(Tile.getTile(8), Tile.getTile(4), entityManager));
+
+						group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(4), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(6), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(7), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(9), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(10), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(12), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(13), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(14), Tile.getTile(4)));
 					}
 					case 13 -> {
-					
+						group.getEnemies().add(new Shooter(Tile.getTile(7), Tile.getTile(4), entityManager));
+						group.getEnemies().add(new Shooter(Tile.getTile(9), Tile.getTile(4), entityManager));
+
+						group.getObstacles().add(new Rock(Tile.getTile(1), Tile.getTile(5)));
+						group.getObstacles().add(new Rock(Tile.getTile(1), Tile.getTile(6)));
+						group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(6)));
+						group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(6)));
+						group.getObstacles().add(new Rock(Tile.getTile(4), Tile.getTile(6)));
+						group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(6)));
+						group.getObstacles().add(new Rock(Tile.getTile(6), Tile.getTile(6)));
+						group.getObstacles().add(new Rock(Tile.getTile(1), Tile.getTile(7)));
+						group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(7)));
+						group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(7)));
+						group.getObstacles().add(new Rock(Tile.getTile(4), Tile.getTile(7)));
+						group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(7)));
+						group.getObstacles().add(new Rock(Tile.getTile(6), Tile.getTile(7)));
+						group.getObstacles().add(new Rock(Tile.getTile(7), Tile.getTile(7)));
+
+						group.getObstacles().add(new Rock(Tile.getTile(15), Tile.getTile(5)));
+						group.getObstacles().add(new Rock(Tile.getTile(15), Tile.getTile(6)));
+						group.getObstacles().add(new Rock(Tile.getTile(14), Tile.getTile(6)));
+						group.getObstacles().add(new Rock(Tile.getTile(10), Tile.getTile(6)));
+						group.getObstacles().add(new Rock(Tile.getTile(13), Tile.getTile(6)));
+						group.getObstacles().add(new Rock(Tile.getTile(12), Tile.getTile(6)));
+						group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(6)));
+						group.getObstacles().add(new Rock(Tile.getTile(15), Tile.getTile(7)));
+						group.getObstacles().add(new Rock(Tile.getTile(14), Tile.getTile(7)));
+						group.getObstacles().add(new Rock(Tile.getTile(13), Tile.getTile(7)));
+						group.getObstacles().add(new Rock(Tile.getTile(12), Tile.getTile(7)));
+						group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(7)));
+						group.getObstacles().add(new Rock(Tile.getTile(10), Tile.getTile(7)));
+						group.getObstacles().add(new Rock(Tile.getTile(9), Tile.getTile(7)));
+
+						group.getObstacles().add(new Rock(Tile.getTile(1), Tile.getTile(3)));
+						group.getObstacles().add(new Rock(Tile.getTile(1), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(4), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(6), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(1), Tile.getTile(1)));
+						group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(1)));
+						group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(1)));
+						group.getObstacles().add(new Rock(Tile.getTile(4), Tile.getTile(1)));
+						group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(1)));
+						group.getObstacles().add(new Rock(Tile.getTile(6), Tile.getTile(1)));
+						group.getObstacles().add(new Rock(Tile.getTile(7), Tile.getTile(1)));
+
+						group.getObstacles().add(new Rock(Tile.getTile(15), Tile.getTile(3)));
+						group.getObstacles().add(new Rock(Tile.getTile(15), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(14), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(10), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(13), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(12), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(15), Tile.getTile(1)));
+						group.getObstacles().add(new Rock(Tile.getTile(14), Tile.getTile(1)));
+						group.getObstacles().add(new Rock(Tile.getTile(13), Tile.getTile(1)));
+						group.getObstacles().add(new Rock(Tile.getTile(12), Tile.getTile(1)));
+						group.getObstacles().add(new Rock(Tile.getTile(11), Tile.getTile(1)));
+						group.getObstacles().add(new Rock(Tile.getTile(10), Tile.getTile(1)));
+						group.getObstacles().add(new Rock(Tile.getTile(9), Tile.getTile(1)));
+
+						group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(3)));
+						group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(5)));
 					}
 					case 14 -> {
-					
-					}
-					case 15 -> {
-					
-					}
-					case 16 -> {
-					
-					}
-					case 17 -> {
-					
-					}
-					case 18 -> {
-					
-					}
-					case 19 -> {
-					
+						group.getEnemies().add(new Crab(Tile.getTile(7), Tile.getTile(3), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(9), Tile.getTile(3), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(7), Tile.getTile(5), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(9), Tile.getTile(5), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(1), Tile.getTile(1), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(1), Tile.getTile(7), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(15), Tile.getTile(1), entityManager));
+						group.getEnemies().add(new Crab(Tile.getTile(15), Tile.getTile(7), entityManager));
+						group.getEnemies().add(new Shooter(Tile.getTile(4), Tile.getTile(4), entityManager));
+						group.getEnemies().add(new Shooter(Tile.getTile(12), Tile.getTile(4), entityManager));
+
+						group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(3)));
+
+						group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(6)));
+						group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(5)));
+
+						group.getObstacles().add(new Rock(Tile.getTile(13), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(14), Tile.getTile(3)));
+
+						group.getObstacles().add(new Rock(Tile.getTile(14), Tile.getTile(5)));
+						group.getObstacles().add(new Rock(Tile.getTile(13), Tile.getTile(6)));
+
+						group.getObstacles().add(new Rock(Tile.getTile(6), Tile.getTile(3)));
+						group.getObstacles().add(new Rock(Tile.getTile(7), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(6), Tile.getTile(5)));
+
+						group.getObstacles().add(new Rock(Tile.getTile(10), Tile.getTile(3)));
+						group.getObstacles().add(new Rock(Tile.getTile(9), Tile.getTile(4)));
+						group.getObstacles().add(new Rock(Tile.getTile(10), Tile.getTile(5)));
+
+						group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(2)));
+						group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(6)));
+
 					}
 					//stanze di michele
-					case 20 -> {
+					case 15 -> {
 						//labirinto maggico
 						group.getObstacles().add(new Rock(Tile.getTile(1), Tile.getTile(5)));
 						group.getObstacles().add(new Rock(Tile.getTile(1), Tile.getTile(6)));
@@ -338,7 +456,7 @@ public class EntityGenerator {
 						group.getObstacles().add(new Rock(Tile.getTile(15), Tile.getTile(2)));
 						group.getObstacles().add(new Rock(Tile.getTile(15), Tile.getTile(3)));
 					}
-					case 21 -> {
+					case 16 -> {
 						group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(4)));
 						group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(5)));
 						group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(6)));
@@ -356,7 +474,7 @@ public class EntityGenerator {
 						
 						group.getEnemies().add(new Zombie(Tile.getTile(8), Tile.getTile(4), entityManager));
 					}
-					case 22 -> {
+					case 17 -> {
 						group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(2)));
 						group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(4)));
 						group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(6)));
@@ -398,7 +516,7 @@ public class EntityGenerator {
 						
 						group.getEnemies().add(new Tank(Tile.getTile(7) + 32, Tile.getTile(3) + 32, entityManager));
 					}
-					case 23 -> {
+					case 18 -> {
 						group.getObstacles().add(new Rock(Tile.getTile(4), Tile.getTile(6)));
 						group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(5)));
 						group.getObstacles().add(new Rock(Tile.getTile(6), Tile.getTile(4)));
@@ -416,11 +534,11 @@ public class EntityGenerator {
 						
 						group.getEnemies().add(new Shooter(Tile.getTile(14), Tile.getTile(6), entityManager));
 					}
-					case 24 -> {
+					case 19 -> {
 						group.getEnemies().add(new Crab(Tile.getTile(5), Tile.getTile(6), entityManager));
 						group.getEnemies().add(new Mage(Tile.getTile(9), Tile.getTile(4), entityManager));
 					}
-					case 25 -> {
+					case 20 -> {
 						group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(3)));
 						group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(4)));
 						group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(5)));
@@ -440,7 +558,7 @@ public class EntityGenerator {
 						group.getEnemies().add(new Ghost(Tile.getTile(5), Tile.getTile(4), entityManager));
 						group.getEnemies().add(new Ghost(Tile.getTile(11), Tile.getTile(4), entityManager));
 					}
-					case 26 -> {
+					case 21 -> {
 						group.getObstacles().add(new Rock(Tile.getTile(4), Tile.getTile(4)));
 						group.getObstacles().add(new Rock(Tile.getTile(5), Tile.getTile(4)));
 						group.getObstacles().add(new Rock(Tile.getTile(6), Tile.getTile(4)));
@@ -454,7 +572,7 @@ public class EntityGenerator {
 						group.getEnemies().add(new Zombie(Tile.getTile(11), Tile.getTile(2), entityManager));
 						group.getEnemies().add(new Zombie(Tile.getTile(11), Tile.getTile(6), entityManager));
 					}
-					case 27 -> {
+					case 22 -> {
 						group.getObstacles().add(new Rock(Tile.getTile(2), Tile.getTile(5)));
 						group.getObstacles().add(new Rock(Tile.getTile(3), Tile.getTile(5)));
 						group.getObstacles().add(new Rock(Tile.getTile(4), Tile.getTile(5)));
@@ -472,7 +590,7 @@ public class EntityGenerator {
 						
 						group.getEnemies().add(new Mage(Tile.getTile(8), Tile.getTile(4), entityManager));
 					}
-					case 28 -> {
+					case 23 -> {
 						group.getObstacles().add(new Rock(Tile.getTile(8), Tile.getTile(4)));
 						
 						group.getEnemies().add(new Zombie(Tile.getTile(3), Tile.getTile(6), entityManager));
@@ -481,7 +599,7 @@ public class EntityGenerator {
 						group.getEnemies().add(new Ghost(Tile.getTile(3), Tile.getTile(2), entityManager));
 						group.getEnemies().add(new Ghost(Tile.getTile(13), Tile.getTile(6), entityManager));
 					}
-					case 29 -> {
+					case 24 -> {
 						group.getEnemies().add(new Crab(Tile.getTile(5), Tile.getTile(4), entityManager));
 						group.getEnemies().add(new Crab(Tile.getTile(6), Tile.getTile(3), entityManager));
 						group.getEnemies().add(new Crab(Tile.getTile(6), Tile.getTile(5), entityManager));
