@@ -14,7 +14,6 @@ public abstract class Enemy extends DynamicEntity {
 	private String currentBehaviour = "default";
 	public boolean canGenerateBloodStain = false;
 	protected boolean performDeathActions = true;
-	//protected Image bloodPot;
 	
 	public boolean checkActivation(){
 		if(activationWaiting > 0){
@@ -38,7 +37,7 @@ public abstract class Enemy extends DynamicEntity {
 	}
 	public BloodStain generateBloodStain(){
 		canGenerateBloodStain = false;
-		return new BloodStain(this.getCenterX() - 48, this.getCenterY());
+		return new BloodStain(this.getCenterX(), this.getCenterY());
 	}
 	//metodi riguardanti lo stato del nemico----------------------------------------------------------------------------
 	public String getCurrentBehaviour(){

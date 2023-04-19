@@ -32,7 +32,7 @@ public class Crab extends Enemy{
 		crabSprites[1] = setSpriteFromPath("src/resources/sprites/Enemies/Crab/granchio2.png");
 		crabSprites[2] = setSpriteFromPath("src/resources/sprites/Enemies/Crab/granchio3.png");
 		crabSprites[3] = setSpriteFromPath("src/resources/sprites/Enemies/Crab/granchio4.png");
-		DEAD_FIFTYFIFTY = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
+		DEAD_FIFTYFIFTY = setSpriteFromPath("src/resources/sprites/Items/BloodPots/sanguepiccolo.png");
 		setActiveSprite(crabSprites[0]);
 		
 		setWidth(48);
