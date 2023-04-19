@@ -13,7 +13,6 @@ import static java.lang.Math.toRadians;
 public class Tank extends Enemy{
    private ArrayList<Image> tankLeftSprites, tankRightSprites;
    private ArrayList<Image> deathAnimationSprites;
-   private Image DEAD_TANK;
 
    private int  animationIndex;
     

@@ -12,8 +12,6 @@ import static java.lang.Math.abs;
 
 public class Bat extends Enemy{
 
-	private Image DEAD_BAT;
-
 	private ArrayList<Image> batSprites;
 	private ArrayList<Image> batBallSprites;
 	private ArrayList<Image> deathAnimationSprites;
@@ -59,8 +57,6 @@ public class Bat extends Enemy{
 		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/DeathAnimation/pistrellomorte4.png"));
 		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/DeathAnimation/pistrellomorte5.png"));
 
-		DEAD_BAT = setSpriteFromPath("src/resources/sprites/png/deadMage.png");
-		
 		setWidth(64);
 		setHeight(64);
 		setCBwidthScalar(0.7);

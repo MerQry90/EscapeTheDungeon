@@ -13,7 +13,6 @@ public class Zombie extends Enemy{
 	private ArrayList<Image> zombieLeftSprites;
 	private ArrayList<Image> zombieRightSprites;
 	private ArrayList<Image> deathAnimationSprites;
-	private Image DEAD_ZOMBIE;
 
 	private int animationIndex;
 	private int soundCountDown;

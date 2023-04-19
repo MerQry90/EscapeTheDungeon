@@ -11,8 +11,6 @@ import java.util.Random;
 
 public class Shooter extends Enemy{
 
-	private Image DEAD_SHOOTER;
-
 	private ArrayList<Image> shooterLeftSprites;
 	private ArrayList<Image> shooterRightSprites;
 	private ArrayList<Image> deathAnimationSprites;
