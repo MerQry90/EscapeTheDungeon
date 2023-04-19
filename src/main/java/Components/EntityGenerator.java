@@ -12,6 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/*
+tank s:3 h:12
+shooter s:0 h:7
+mage s:0 h:5
+ghost s:4 h:3
+crab s:25 h:2
+bat s:25 h:3
+zombie s:4 h:4
+boss s:0 h:150
+*/
+
 public class EntityGenerator {
 
 	private List<Group> groups;

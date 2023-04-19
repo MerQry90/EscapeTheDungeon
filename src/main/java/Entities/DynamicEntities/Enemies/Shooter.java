@@ -64,7 +64,8 @@ public class Shooter extends Enemy{
 		activateCollisionBox();
 		
 		translationVector2D = new Vector2D(0);
-		setRandomHealth(6, 4);
+		setHealth(7);
+		
 		setCanPassThroughWalls(false);
 		setCanFly(false);
 		

@@ -41,14 +41,14 @@ public class Crab extends Enemy{
 		setCBheightScalar(0.9);
 		activateCollisionBox();
 		
-		translationVector2D = new Vector2D(0);
-		setRandomSpeed(1, 30);
-		setRandomHealth(2, 1);
+		translationVector2D = new Vector2D(20);
+		setHealth(2);
+		
 		setCanPassThroughWalls(false);
 		setCanFly(false);
 		wait = 18;
 		countdown = 0;
-		movingCountdown = 3;
+		movingCountdown = 4;
 		animationCountDown = 5;
 		animationIndex = 0;
 	}
@@ -123,7 +123,7 @@ public class Crab extends Enemy{
 					nextAnimation();
 					if (movingCountdown <= 0) {
 						countdown = 0;
-						movingCountdown = 3;
+						movingCountdown = 4;
 					}
 					if (countdown <= wait) {
 						changeBehaviourTo("stop-1");

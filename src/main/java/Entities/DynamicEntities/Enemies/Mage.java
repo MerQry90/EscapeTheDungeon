@@ -55,7 +55,8 @@ public class Mage extends Enemy{
 		activateCollisionBox();
 		
 		translationVector2D = new Vector2D(0);
-		setRandomHealth(3, 3);
+		setHealth(5);
+		
 		setCanPassThroughWalls(false);
 		setCanFly(false);
 		

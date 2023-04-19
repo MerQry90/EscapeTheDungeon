@@ -67,9 +67,9 @@ public class Bat extends Enemy{
 		setCBheightScalar(0.9);
 		activateCollisionBox();
 		
-		translationVector2D = new Vector2D(0);
-		setRandomSpeed(1, 30);
-		setRandomHealth(2, 1);
+		translationVector2D = new Vector2D(25);
+		setHealth(3);
+		
 		setCanPassThroughWalls(false);
 		setCanFly(true);
 		wait = 40;

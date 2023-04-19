@@ -56,9 +56,10 @@ public class Boss extends Enemy{
 
 		Random random = new Random();
 		previousHoleAngulation = toRadians(random.nextDouble(365));
-
+		
 		translationVector2D = new Vector2D(0);
-		setHealth(51);
+		setHealth(150);
+		
 		behaviourCountdown = 0;
 		previousRandomBehaviour = -1;
 		cleanProjectilesOnce = true;

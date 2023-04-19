@@ -57,7 +57,8 @@ public class Ghost extends Enemy{
 		activateCollisionBox();
 		
 		translationVector2D = new Vector2D(4);
-		setRandomHealth(3, 2);
+		setHealth(3);
+		
 		setCanPassThroughWalls(true);
 		setCanFly(true);
 		countdown = 54 + 9;

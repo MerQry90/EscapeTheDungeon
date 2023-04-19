@@ -64,9 +64,9 @@ public class Tank extends Enemy{
         canGenerateBloodStain = true;
         canBreakRocks = true;
 
-        translationVector2D = new Vector2D(0);
-        setRandomSpeed(1, 5);
-        setRandomHealth(5, 18);
+        translationVector2D = new Vector2D(3);
+        setHealth(12);
+        
         setCanPassThroughWalls(false);
         setCanFly(false);
     }
