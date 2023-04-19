@@ -299,9 +299,6 @@ public class EntityManager {
 		if(powerUpList != null){
 			powerUpList.clear();
 		}
-		if(heartItems != null){
-			heartItems.clear();
-		}
 		if(obstacles != null){
 			obstacles.clear();
 		}

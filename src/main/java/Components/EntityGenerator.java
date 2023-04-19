@@ -416,7 +416,7 @@ public class EntityGenerator {
 	public void generateHearts(int id){
 		Random random = new Random();
 		if(random.nextInt(3) == 0){
-			getGroupByID(id).getItems().add(new HeartItem(512, 256));
+			getGroupByID(id).addHeart();
 		}
 	}
 }

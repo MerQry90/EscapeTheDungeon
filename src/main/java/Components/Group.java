@@ -39,6 +39,9 @@ public class Group {
 	public List<HeartItem> getItems() {
 		return heartItems;
 	}
+	public void addHeart(){
+		heartItems.add(new HeartItem(512, 256));
+	}
 
 	public boolean isDefeated() {
 		return defeated;
