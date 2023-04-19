@@ -89,7 +89,7 @@ public class Shooter extends Enemy{
 				}
 				case "shoot" -> {
 					nextAnimation();
-					entityManager.newHostileProjectile(new Peas(getX(), getY(),
+					entityManager.newHostileProjectile(new Peas(getX() + 16, getY() + 16,
 							entityManager.getPlayerX(), entityManager.getPlayerY(), entityManager));
 					idleCountdown = 20;
 					changeBehaviourTo("idle");

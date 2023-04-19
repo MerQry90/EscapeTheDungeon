@@ -14,7 +14,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-//provagit
+
 public class EntityManager {
 	
 	/*
@@ -377,7 +377,14 @@ public class EntityManager {
 			}
 		}
 		for (Enemy enemy: enemies) {
-			enemy.paint(g);
+			if(!enemy.checkIfActive()) {
+				enemy.paint(g);
+			}
+		}
+		for (Enemy enemy: enemies) {
+			if(enemy.checkIfActive()) {
+				enemy.paint(g);
+			}
 		}
 		for (Projectile arrow: friendlyArrows){
 			arrow.paint(g);
