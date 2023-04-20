@@ -46,7 +46,7 @@ public class OrbitalSlimeBalls extends Projectile{
 	
 	@Override
 	public void init() {
-		SLIME_BALL = GenericEntity.setSpriteFromPath("src/resources/sprites/projectiles/slimeball.png");
+		SLIME_BALL = GenericEntity.setSpriteFromPath("src/resources/sprites/Enemies/Boss/pallina/slimeball_2.png");
 		NOT_VISIBLE = GenericEntity.setSpriteFromPath("src/resources/sprites/png/invisible_cube.png");
 		setActiveSprite(NOT_VISIBLE);
 		

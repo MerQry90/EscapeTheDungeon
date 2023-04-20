@@ -144,8 +144,8 @@ public class EntityGenerator {
 						group.getObstacles().add(new Rock(Tile.getTile(15), Tile.getTile(5)));
 						
 						group.getEnemies().add(new Ghost(Tile.getTile(1), Tile.getTile(1), entityManager));
-						group.getEnemies().add(new Ghost(Tile.getTile(1), Tile.getTile(7), entityManager));
-						group.getEnemies().add(new Ghost(Tile.getTile(15), Tile.getTile(1), entityManager));
+						//group.getEnemies().add(new Ghost(Tile.getTile(1), Tile.getTile(7), entityManager));
+						//group.getEnemies().add(new Ghost(Tile.getTile(15), Tile.getTile(1), entityManager));
 						group.getEnemies().add(new Ghost(Tile.getTile(15), Tile.getTile(7), entityManager));
 					}
 					case 1 -> {

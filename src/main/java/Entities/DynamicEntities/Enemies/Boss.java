@@ -16,6 +16,10 @@ import static java.lang.Math.*;
 
 public class Boss extends Enemy{
 	
+	private Image[] sprites;
+	private int animationIndex;
+	private int spriteChangeWait;
+	
 	private Image BOSS_TMP;
 	private int behaviourCountdown;
 	private int previousRandomBehaviour;
@@ -25,8 +29,8 @@ public class Boss extends Enemy{
 	
 	private final int FPS = 30;
 	private final int ORBITAL_BEHAVIOUR_DURATION = 20 * FPS;
-	private final int FASTBALL_BEHAVIOUR_DURATION = 8 * FPS;
-	private final int SLIMETRAIL_BEHAVIOUR_DURATION = 2 * FPS;
+	private final int FASTBALL_BEHAVIOUR_DURATION = 6 * FPS;
+	private final int SLIMETRAIL_BEHAVIOUR_DURATION = 3 * FPS;
 	
 	public Boss(EntityManager entityManager){
 		this.entityManager = entityManager;
@@ -36,8 +40,14 @@ public class Boss extends Enemy{
 	@Override
 	public void init() {
 		//CARICAMENTO SPRITE
-		BOSS_TMP = setSpriteFromPath("src/resources/sprites/png/boss.png");
-		setActiveSprite(BOSS_TMP);
+		sprites = new Image[4];
+		animationIndex = 0;
+		sprites[0] = setSpriteFromPath("src/resources/sprites/Enemies/Boss/bosss1.png");
+		sprites[1] = setSpriteFromPath("src/resources/sprites/Enemies/Boss/bosss2.png");
+		sprites[2] = setSpriteFromPath("src/resources/sprites/Enemies/Boss/bosss3.png");
+		sprites[3] = setSpriteFromPath("src/resources/sprites/Enemies/Boss/bosss4.png");
+		setActiveSprite(sprites[animationIndex]);
+		spriteChangeWait = 0;
 		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
 		//verrà sommato a minimumSpeed
@@ -58,15 +68,35 @@ public class Boss extends Enemy{
 		previousHoleAngulation = toRadians(random.nextDouble(365));
 		
 		translationVector2D = new Vector2D(0);
-		setHealth(150);
+		setHealth(51); // se diverso da 150 è per testing
 		
 		behaviourCountdown = 0;
 		previousRandomBehaviour = -1;
 		cleanProjectilesOnce = true;
 	}
 	
+	public void updateSprite(){
+		if(spriteChangeWait > 0){
+			spriteChangeWait -= 1;
+		}
+		else {
+			if(!getCurrentBehaviour().equals("finalRage")){
+				spriteChangeWait = 10;
+			}
+			else {
+				spriteChangeWait = 5;
+			}
+			animationIndex += 1;
+			if(animationIndex >= 4){
+				animationIndex = 0;
+			}
+			setActiveSprite(sprites[animationIndex]);
+		}
+	}
+	
 	@Override
 	public void updateBehaviour() {
+		updateSprite();
 		if(getHealth() > 50){
 			if(behaviourCountdown > 0){
 				behaviourCountdown -= 1;

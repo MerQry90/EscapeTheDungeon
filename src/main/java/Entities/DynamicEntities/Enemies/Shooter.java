@@ -67,7 +67,7 @@ public class Shooter extends Enemy{
 		setCanPassThroughWalls(false);
 		setCanFly(false);
 		
-		idleCountdown = 20;
+		idleCountdown = 30;
 	}
 	
 	@Override
@@ -90,7 +90,7 @@ public class Shooter extends Enemy{
 					nextAnimation();
 					entityManager.newHostileProjectile(new Peas(getX() + 16, getY() + 16,
 							entityManager.getPlayerX(), entityManager.getPlayerY(), entityManager));
-					idleCountdown = 20;
+					idleCountdown = 30;
 					changeBehaviourTo("idle");
 				}
 				case "dead" -> {

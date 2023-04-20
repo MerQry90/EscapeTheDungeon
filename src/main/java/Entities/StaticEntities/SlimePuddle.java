@@ -10,7 +10,7 @@ public class SlimePuddle extends Hazard{
 
 	@Override
 	public void init() {
-		SLIME_PUDDLE = setSpriteFromPath("src/resources/sprites/projectiles/SlimePuddle.png");
+		SLIME_PUDDLE = setSpriteFromPath("src/resources/sprites/Enemies/Boss/trail/striaslime1.png");
 		setActiveSprite(SLIME_PUDDLE);
 
 		setWidth(64);

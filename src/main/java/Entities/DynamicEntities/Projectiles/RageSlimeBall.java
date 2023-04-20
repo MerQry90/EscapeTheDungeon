@@ -25,7 +25,7 @@ public class RageSlimeBall extends Projectile{
 	}
 	@Override
 	public void init() {
-		SLIME_BALL = GenericEntity.setSpriteFromPath("src/resources/sprites/projectiles/slimeball.png");
+		SLIME_BALL = GenericEntity.setSpriteFromPath("src/resources/sprites/Enemies/Boss/pallina/slimeball_1.png");
 		setActiveSprite(SLIME_BALL);
 
 		distance = 30;

@@ -23,7 +23,7 @@ public class DirectSlimeBalls extends Projectile{
     }
 
     public void init(){
-        SLIME_BALL = GenericEntity.setSpriteFromPath("src/resources/sprites/projectiles/slimeball.png");
+        SLIME_BALL = GenericEntity.setSpriteFromPath("src/resources/sprites/Enemies/Boss/pallina/slimeball_2.png");
         setActiveSprite(SLIME_BALL);
 
         setWidth(32);

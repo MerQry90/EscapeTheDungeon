@@ -366,14 +366,14 @@ public class EntityManager {
 		for(PowerUp powerUp: powerUpList){
 			powerUp.paint(g);
 		}
-		for (Obstacle obstacle: obstacles){
-			if(obstacle.checkIfActive()) {
-				obstacle.paint(g);
-			}
-		}
 		for (Hazard hazard: hazards){
 			if(hazard.checkIfActive()) {
 				hazard.paint(g);
+			}
+		}
+		for (Obstacle obstacle: obstacles){
+			if(obstacle.checkIfActive()) {
+				obstacle.paint(g);
 			}
 		}
 		for (Enemy enemy: enemies) {
