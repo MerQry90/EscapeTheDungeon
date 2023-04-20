@@ -37,14 +37,15 @@ public class MainGame extends GameState{
 		
 		clearedTotalStages = 0;
 		pause = false;
-		toggleMap = false;
+		toggleMap = true;
+		mapCountdown = 0;
 		
 		cellManager = new CellManager();
 		setEntityGroups();
 		goToStartingRoom();
 		ui = new UI();
 		setUI();
-		audioManager.playSoundLoop(0);
+		audioManager.playSoundLoop(AudioManager.NORMAL_MUSIC_INDEX);
 	}
 	
 	public void setUI(){
@@ -95,12 +96,13 @@ public class MainGame extends GameState{
 		//vari
 		if(keyH.mPressed && mapCountdown <= 0){
 			mapCountdown = 10;
-			System.out.println(mapCountdown);
 			toggleMap = !toggleMap;
 			if(toggleMap){
 				ui.enableMap();
 			}
-			else ui.disableMap();
+			else {
+				ui.disableMap();
+			}
 		}
 		if(keyH.escapePressed && pauseCountdown <= 0){
 			pauseCountdown = 10;
@@ -183,9 +185,13 @@ public class MainGame extends GameState{
 	
 	@Override
 	public void update() {
-		pauseCountdown--;
-		mapCountdown--;
 		processInput();
+		if(pauseCountdown > 0){
+			pauseCountdown -= 1;
+		}
+		if(mapCountdown > 0){
+			mapCountdown -= 1;
+		}
 		if(!pause) {
 			if(entityManager.isBossDead()){
 				win = true;
