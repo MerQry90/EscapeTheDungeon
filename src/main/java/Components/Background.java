@@ -36,15 +36,17 @@ public class Background {
 	public Background(){
 		tile = new Tile();
 
-		MainMenuBackground = new ImageIcon("src/resources/sprites/backgrounds/MainMenu_PlaceHolder_2.png");
+		MainMenuBackground = new ImageIcon("src/resources/sprites/backgrounds/pavimento.png");
 		BLACK_BACKGROUND = new ImageIcon("src/resources/sprites/backgrounds/black_background.png");
-
 		MainGameBackground = new ImageIcon("src/resources/sprites/Backgrounds - Doors/murofin.png");
 
 		showIntroductionText = false;
 		showCommandText = false;
 		showGameOverText = false;
 		showGameWinText = false;
+		
+		/*TESTO MENU PRINCIPALE*/
+		
 
 		/*TESTO INTRODUZIONE*/
 		introductionIndex = 0;

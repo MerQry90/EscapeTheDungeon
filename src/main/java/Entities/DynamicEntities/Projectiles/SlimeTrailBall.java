@@ -40,22 +40,14 @@ public class SlimeTrailBall extends Projectile{
 			if(direction.equals("up") || direction.equals("right")) {
 				entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.SLIME_SOUND_1_INDEX);
 			}
-			if(direction.equals("up") || direction.equals("down")) {
-				entityManager.generateSlimePuddle(this.getCenterX(), this.getCenterY(), true);
-			}
-			else {
-				entityManager.generateSlimePuddle(this.getCenterX(), this.getCenterY(), false);
-			}
+			entityManager.generateSlimePuddle(this.getCenterX(), this.getCenterY(),
+					direction.equals("up") || direction.equals("down"));
 			slimePuddleCountdown = 10;
 		}
 		slimePuddleCountdown -= 1;
 		if(entityManager.checkWallsCollisions(this)){
-			if(direction.equals("up") || direction.equals("down")) {
-				entityManager.generateSlimePuddle(this.getCenterX(), this.getCenterY(), true);
-			}
-			else {
-				entityManager.generateSlimePuddle(this.getCenterX(), this.getCenterY(), false);
-			}
+			entityManager.generateSlimePuddle(this.getCenterX(), this.getCenterY(),
+					direction.equals("up") || direction.equals("down"));
 			setInactive();
 		}
 		switch (direction){
