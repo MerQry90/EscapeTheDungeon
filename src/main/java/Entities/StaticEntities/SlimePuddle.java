@@ -3,15 +3,24 @@ package Entities.StaticEntities;
 import java.awt.*;
 
 public class SlimePuddle extends Hazard{
-	private Image SLIME_PUDDLE;
-	public SlimePuddle(int x, int y){
+	private Image SLIME_PUDDLE_VERTICAL;
+	private Image SLIME_PUDDLE_HORIZONTAL;
+	
+	public SlimePuddle(int x, int y, boolean isVertical){
 		super(x, y, 64, 64, 30 * 5);
+		init();
+		if(isVertical){
+			setActiveSprite(SLIME_PUDDLE_VERTICAL);
+		}
+		else {
+			setActiveSprite(SLIME_PUDDLE_HORIZONTAL);
+		}
 	}
 
 	@Override
 	public void init() {
-		SLIME_PUDDLE = setSpriteFromPath("src/resources/sprites/Enemies/Boss/trail/striaslime1.png");
-		setActiveSprite(SLIME_PUDDLE);
+		SLIME_PUDDLE_VERTICAL = setSpriteFromPath("src/resources/sprites/Enemies/Boss/trail/striaslime1_verticale.png");
+		SLIME_PUDDLE_HORIZONTAL = setSpriteFromPath("src/resources/sprites/Enemies/Boss/trail/striaslime1_orizzontale.png");
 
 		setWidth(64);
 		setHeight(64);

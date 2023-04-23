@@ -238,8 +238,8 @@ public class EntityManager {
 		hostileProjectiles.clear();
 	}
 	
-	public void generateSlimePuddle(int x, int y){
-		hazards.add(new SlimePuddle(x, y));
+	public void generateSlimePuddle(int x, int y, boolean isVertical){
+		hazards.add(new SlimePuddle(x, y, isVertical));
 	}
 
 	public void updateHazards(){

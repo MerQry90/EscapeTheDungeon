@@ -7,8 +7,7 @@ import Entities.GenericEntity;
 import java.awt.*;
 
 public class SlimeTrailBall extends Projectile{
-
-	private Image SLIME_BALL;
+	
 	private String direction;
 	private EntityManager entityManager;
 	private int slimePuddleCountdown;
@@ -26,9 +25,6 @@ public class SlimeTrailBall extends Projectile{
 
 	@Override
 	public void init() {
-		SLIME_BALL = GenericEntity.setSpriteFromPath("src/resources/sprites/projectiles/slimeball.png");
-		setActiveSprite(SLIME_BALL);
-
 		slimePuddleCountdown = 0;
 
 		setWidth(24);
@@ -41,15 +37,25 @@ public class SlimeTrailBall extends Projectile{
 	@Override
 	public void moveEntity() {
 		if (slimePuddleCountdown <= 0){
-			entityManager.generateSlimePuddle(this.getCenterX(), this.getCenterY());
 			if(direction.equals("up") || direction.equals("right")) {
 				entityManager.mainGameReference.audioManager.playSoundOnce(AudioManager.SLIME_SOUND_1_INDEX);
+			}
+			if(direction.equals("up") || direction.equals("down")) {
+				entityManager.generateSlimePuddle(this.getCenterX(), this.getCenterY(), true);
+			}
+			else {
+				entityManager.generateSlimePuddle(this.getCenterX(), this.getCenterY(), false);
 			}
 			slimePuddleCountdown = 10;
 		}
 		slimePuddleCountdown -= 1;
 		if(entityManager.checkWallsCollisions(this)){
-			entityManager.generateSlimePuddle(this.getCenterX(), this.getCenterY());
+			if(direction.equals("up") || direction.equals("down")) {
+				entityManager.generateSlimePuddle(this.getCenterX(), this.getCenterY(), true);
+			}
+			else {
+				entityManager.generateSlimePuddle(this.getCenterX(), this.getCenterY(), false);
+			}
 			setInactive();
 		}
 		switch (direction){
