@@ -6,6 +6,12 @@ import Entities.GenericEntity;
 
 import java.awt.*;
 
+/**
+ * Not-physical projectile that is used to spawn SlimePuddles.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class SlimeTrailBall extends Projectile{
 	
 	private String direction;

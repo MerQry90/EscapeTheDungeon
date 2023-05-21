@@ -6,6 +6,12 @@ import Components.Background;
 
 import java.awt.*;
 
+/**
+ * Defines the actual state of the game.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public abstract class GameState {
 
 	private boolean active;

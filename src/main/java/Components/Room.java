@@ -6,6 +6,14 @@ import Entities.StaticEntities.Obstacle;
 
 import java.awt.*;
 
+/**
+ * Data structure that saves the information about
+ * the links from a room to others, specifically if the
+ * doors are close or open and which room they are connected to.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Room {
 	
 	private Obstacle northernLeftWall;

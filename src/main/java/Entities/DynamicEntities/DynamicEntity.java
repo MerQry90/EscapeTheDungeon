@@ -7,6 +7,12 @@ import java.util.List;
 
 import static java.lang.Math.*;
 
+/**
+ * Generic description of an entity that has movement capabilities.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public abstract class DynamicEntity extends GenericEntity {
 	
 	private int health;

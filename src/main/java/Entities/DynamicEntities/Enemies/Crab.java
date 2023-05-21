@@ -9,6 +9,13 @@ import java.util.Random;
 
 import static java.lang.Math.abs;
 
+/**
+ * Type of enemy, it has a 50% chance to move towards the player,
+ * or 50% chance to move randomly.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Crab extends Enemy{
 	
 	private int wait, countdown, movingCountdown;

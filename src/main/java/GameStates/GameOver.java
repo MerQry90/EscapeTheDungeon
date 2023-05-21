@@ -3,6 +3,13 @@ package GameStates;
 import Application.KeyHandler;
 import Components.AudioManager;
 
+/**
+ * Type of GameState, it's activated when the Player is killed
+ * and shows a game over screen.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class GameOver extends GameState{
 	
 	private int nextGameStateCountdown;
@@ -12,7 +19,7 @@ public class GameOver extends GameState{
 		background.loadGameOverBackground();
 		setActive();
 		audioManager.playSoundOnce(AudioManager.GAME_OVER_MUSIC_INDEX);
-		nextGameStateCountdown = 300;
+		nextGameStateCountdown = 280;
 	}
 	
 	@Override

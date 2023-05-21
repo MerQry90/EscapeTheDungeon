@@ -8,7 +8,15 @@ import java.awt.*;
 
 import static java.lang.Math.*;
 
-public class OrbitalSlimeBalls extends Projectile{
+/**
+ * Projectile shot by the Boss, it orbits around it
+ * until the end of the duration, it also changes direction
+ * at some point.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
+public class OrbitalSlimeBall extends Projectile{
 	
 	private Image SLIME_BALL;
 	private Image NOT_VISIBLE;
@@ -25,8 +33,8 @@ public class OrbitalSlimeBalls extends Projectile{
 	
 	private final double EPSILON = toRadians(2);
 	
-	public OrbitalSlimeBalls(int centerX, int centerY, double distanceFromCenter,
-							 double startingAngulation, int duration, int spawnTime, EntityManager entityManager){
+	public OrbitalSlimeBall(int centerX, int centerY, double distanceFromCenter,
+							double startingAngulation, int duration, int spawnTime, EntityManager entityManager){
 		this.centerX = centerX;
 		this.centerY = centerY;
 		this.distanceFromCenter = distanceFromCenter;

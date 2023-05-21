@@ -3,6 +3,13 @@ package Components;
 import javax.sound.sampled.*;
 import java.io.*;
 
+/**
+ * Manages the whole sound compartment of the game,
+ * allowing other classes to play music and sound effects.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class AudioManager {
 	
 	public static final int NORMAL_MUSIC_INDEX = 0;

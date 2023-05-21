@@ -3,9 +3,12 @@ package Application;
 import javax.swing.*;
 import java.awt.*;
 
-/*
-Application estende JFrame in quanto è il frame principale, quello su cui va "incollato" GamePanel
-e in quanto tale diventa runnable
+/**
+ * The starting point of the application,
+ * it extends JFrame to make the application graphical and is also runnable.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
  */
 public class Application extends JFrame {
 	public Application() {

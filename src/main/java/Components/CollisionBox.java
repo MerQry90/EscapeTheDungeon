@@ -2,6 +2,12 @@ package Components;
 
 import java.awt.geom.Rectangle2D;
 
+/**
+ * Identifies the area in which an entity can detect a collision.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class CollisionBox {
 	private int CBx, CBy, CBw, CBh;
 	private double wScalar, hScalar;

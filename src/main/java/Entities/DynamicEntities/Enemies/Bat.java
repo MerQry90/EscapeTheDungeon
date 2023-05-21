@@ -10,6 +10,13 @@ import java.util.Random;
 
 import static java.lang.Math.abs;
 
+/**
+ * Type of enemy, it charges and then dashes
+ * towards the player.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Bat extends Enemy{
 
 	private ArrayList<Image> batSprites;

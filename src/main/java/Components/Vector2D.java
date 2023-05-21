@@ -2,6 +2,13 @@ package Components;
 
 import static java.lang.Math.*;
 
+/**
+ * Data structure that represents the movement vector
+ * of an entity.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Vector2D {
 	
 	private double module;

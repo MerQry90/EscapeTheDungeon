@@ -8,6 +8,13 @@ import java.awt.*;
 
 import static java.lang.Math.*;
 
+/**
+ * Projectile shot by the Boss in its final phase, they move in an expanding circle
+ * with a gap that the player must fit into to evade damage.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class RageSlimeBall extends Projectile{
 	private Image SLIME_BALL;
 

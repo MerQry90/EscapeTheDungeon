@@ -7,10 +7,16 @@ import Entities.DynamicEntities.Projectiles.Arrow;
 
 import java.awt.*;
 
-
+/**
+ * Type of GameState, defines the actual running game.
+ * Manages the creation of the map and the initialization of all the game components.
+ * This state is over when the player dies or the final boss is killed.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class MainGame extends GameState{
-
-	private Stage stage;
+	
 	private boolean pause;
 	private boolean toggleMap;
 	private int pauseCountdown;
@@ -32,8 +38,6 @@ public class MainGame extends GameState{
 		background.loadMainGameBackground();
 		
 		entityManager = new EntityManager(this);
-		
-		stage = new Stage(entityManager);
 		
 		clearedTotalStages = 0;
 		pause = false;

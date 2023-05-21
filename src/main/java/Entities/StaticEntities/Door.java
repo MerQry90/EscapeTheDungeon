@@ -4,6 +4,12 @@ import Entities.GenericEntity;
 
 import java.awt.*;
 
+/**
+ * Takes the Player in another room when it walks in it.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Door extends GenericEntity {
 	
 	private Image CLOSED_nDOOR,  CLOSED_sDOOR, CLOSED_eDOOR , CLOSED_wDOOR;

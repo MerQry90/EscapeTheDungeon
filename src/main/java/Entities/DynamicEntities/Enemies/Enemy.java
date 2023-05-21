@@ -8,6 +8,12 @@ import java.util.Random;
 
 import static java.lang.Math.abs;
 
+/**
+ * Generic description of an abstract enemy.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public abstract class Enemy extends DynamicEntity {
 
 	protected int activationWaiting = 10;

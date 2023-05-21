@@ -4,6 +4,12 @@ import Entities.DynamicEntities.Player;
 
 import java.awt.*;
 
+/**
+ * Makes the Player shoot 3 arrows instead if 1.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class MultipleShot extends PowerUp{
 	Image MULTIPLESHOT;
 

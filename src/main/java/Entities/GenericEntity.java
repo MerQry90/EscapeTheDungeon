@@ -8,6 +8,12 @@ import java.awt.*;
 
 import static java.lang.Math.abs;
 
+/**
+ * Abstract definition of an entity and all its components.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public abstract class GenericEntity {
 
 	protected EntityManager entityManager;

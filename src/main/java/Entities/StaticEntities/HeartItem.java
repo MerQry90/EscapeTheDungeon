@@ -4,6 +4,13 @@ import Entities.GenericEntity;
 
 import java.awt.*;
 
+/**
+ * Heals the Player by 1 hearth when picked up.
+ * Can randomly spawn when a room is completed.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class HeartItem extends GenericEntity {
 	private Image HEART;
 

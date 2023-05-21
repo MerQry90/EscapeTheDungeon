@@ -1,5 +1,11 @@
 package Entities.StaticEntities;
 
+/**
+ * Type of obstacle that hurts the Player when it walks on it.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public abstract class Hazard extends Obstacle{
 	private int duration;
 	int index;

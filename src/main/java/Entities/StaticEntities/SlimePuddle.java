@@ -2,6 +2,12 @@ package Entities.StaticEntities;
 
 import java.awt.*;
 
+/**
+ * Type of Hazard spawned by the Boss, it expands over time.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class SlimePuddle extends Hazard{
 	private Image SLIME_PUDDLE_VERTICAL;
 	private Image SLIME_PUDDLE_HORIZONTAL;

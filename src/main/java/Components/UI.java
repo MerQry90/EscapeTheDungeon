@@ -6,6 +6,12 @@ import Entities.GenericEntity;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Manages the User UI during the game.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class UI {
 	private Image NORMAL_ROOM;
 	private Image SPECIAL_ROOM;

@@ -3,6 +3,13 @@ package Entities.StaticEntities;
 import java.awt.*;
 import java.util.Random;
 
+/**
+ * Obstacle in the room that blocks the Player,
+ * it can be destroyed by the Tank.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Rock extends Obstacle{
 
 	private Image ROCK_IMAGE, ROCK_IMAGE2;

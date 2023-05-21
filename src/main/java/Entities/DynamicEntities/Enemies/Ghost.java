@@ -8,6 +8,12 @@ import java.util.ArrayList;
 
 import static java.lang.Math.abs;
 
+/**
+ * Type of enemy, moves towards the player becoming invisible.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Ghost extends Enemy{
 
 	private ArrayList<Image> ghostSprites;

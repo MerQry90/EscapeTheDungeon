@@ -5,6 +5,13 @@ import java.util.*;
 //Griglia delle stanze è 8 col x 8 righe
 // 1a cifra la colonna, 2a cifra la riga
 
+/**
+ * Generates in a procedural way the entire game map
+ * in an 8 x 8 grid, and identifies special rooms
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class CellManager {
 	
 	public final int STARTING_CELL = 35;

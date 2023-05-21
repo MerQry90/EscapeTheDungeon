@@ -3,6 +3,13 @@ package GameStates;
 import Application.KeyHandler;
 import Components.AudioManager;
 
+/**
+ * Type of GameState, defines the main menu of the game.
+ * Allows the user to start the game or see the commands.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class MainMenu extends GameState {
 	public boolean showIntroduction, showCommands;
 	public int inputCountdown;

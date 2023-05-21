@@ -4,6 +4,12 @@ import Entities.DynamicEntities.Player;
 
 import java.awt.*;
 
+/**
+ * Makes the Player faster in its movement capabilities.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class FastFeet extends PowerUp{
 	Image FAST_FEET;
 	public FastFeet(int x, int y) {

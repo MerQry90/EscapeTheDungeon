@@ -8,6 +8,14 @@ import Entities.StaticEntities.PowerUps.PowerUp;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Data structure that identifies a group of enemies
+ * linked to a specific room, used in the procedural
+ * generation of the game.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Group {
 	private int ID;
 	private boolean defeated;

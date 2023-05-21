@@ -7,7 +7,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
-
+/**
+ * Type of enemy, moves towards the player.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Zombie extends Enemy{
 
 	private ArrayList<Image> zombieLeftSprites;

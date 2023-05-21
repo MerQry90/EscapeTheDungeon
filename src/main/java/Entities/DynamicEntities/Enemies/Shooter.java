@@ -3,12 +3,19 @@ package Entities.DynamicEntities.Enemies;
 import Components.AudioManager;
 import Components.EntityManager;
 import Components.Vector2D;
-import Entities.DynamicEntities.Projectiles.Peas;
+import Entities.DynamicEntities.Projectiles.RockProjectile;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Type of enemy, it stands still but rapidly shoots
+ * projectiles toward the player.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Shooter extends Enemy{
 
 	private ArrayList<Image> shooterLeftSprites;
@@ -88,7 +95,7 @@ public class Shooter extends Enemy{
 				}
 				case "shoot" -> {
 					nextAnimation();
-					entityManager.newHostileProjectile(new Peas(getX() + 16, getY() + 16,
+					entityManager.newHostileProjectile(new RockProjectile(getX() + 16, getY() + 16,
 							entityManager.getPlayerX(), entityManager.getPlayerY(), entityManager));
 					idleCountdown = 30;
 					changeBehaviourTo("idle");

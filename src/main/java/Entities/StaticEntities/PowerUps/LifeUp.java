@@ -4,6 +4,12 @@ import Entities.DynamicEntities.Player;
 
 import java.awt.*;
 
+/**
+ * Increases the Player's health by 2 hearts.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class LifeUp extends PowerUp{
 	Image LIFE_UP;
 

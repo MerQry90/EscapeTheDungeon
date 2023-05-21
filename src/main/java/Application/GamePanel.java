@@ -9,11 +9,12 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/*
-la classe GamePanel implementa ActionListener in quanto è il "ciclo principale" del gioco,
-ciò che gli permette di funzionare e andare avanti
-GamePanel è fondamentalmente la classe che si occupa, oltre appunto del ciclo principale,
- di gestire gli stati del gioco, il resto viene gestito da ogni stato singolarmente
+/**
+ * The main loop of the game, updated 30 times per second.
+ * GamePanel also manages the various states of the game.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
  */
 public class GamePanel extends JPanel implements ActionListener {
 

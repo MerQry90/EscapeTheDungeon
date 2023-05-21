@@ -9,6 +9,13 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * Type of enemy, teleport across the rooms,
+ * while shooting homing projectiles.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Mage extends Enemy{
 	
 	private Image MAGE_IDLE, MAGE_SHOOTING, DEAD_MAGE;

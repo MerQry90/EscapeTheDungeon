@@ -4,8 +4,8 @@ import Components.AudioManager;
 import Components.EntityManager;
 import Components.Tile;
 import Components.Vector2D;
-import Entities.DynamicEntities.Projectiles.OrbitalSlimeBalls;
-import Entities.DynamicEntities.Projectiles.DirectSlimeBalls;
+import Entities.DynamicEntities.Projectiles.OrbitalSlimeBall;
+import Entities.DynamicEntities.Projectiles.DirectSlimeBall;
 import Entities.DynamicEntities.Projectiles.RageSlimeBall;
 import Entities.DynamicEntities.Projectiles.SlimeTrailBall;
 
@@ -14,6 +14,15 @@ import java.util.Random;
 
 import static java.lang.Math.*;
 
+/**
+ * Type of enemy, the final boss, has various patterns
+ * of attacks that change when its health is lowered
+ * to a certain threshold.
+ * The game is won if killed.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Boss extends Enemy{
 	
 	private Image[] sprites;
@@ -140,16 +149,16 @@ public class Boss extends Enemy{
 					int loopCount = 0;
 					for(int i = 50; i < 600; i += 50){
 						loopCount += 1;
-						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+						entityManager.newHostileProjectile(new OrbitalSlimeBall(
 								getCenterX(), getCenterY(), i, toRadians(45),
 								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
-						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+						entityManager.newHostileProjectile(new OrbitalSlimeBall(
 								getCenterX(), getCenterY(), i, toRadians(135),
 								ORBITAL_BEHAVIOUR_DURATION,loopCount * 20, entityManager));
-						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+						entityManager.newHostileProjectile(new OrbitalSlimeBall(
 								getCenterX(), getCenterY(), i, toRadians(225),
 								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
-						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+						entityManager.newHostileProjectile(new OrbitalSlimeBall(
 								getCenterX(), getCenterY(), i, toRadians(315),
 								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
 					}
@@ -159,16 +168,16 @@ public class Boss extends Enemy{
 					int loopCount = 0;
 					for(int i = 50; i < 600; i += 150){
 						loopCount += 1;
-						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+						entityManager.newHostileProjectile(new OrbitalSlimeBall(
 								getCenterX(), getCenterY(), i, toRadians(45),
 								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
-						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+						entityManager.newHostileProjectile(new OrbitalSlimeBall(
 								getCenterX(), getCenterY(), i, toRadians(135),
 								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
-						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+						entityManager.newHostileProjectile(new OrbitalSlimeBall(
 								getCenterX(), getCenterY(), i, toRadians(225),
 								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
-						entityManager.newHostileProjectile(new OrbitalSlimeBalls(
+						entityManager.newHostileProjectile(new OrbitalSlimeBall(
 								getCenterX(), getCenterY(), i, toRadians(315),
 								ORBITAL_BEHAVIOUR_DURATION, loopCount * 20, entityManager));
 					}
@@ -178,7 +187,7 @@ public class Boss extends Enemy{
 				case "fastBalls" -> {
 					shootCountDown -= 1;
 					if(shootCountDown <= 0){
-						entityManager.newHostileProjectile(new DirectSlimeBalls(
+						entityManager.newHostileProjectile(new DirectSlimeBall(
 								getCenterX(), getCenterY(), 15, getPlayerAngulation(), entityManager));
 						shootCountDown = 10;
 					}

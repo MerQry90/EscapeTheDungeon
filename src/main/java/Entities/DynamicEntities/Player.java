@@ -9,6 +9,13 @@ import java.util.ArrayList;
 
 import static java.lang.Math.*;
 
+/**
+ * Represents the character controlled by the user during the game,
+ * with all of its information as an entity.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Player extends DynamicEntity {
 
 	private ArrayList<Image> playerLeftSprites;

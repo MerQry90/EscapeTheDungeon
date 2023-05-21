@@ -4,6 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Objects;
 
+/**
+ * Manages the backgrounds of the game and
+ * some walls of text in the main menu
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Background {
 	
 	protected final static int UPPER_BOUND = 64;

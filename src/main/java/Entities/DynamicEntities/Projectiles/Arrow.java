@@ -9,6 +9,12 @@ import java.awt.*;
 import static java.lang.Math.abs;
 import static java.lang.Math.toRadians;
 
+/**
+ * Projectile shot by the player to damage enemies.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Arrow extends Projectile {
 
 	private Image ARROW_RIGHT, ARROW_LEFT, ARROW_UP, ARROW_DOWN;

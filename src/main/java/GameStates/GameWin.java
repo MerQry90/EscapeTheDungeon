@@ -3,6 +3,13 @@ package GameStates;
 import Application.KeyHandler;
 import Components.AudioManager;
 
+/**
+ * Type of GameState, it's activated when the Player defeats the final boss
+ * and shows a victory screen.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class GameWin extends GameState{
 	
 	private int nextGameStateCountdown;

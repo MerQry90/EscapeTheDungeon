@@ -2,6 +2,12 @@ package Entities.StaticEntities;
 
 import java.awt.*;
 
+/**
+ * Type of Hazard spawned by the Tank, it expands over time.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class BloodStain extends Hazard{
     private Image BLOODSTAIN;
     public BloodStain(int x, int y){

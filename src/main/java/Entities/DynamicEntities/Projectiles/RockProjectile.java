@@ -8,12 +8,18 @@ import java.awt.*;
 
 import static java.lang.Math.abs;
 
-public class Peas extends Projectile{
+/**
+ * Projectile shot by the shooter, moves in the same direction until it collides.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
+public class RockProjectile extends Projectile{
 	
 	Image PEAS;
 	int objectiveX, objectiveY;
 	
-	public Peas(int x, int y, int objectiveX, int objectiveY, EntityManager entityManager){
+	public RockProjectile(int x, int y, int objectiveX, int objectiveY, EntityManager entityManager){
 		this.entityManager = entityManager;
 		setX(x);
 		setY(y);

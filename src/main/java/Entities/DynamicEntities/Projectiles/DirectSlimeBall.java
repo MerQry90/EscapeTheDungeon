@@ -7,13 +7,20 @@ import Entities.GenericEntity;
 
 import java.awt.*;
 
-public class DirectSlimeBalls extends Projectile{
+/**
+ * Projectile shot by the boss, rapidly move towards
+ * the last known player's location.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
+public class DirectSlimeBall extends Projectile{
     
     private double angulation;
     private Image SLIME_BALL;
     private int speed;
 
-    public DirectSlimeBalls(int x, int y, int speed , double angulation, EntityManager entityManager){
+    public DirectSlimeBall(int x, int y, int speed , double angulation, EntityManager entityManager){
         this.entityManager = entityManager;
         setXFromCenter(x);
         setYFromCenter(y);

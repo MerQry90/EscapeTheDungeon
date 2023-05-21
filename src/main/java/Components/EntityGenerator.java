@@ -23,6 +23,13 @@ zombie s:4 h:4
 boss s:0 h:150
 */
 
+/**
+ * Generates groups of enemies, linking them to a specific
+ * room, remembers if they were slayed or not.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class EntityGenerator {
 
 	private List<Group> groups;

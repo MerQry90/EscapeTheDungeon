@@ -8,6 +8,13 @@ import java.awt.*;
 
 import static java.lang.Math.abs;
 
+/**
+ * Projectiles shot by the Mage, they continuously
+ * follow the player until the end of their duration.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class MagicBall extends Projectile {
     private int objectiveX, objectiveY;
     private int duration = 60;

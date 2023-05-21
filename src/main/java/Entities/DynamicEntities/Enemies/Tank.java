@@ -10,6 +10,14 @@ import java.util.Random;
 
 import static java.lang.Math.toRadians;
 
+/**
+ * Type of enemy, has a lot of health and when killed,
+ * it leaves behind a pool of blood that expands and
+ * damages the player.
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Tank extends Enemy{
    private ArrayList<Image> tankLeftSprites, tankRightSprites;
    private ArrayList<Image> deathAnimationSprites;

@@ -1,5 +1,12 @@
 package Components;
 
+/**
+ * Data structure that identifies as a room in the
+ * procedural generation of the game map
+ * @author Michele Lugli
+ * @author Simone Mercurio
+ * @version 2023.05.21
+ */
 public class Cell {
 	
 	private int ID;
