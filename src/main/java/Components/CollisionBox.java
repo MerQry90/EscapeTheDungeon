@@ -12,8 +12,20 @@ public class CollisionBox {
 	private int CBx, CBy, CBw, CBh;
 	private double wScalar, hScalar;
 	private Rectangle2D hitBox;
-	
-	
+
+	/**
+	 *Initialize the area in which an entity can detect a collision using the following parameters:
+	 * @param Ex Entity x: the x coordinate in which the entity is situated
+	 * @param Ey Entity y: the y coordinate in which the entity is situated
+	 * @param Ew Entity width
+	 * @param Eh Entity height
+	 * @param wScalar Width scalar: a value from 1 to 0
+	 *                that determines if the collisionBox is as wide as the entity (1)
+	 *                or smaller (0.9 to 0)
+	 * @param hScalar Height scalar: a value from 1 to 0
+	 * 	 *                that determines if the collisionBox is as high as the entity (1)
+	 * 	 *                or smaller (0.9 to 0)
+	 */
 	public CollisionBox(int Ex, int Ey, int Ew, int Eh, double wScalar, double hScalar) {
 		this.wScalar = wScalar;
 		this.hScalar = hScalar;

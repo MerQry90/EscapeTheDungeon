@@ -17,9 +17,6 @@ import static java.lang.Math.toRadians;
  */
 public class Arrow extends Projectile {
 
-	private Image ARROW_RIGHT, ARROW_LEFT, ARROW_UP, ARROW_DOWN;
-	private int arrowDuration;
-	
 	public static final int ORIENTATION_UP_STRAIGHT = 0;
 	public static final int ORIENTATION_UP_toLEFT = 1;
 	public static final int ORIENTATION_UP_toRIGHT = 2;
@@ -32,11 +29,23 @@ public class Arrow extends Projectile {
 	public static final int ORIENTATION_RIGHT_STRAIGHT = 9;
 	public static final int ORIENTATION_RIGHT_toUP = 10;
 	public static final int ORIENTATION_RIGHT_toDOWN = 11;
+
+	private Image ARROW_RIGHT, ARROW_LEFT, ARROW_UP, ARROW_DOWN;
+	private int arrowDuration;
 	
 	//la freccia deve essere visibile finché non collide con qualcosa
 	private final int arrowSpeed = 20;
 	private int arrowOrientation;
 
+	/**
+	 * Initializes sprites, animations, speed, CollisionBox and the parameters needed to move the arrow.
+	 * @param x Coordinate where the arrow will be initially located
+	 * @param y Coordinate where the arrow will be initially located
+	 * @param arrowOrientation Values that determines the arrow orientation.<br>
+	 *                         0-5: vertical arrow, with 0-2 facing up and 3-5 facing down<br>
+	 *                         6-11: horizontal arrow, with 6-8 facing left and 9-11 facing right<br>
+	 * @param entityManager Necessary to check collisions with other entities
+	 */
 	public Arrow(int x, int y, int arrowOrientation, EntityManager entityManager) {
 		this.entityManager = entityManager;
 		this.arrowOrientation = arrowOrientation;
@@ -44,24 +53,15 @@ public class Arrow extends Projectile {
 		setY(y);
 		init();
 	}
-	
-	public boolean checkIfVertical(){
-		return arrowOrientation >= 0 && arrowOrientation <= 5;
-	}
+
 	public boolean checkIfHorizontal(){
 		return arrowOrientation >= 6 && arrowOrientation <= 11;
 	}
 	public boolean checkIfRight(){
 		return arrowOrientation >= 9 && arrowOrientation <= 11;
 	}
-	public boolean checkIfLeft(){
-		return arrowOrientation >= 6 && arrowOrientation <= 8;
-	}
 	public boolean checkIfUp(){
 		return arrowOrientation >= 0 && arrowOrientation <= 2;
-	}
-	public boolean checkIfDown(){
-		return arrowOrientation >= 3 && arrowOrientation <= 5;
 	}
 	
 	@Override

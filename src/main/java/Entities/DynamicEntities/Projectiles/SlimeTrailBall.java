@@ -18,6 +18,13 @@ public class SlimeTrailBall extends Projectile{
 	private EntityManager entityManager;
 	private int slimePuddleCountdown;
 
+	/**
+	 * Initializes sprites, animations, speed, CollisionBox and the parameters needed to move the ball.
+	 * @param centerX Central x-coordinate of the generating entity
+	 * @param centerY Central y-coordinate of the generating entity
+	 * @param direction The possible values are "up", "down", "right" and "left"
+	 * @param entityManager Necessary to check collisions with other entities
+	 */
 	public SlimeTrailBall(int centerX, int centerY, String direction, EntityManager entityManager){
 
 		this.direction = direction;

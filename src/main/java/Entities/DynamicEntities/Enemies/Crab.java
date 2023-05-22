@@ -24,7 +24,13 @@ public class Crab extends Enemy{
 	private int animationCountDown;
 	private int animationIndex;
 	private Image[] crabSprites;
-	
+
+	/**
+	 * Initializes sprites, animations, speed, health, CollisionBox and the parameters needed to move the entity.
+	 * @param x Coordinate where the entity will be initially located
+	 * @param y Coordinate where the entity will be initially located
+	 * @param entityManager Necessary to check collisions with other entities
+	 */
 	public Crab(int x, int y, EntityManager entityManager){
 		this.entityManager = entityManager;
 		setX(x);

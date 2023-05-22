@@ -19,7 +19,11 @@ public class CellManager {
 	private List<Cell> cells;
 	private List<Cell> deadEnds;
 	private Map<Integer, Boolean> knownIDsAndFound;
-	
+
+	/**
+	 * Initialize the starting room in order to
+	 * create the entire map starting from the ID of the starting cell.
+	 */
 	public CellManager(){
 		//init stanza iniziale così da poter cominciare a reiterare
 		cells = new ArrayList<>();
@@ -78,10 +82,7 @@ public class CellManager {
 			knownIDsAndFound.putIfAbsent(tmpID, false);
 		}
 	}
-	
-	public List<Cell> getDeadEndsList(){
-		return deadEnds;
-	}
+
 	public List<Cell> getCellsList() {
 		return cells;
 	}
@@ -230,12 +231,6 @@ public class CellManager {
 				cell.setAsDeadEnd();
 				deadEnds.add(cell);
 			}
-		}
-	}
-	
-	public void printCells(){
-		for(Cell cell: cells){
-			System.out.println(cell);
 		}
 	}
 	

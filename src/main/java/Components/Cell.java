@@ -12,7 +12,14 @@ public class Cell {
 	private int ID;
 	private int northDoorID, eastDoorID, southDoorID, westDoorID;
 	private boolean deadEnd;
-	
+
+	/**
+	 * Data structure that identifies as a room in the
+	 * procedural generation of the map.
+	 * All the DoorID's are set to -1 and deadEnd is set to false.
+	 * @param ID is the unique identifier of the room and is determined by the position in a grid.
+	 *           The starting room cell ID is always 35 and is the center of the grid.
+	 */
 	public Cell(int ID){
 		this.ID = ID;
 		northDoorID = -1;
@@ -24,9 +31,6 @@ public class Cell {
 	
 	public int getID() {
 		return ID;
-	}
-	public void setID(int ID) {
-		this.ID = ID;
 	}
 	public int getNorthDoorID() {
 		return northDoorID;

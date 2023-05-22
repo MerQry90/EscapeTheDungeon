@@ -23,7 +23,13 @@ public class Ghost extends Enemy{
 	private int countdown;
 	private int animationIndex;
 	private ArrayList<Image> deathAnimationSprites;
-	
+
+	/**
+	 * Initializes sprites, animations, speed, health, CollisionBox and the parameters needed to move the entity.
+	 * @param x Coordinate where the entity will be initially located
+	 * @param y Coordinate where the entity will be initially located
+	 * @param entityManager Necessary to check collisions with other entities
+	 */
 	public Ghost(int x, int y, EntityManager entityManager){
 		this.entityManager = entityManager;
 		setX(x);

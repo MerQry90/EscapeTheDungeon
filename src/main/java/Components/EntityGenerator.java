@@ -34,9 +34,19 @@ public class EntityGenerator {
 
 	private List<Group> groups;
 	private EntityManager entityManager;
-	private int bossRoomID, specialRoomNumber;
+	/**
+	 * Number of special rooms already filled with the ability.
+	 * Used to put the stronger ability far from the first room.
+	 */
+	private int specialRoomNumber;
+	private int bossRoomID;
 	private List<Integer> specialRoomsIDS;
 
+	/**
+	 * Generates groups of enemies, linking them to a specific
+	 * room, remembers if they were slayed or not.
+	 * @param entityManager needed to create entities
+	 */
 	public EntityGenerator(EntityManager entityManager) {
 		this.groups = new ArrayList<>();
 		this.entityManager = entityManager;
@@ -151,8 +161,6 @@ public class EntityGenerator {
 						group.getObstacles().add(new Rock(Tile.getTile(15), Tile.getTile(5)));
 						
 						group.getEnemies().add(new Ghost(Tile.getTile(1), Tile.getTile(1), entityManager));
-						//group.getEnemies().add(new Ghost(Tile.getTile(1), Tile.getTile(7), entityManager));
-						//group.getEnemies().add(new Ghost(Tile.getTile(15), Tile.getTile(1), entityManager));
 						group.getEnemies().add(new Ghost(Tile.getTile(15), Tile.getTile(7), entityManager));
 					}
 					case 1 -> {

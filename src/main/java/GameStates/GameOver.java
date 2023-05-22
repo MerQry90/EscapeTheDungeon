@@ -13,7 +13,12 @@ import Components.AudioManager;
 public class GameOver extends GameState{
 	
 	private int nextGameStateCountdown;
-	
+
+	/**
+	 * Loads the game over screen.
+	 * @param keyH used to read input and return to the MainMenu GameState
+	 * @param audioManager needed to play music and audio effects
+	 */
 	public GameOver(KeyHandler keyH, AudioManager audioManager) {
 		this.keyH = keyH;
 		background.loadGameOverBackground();

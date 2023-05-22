@@ -42,7 +42,10 @@ public class AudioManager {
 	private final File[] audioFiles;
 	private final Clip[] clips;
 	private int currentSoundLoop;
-	
+
+	/**
+	 * initializes all audio files of the application
+	 */
 	public AudioManager(){
 		int audioNumber = 30;
 		audioFiles = new File[audioNumber];

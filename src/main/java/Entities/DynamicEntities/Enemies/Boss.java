@@ -24,23 +24,27 @@ import static java.lang.Math.*;
  * @version 2023.05.21
  */
 public class Boss extends Enemy{
-	
+
+	private final int FPS = 30;
+	private final int ORBITAL_BEHAVIOUR_DURATION = 20 * FPS;
+	private final int FASTBALL_BEHAVIOUR_DURATION = 6 * FPS;
+	private final int SLIMETRAIL_BEHAVIOUR_DURATION = 3 * FPS;
+
 	private Image[] sprites;
 	private int animationIndex;
 	private int spriteChangeWait;
-	
-	private Image BOSS_TMP;
+
 	private int behaviourCountdown;
 	private int previousRandomBehaviour;
 	private int shootCountDown, finalRageCountDown;
 	private double previousHoleAngulation;
 	private boolean cleanProjectilesOnce;
-	
-	private final int FPS = 30;
-	private final int ORBITAL_BEHAVIOUR_DURATION = 20 * FPS;
-	private final int FASTBALL_BEHAVIOUR_DURATION = 6 * FPS;
-	private final int SLIMETRAIL_BEHAVIOUR_DURATION = 3 * FPS;
-	
+
+	/**
+	 * Initializes sprites, animations, speed, health, CollisionBox and the parameters needed to move the entity.
+	 * The Boss will always be in the center of the room, so coordinates are not required.
+	 * @param entityManager Necessary to check collisions with other entities
+	 */
 	public Boss(EntityManager entityManager){
 		this.entityManager = entityManager;
 		init();

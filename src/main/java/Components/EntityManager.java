@@ -23,11 +23,6 @@ import java.util.Random;
  * @version 2023.05.21
  */
 public class EntityManager {
-	
-	/*
-	* link agli sprite di sharon
-	* https://drive.google.com/drive/folders/1iUHRR4yvI7v8MohoRNtiPgisIckRKKzU?usp=sharing
-	* */
 
 	public MainGame mainGameReference;
 	
@@ -46,7 +41,11 @@ public class EntityManager {
 	
 	private boolean bossHasBeenDefeated;
 	private boolean roomHasBeenCompleted_actionPerformedOnce;
-	
+
+	/**
+	 * Initializes all lists of entities, instantiates the EntityGenerator
+	 * @param mainGameReference needed to play music and sounds
+	 */
 	public EntityManager(MainGame mainGameReference){
 		this.mainGameReference = mainGameReference;
 		bossHasBeenDefeated = false;
@@ -327,19 +326,12 @@ public class EntityManager {
 			mainGameReference.audioManager.playSoundLoop(2);
 		}
 	}
-	public Room getRoom(){
-		return room;
-	}
 	public int getRoomID(){
 		return room.roomID;
 	}
 	public void setRoomAsDeadEnd(){
 		room.setAsDeadEnd();
 	}
-	public boolean isRoomDeadEnd() {
-		return room.isDeadEnd();
-	}
-	
 	public void checkRoomCompletion(){
 		boolean completed = true;
 		if(!enemies.isEmpty()){

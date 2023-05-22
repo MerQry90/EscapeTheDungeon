@@ -22,14 +22,17 @@ public class MainGame extends GameState{
 	private int pauseCountdown;
 	private int mapCountdown;
 	
-	private int clearedTotalStages;
-	
 	private EntityManager entityManager;
 	private CellManager cellManager;
 	public UI ui;
 	
 	public boolean win;
-	
+
+	/**
+	 * Loads the main game.
+	 * @param keyH used to read inputs
+	 * @param audioManager needed to play music and audio effects
+	 */
 	public MainGame(KeyHandler keyH, AudioManager audioManager){
 		this.keyH = keyH;
 		this.audioManager = audioManager;
@@ -38,8 +41,7 @@ public class MainGame extends GameState{
 		background.loadMainGameBackground();
 		
 		entityManager = new EntityManager(this);
-		
-		clearedTotalStages = 0;
+
 		pause = false;
 		toggleMap = true;
 		mapCountdown = 0;

@@ -18,13 +18,19 @@ import java.awt.event.ActionListener;
  */
 public class GamePanel extends JPanel implements ActionListener {
 
+	/**
+	 * FPS stands for frame per seconds
+	 */
 	private final int FPS = 30;
 	private GameState gameState;
 	private Timer timer;
 	private Background background;
 	private KeyHandler keyH;
 	private AudioManager audioManager;
-	
+
+	/**
+	 * initialize application window parameters, the input handler, the audio manager and the first state of the game
+	 */
 	public GamePanel() {
 		
 		//impostazioni finestra 17x9

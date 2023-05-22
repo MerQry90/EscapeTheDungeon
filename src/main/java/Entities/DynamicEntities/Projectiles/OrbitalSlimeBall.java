@@ -17,7 +17,9 @@ import static java.lang.Math.*;
  * @version 2023.05.21
  */
 public class OrbitalSlimeBall extends Projectile{
-	
+
+	private final double EPSILON = toRadians(2);
+
 	private Image SLIME_BALL;
 	private Image NOT_VISIBLE;
 	
@@ -30,9 +32,17 @@ public class OrbitalSlimeBall extends Projectile{
 	private int changeDirectionWait;
 	
 	private boolean theChosenOneForAudio;
-	
-	private final double EPSILON = toRadians(2);
-	
+
+	/**
+	 * Initializes sprites, animations, speed, CollisionBox and the parameters needed to move the ball.
+	 * @param centerX Central x-coordinate of the generating entity
+	 * @param centerY Central y-coordinate of the generating entity
+	 * @param distanceFromCenter Distance of the ball from the center, value passed from a for loop
+	 * @param startingAngulation Starting angulation of the ball, expressed in radiant
+	 * @param duration Duration of the ball before it disappears
+	 * @param spawnTime Time before it appears on the screen and the collisionBox is activated
+	 * @param entityManager Necessary to check collisions with other entities
+	 */
 	public OrbitalSlimeBall(int centerX, int centerY, double distanceFromCenter,
 							double startingAngulation, int duration, int spawnTime, EntityManager entityManager){
 		this.centerX = centerX;

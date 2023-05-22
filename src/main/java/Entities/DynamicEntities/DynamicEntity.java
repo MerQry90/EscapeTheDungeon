@@ -62,14 +62,6 @@ public abstract class DynamicEntity extends GenericEntity {
 		return canFly;
 	}
 
-	public boolean getCanPassThroughWalls() {
-		return canPassThroughWalls;
-	}
-
-	public void setCanBreakRocks(){
-		canBreakRocks = true;
-	}
-
 	public boolean getCanBreakRocks(){
 		return canBreakRocks;
 	}

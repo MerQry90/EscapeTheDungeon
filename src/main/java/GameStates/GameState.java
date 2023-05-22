@@ -16,9 +16,8 @@ public abstract class GameState {
 
 	private boolean active;
 	protected Background background = new Background();
-	public AudioManager audioManager;
 	protected KeyHandler keyH;
-	
+	public AudioManager audioManager;
 	public void render(Graphics g){
 		background.paint(g);
 	}

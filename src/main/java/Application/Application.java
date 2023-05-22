@@ -11,21 +11,25 @@ import java.awt.*;
  * @version 2023.05.21
  */
 public class Application extends JFrame {
+
+	/**
+	 * starts the whole application when instantiated
+	 */
 	public Application() {
-		initUI();
+		initApp();
 	}
 
 	/*
 Creazione dell'oggetto GamePanel e settaggio delle sue proprietà.
 GamePanel è ciò che permette di visualizzare a schermo l'applicazione.
 	*/
-	private void initUI() {
+	private void initApp() {
 		GamePanel gamePanel = new GamePanel();
 		add(gamePanel);
 		//l'ordine di setResizable e pack è importante
 		setResizable(false);
 		pack();
-		setTitle("OOPProject");
+		setTitle("Caves of Madness");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 	}

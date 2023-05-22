@@ -20,6 +20,14 @@ public class DirectSlimeBall extends Projectile{
     private Image SLIME_BALL;
     private int speed;
 
+    /**
+     * Initializes sprites, animations, speed, CollisionBox and the parameters needed to move the ball.
+     * @param x Coordinate where the ball will be initially located
+     * @param y Coordinate where the ball will be initially located
+     * @param speed Number of pixels per frame added to the ball coordinates to upload its position
+     * @param angulation Angulation of the ball relative to the player coordinates, expressed in double
+     * @param entityManager Necessary to check collisions with other entities
+     */
     public DirectSlimeBall(int x, int y, int speed , double angulation, EntityManager entityManager){
         this.entityManager = entityManager;
         setXFromCenter(x);

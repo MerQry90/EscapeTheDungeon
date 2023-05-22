@@ -17,14 +17,17 @@ import static java.lang.Math.abs;
 public class RockProjectile extends Projectile{
 	
 	Image PEAS;
-	int objectiveX, objectiveY;
-	
-	public RockProjectile(int x, int y, int objectiveX, int objectiveY, EntityManager entityManager){
+
+	/**
+	 * Initializes sprites, animations, speed, CollisionBox and the parameters needed to move the projectile.
+	 * @param x Coordinate where the projectile will be initially located
+	 * @param y Coordinate where the projectile will be initially located
+	 * @param entityManager Necessary to check collisions with other entities
+	 */
+	public RockProjectile(int x, int y, EntityManager entityManager){
 		this.entityManager = entityManager;
 		setX(x);
 		setY(y);
-		this.objectiveX = objectiveX;
-		this.objectiveY = objectiveY;
 		init();
 	}
 	

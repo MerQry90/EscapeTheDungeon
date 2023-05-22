@@ -25,7 +25,7 @@ public class HeartItem extends GenericEntity {
 
 	@Override
 	public void init() {
-		HEART = setSpriteFromPath("src/resources/sprites/png/full_heart.png");
+		HEART = setSpriteFromPath("src/resources/sprites/MainCharacter/Hearts/cuore.png");
 		setActiveSprite(HEART);
 		setCBwidthScalar(1);
 		setCBheightScalar(1);

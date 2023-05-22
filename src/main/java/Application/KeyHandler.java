@@ -23,6 +23,10 @@ public class KeyHandler implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent e)  { }
 
+	/**
+	 * set the boolean value of the pressed key to true
+	 * @param e is the code of the key pressed
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
@@ -55,6 +59,10 @@ public class KeyHandler implements KeyListener {
 		}
 	}
 
+	/**
+	 * set the boolean value of the released key to false
+	 * @param e is the code of the key pressed
+	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
 		int code = e.getKeyCode();

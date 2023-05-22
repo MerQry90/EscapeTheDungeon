@@ -41,6 +41,11 @@ public class Player extends DynamicEntity {
 	public boolean showPowerUpMessageLU;
 	public boolean showPowerUpMessageFF;
 
+	/**
+	 * Initializes sprites, animations, coordinates,
+	 * and all the parameters relative to Player
+	 * @param entityManager necessary to check collision with other entities
+	 */
 	public Player(EntityManager entityManager) {
 		this.entityManager = entityManager;
 		setX(512);
@@ -71,7 +76,6 @@ public class Player extends DynamicEntity {
 		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0007.png"));
 		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0008.png"));
 
-		//INVULNERABLE_PLAYER = (BufferedImage) setSpriteFromPath("src/resources/sprites/png/invisible_cube.png");
 		isFacingRight = false;
 		setAnimationNotShooting();
 		animationIndex = 0;
@@ -82,7 +86,6 @@ public class Player extends DynamicEntity {
 
 		maxHealth = 3;
 		setHealth(maxHealth);
-
 
 		setX(512);
 		setY(256);
@@ -174,9 +177,6 @@ public class Player extends DynamicEntity {
 	}
 	public void resetTimeGateBackwardsShooting(){
 		timeGateBackwardsShooting = 16;
-	}
-	public void stopBackwardShooting(){
-		timeGateBackwardsShooting = 0;
 	}
 	public boolean checkBackwardShooting(){
 		//System.out.println(timeGateBackwardsShooting);

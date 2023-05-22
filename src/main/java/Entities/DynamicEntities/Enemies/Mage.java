@@ -23,6 +23,13 @@ public class Mage extends Enemy{
 	private ArrayList<Image> deathAnimationSprites;
 
 	private int idleCountdown, shotNumber, animationIndex;
+
+	/**
+	 * Initializes sprites, animations, speed, health, CollisionBox and the parameters needed to move the entity.
+	 * @param x Coordinate where the entity will be initially located
+	 * @param y Coordinate where the entity will be initially located
+	 * @param entityManager Necessary to check collisions with other entities
+	 */
 	public Mage(int x, int y, EntityManager entityManager){
 		setX(x);
 		setY(y);
@@ -100,8 +107,7 @@ public class Mage extends Enemy{
 				}
 				case "shoot" -> {
 					setActiveSprite(MAGE_SHOOTING);
-					entityManager.newHostileProjectile(new MagicBall(getX(), getY(),
-							entityManager.getPlayerX(), entityManager.getPlayerY(), entityManager));
+					entityManager.newHostileProjectile(new MagicBall(getX(), getY(), entityManager));
 					idleCountdown = 10;
 					shotNumber += 1;
 					changeBehaviourTo("idle");

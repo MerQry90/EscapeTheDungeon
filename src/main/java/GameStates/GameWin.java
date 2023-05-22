@@ -13,7 +13,12 @@ import Components.AudioManager;
 public class GameWin extends GameState{
 	
 	private int nextGameStateCountdown;
-	
+
+	/**
+	 * Loads the game win screen.
+	 * @param keyH used to read inputs
+	 * @param audioManager needed to play music and audio effects
+	 */
 	public GameWin(KeyHandler keyH, AudioManager audioManager){
 		this.keyH = keyH;
 		background.loadGameWinBackground();

@@ -18,6 +18,12 @@ public class MainMenu extends GameState {
 	/*
 	il costruttore carica l'immagine, dopo aver settato 'active' lo stato
 	 */
+
+	/**
+	 * Loads the main menu screen.
+	 * @param keyH used to read inputs
+	 * @param audioManager needed to play music and audio effects
+	 */
 	public MainMenu(KeyHandler keyH, AudioManager audioManager) {
 		this.keyH = keyH;
 		this.audioManager = audioManager;

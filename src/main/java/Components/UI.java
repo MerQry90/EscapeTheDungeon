@@ -13,6 +13,8 @@ import java.util.List;
  * @version 2023.05.21
  */
 public class UI {
+	private static final int MAP_ROOM_DIMENSION = 24;
+
 	private Image NORMAL_ROOM;
 	private Image SPECIAL_ROOM;
 	private Image BOSS_ROOM;
@@ -28,7 +30,6 @@ public class UI {
 	private Image NOTHING;
 
 	private boolean mapEnabled;
-	private static int mapRoomDimension = 24;
 
 	private List<Integer> specialRoomsIDS;
 	private int bossRoomID;
@@ -37,6 +38,9 @@ public class UI {
 	private int messageIndex;
 	private String[] messages;
 
+	/**
+	 * Initializes every variable, image and string needed for the correct UI visualization.
+	 */
 	public UI(){
 		NORMAL_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/NormalRoom.png");
 		SPECIAL_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/SpecialRoom.png");
@@ -45,8 +49,8 @@ public class UI {
 
 		DARK_SCREEN = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/DarkScreen.png");
 
-		HEART_FULL = GenericEntity.setSpriteFromPath("src/resources/sprites/png/full_heart.png");
-		HEART_EMPTY = GenericEntity.setSpriteFromPath("src/resources/sprites/png/empty_heart.png");
+		HEART_FULL = GenericEntity.setSpriteFromPath("src/resources/sprites/MainCharacter/Hearts/cuore.png");
+		HEART_EMPTY = GenericEntity.setSpriteFromPath("src/resources/sprites/MainCharacter/Hearts/cuore_vuoto.png");
 		
 		KEY = GenericEntity.setSpriteFromPath("src/resources/sprites/Items/chiave.png");
 		
@@ -84,8 +88,6 @@ public class UI {
 	}
 	
 	public void drawKeyNumber(int numberOfKeys, Graphics g){
-		//g.setFont(new Font("Verdana", Font.BOLD, 30));
-		//g.drawString("# of keys: " + numberOfKeys, Tile.getTile(0) + 10, Tile.getTile(9) - 20);
 	
 		if(numberOfKeys > 0){
 			g.drawImage(KEY, 10, Tile.getTile(8) + 10, 40, 40, null);
@@ -144,17 +146,17 @@ public class UI {
 				IDX = ID % 10;
 				IDY = (ID - IDX) / 10;
 
-				mapCellX = (int)xOffset + (IDX * mapRoomDimension);
-				mapCellY = (int)yOffset + (IDY * mapRoomDimension);
+				mapCellX = (int)xOffset + (IDX * MAP_ROOM_DIMENSION);
+				mapCellY = (int)yOffset + (IDY * MAP_ROOM_DIMENSION);
 
 				if(checkIfSpecialRoom(ID)){
-					g.drawImage(SPECIAL_ROOM, mapCellX, mapCellY, mapRoomDimension, mapRoomDimension, null);
+					g.drawImage(SPECIAL_ROOM, mapCellX, mapCellY, MAP_ROOM_DIMENSION, MAP_ROOM_DIMENSION, null);
 				}
 				else if(checkIfBossRoom(ID)){
-					g.drawImage(BOSS_ROOM, mapCellX, mapCellY, mapRoomDimension, mapRoomDimension, null);
+					g.drawImage(BOSS_ROOM, mapCellX, mapCellY, MAP_ROOM_DIMENSION, MAP_ROOM_DIMENSION, null);
 				}
 				else {
-					g.drawImage(NORMAL_ROOM, mapCellX, mapCellY, mapRoomDimension, mapRoomDimension, null);
+					g.drawImage(NORMAL_ROOM, mapCellX, mapCellY, MAP_ROOM_DIMENSION, MAP_ROOM_DIMENSION, null);
 				}
 				if(ID == playerCellID){
 					//dipingo il quadrato rosso dove c'è il player
@@ -166,10 +168,10 @@ public class UI {
 				IDY = (ID - IDX) / 10;
 
 
-				mapCellX = (int)xOffset + (IDX * mapRoomDimension);
-				mapCellY = (int)yOffset + (IDY * mapRoomDimension);
+				mapCellX = (int)xOffset + (IDX * MAP_ROOM_DIMENSION);
+				mapCellY = (int)yOffset + (IDY * MAP_ROOM_DIMENSION);
 
-				g.drawImage(DARK_ROOM, mapCellX, mapCellY, mapRoomDimension, mapRoomDimension, null);
+				g.drawImage(DARK_ROOM, mapCellX, mapCellY, MAP_ROOM_DIMENSION, MAP_ROOM_DIMENSION, null);
 			}
 		}
 	}

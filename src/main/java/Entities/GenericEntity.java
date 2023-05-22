@@ -140,12 +140,12 @@ public abstract class GenericEntity {
 	
 	public void paint(Graphics g){
 		g.drawImage(getActiveSprite(), getX(), getY(), getWidth(), getHeight(), null);
-		g.setColor(Color.CYAN);
+		/*g.setColor(Color.CYAN);
 		g.drawRect(getX(), getY(), getWidth(), getHeight());
 		g.setColor(Color.GREEN);
 		if(isCollisionBoxActive()) {
 			g.drawRect(cb.getCBx(), cb.getCBy(), cb.getCBw(), cb.getCBh());
-		}
+		}*/
 	}
 	
 }

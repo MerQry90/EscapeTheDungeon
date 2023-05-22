@@ -16,16 +16,19 @@ import static java.lang.Math.abs;
  * @version 2023.05.21
  */
 public class MagicBall extends Projectile {
-    private int objectiveX, objectiveY;
     private int duration = 60;
     private Image MAGIC_BALL;
 
-    public MagicBall(int x, int y, int objectiveX, int objectiveY, EntityManager entityManager){
+    /**
+     * Initializes sprites, animations, speed, CollisionBox and the parameters needed to move the ball.
+     * @param x Coordinate where the ball will be initially located
+     * @param y Coordinate where the ball will be initially located
+     * @param entityManager Necessary to check collisions with other entities
+     */
+    public MagicBall(int x, int y, EntityManager entityManager){
         this.entityManager = entityManager;
         setX(x);
         setY(y);
-        this.objectiveX = objectiveX;
-        this.objectiveY = objectiveY;
         init();
     }
     @Override

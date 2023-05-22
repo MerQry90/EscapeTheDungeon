@@ -31,16 +31,6 @@ public abstract class Enemy extends DynamicEntity {
 		return false;
 	}
 
-	public void setRandomHealth(int minimumHealth, int maximumHealth){
-		Random random = new Random();
-		int health = random.nextInt(minimumHealth) + maximumHealth;
-		setHealth(health);
-	}
-	public void setRandomSpeed(int minimumSpeed, int maximumSpeed){
-		Random random = new Random();
-		int speed = random.nextInt(minimumSpeed) + maximumSpeed;
-		setSpeed(speed);
-	}
 	public BloodStain generateBloodStain(){
 		canGenerateBloodStain = false;
 		return new BloodStain(this.getCenterX(), this.getCenterY());

@@ -12,27 +12,21 @@ import java.util.Objects;
  * @version 2023.05.21
  */
 public class Background {
-	
-	protected final static int UPPER_BOUND = 64;
-	protected final static int LOWER_BOUND = 64 * 8;
-	protected final static int LEFT_BOUND = 64;
-	protected final static int RIGHT_BOUND = 64 * 16;
-
-	private boolean showIntroductionText, showCommandText, showGameOverText, showGameWinText;
-	private int introductionIndex;
-	private String[] introductionText;
-	private String[] commandsText;
-	
 	/*
-	width e height sono le misure del background e conseguentemente della finestra di gioco
-	(per ora sono impostate manualmente e moltiplicate per 64 perché basate sulla scala del vecchio progetto)
-	 */
+		width e height sono le misure del background e conseguentemente della finestra di gioco
+		(per ora sono impostate manualmente e moltiplicate per 64 perché basate sulla scala del vecchio progetto)
+		 */
 	private final int width = 17 * 64;
 	private final int height = 9 * 64;
 
+	private boolean showIntroductionText, showCommandText, showGameOverText, showGameWinText;
+	private int introductionIndex;
+
+	private String[] introductionText;
+	private String[] commandsText;
+
 	private Image background;
 	private ImageIcon MainMenuBackground, BLACK_BACKGROUND, MainGameBackground;
-
 	private Tile tile;
 
 	/*
@@ -40,10 +34,15 @@ public class Background {
 	in questo modo, quando lo stato cambia, basterà chiamare uno dei metodi sottostanti che non fa altro che cambiare
 	background e associare l'immagine corretta
 	 */
+
+	/**
+	 * pre-loads the background images (the main manu it's considered a background), initializes the boolean values
+	 * used to display various information on the screen, and related information.
+	 */
 	public Background(){
 		tile = new Tile();
 
-		MainMenuBackground = new ImageIcon("src/resources/sprites/backgrounds/pavimento.png");
+		MainMenuBackground = new ImageIcon("src/resources/sprites/Backgrounds - Doors/menu.png");
 		BLACK_BACKGROUND = new ImageIcon("src/resources/sprites/backgrounds/black_background.png");
 		MainGameBackground = new ImageIcon("src/resources/sprites/Backgrounds - Doors/murofin.png");
 
@@ -51,9 +50,6 @@ public class Background {
 		showCommandText = false;
 		showGameOverText = false;
 		showGameWinText = false;
-		
-		/*TESTO MENU PRINCIPALE*/
-		
 
 		/*TESTO INTRODUZIONE*/
 		introductionIndex = 0;
@@ -79,14 +75,6 @@ public class Background {
 		commandsText[2] = "- press ESC to pause the game";
 		commandsText[3] = "- press M to toggle the map(on/off)";
 
-	}
-
-	public int getWidth() {
-		return width;
-	}
-
-	public int getHeight() {
-		return height;
 	}
 
 	public void loadBlackBackground(){

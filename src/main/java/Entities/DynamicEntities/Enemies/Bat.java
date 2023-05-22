@@ -24,7 +24,13 @@ public class Bat extends Enemy{
 	private ArrayList<Image> deathAnimationSprites;
 	
 	private int wait, countdown, movingCountdown, animationIndex;
-	
+
+	/**
+	 * Initializes sprites, animations, speed, health, CollisionBox and the parameters needed to move the entity.
+	 * @param x Coordinate where the entity will be initially located
+	 * @param y Coordinate where the entity will be initially located
+	 * @param entityManager Necessary to check collisions with other entities
+	 */
 	public Bat(int x, int y, EntityManager entityManager){
 		this.entityManager = entityManager;
 		setX(x);

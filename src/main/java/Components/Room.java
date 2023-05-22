@@ -46,7 +46,19 @@ public class Room {
 	
 	private boolean deadEnd;
 	public int roomID;
-	
+
+	/**
+	 * Data structure that saves the information about
+	 * the links from a room to others, specifically if the
+	 * doors are close or open and which room they are connected to.
+	 *
+	 * All the parameters are roomIDs.
+	 * @param roomID The ID of the current room
+	 * @param northLeadsTo Indicates in which room lead the north door
+	 * @param eastLeadsTo Indicates in which room lead the east door
+	 * @param southLeadsTo Indicates in which room lead the south door
+	 * @param westLeadsTo Indicates in which room lead the west door
+	 */
 	public Room(int roomID, int northLeadsTo, int eastLeadsTo, int southLeadsTo, int westLeadsTo) {
 		this.roomID = roomID;
 		deadEnd = false;
@@ -117,9 +129,6 @@ public class Room {
 	
 	public void setAsDeadEnd(){
 		this.deadEnd = true;
-	}
-	public boolean isDeadEnd() {
-		return deadEnd;
 	}
 	
 	public void paintDoors(Graphics g){

@@ -23,7 +23,13 @@ public class Shooter extends Enemy{
 	private ArrayList<Image> deathAnimationSprites;
 	
 	private int idleCountdown, animationIndex;
-	
+
+	/**
+	 * Initializes sprites, animations, speed, health, CollisionBox and the parameters needed to move the entity.
+	 * @param x Coordinate where the entity will be initially located
+	 * @param y Coordinate where the entity will be initially located
+	 * @param entityManager Necessary to check collisions with other entities
+	 */
 	public Shooter(int x, int y, EntityManager entityManager){
 		this.entityManager = entityManager;
 		setX(x);
@@ -95,8 +101,7 @@ public class Shooter extends Enemy{
 				}
 				case "shoot" -> {
 					nextAnimation();
-					entityManager.newHostileProjectile(new RockProjectile(getX() + 16, getY() + 16,
-							entityManager.getPlayerX(), entityManager.getPlayerY(), entityManager));
+					entityManager.newHostileProjectile(new RockProjectile(getX() + 16, getY() + 16, entityManager));
 					idleCountdown = 30;
 					changeBehaviourTo("idle");
 				}

@@ -13,7 +13,11 @@ public class Vector2D {
 	
 	private double module;
 	private double angulation;
-	
+
+	/**
+	 * Sets the speed and calculate autonomously the angle of movement of an entity knowing its coordinates.
+	 * @param speed The speed of the entity, expressed in amount of pixels added to the entity coordinates every frame
+	 */
 	public Vector2D(int speed){
 		setModule(speed);
 		setAngulationFromCoordinates(0, 0);

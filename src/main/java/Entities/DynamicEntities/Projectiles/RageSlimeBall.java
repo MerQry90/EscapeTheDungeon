@@ -23,6 +23,14 @@ public class RageSlimeBall extends Projectile{
 	private double distance;
 	private EntityManager entityManager;
 	private int duration;
+
+	/**
+	 * Initializes sprites, animations, speed, CollisionBox and the parameters needed to move the ball.
+	 * @param centerX Central x-coordinate of the generating entity
+	 * @param centerY Central y-coordinate of the generating entity
+	 * @param angulation Angulation of the ball relative to its position in the circle, expressed in double
+	 * @param entityManager Necessary to check collisions with other entities
+	 */
 	public RageSlimeBall(int centerX, int centerY, double angulation, EntityManager entityManager){
 		this.centerX = centerX;
 		this.centerY = centerY;

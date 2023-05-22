@@ -25,6 +25,10 @@ public class Group {
 	private List<HeartItem> heartItems;
 	private List<PowerUp> powerUpList;
 
+	/**
+	 * Uses the ID to generate the entities relative to a specific room.
+	 * @param ID used to identify the room for which the entities are generated
+	 */
 	public Group(int ID){
 		enemies = new ArrayList<>();
 		obstacles = new ArrayList<>();
