@@ -31,7 +31,7 @@ public class CellManager {
 		do{
 			cells.clear();
 			deadEnds.clear();
-			placeableRooms = 20;
+			placeableRooms = 16;
 			cells.add(new Cell(STARTING_CELL));
 			makeMap(getCellByID(STARTING_CELL));
 			makeDoors();
