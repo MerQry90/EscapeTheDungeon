@@ -1,2 +1,9 @@
-/gradle/
 /.gradle/
+/.idea/
+/build/
+/gradle/
+/out/
+/build.gradle/
+/gradlew/
+/gradlew.bat/
+/settings.gradle/
