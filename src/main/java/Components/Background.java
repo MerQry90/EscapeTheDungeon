@@ -27,7 +27,6 @@ public class Background {
 
 	private Image background;
 	private ImageIcon MainMenuBackground, BLACK_BACKGROUND, MainGameBackground;
-	private Tile tile;
 
 	/*
 	Le tre immagini di background sono pre-caricate all'inizio del programma nel costruttore,
@@ -40,7 +39,6 @@ public class Background {
 	 * used to display various information on the screen, and related information.
 	 */
 	public Background(){
-		tile = new Tile();
 
 		MainMenuBackground = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(
 				"sprites/Backgrounds - Doors/menu.png")));
