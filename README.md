@@ -18,4 +18,4 @@ You can download the latest version of this sofware [here](https://github.com/Me
 To run the application just double-click the downloaded jar.  
 *It runs only when the JDK is installed correctly.*
 ## License
-This software is licensed under MIT License
+This software is licensed under MIT License.
