@@ -23,6 +23,9 @@ public class LifeUp extends PowerUp{
 
 	@Override
 	public void activate(Player player) {
+		if(player.getHealth() < player.getMaxHealth()) {
+			player.setHealth(player.getHealth() + 1);
+		}
 		for(int i = 0; i < 2; i++) {
 			if (player.getMaxHealth() < 6) {
 				player.setMaxHealth(player.getMaxHealth() + 1);

@@ -29,7 +29,7 @@ GamePanel è ciò che permette di visualizzare a schermo l'applicazione.
 		//l'ordine di setResizable e pack è importante
 		setResizable(false);
 		pack();
-		setTitle("Caves of Madness");
+		setTitle("Escape the Dungeon");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setLocationRelativeTo(null);
 	}
