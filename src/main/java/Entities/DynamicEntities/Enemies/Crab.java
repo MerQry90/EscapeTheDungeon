@@ -5,6 +5,7 @@ import Components.Vector2D;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 import static java.lang.Math.abs;
@@ -41,11 +42,16 @@ public class Crab extends Enemy{
 	public void init() {
 		//CARICAMENTO SPRITE
 		crabSprites = new Image[4];
-		crabSprites[0] = setSpriteFromPath("src/resources/sprites/Enemies/Crab/granchio1.png");
-		crabSprites[1] = setSpriteFromPath("src/resources/sprites/Enemies/Crab/granchio2.png");
-		crabSprites[2] = setSpriteFromPath("src/resources/sprites/Enemies/Crab/granchio3.png");
-		crabSprites[3] = setSpriteFromPath("src/resources/sprites/Enemies/Crab/granchio4.png");
-		DEAD_FIFTYFIFTY = setSpriteFromPath("src/resources/sprites/Items/BloodPots/sanguepiccolo.png");
+		crabSprites[0] = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Crab/granchio1.png")));
+		crabSprites[1] = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Crab/granchio2.png")));
+		crabSprites[2] = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Crab/granchio3.png")));
+		crabSprites[3] = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Crab/granchio4.png")));
+		DEAD_FIFTYFIFTY = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Items/BloodPots/sanguepiccolo.png")));
 		setActiveSprite(crabSprites[0]);
 		
 		setWidth(48);

@@ -5,6 +5,7 @@ import Components.Vector2D;
 import Entities.GenericEntity;
 
 import java.awt.*;
+import java.util.Objects;
 
 import static java.lang.Math.abs;
 
@@ -34,7 +35,8 @@ public class RockProjectile extends Projectile{
 	@Override
 	public void init() {
 		//CARICAMENTO SPRITE
-		PEAS = GenericEntity.setSpriteFromPath("src/resources/sprites/Projectiles/rockshooterrock.png");
+		PEAS = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Projectiles/rockshooterrock.png")));
 		setActiveSprite(PEAS);
 		
 		setWidth(32);

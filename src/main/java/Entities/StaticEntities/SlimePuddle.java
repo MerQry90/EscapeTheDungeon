@@ -1,6 +1,7 @@
 package Entities.StaticEntities;
 
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * Type of Hazard spawned by the Boss, it expands over time.
@@ -25,8 +26,10 @@ public class SlimePuddle extends Hazard{
 
 	@Override
 	public void init() {
-		SLIME_PUDDLE_VERTICAL = setSpriteFromPath("src/resources/sprites/Enemies/Boss/trail/striaslime1_verticale.png");
-		SLIME_PUDDLE_HORIZONTAL = setSpriteFromPath("src/resources/sprites/Enemies/Boss/trail/striaslime1_orizzontale.png");
+		SLIME_PUDDLE_VERTICAL = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Boss/trail/striaslime1_verticale.png")));
+		SLIME_PUDDLE_HORIZONTAL = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Boss/trail/striaslime1_orizzontale.png")));
 
 		setWidth(64);
 		setHeight(64);

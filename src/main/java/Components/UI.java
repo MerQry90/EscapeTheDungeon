@@ -5,6 +5,7 @@ import Entities.GenericEntity;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Manages the User UI during the game.
@@ -42,20 +43,29 @@ public class UI {
 	 * Initializes every variable, image and string needed for the correct UI visualization.
 	 */
 	public UI(){
-		NORMAL_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/NormalRoom.png");
-		SPECIAL_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/SpecialRoom.png");
-		BOSS_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/BossRoom.png");
-		DARK_ROOM = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/DarkRoom.png");
+		NORMAL_ROOM = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/mapTiles/NormalRoom.png")));
+		SPECIAL_ROOM = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/mapTiles/SpecialRoom.png")));
+		BOSS_ROOM = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/mapTiles/BossRoom.png")));
+		DARK_ROOM = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/mapTiles/DarkRoom.png")));
 
-		DARK_SCREEN = GenericEntity.setSpriteFromPath("src/resources/sprites/mapTiles/DarkScreen.png");
+		DARK_SCREEN = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/mapTiles/DarkScreen.png")));
 
-		HEART_FULL = GenericEntity.setSpriteFromPath("src/resources/sprites/MainCharacter/Hearts/cuore.png");
-		HEART_EMPTY = GenericEntity.setSpriteFromPath("src/resources/sprites/MainCharacter/Hearts/cuore_vuoto.png");
+		HEART_FULL = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/Hearts/cuore.png")));
+		HEART_EMPTY = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/Hearts/cuore_vuoto.png")));
 		
-		KEY = GenericEntity.setSpriteFromPath("src/resources/sprites/Items/chiave.png");
+		KEY = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Items/chiave.png")));
 		
-		NOTHING = GenericEntity.setSpriteFromPath("src/resources/sprites/png/invisible_cube.png");
-		
+		NOTHING = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/invisible_cube.png")));
+
 		mapEnabled = true;
 		messageTime = 0;
 		

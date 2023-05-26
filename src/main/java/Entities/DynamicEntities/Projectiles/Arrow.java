@@ -5,6 +5,7 @@ import Components.Vector2D;
 import Entities.GenericEntity;
 
 import java.awt.*;
+import java.util.Objects;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.toRadians;
@@ -67,10 +68,14 @@ public class Arrow extends Projectile {
 	@Override
 	public void init() {
 		//CARICAMENTO SPRITE
-		ARROW_UP = setSpriteFromPath("src/resources/sprites/Projectiles/freccia_up.png");
-		ARROW_DOWN = setSpriteFromPath("src/resources/sprites/Projectiles/freccia_down.png");
-		ARROW_LEFT = setSpriteFromPath("src/resources/sprites/Projectiles/freccia_left.png");
-		ARROW_RIGHT = setSpriteFromPath("src/resources/sprites/Projectiles/freccia_right.png");
+		ARROW_UP = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Projectiles/freccia_up.png")));
+		ARROW_DOWN = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Projectiles/freccia_down.png")));
+		ARROW_LEFT = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Projectiles/freccia_left.png")));
+		ARROW_RIGHT = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Projectiles/freccia_right.png")));
 
 		
 		setWidth(40);

@@ -3,6 +3,7 @@ package Entities.StaticEntities.PowerUps;
 import Entities.DynamicEntities.Player;
 
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * Increases the Player's health by 2 hearts.
@@ -15,7 +16,8 @@ public class LifeUp extends PowerUp{
 
 	public LifeUp(int x, int y){
 		super(x, y);
-		LIFE_UP = setSpriteFromPath("src/resources/sprites/PowerUps/onelife.png");
+		LIFE_UP = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/PowerUps/onelife.png")));
 		setActiveSprite(LIFE_UP);
 	}
 

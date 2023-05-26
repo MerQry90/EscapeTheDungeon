@@ -10,6 +10,7 @@ import Entities.DynamicEntities.Projectiles.RageSlimeBall;
 import Entities.DynamicEntities.Projectiles.SlimeTrailBall;
 
 import java.awt.*;
+import java.util.Objects;
 import java.util.Random;
 
 import static java.lang.Math.*;
@@ -55,10 +56,14 @@ public class Boss extends Enemy{
 		//CARICAMENTO SPRITE
 		sprites = new Image[4];
 		animationIndex = 0;
-		sprites[0] = setSpriteFromPath("src/resources/sprites/Enemies/Boss/bosss1.png");
-		sprites[1] = setSpriteFromPath("src/resources/sprites/Enemies/Boss/bosss2.png");
-		sprites[2] = setSpriteFromPath("src/resources/sprites/Enemies/Boss/bosss3.png");
-		sprites[3] = setSpriteFromPath("src/resources/sprites/Enemies/Boss/bosss4.png");
+		sprites[0] = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Boss/bosss1.png")));
+		sprites[1] = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Boss/bosss2.png")));
+		sprites[2] = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Boss/bosss3.png")));
+		sprites[3] = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Boss/bosss4.png")));
 		setActiveSprite(sprites[animationIndex]);
 		spriteChangeWait = 0;
 		

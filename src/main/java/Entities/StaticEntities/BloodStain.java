@@ -1,6 +1,7 @@
 package Entities.StaticEntities;
 
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * Type of Hazard spawned by the Tank, it expands over time.
@@ -16,7 +17,8 @@ public class BloodStain extends Hazard{
 
     @Override
     public void init() {
-        BLOODSTAIN = setSpriteFromPath("src/resources/sprites/Items/BloodPots/sanguegrande.png");
+        BLOODSTAIN = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Items/BloodPots/sanguegrande.png")));
         setActiveSprite(BLOODSTAIN);
 
         setWidth(192);

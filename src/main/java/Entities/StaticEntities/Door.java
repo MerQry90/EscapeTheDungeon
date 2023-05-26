@@ -3,6 +3,7 @@ package Entities.StaticEntities;
 import Entities.GenericEntity;
 
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * Takes the Player in another room when it walks in it.
@@ -30,15 +31,23 @@ public class Door extends GenericEntity {
 	@Override
 	public void init() {
 		//CARICAMENTO SPRITE
-		CLOSED_nDOOR = setSpriteFromPath("src/resources/sprites/Backgrounds - Doors/Doors/closed_nDoor.png");
-		CLOSED_sDOOR = setSpriteFromPath("src/resources/sprites/Backgrounds - Doors/Doors/closed_sDoor.png");
-		CLOSED_eDOOR = setSpriteFromPath("src/resources/sprites/Backgrounds - Doors/Doors/closed_eDoor.png");
-		CLOSED_wDOOR = setSpriteFromPath("src/resources/sprites/Backgrounds - Doors/Doors/closed_wDoor.png");
+		CLOSED_nDOOR = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Backgrounds - Doors/Doors/closed_nDoor.png")));
+		CLOSED_sDOOR = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Backgrounds - Doors/Doors/closed_sDoor.png")));
+		CLOSED_eDOOR = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Backgrounds - Doors/Doors/closed_eDoor.png")));
+		CLOSED_wDOOR = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Backgrounds - Doors/Doors/closed_wDoor.png")));
 
-		OPENED_nDOOR = setSpriteFromPath("src/resources/sprites/Backgrounds - Doors/Doors/opened_nDoor.png");
-		OPENED_sDOOR = setSpriteFromPath("src/resources/sprites/Backgrounds - Doors/Doors/opened_sDoor.png");
-		OPENED_eDOOR = setSpriteFromPath("src/resources/sprites/Backgrounds - Doors/Doors/opened_eDoor.png");
-		OPENED_wDOOR = setSpriteFromPath("src/resources/sprites/Backgrounds - Doors/Doors/opened_wDoor.png");
+		OPENED_nDOOR = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Backgrounds - Doors/Doors/opened_nDoor.png")));
+		OPENED_sDOOR = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Backgrounds - Doors/Doors/opened_sDoor.png")));
+		OPENED_eDOOR = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Backgrounds - Doors/Doors/opened_eDoor.png")));
+		OPENED_wDOOR = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Backgrounds - Doors/Doors/opened_wDoor.png")));
 
 		switch (position){
 			case "n" -> {

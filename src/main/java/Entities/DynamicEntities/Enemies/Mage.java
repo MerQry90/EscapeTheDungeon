@@ -7,6 +7,7 @@ import Entities.DynamicEntities.Projectiles.MagicBall;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -41,25 +42,41 @@ public class Mage extends Enemy{
 		mageTeleportSprites = new ArrayList<>();
 		deathAnimationSprites = new ArrayList<>();
 
-		MAGE_IDLE = setSpriteFromPath("src/resources/sprites/Enemies/Mage/magikino1.png");
-		MAGE_SHOOTING  = setSpriteFromPath("src/resources/sprites/Enemies/Mage/magikino2.png");
+		MAGE_IDLE = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/magikino1.png")));
+		MAGE_SHOOTING  = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/magikino2.png")));
 		
-		mageTeleportSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline1.png"));
-		mageTeleportSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline2.png"));
-		mageTeleportSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline3.png"));
-		mageTeleportSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline4.png"));
-		mageTeleportSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/stelline/stelline5.png"));
+		mageTeleportSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/stelline/stelline1.png"))));
+		mageTeleportSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/stelline/stelline2.png"))));
+		mageTeleportSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/stelline/stelline3.png"))));
+		mageTeleportSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/stelline/stelline4.png"))));
+		mageTeleportSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/stelline/stelline5.png"))));
 
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte1.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte2.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte3.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte4.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte5.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte6.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte7.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Mage/DeathAnimation/magikinomorte8.png"));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/DeathAnimation/magikinomorte1.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/DeathAnimation/magikinomorte2.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/DeathAnimation/magikinomorte3.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/DeathAnimation/magikinomorte4.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/DeathAnimation/magikinomorte5.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/DeathAnimation/magikinomorte6.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/DeathAnimation/magikinomorte7.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Mage/DeathAnimation/magikinomorte8.png"))));
 
-		DEAD_MAGE = setSpriteFromPath("");
+		DEAD_MAGE = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+			"sprites/invisible_cube.png")));
 
 		setActiveSprite(MAGE_IDLE);
 		setWidth(64);

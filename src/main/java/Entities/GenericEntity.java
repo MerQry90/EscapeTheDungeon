@@ -5,6 +5,7 @@ import Components.EntityManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 import static java.lang.Math.abs;
 
@@ -102,7 +103,7 @@ public abstract class GenericEntity {
 	public int getCenterY(){
 		return getY() + (getHeight() / 2);
 	}
-	public static Image setSpriteFromPath(String path){
+	public static Image setSpriteFromPath(URL path){
 		ImageIcon icon = new ImageIcon(path);
 		return icon.getImage();
 	}

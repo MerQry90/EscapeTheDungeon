@@ -5,6 +5,7 @@ import Components.Vector2D;
 import Entities.GenericEntity;
 
 import java.awt.*;
+import java.util.Objects;
 
 import static java.lang.Math.abs;
 
@@ -33,7 +34,8 @@ public class MagicBall extends Projectile {
     }
     @Override
     public void init() {
-        MAGIC_BALL = GenericEntity.setSpriteFromPath("src/resources/sprites/projectiles/Magic_ball.png");
+        MAGIC_BALL = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/projectiles/Magic_ball.png")));
         setActiveSprite(MAGIC_BALL);
 
         setWidth(24);

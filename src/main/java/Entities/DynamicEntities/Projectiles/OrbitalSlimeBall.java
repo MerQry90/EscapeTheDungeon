@@ -5,6 +5,7 @@ import Components.EntityManager;
 import Entities.GenericEntity;
 
 import java.awt.*;
+import java.util.Objects;
 
 import static java.lang.Math.*;
 
@@ -64,8 +65,10 @@ public class OrbitalSlimeBall extends Projectile{
 	
 	@Override
 	public void init() {
-		SLIME_BALL = GenericEntity.setSpriteFromPath("src/resources/sprites/Enemies/Boss/pallina/slimeball_2.png");
-		NOT_VISIBLE = GenericEntity.setSpriteFromPath("src/resources/sprites/png/invisible_cube.png");
+		SLIME_BALL = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Boss/pallina/slimeball_2.png")));
+		NOT_VISIBLE = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/png/invisible_cube.png")));
 		setActiveSprite(NOT_VISIBLE);
 		
 		updateCoordinates();

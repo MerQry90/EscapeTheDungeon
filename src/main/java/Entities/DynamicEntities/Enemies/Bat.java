@@ -6,6 +6,7 @@ import Components.Vector2D;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 import static java.lang.Math.abs;
@@ -46,29 +47,52 @@ public class Bat extends Enemy{
 
 		//CARICAMENTO SPRITE
 
-		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello1.png"));
-		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello2.png"));
-		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello3.png"));
-		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello4.png"));
-		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello5.png"));
-		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello6.png"));
-		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello7.png"));
-		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello8.png"));
-		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello9.png"));
-		batSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/Idle/pistrello10.png"));
+		batSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/Idle/pistrello1.png"))));
+		batSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/Idle/pistrello2.png"))));
+		batSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/Idle/pistrello3.png"))));
+		batSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/Idle/pistrello4.png"))));
+		batSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/Idle/pistrello5.png"))));
+		batSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/Idle/pistrello6.png"))));
+		batSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/Idle/pistrello7.png"))));
+		batSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/Idle/pistrello8.png"))));
+		batSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/Idle/pistrello9.png"))));
+		batSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/Idle/pistrello10.png"))));
 
-		batBallSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello4.png"));
-		batBallSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello5.png"));
-		batBallSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello6.png"));
-		batBallSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello7.png"));
-		batBallSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello8.png"));
-		batBallSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/pallina-pistrello/pistrello9.png"));
 
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/DeathAnimation/pistrellomorte1.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/DeathAnimation/pistrellomorte2.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/DeathAnimation/pistrellomorte3.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/DeathAnimation/pistrellomorte4.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Bat/DeathAnimation/pistrellomorte5.png"));
+		batBallSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/pallina-pistrello/pistrello4.png"))));
+		batBallSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/pallina-pistrello/pistrello5.png"))));
+		batBallSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/pallina-pistrello/pistrello6.png"))));
+		batBallSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/pallina-pistrello/pistrello7.png"))));
+		batBallSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/pallina-pistrello/pistrello8.png"))));
+		batBallSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/pallina-pistrello/pistrello9.png"))));
+
+
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/DeathAnimation/pistrellomorte1.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/DeathAnimation/pistrellomorte2.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/DeathAnimation/pistrellomorte3.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/DeathAnimation/pistrellomorte4.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Bat/DeathAnimation/pistrellomorte5.png"))));
 
 		setWidth(64);
 		setHeight(64);

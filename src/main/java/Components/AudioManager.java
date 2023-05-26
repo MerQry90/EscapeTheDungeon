@@ -2,6 +2,7 @@ package Components;
 
 import javax.sound.sampled.*;
 import java.io.*;
+import java.net.URL;
 
 /**
  * Manages the whole sound compartment of the game,
@@ -11,7 +12,6 @@ import java.io.*;
  * @version 2023.05.21
  */
 public class AudioManager {
-	
 	public static final int NORMAL_MUSIC_INDEX = 0;
 	public static final int PLAYER_HURTED_INDEX = 1;
 	public static final int BOSS_MUSIC_INDEX = 2;
@@ -51,10 +51,10 @@ public class AudioManager {
 		audioFiles = new File[audioNumber];
 		clips = new Clip[audioNumber];
 		currentSoundLoop = 0;
-		
+
 		//music
 		audioFiles[NORMAL_MUSIC_INDEX] = new File("src/resources/audio/dungeonOstVer2.wav");
-		audioFiles[MAIN_MENU_MUSIC_INDEX] = new File("src/resources/audio/mainMenuOst.wav");
+		audioFiles[MAIN_MENU_MUSIC_INDEX] = new File(getClass().getClassLoader().getResource("audio/mainMenuOst.wav").toString());
 		audioFiles[GAME_WIN_MUSIC_INDEX] = new File("src/resources/audio/winMusic.wav");
 		audioFiles[GAME_OVER_MUSIC_INDEX] = new File("src/resources/audio/gameOver.wav");
 		

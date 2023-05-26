@@ -6,6 +6,7 @@ import Components.Vector2D;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static java.lang.Math.*;
 
@@ -58,23 +59,39 @@ public class Player extends DynamicEntity {
 		playerRightSprites = new ArrayList<>();
 
 		//CARICAMENTO SPRITE
-		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim12.png"));
-		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim13.png"));
-		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim14.png"));
-		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim15.png"));
-		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim16.png"));
-		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim17.png"));
-		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim18.png"));
-		playerLeftSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/sx/pg_sim19.png"));
+		playerLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/sx/pg_sim12.png"))));
+		playerLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/sx/pg_sim13.png"))));
+		playerLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/sx/pg_sim14.png"))));
+		playerLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/sx/pg_sim15.png"))));
+		playerLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/sx/pg_sim16.png"))));
+		playerLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/sx/pg_sim17.png"))));
+		playerLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/sx/pg_sim18.png"))));
+		playerLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/sx/pg_sim19.png"))));
 
-		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0001.png"));
-		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0002.png"));
-		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0003.png"));
-		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0004.png"));
-		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0005.png"));
-		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0006.png"));
-		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0007.png"));
-		playerRightSprites.add(setSpriteFromPath("src/resources/sprites/MainCharacter/dx/Sprite-0008.png"));
+		playerRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/dx/Sprite-0001.png"))));
+		playerRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/dx/Sprite-0002.png"))));
+		playerRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/dx/Sprite-0003.png"))));
+		playerRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/dx/Sprite-0004.png"))));
+		playerRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/dx/Sprite-0005.png"))));
+		playerRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/dx/Sprite-0006.png"))));
+		playerRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/dx/Sprite-0007.png"))));
+		playerRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/dx/Sprite-0008.png"))));
 
 		isFacingRight = false;
 		setAnimationNotShooting();

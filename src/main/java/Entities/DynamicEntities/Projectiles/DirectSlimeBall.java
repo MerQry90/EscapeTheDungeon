@@ -6,6 +6,7 @@ import Components.Vector2D;
 import Entities.GenericEntity;
 
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * Projectile shot by the boss, rapidly move towards
@@ -38,7 +39,8 @@ public class DirectSlimeBall extends Projectile{
     }
 
     public void init(){
-        SLIME_BALL = GenericEntity.setSpriteFromPath("src/resources/sprites/Enemies/Boss/pallina/slimeball_2.png");
+        SLIME_BALL = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Enemies/Boss/pallina/slimeball_2.png")));
         setActiveSprite(SLIME_BALL);
 
         setWidth(32);

@@ -4,6 +4,7 @@ import Components.Tile;
 import Entities.DynamicEntities.Player;
 
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * Gives a key item to the player.
@@ -18,7 +19,8 @@ public class Key extends PowerUp{
 	
 	public Key(int x, int y) {
 		super(x, y);
-		KEY = setSpriteFromPath("src/resources/sprites/Items/chiave.png");
+		KEY = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Items/chiave.png")));
 		setActiveSprite(KEY);
 	}
 	

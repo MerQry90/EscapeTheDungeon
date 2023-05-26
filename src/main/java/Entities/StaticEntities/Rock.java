@@ -1,6 +1,7 @@
 package Entities.StaticEntities;
 
 import java.awt.*;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -20,8 +21,10 @@ public class Rock extends Obstacle{
 
 	@Override
 	public void init() {
-		ROCK_IMAGE = setSpriteFromPath("src/resources/sprites/Rocks/roccia.png");
-		ROCK_IMAGE2 = setSpriteFromPath("src/resources/sprites/Rocks/roccia2.png");
+		ROCK_IMAGE = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Rocks/roccia.png")));
+		ROCK_IMAGE2 = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Rocks/roccia2.png")));
 
 		Random random = new Random();
 		if(random.nextBoolean()){

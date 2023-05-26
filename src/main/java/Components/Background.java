@@ -42,9 +42,12 @@ public class Background {
 	public Background(){
 		tile = new Tile();
 
-		MainMenuBackground = new ImageIcon("src/resources/sprites/Backgrounds - Doors/menu.png");
-		BLACK_BACKGROUND = new ImageIcon("src/resources/sprites/backgrounds/black_background.png");
-		MainGameBackground = new ImageIcon("src/resources/sprites/Backgrounds - Doors/murofin.png");
+		MainMenuBackground = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Backgrounds - Doors/menu.png")));
+		BLACK_BACKGROUND = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Backgrounds - Doors/black_background.png")));
+		MainGameBackground = new ImageIcon(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Backgrounds - Doors/murofin.png")));
 
 		showIntroductionText = false;
 		showCommandText = false;

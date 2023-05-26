@@ -3,6 +3,7 @@ package Entities.StaticEntities;
 import Entities.GenericEntity;
 
 import java.awt.*;
+import java.util.Objects;
 
 /**
  * Heals the Player by 1 hearth when picked up.
@@ -25,7 +26,8 @@ public class HeartItem extends GenericEntity {
 
 	@Override
 	public void init() {
-		HEART = setSpriteFromPath("src/resources/sprites/MainCharacter/Hearts/cuore.png");
+		HEART = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/MainCharacter/Hearts/cuore.png")));
 		setActiveSprite(HEART);
 		setCBwidthScalar(1);
 		setCBheightScalar(1);
