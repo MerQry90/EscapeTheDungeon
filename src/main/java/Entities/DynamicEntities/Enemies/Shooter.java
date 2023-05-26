@@ -7,6 +7,7 @@ import Entities.DynamicEntities.Projectiles.RockProjectile;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -45,22 +46,37 @@ public class Shooter extends Enemy{
 
 		//CARICAMENTO SPRITE
 
-		shooterLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter1_L.png"));
-		shooterLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter2_L.png"));
-		shooterLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter3_L.png"));
-		shooterLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter4_L.png"));
-		shooterLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter5_L.png"));
-		shooterLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter6_L.png"));
+		shooterLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Shooter/rockshooter1_L.png"))));
+		shooterLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Shooter/rockshooter2_L.png"))));
+		shooterLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Shooter/rockshooter3_L.png"))));
+		shooterLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Shooter/rockshooter4_L.png"))));
+		shooterLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Shooter/rockshooter5_L.png"))));
+		shooterLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Shooter/rockshooter6_L.png"))));
 
-		shooterRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter1_R.png"));
-		shooterRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter2_R.png"));
-		shooterRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter3_R.png"));
-		shooterRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter4_R.png"));
-		shooterRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter5_R.png"));
-		shooterRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/rockshooter6_R.png"));
+		shooterRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Shooter/rockshooter1_R.png"))));
+		shooterRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Shooter/rockshooter2_R.png"))));
+		shooterRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Shooter/rockshooter3_R.png"))));
+		shooterRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Shooter/rockshooter4_R.png"))));
+		shooterRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Shooter/rockshooter5_R.png"))));
+		shooterRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Shooter/rockshooter6_R.png"))));
 
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/DeathAnimation/rockshootermorte1.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Shooter/DeathAnimation/rockshootermorte2.png"));
+
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Shooter/DeathAnimation/rockshootermorte1.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Shooter/DeathAnimation/rockshootermorte2.png"))));
 
 		setActiveSprite(shooterLeftSprites.get(0));
 		animationIndex = 0;

@@ -5,6 +5,7 @@ import Components.EntityManager;
 import Components.Vector2D;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -43,21 +44,34 @@ public class Zombie extends Enemy{
 
 		//CARICAMENTO SPRITE
 
-		zombieLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie1_L.png"));
-		zombieLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie2_L.png"));
-		zombieLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie3_L.png"));
-		zombieLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie4_L.png"));
+		zombieLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Zombie/zombie1_L.png"))));
+		zombieLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Zombie/zombie2_L.png"))));
+		zombieLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Zombie/zombie3_L.png"))));
+		zombieLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Zombie/zombie4_L.png"))));
 
-		zombieRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie1_R.png"));
-		zombieRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie2_R.png"));
-		zombieRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie3_R.png"));
-		zombieRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/zombie4_R.png"));
+		zombieRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Zombie/zombie1_R.png"))));
+		zombieRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Zombie/zombie2_R.png"))));
+		zombieRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Zombie/zombie3_R.png"))));
+		zombieRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Zombie/zombie4_R.png"))));
 
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/DeathAnimation/Zombiemorte1.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/DeathAnimation/Zombiemorte2.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/DeathAnimation/Zombiemorte3.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/DeathAnimation/Zombiemorte4.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Zombie/DeathAnimation/Zombiemorte5.png"));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Zombie/DeathAnimation/Zombiemorte1.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Zombie/DeathAnimation/Zombiemorte2.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Zombie/DeathAnimation/Zombiemorte3.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Zombie/DeathAnimation/Zombiemorte4.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Zombie/DeathAnimation/Zombiemorte5.png"))));
 
 		setActiveSprite(zombieLeftSprites.get(0));
 		animationIndex = 0;

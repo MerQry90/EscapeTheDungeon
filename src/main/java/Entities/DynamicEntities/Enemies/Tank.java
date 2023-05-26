@@ -6,6 +6,7 @@ import Components.Vector2D;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 import static java.lang.Math.toRadians;
@@ -45,21 +46,34 @@ public class Tank extends Enemy{
         deathAnimationSprites = new ArrayList<>();
 
         //CARICAMENTO SPRITE
-        tankLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank1_left.png"));
-        tankLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank2_left.png"));
-        tankLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank3_left.png"));
-        tankLeftSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank4_left.png"));
+        tankLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Enemies/Tank/tank1_left.png"))));
+        tankLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Enemies/Tank/tank2_left.png"))));
+        tankLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Enemies/Tank/tank3_left.png"))));
+        tankLeftSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Enemies/Tank/tank4_left.png"))));
 
-        tankRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank1_right.png"));
-        tankRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank2_right.png"));
-        tankRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank3_right.png"));
-        tankRightSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/tank4_right.png"));
+        tankRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Enemies/Tank/tank1_right.png"))));
+        tankRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Enemies/Tank/tank2_right.png"))));
+        tankRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Enemies/Tank/tank3_right.png"))));
+        tankRightSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Enemies/Tank/tank4_right.png"))));
 
-        deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/DeathAnimation/tankMORTE1.png"));
-        deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/DeathAnimation/tankMORTE2.png"));
-        deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/DeathAnimation/tankMORTE3.png"));
-        deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/DeathAnimation/tankMORTE4.png"));
-        deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Tank/DeathAnimation/tankMORTE5.png"));
+        deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Enemies/Tank/DeathAnimation/tankMORTE1.png"))));
+        deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Enemies/Tank/DeathAnimation/tankMORTE2.png"))));
+        deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Enemies/Tank/DeathAnimation/tankMORTE3.png"))));
+        deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Enemies/Tank/DeathAnimation/tankMORTE4.png"))));
+        deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+                "sprites/Enemies/Tank/DeathAnimation/tankMORTE5.png"))));
 
         setActiveSprite(tankLeftSprites.get(0));
         animationIndex = 0;

@@ -5,6 +5,7 @@ import Components.Vector2D;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static java.lang.Math.abs;
 
@@ -43,20 +44,32 @@ public class Ghost extends Enemy{
 		deathAnimationSprites = new ArrayList<>();
 
 		//CARICAMENTO SPRITE
-		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino1.png"));
-		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino2.png"));
-		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino3.png"));
-		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino4.png"));
-		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino5.png"));
-		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino6.png"));
-		ghostSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/fantasmino7.png"));
+		ghostSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Ghost/fantasmino1.png"))));
+		ghostSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Ghost/fantasmino2.png"))));
+		ghostSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Ghost/fantasmino3.png"))));
+		ghostSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Ghost/fantasmino4.png"))));
+		ghostSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Ghost/fantasmino5.png"))));
+		ghostSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Ghost/fantasmino6.png"))));
+		ghostSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Ghost/fantasmino7.png"))));
 
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/DeathAnimation/fantasminomorte5.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/DeathAnimation/fantasminomorte6.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/DeathAnimation/fantasminomorte7.png"));
-		deathAnimationSprites.add(setSpriteFromPath("src/resources/sprites/Enemies/Ghost/DeathAnimation/fantasminomorte8.png"));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Ghost/DeathAnimation/fantasminomorte5.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Ghost/DeathAnimation/fantasminomorte6.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Ghost/DeathAnimation/fantasminomorte7.png"))));
+		deathAnimationSprites.add(setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/Enemies/Ghost/DeathAnimation/fantasminomorte8.png"))));
 
-		DEAD_GHOST = setSpriteFromPath("src/resources/sprites/png/invisible_cube.png");
+		DEAD_GHOST = setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
+				"sprites/invisible_cube.png")));
 		animationIndex = 0;
 		
 		//l'estremo è escluso, velocità a cui viene sommata maximumSpeed
