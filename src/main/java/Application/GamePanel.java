@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URISyntaxException;
 
 /**
  * The main loop of the game, updated 30 times per second.
@@ -31,7 +32,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	/**
 	 * initialize application window parameters, the input handler, the audio manager and the first state of the game
 	 */
-	public GamePanel() {
+	public GamePanel(){
 		
 		//impostazioni finestra 17x9
 		setPreferredSize(new Dimension(1088, 576));
