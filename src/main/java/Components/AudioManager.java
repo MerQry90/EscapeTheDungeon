@@ -2,7 +2,10 @@ package Components;
 
 import javax.sound.sampled.*;
 import java.io.*;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.util.Objects;
 
 /**
  * Manages the whole sound compartment of the game,
@@ -12,6 +15,7 @@ import java.net.URL;
  * @version 2023.05.21
  */
 public class AudioManager {
+	
 	public static final int NORMAL_MUSIC_INDEX = 0;
 	public static final int PLAYER_HURTED_INDEX = 1;
 	public static final int BOSS_MUSIC_INDEX = 2;
@@ -39,7 +43,7 @@ public class AudioManager {
 	public static final int GAME_OVER_MUSIC_INDEX = 24;
 	public static final int SLIME_SOUND_2_INDEX = 25;
 	
-	private final File[] audioFiles;
+	private final URL[] audioFiles;
 	private final Clip[] clips;
 	private int currentSoundLoop;
 
@@ -47,61 +51,66 @@ public class AudioManager {
 	 * initializes all audio files of the application
 	 */
 	public AudioManager(){
-		int audioNumber = 30;
-		audioFiles = new File[audioNumber];
+		int audioNumber = 26;
+		audioFiles = new URL[audioNumber];
 		clips = new Clip[audioNumber];
 		currentSoundLoop = 0;
-
-		//music
-		audioFiles[NORMAL_MUSIC_INDEX] = new File("src/resources/audio/dungeonOstVer2.wav");
-		audioFiles[MAIN_MENU_MUSIC_INDEX] = new File(getClass().getClassLoader().getResource("audio/mainMenuOst.wav").toString());
-		audioFiles[GAME_WIN_MUSIC_INDEX] = new File("src/resources/audio/winMusic.wav");
-		audioFiles[GAME_OVER_MUSIC_INDEX] = new File("src/resources/audio/gameOver.wav");
 		
-		//player gets hit
-		audioFiles[PLAYER_HURTED_INDEX] = new File("src/resources/audio/playerGotHit.wav");
-		//boss music
-		audioFiles[BOSS_MUSIC_INDEX] = new File("src/resources/audio/bossOst.wav");
-		//arrow shot
-		audioFiles[ARROW_SHOOTING_INDEX] = new File("src/resources/audio/shoot.wav");
-		//key picked up
-		audioFiles[KEY_PICKEDUP_INDEX] = new File("src/resources/audio/keyPickup.wav");
-		//enemy hit with an arrow
-		audioFiles[STANDARD_ENEMY_HURTED_INDEX] = new File("src/resources/audio/enemyHit.wav");
-		//doors opening
-		audioFiles[DOORS_OPENING_INDEX] = new File("src/resources/audio/doorOpening.wav");
-		//bat sounds
-		audioFiles[BAT_SOUND_1_INDEX] = new File("src/resources/audio/batDash1.wav");
-		audioFiles[BAT_SOUND_2_INDEX] = new File("src/resources/audio/batDash2.wav");
-		//broken rock
-		audioFiles[ROCK_BROKEN_INDEX] = new File("src/resources/audio/brokenRock.wav");
-		//healing sound
-		audioFiles[PLAYER_HEALED] = new File("src/resources/audio/heal.wav");
-		//mage sound
-		audioFiles[MAGE_DEATH_SOUND_INDEX] = new File("src/resources/audio/mageSound.wav");
-		//teleport
-		audioFiles[TELEPORT_SOUND_INDEX] = new File("src/resources/audio/teleport.wav");
-		//powerup
-		audioFiles[POWERUP_PICKED_INDEX] = new File("src/resources/audio/powerUp.wav");
-		//rock throw
-		audioFiles[ROCK_THROW_1_INDEX] = new File("src/resources/audio/rockThrow1.wav");
-		audioFiles[ROCK_THROW_2_INDEX] = new File("src/resources/audio/rockThrow2.wav");
-		//tank sounds
-		audioFiles[TANK_SOUND_INDEX] = new File("src/resources/audio/TankSound.wav");
-		audioFiles[TANK_DEATH_INDEX] = new File("src/resources/audio/TankDeath.wav");
-		//zombie sounds
-		audioFiles[ZOMBIE_SOUND_1_INDEX] = new File("src/resources/audio/ZombieSound1.wav");
-		audioFiles[ZOMBIE_SOUND_2_INDEX] = new File("src/resources/audio/ZombieSound2.wav");
-		audioFiles[ZOMBIE_DEATH_INDEX] = new File("src/resources/audio/ZombieDeath.wav");
-		//slime sounds
-		audioFiles[SLIME_SOUND_1_INDEX] = new File("src/resources/audio/SlimeSound.wav");
-		audioFiles[SLIME_SOUND_2_INDEX] = new File("src/resources/audio/slimeSound2.wav");
+		try {
+			//music
+			audioFiles[MAIN_MENU_MUSIC_INDEX] = getClass().getClassLoader().getResource("audio/mainMenuOst.wav");
+			audioFiles[NORMAL_MUSIC_INDEX] = getClass().getClassLoader().getResource("audio/dungeonOstVer2.wav");
+			audioFiles[GAME_WIN_MUSIC_INDEX] = getClass().getClassLoader().getResource("audio/winMusic.wav");
+			audioFiles[GAME_OVER_MUSIC_INDEX] = getClass().getClassLoader().getResource("audio/gameOver.wav");
+			//player gets hit
+			audioFiles[PLAYER_HURTED_INDEX] = getClass().getClassLoader().getResource("audio/playerGotHit.wav");
+			//boss music
+			audioFiles[BOSS_MUSIC_INDEX] = getClass().getClassLoader().getResource("audio/bossOst.wav");
+			//arrow shot
+			audioFiles[ARROW_SHOOTING_INDEX] = getClass().getClassLoader().getResource("audio/shoot.wav");
+			//key picked up
+			audioFiles[KEY_PICKEDUP_INDEX] = getClass().getClassLoader().getResource("audio/keyPickup.wav");
+			//enemy hit with an arrow
+			audioFiles[STANDARD_ENEMY_HURTED_INDEX] = getClass().getClassLoader().getResource("audio/enemyHit.wav");
+			//doors opening
+			audioFiles[DOORS_OPENING_INDEX] = getClass().getClassLoader().getResource("audio/doorOpening.wav");
+			//bat sounds
+			audioFiles[BAT_SOUND_1_INDEX] = getClass().getClassLoader().getResource("audio/batDash1.wav");
+			audioFiles[BAT_SOUND_2_INDEX] = getClass().getClassLoader().getResource("audio/batDash2.wav");
+			//broken rock
+			audioFiles[ROCK_BROKEN_INDEX] = getClass().getClassLoader().getResource("audio/brokenRock.wav");
+			//healing sound
+			audioFiles[PLAYER_HEALED] = getClass().getClassLoader().getResource("audio/heal.wav");
+			//mage sound
+			audioFiles[MAGE_DEATH_SOUND_INDEX] = getClass().getClassLoader().getResource("audio/mageSound.wav");
+			//teleport
+			audioFiles[TELEPORT_SOUND_INDEX] = getClass().getClassLoader().getResource("audio/teleport.wav");
+			//powerup
+			audioFiles[POWERUP_PICKED_INDEX] = getClass().getClassLoader().getResource("audio/powerUp.wav");
+			//rock throw
+			audioFiles[ROCK_THROW_1_INDEX] = getClass().getClassLoader().getResource("audio/rockThrow1.wav");
+			audioFiles[ROCK_THROW_2_INDEX] =getClass().getClassLoader().getResource("audio/rockThrow2.wav");
+			//tank sounds
+			audioFiles[TANK_SOUND_INDEX] = getClass().getClassLoader().getResource("audio/TankSound.wav");
+			audioFiles[TANK_DEATH_INDEX] = getClass().getClassLoader().getResource("audio/TankDeath.wav");
+			//zombie sounds
+			audioFiles[ZOMBIE_SOUND_1_INDEX] = getClass().getClassLoader().getResource("audio/ZombieSound1.wav");
+			audioFiles[ZOMBIE_SOUND_2_INDEX] = getClass().getClassLoader().getResource("audio/ZombieSound2.wav");
+			audioFiles[ZOMBIE_DEATH_INDEX] = getClass().getClassLoader().getResource("audio/ZombieDeath.wav");
+			//slime sounds
+			audioFiles[SLIME_SOUND_1_INDEX] = getClass().getClassLoader().getResource("audio/SlimeSound.wav");
+			audioFiles[SLIME_SOUND_2_INDEX] = getClass().getClassLoader().getResource("audio/slimeSound2.wav");
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
 	}
 	
 	private void setClip(int i){
 		try {
-			clips[i] = AudioSystem.getClip();
+			System.out.println(audioFiles[i].getPath());
 			AudioInputStream ais = AudioSystem.getAudioInputStream(audioFiles[i]);
+			clips[i] = AudioSystem.getClip();
 			clips[i].open(ais);
 		}
 		catch (Throwable e){
