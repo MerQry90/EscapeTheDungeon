@@ -65,7 +65,7 @@ public class Crab extends Enemy{
 		
 		setCanPassThroughWalls(false);
 		setCanFly(false);
-		wait = 18;
+		wait = 25;
 		countdown = 0;
 		movingCountdown = 4;
 		animationCountDown = 5;

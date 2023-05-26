@@ -11,7 +11,7 @@ import Components.AudioManager;
  * @version 2023.05.21
  */
 public class MainMenu extends GameState {
-	public boolean showIntroduction, showCommands;
+	public boolean showCommands;
 	public int inputCountdown;
 	public AudioManager audioManager;
 
@@ -28,7 +28,6 @@ public class MainMenu extends GameState {
 		this.keyH = keyH;
 		this.audioManager = audioManager;
 		showCommands = false;
-		showIntroduction = false;
 		inputCountdown = 6;
 		setActive();
 		background.loadMainMenuBackground();
@@ -38,33 +37,15 @@ public class MainMenu extends GameState {
 	@Override
 	public void processInput(){
 		inputCountdown --;
-		if(keyH.enterPressed && !showIntroduction && !showCommands){
+		if(keyH.enterPressed && !showCommands){
 			setInactive();
 			audioManager.stopSoundLoop();
 		}
 		if(inputCountdown <= 0) {
-			if (keyH.iPressed && !showCommands || showIntroduction) {
-				inputCountdown = 6;
-				background.loadBlackBackground();
-				showIntroduction = true;
-				if(keyH.shootRight){
-					inputCountdown = 6;
-					background.loadIntroductionText("next");
-				}
-				else if(keyH.shootLeft){
-					inputCountdown = 6;
-					background.loadIntroductionText("previous");
-				}
-				else if(keyH.escapePressed){
-					inputCountdown = 6;
-					showIntroduction = false;
-					background.loadMainMenuBackground();
-				}
-			}
-			else if (keyH.cPressed || showCommands) {
+			if (keyH.cPressed || showCommands) {
 				inputCountdown = 6;
 				showCommands = true;
-				background.loadCommandBackground();
+				background.loadBlackBackground();
 				if (keyH.escapePressed) {
 					inputCountdown = 6;
 					background.loadMainMenuBackground();

@@ -86,7 +86,7 @@ public class Boss extends Enemy{
 		previousHoleAngulation = toRadians(random.nextDouble(365));
 		
 		translationVector2D = new Vector2D(0);
-		setHealth(51); // se diverso da 150 è per testing
+		setHealth(170); // se diverso da 150 è per testing
 		
 		behaviourCountdown = 0;
 		previousRandomBehaviour = -1;

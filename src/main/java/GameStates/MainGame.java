@@ -167,16 +167,6 @@ public class MainGame extends GameState{
 			entityManager.setDefaultPlayerPositionUp();
 			translateCellToNewRoom(cellManager.getBossRoomID());
 		}
-		if(keyH.damagePlayer && mapCountdown <= 0){
-			entityManager.getPlayer().lowerHealth();
-			mapCountdown = 10;
-		}
-		if(keyH.fast){
-			entityManager.getPlayer().setSpeed(entityManager.getPlayer().getSpeed() + 2);
-		}
-		if(keyH.tPressed){
-			entityManager.getPlayer().activateMultipleShot();
-		}
 	}
 
 	@Override

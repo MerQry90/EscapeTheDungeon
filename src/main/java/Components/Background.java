@@ -52,37 +52,18 @@ public class Background {
 		showGameOverText = false;
 		showGameWinText = false;
 
-		/*TESTO INTRODUZIONE*/
-		introductionIndex = 0;
-		introductionText = new String[13];
-		introductionText[0] = "You were walking in a forest, hunting all alone.";
-		introductionText[1] = "These are though days, and you can rely only on your crossbow";
-		introductionText[2] = "Everything is quiet and peaceful today, even the sun blesses";
-		introductionText[3] = "you with his warm presence, the trees around you seems";
-		introductionText[4] = "friendly, and you see a deer quietly walking around.";
-		introductionText[5] = "The perfect prey for the perfect day. In the last";
-		introductionText[6] = "days you didn't eat anything, so you silently start to";
-		introductionText[7] = "follow it until the right time to shoot.";
-		introductionText[8] = "Suddenly, a weird sound broke into the peaceful place,";
-		introductionText[9] = "making the deer run away, and leaving you starving.";
-		introductionText[10] = "But right after, an earthquake creates an huge crack on";
-		introductionText[11] = "the ground, causing you to fall into the into the depths";
-		introductionText[12] = "of the earth.";
-
 		/*TESTO SCHERMATA COMANDI*/
-		commandsText = new String[4];
+		commandsText = new String[7];
 		commandsText[0] = "- use W, A, S, D, to move the character";
 		commandsText[1] = "- press the directional arrows to shoot";
 		commandsText[2] = "- press ESC to pause the game";
 		commandsText[3] = "- press M to toggle the map(on/off)";
-
+		commandsText[4] = "        Cheat keys:";
+		commandsText[5] = "- K to kill all enemies in the room";
+		commandsText[6] = "- B to teleport instantly to the boss room";
 	}
 
 	public void loadBlackBackground(){
-		showIntroductionText = true;
-		background = BLACK_BACKGROUND.getImage();
-	}
-	public void loadCommandBackground(){
 		showCommandText = true;
 		background = BLACK_BACKGROUND.getImage();
 	}
@@ -104,14 +85,7 @@ public class Background {
 		showGameWinText = true;
 		background = BLACK_BACKGROUND.getImage();
 	}
-	public void loadIntroductionText(String direction){
-		if(Objects.equals(direction, "next") && introductionIndex < 12){
-			introductionIndex += 1;
-		}
-		else if (Objects.equals(direction, "previous") && introductionIndex > 0) {
-			introductionIndex -= 1;
-		}
-	}
+
 	public void paint(Graphics g){
 		g.drawImage(background, 0, 0, width, height, null);
 		if(showIntroductionText){
@@ -127,9 +101,9 @@ public class Background {
 		}
 		if(showCommandText){
 			g.setColor(Color.WHITE);
-			g.setFont(new Font("Verdana", Font.BOLD, 45));
+			g.setFont(new Font("Verdana", Font.BOLD, 30));
 			for(int i = 0; i < commandsText.length; i++){
-				g.drawString(commandsText[i], 14,64 + (i * 128));
+				g.drawString(commandsText[i], 14,64 + (i * 60));
 			}
 			g.setColor(Color.RED);
 			g.setFont(new Font("Verdana", Font.BOLD, 15));
