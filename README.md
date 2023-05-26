@@ -13,7 +13,7 @@ The proper JDK or JRE should be installed in your system to run this application
 You can find the Oracle site [here](https://www.oracle.com/it/java/technologies/downloads/).
 ## Download and usage
 This software is availabe as an **platform independent executable jar** for **Windows, Linux and Mac**  
-You can download the latest version of this sofware [here](https://github.com/MerQry90/EscapeTheDungeon/releases/tag/game).
+You can download the latest version of this sofware [here](https://github.com/MerQry90/EscapeTheDungeon/releases).
 
 To run the application just double-click the downloaded jar.  
 *It runs only when the JDK is installed correctly.*
