@@ -68,7 +68,7 @@ public class OrbitalSlimeBall extends Projectile{
 		SLIME_BALL = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
 				"sprites/Enemies/Boss/pallina/slimeball_2.png")));
 		NOT_VISIBLE = GenericEntity.setSpriteFromPath(Objects.requireNonNull(getClass().getClassLoader().getResource(
-				"sprites/png/invisible_cube.png")));
+				"sprites/invisible_cube.png")));
 		setActiveSprite(NOT_VISIBLE);
 		
 		updateCoordinates();

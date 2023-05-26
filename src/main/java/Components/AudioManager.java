@@ -108,7 +108,6 @@ public class AudioManager {
 	
 	private void setClip(int i){
 		try {
-			System.out.println(audioFiles[i].getPath());
 			AudioInputStream ais = AudioSystem.getAudioInputStream(audioFiles[i]);
 			clips[i] = AudioSystem.getClip();
 			clips[i].open(ais);
